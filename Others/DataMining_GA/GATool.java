@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * ÒÅ´«Ëã·¨¹¤¾ßÀà
+ * é—ä¼ ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class GATool {
-	// ±äÁ¿×îĞ¡Öµ
+	// å˜é‡æœ€å°å€¼
 	private int minNum;
-	// ±äÁ¿×î´óÖµ
+	// å˜é‡æœ€å¤§å€¼
 	private int maxNum;
-	// µ¥¸ö±äÁ¿µÄ±àÂëÎ»Êı
+	// å•ä¸ªå˜é‡çš„ç¼–ç ä½æ•°
 	private int codeNum;
-	// ³õÊ¼ÖÖÈºµÄÊıÁ¿
+	// åˆå§‹ç§ç¾¤çš„æ•°é‡
 	private int initSetsNum;
-	// Ëæ»úÊıÉú³ÉÆ÷
+	// éšæœºæ•°ç”Ÿæˆå™¨
 	private Random random;
-	// ³õÊ¼ÈºÌå
+	// åˆå§‹ç¾¤ä½“
 	private ArrayList<int[]> initSets;
 
 	public GATool(int minNum, int maxNum, int initSetsNum) {
@@ -33,7 +33,7 @@ public class GATool {
 	}
 
 	/**
-	 * ²úÉú³õÊ¼»¯ÈºÌå
+	 * äº§ç”Ÿåˆå§‹åŒ–ç¾¤ä½“
 	 */
 	private void produceInitSets() {
 		this.codeNum = 0;
@@ -42,7 +42,7 @@ public class GATool {
 
 		initSets = new ArrayList<>();
 
-		// È·¶¨±àÂëÎ»Êı
+		// ç¡®å®šç¼–ç ä½æ•°
 		while (num != 0) {
 			codeNum++;
 			num /= 2;
@@ -55,7 +55,7 @@ public class GATool {
 	}
 
 	/**
-	 * ²úÉú³õÊ¼¸öÌåµÄ±àÂë
+	 * äº§ç”Ÿåˆå§‹ä¸ªä½“çš„ç¼–ç 
 	 * 
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class GATool {
 		}
 		numToBinaryArray(array2, num2);
 
-		// ×é³É×ÜµÄ±àÂë
+		// ç»„æˆæ€»çš„ç¼–ç 
 		for (int i = 0, k = 0; i < tempArray.length; i++, k++) {
 			if (k < codeNum) {
 				tempArray[i] = array1[k];
@@ -94,10 +94,10 @@ public class GATool {
 	}
 
 	/**
-	 * Ñ¡Ôñ²Ù×÷£¬°ÑÊÊÖµ½Ï¸ßµÄ¸öÌåÓÅÏÈÒÅ´«µ½ÏÂÒ»´ú
+	 * é€‰æ‹©æ“ä½œï¼ŒæŠŠé€‚å€¼è¾ƒé«˜çš„ä¸ªä½“ä¼˜å…ˆé—ä¼ åˆ°ä¸‹ä¸€ä»£
 	 * 
 	 * @param initCodes
-	 *            ³õÊ¼¸öÌå±àÂë
+	 *            åˆå§‹ä¸ªä½“ç¼–ç 
 	 * @return
 	 */
 	private ArrayList<int[]> selectOperate(ArrayList<int[]> initCodes) {
@@ -111,7 +111,7 @@ public class GATool {
 			sumAdaptiveValue += adaptiveValue[i];
 		}
 
-		// ×ª³É¸ÅÂÊµÄĞÎÊ½£¬×ö¹éÒ»»¯²Ù×÷
+		// è½¬æˆæ¦‚ç‡çš„å½¢å¼ï¼Œåšå½’ä¸€åŒ–æ“ä½œ
 		for (int i = 0; i < initSetsNum; i++) {
 			adaptiveValue[i] = adaptiveValue[i] / sumAdaptiveValue;
 		}
@@ -119,17 +119,17 @@ public class GATool {
 		for (int i = 0; i < initSetsNum; i++) {
 			randomNum = random.nextInt(100) + 1;
 			randomNum = randomNum / 100;
-			//ÒòÎª1.0ÊÇÎŞ·¨ÅĞ¶Ïµ½µÄ£¬,×ÜºÍ»áÎŞÏŞ½Ó½ü1.0È¡Îª0.99×öÅĞ¶Ï
+			//å› ä¸º1.0æ˜¯æ— æ³•åˆ¤æ–­åˆ°çš„ï¼Œ,æ€»å’Œä¼šæ— é™æ¥è¿‘1.0å–ä¸º0.99åšåˆ¤æ–­
 			if(randomNum == 1){
 				randomNum = randomNum - 0.01;
 			}
 
 			sumAdaptiveValue = 0;
-			// È·¶¨Çø¼ä
+			// ç¡®å®šåŒºé—´
 			for (int j = 0; j < initSetsNum; j++) {
 				if (randomNum > sumAdaptiveValue
 						&& randomNum <= sumAdaptiveValue + adaptiveValue[j]) {
-					//²ÉÓÃ¿½±´µÄ·½Ê½±ÜÃâÒıÓÃÖØ¸´
+					//é‡‡ç”¨æ‹·è´çš„æ–¹å¼é¿å…å¼•ç”¨é‡å¤
 					resultCodes.add(initCodes.get(j).clone());
 					break;
 				} else {
@@ -142,21 +142,21 @@ public class GATool {
 	}
 
 	/**
-	 * ½»²æÔËËã
+	 * äº¤å‰è¿ç®—
 	 * 
 	 * @param selectedCodes
-	 *            ÉÏ²½ÖèµÄÑ¡ÔñºóµÄ±àÂë
+	 *            ä¸Šæ­¥éª¤çš„é€‰æ‹©åçš„ç¼–ç 
 	 * @return
 	 */
 	private ArrayList<int[]> crossOperate(ArrayList<int[]> selectedCodes) {
 		int randomNum = 0;
-		// ½»²æµã
+		// äº¤å‰ç‚¹
 		int crossPoint = 0;
 		ArrayList<int[]> resultCodes = new ArrayList<>();
-		// Ëæ»ú±àÂë¶ÓÁĞ£¬½øĞĞËæ»ú½»²æÅä¶Ô
+		// éšæœºç¼–ç é˜Ÿåˆ—ï¼Œè¿›è¡Œéšæœºäº¤å‰é…å¯¹
 		ArrayList<int[]> randomCodeSeqs = new ArrayList<>();
 
-		// ½øĞĞËæ»úÅÅĞò
+		// è¿›è¡Œéšæœºæ’åº
 		while (selectedCodes.size() > 0) {
 			randomNum = random.nextInt(selectedCodes.size());
 
@@ -167,14 +167,14 @@ public class GATool {
 		int temp = 0;
 		int[] array1;
 		int[] array2;
-		// ½øĞĞÁ½Á½½»²æÔËËã
+		// è¿›è¡Œä¸¤ä¸¤äº¤å‰è¿ç®—
 		for (int i = 1; i < randomCodeSeqs.size(); i++) {
 			if (i % 2 == 1) {
 				array1 = randomCodeSeqs.get(i - 1);
 				array2 = randomCodeSeqs.get(i);
 				crossPoint = random.nextInt(2 * codeNum - 1) + 1;
 
-				// ½øĞĞ½»²æµãÎ»ÖÃºóµÄ±àÂëµ÷»»
+				// è¿›è¡Œäº¤å‰ç‚¹ä½ç½®åçš„ç¼–ç è°ƒæ¢
 				for (int j = 0; j < 2 * codeNum; j++) {
 					if (j >= crossPoint) {
 						temp = array1[j];
@@ -183,7 +183,7 @@ public class GATool {
 					}
 				}
 
-				// ¼ÓÈëµ½½»²æÔËËã½á¹ûÖĞ
+				// åŠ å…¥åˆ°äº¤å‰è¿ç®—ç»“æœä¸­
 				resultCodes.add(array1);
 				resultCodes.add(array2);
 			}
@@ -193,14 +193,14 @@ public class GATool {
 	}
 
 	/**
-	 * ±äÒì²Ù×÷
+	 * å˜å¼‚æ“ä½œ
 	 * 
 	 * @param crossCodes
-	 *            ½»²æÔËËãºóµÄ½á¹û
+	 *            äº¤å‰è¿ç®—åçš„ç»“æœ
 	 * @return
 	 */
 	private ArrayList<int[]> variationOperate(ArrayList<int[]> crossCodes) {
-		// ±äÒìµã
+		// å˜å¼‚ç‚¹
 		int variationPoint = 0;
 		ArrayList<int[]> resultCodes = new ArrayList<>();
 
@@ -208,7 +208,7 @@ public class GATool {
 			variationPoint = random.nextInt(codeNum * 2);
 
 			for (int i = 0; i < array.length; i++) {
-				// ±äÒìµã½øĞĞ±äÒì
+				// å˜å¼‚ç‚¹è¿›è¡Œå˜å¼‚
 				if (i == variationPoint) {
 					array[i] = (array[i] == 0 ? 1 : 0);
 					break;
@@ -222,12 +222,12 @@ public class GATool {
 	}
 
 	/**
-	 * Êı×Ö×ªÎª¶ş½øÖÆĞÎÊ½
+	 * æ•°å­—è½¬ä¸ºäºŒè¿›åˆ¶å½¢å¼
 	 * 
 	 * @param binaryArray
-	 *            ×ª»¯ºóµÄ¶ş½øÖÆÊı×éĞÎÊ½
+	 *            è½¬åŒ–åçš„äºŒè¿›åˆ¶æ•°ç»„å½¢å¼
 	 * @param num
-	 *            ´ı×ª»¯Êı×Ö
+	 *            å¾…è½¬åŒ–æ•°å­—
 	 */
 	private void numToBinaryArray(int[] binaryArray, int num) {
 		int index = 0;
@@ -238,7 +238,7 @@ public class GATool {
 			num /= 2;
 		}
 		
-		//½øĞĞÊı×éÇ°ºÍÎ²²¿µÄµ÷»»
+		//è¿›è¡Œæ•°ç»„å‰å’Œå°¾éƒ¨çš„è°ƒæ¢
 		for(int i=0; i<binaryArray.length/2; i++){
 			temp = binaryArray[i];
 			binaryArray[i] = binaryArray[binaryArray.length - 1 - i];
@@ -247,10 +247,10 @@ public class GATool {
 	}
 
 	/**
-	 * ¶ş½øÖÆÊı×é×ª»¯ÎªÊı×Ö
+	 * äºŒè¿›åˆ¶æ•°ç»„è½¬åŒ–ä¸ºæ•°å­—
 	 * 
 	 * @param binaryArray
-	 *            ´ı×ª»¯¶ş½øÖÆÊı×é
+	 *            å¾…è½¬åŒ–äºŒè¿›åˆ¶æ•°ç»„
 	 */
 	private int binaryArrayToNum(int[] binaryArray) {
 		int result = 0;
@@ -265,7 +265,7 @@ public class GATool {
 	}
 
 	/**
-	 * ¼ÆËã¸öÌå±àÂëµÄÊÊÖµ
+	 * è®¡ç®—ä¸ªä½“ç¼–ç çš„é€‚å€¼
 	 * 
 	 * @param codeArray
 	 */
@@ -284,7 +284,7 @@ public class GATool {
 			}
 		}
 
-		// ½øĞĞÊÊÖµµÄµş¼Ó
+		// è¿›è¡Œé€‚å€¼çš„å åŠ 
 		x1 = binaryArrayToNum(array1);
 		x2 = binaryArrayToNum(array2);
 		result = x1 * x1 + x2 * x2;
@@ -293,12 +293,12 @@ public class GATool {
 	}
 
 	/**
-	 * ½øĞĞÒÅ´«Ëã·¨¼ÆËã
+	 * è¿›è¡Œé—ä¼ ç®—æ³•è®¡ç®—
 	 */
 	public void geneticCal() {
-		// ×î´óÊÊÖµ
+		// æœ€å¤§é€‚å€¼
 		int maxFitness;
-		//µü´úÒÅ´«´ÎÊı
+		//è¿­ä»£é—ä¼ æ¬¡æ•°
 		int loopCount = 0;
 		boolean canExit = false;
 		ArrayList<int[]> initCodes;
@@ -307,7 +307,7 @@ public class GATool {
 		ArrayList<int[]> variationCodes;
 		
 		int[] maxCode = new int[2*codeNum];
-		//¼ÆËã×î´óÊÊÖµ
+		//è®¡ç®—æœ€å¤§é€‚å€¼
 		for(int i=0; i<2*codeNum; i++){
 			maxCode[i] = 1;
 		}
@@ -316,7 +316,7 @@ public class GATool {
 		initCodes = initSets;
 		while (true) {
 			for (int[] array : initCodes) {
-				// ÒÅ´«µü´úµÄÖÕÖ¹Ìõ¼şÎª´æÔÚ±àÂë´ïµ½×î´óÊÊÖµ
+				// é—ä¼ è¿­ä»£çš„ç»ˆæ­¢æ¡ä»¶ä¸ºå­˜åœ¨ç¼–ç è¾¾åˆ°æœ€å¤§é€‚å€¼
 				if (maxFitness == calCodeAdaptiveValue(array)) {
 					canExit = true;
 					break;
@@ -335,21 +335,21 @@ public class GATool {
 			loopCount++;
 		}
 
-		System.out.println("×Ü¹²ÒÅ´«½ø»¯ÁË" + loopCount +"´Î" );
+		System.out.println("æ€»å…±é—ä¼ è¿›åŒ–äº†" + loopCount +"æ¬¡" );
 		printFinalCodes(initCodes);
 	}
 
 	/**
-	 * Êä³ö×îºóµÄ±àÂë¼¯
+	 * è¾“å‡ºæœ€åçš„ç¼–ç é›†
 	 * 
 	 * @param finalCodes
-	 *            ×îºóµÄ½á¹û±àÂë
+	 *            æœ€åçš„ç»“æœç¼–ç 
 	 */
 	private void printFinalCodes(ArrayList<int[]> finalCodes) {
 		int j = 0;
 
 		for (int[] array : finalCodes) {
-			System.out.print("¸öÌå" + (j + 1) + ":");
+			System.out.print("ä¸ªä½“" + (j + 1) + ":");
 			for (int i = 0; i < array.length; i++) {
 				System.out.print(array[i]);
 			}

@@ -10,21 +10,21 @@ import java.util.Comparator;
 import java.util.Stack;
 
 /**
- * KDÊ÷-kÎ¬¿Õ¼ä¹Ø¼üÊı¾İ¼ìË÷Ëã·¨¹¤¾ßÀà
+ * KDæ ‘-kç»´ç©ºé—´å…³é”®æ•°æ®æ£€ç´¢ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class KDTreeTool {
-	// ¿Õ¼äÆ½ÃæµÄ·½Ïò
+	// ç©ºé—´å¹³é¢çš„æ–¹å‘
 	public static final int DIRECTION_X = 0;
 	public static final int DIRECTION_Y = 1;
 
-	// ÊäÈëµÄ²âÊÔÊı¾İ×ø±êµãÎÄ¼ş
+	// è¾“å…¥çš„æµ‹è¯•æ•°æ®åæ ‡ç‚¹æ–‡ä»¶
 	private String filePath;
-	// Ô­Ê¼ËùÓĞÊı¾İµãÊı¾İ
+	// åŸå§‹æ‰€æœ‰æ•°æ®ç‚¹æ•°æ®
 	private ArrayList<Point> totalDatas;
-	// KDÊ÷¸ù½Úµã
+	// KDæ ‘æ ¹èŠ‚ç‚¹
 	private TreeNode rootNode;
 
 	public KDTreeTool(String filePath) {
@@ -34,7 +34,7 @@ public class KDTreeTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -62,7 +62,7 @@ public class KDTreeTool {
 	}
 
 	/**
-	 * ´´½¨KDÊ÷
+	 * åˆ›å»ºKDæ ‘
 	 * 
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public class KDTreeTool {
 		ArrayList<Point> copyDatas;
 
 		rootNode = new TreeNode();
-		// ¸ù¾İ½Úµã¿ªÊ¼Ê±Ëù±íÊ¾µÄ¿Õ¼äÊ±ÎŞÏŞ´óµÄ
+		// æ ¹æ®èŠ‚ç‚¹å¼€å§‹æ—¶æ‰€è¡¨ç¤ºçš„ç©ºé—´æ—¶æ— é™å¤§çš„
 		rootNode.range = new Range();
 		copyDatas = (ArrayList<Point>) totalDatas.clone();
 		recusiveConstructNode(rootNode, copyDatas);
@@ -79,12 +79,12 @@ public class KDTreeTool {
 	}
 
 	/**
-	 * µİ¹é½øĞĞKDÊ÷µÄ¹¹Ôì
+	 * é€’å½’è¿›è¡ŒKDæ ‘çš„æ„é€ 
 	 * 
 	 * @param node
-	 *            µ±Ç°ÕıÔÚ¹¹ÔìµÄ½Úµã
+	 *            å½“å‰æ­£åœ¨æ„é€ çš„èŠ‚ç‚¹
 	 * @param datas
-	 *            ¸Ã½Úµã¶ÔÓ¦µÄÕıÔÚ´¦ÀíµÄÊı¾İ
+	 *            è¯¥èŠ‚ç‚¹å¯¹åº”çš„æ­£åœ¨å¤„ç†çš„æ•°æ®
 	 * @return
 	 */
 	private void recusiveConstructNode(TreeNode node, ArrayList<Point> datas) {
@@ -97,15 +97,15 @@ public class KDTreeTool {
 		Range range;
 		Range range2;
 
-		// Èç¹û»®·ÖµÄÊı¾İµã¼¯ºÏÖ»ÓĞ1¸öÊı¾İ£¬Ôò²»ÔÙ»®·Ö
+		// å¦‚æœåˆ’åˆ†çš„æ•°æ®ç‚¹é›†åˆåªæœ‰1ä¸ªæ•°æ®ï¼Œåˆ™ä¸å†åˆ’åˆ†
 		if (datas.size() == 1) {
 			node.nodeData = datas.get(0);
 			return;
 		}
 
-		// Ê×ÏÈÔÚµ±Ç°µÄÊı¾İµã¼¯ºÏÖĞ½øĞĞ·Ö¸î·½ÏòµÄÑ¡Ôñ
+		// é¦–å…ˆåœ¨å½“å‰çš„æ•°æ®ç‚¹é›†åˆä¸­è¿›è¡Œåˆ†å‰²æ–¹å‘çš„é€‰æ‹©
 		direction = selectSplitDrc(datas);
-		// ¸ù¾İ·½ÏòÈ¡³öÖĞÎ»Êıµã×÷ÎªÊı¾İÊ¸Á¿
+		// æ ¹æ®æ–¹å‘å–å‡ºä¸­ä½æ•°ç‚¹ä½œä¸ºæ•°æ®çŸ¢é‡
 		p = getMiddlePoint(datas, direction);
 
 		node.spilt = direction;
@@ -113,7 +113,7 @@ public class KDTreeTool {
 
 		leftSideDatas = getLeftSideDatas(datas, p, direction);
 		datas.removeAll(leftSideDatas);
-		// »¹ÒªÈ¥µô×ÔÉí
+		// è¿˜è¦å»æ‰è‡ªèº«
 		datas.remove(p);
 		rightSideDatas = datas;
 
@@ -121,7 +121,7 @@ public class KDTreeTool {
 			leftNode = new TreeNode();
 			leftNode.parentNode = node;
 			range2 = Range.initLeftRange(p, direction);
-			// »ñÈ¡¸¸½ÚµãµÄ¿Õ¼äÊ¸Á¿£¬½øĞĞ½»¼¯ÔËËã×ö·¶Î§²ğ·Ö
+			// è·å–çˆ¶èŠ‚ç‚¹çš„ç©ºé—´çŸ¢é‡ï¼Œè¿›è¡Œäº¤é›†è¿ç®—åšèŒƒå›´æ‹†åˆ†
 			range = node.range.crossOperation(range2);
 			leftNode.range = range;
 
@@ -133,7 +133,7 @@ public class KDTreeTool {
 			rightNode = new TreeNode();
 			rightNode.parentNode = node;
 			range2 = Range.initRightRange(p, direction);
-			// »ñÈ¡¸¸½ÚµãµÄ¿Õ¼äÊ¸Á¿£¬½øĞĞ½»¼¯ÔËËã×ö·¶Î§²ğ·Ö
+			// è·å–çˆ¶èŠ‚ç‚¹çš„ç©ºé—´çŸ¢é‡ï¼Œè¿›è¡Œäº¤é›†è¿ç®—åšèŒƒå›´æ‹†åˆ†
 			range = node.range.crossOperation(range2);
 			rightNode.range = range;
 
@@ -143,21 +143,21 @@ public class KDTreeTool {
 	}
 
 	/**
-	 * ËÑË÷³ö¸ø¶¨Êı¾İµãµÄ×î½üµã
+	 * æœç´¢å‡ºç»™å®šæ•°æ®ç‚¹çš„æœ€è¿‘ç‚¹
 	 * 
 	 * @param p
-	 *            ´ı±È½Ï×ø±êµã
+	 *            å¾…æ¯”è¾ƒåæ ‡ç‚¹
 	 */
 	public Point searchNearestData(Point p) {
-		// ½Úµã¾àÀë¸ø¶¨Êı¾İµãµÄ¾àÀë
+		// èŠ‚ç‚¹è·ç¦»ç»™å®šæ•°æ®ç‚¹çš„è·ç¦»
 		TreeNode nearestNode = null;
-		// ÓÃÕ»¼ÇÂ¼±éÀú¹ıµÄ½Úµã
+		// ç”¨æ ˆè®°å½•éå†è¿‡çš„èŠ‚ç‚¹
 		Stack<TreeNode> stackNodes;
 
 		stackNodes = new Stack<>();
 		findedNearestLeafNode(p, rootNode, stackNodes);
 
-		// È¡³öÒ¶×Ó½Úµã£¬×÷Îªµ±Ç°ÕÒµ½µÄ×î½ü½Úµã
+		// å–å‡ºå¶å­èŠ‚ç‚¹ï¼Œä½œä¸ºå½“å‰æ‰¾åˆ°çš„æœ€è¿‘èŠ‚ç‚¹
 		nearestNode = stackNodes.pop();
 		nearestNode = dfsSearchNodes(stackNodes, p, nearestNode);
 
@@ -165,44 +165,44 @@ public class KDTreeTool {
 	}
 
 	/**
-	 * Éî¶ÈÓÅÏÈµÄ·½Ê½½øĞĞ×î½üµãµÄ²éÕÒ
+	 * æ·±åº¦ä¼˜å…ˆçš„æ–¹å¼è¿›è¡Œæœ€è¿‘ç‚¹çš„æŸ¥æ‰¾
 	 * 
 	 * @param stack
-	 *            KDÊ÷½ÚµãÕ»
+	 *            KDæ ‘èŠ‚ç‚¹æ ˆ
 	 * @param desPoint
-	 *            ¸ø¶¨µÄÊı¾İµã
+	 *            ç»™å®šçš„æ•°æ®ç‚¹
 	 * @param nearestNode
-	 *            µ±Ç°ÕÒµ½µÄ×î½ü½Úµã
+	 *            å½“å‰æ‰¾åˆ°çš„æœ€è¿‘èŠ‚ç‚¹
 	 * @return
 	 */
 	private TreeNode dfsSearchNodes(Stack<TreeNode> stack, Point desPoint,
 			TreeNode nearestNode) {
-		// ÊÇ·ñÅöµ½¸¸½Úµã±ß½ç
+		// æ˜¯å¦ç¢°åˆ°çˆ¶èŠ‚ç‚¹è¾¹ç•Œ
 		boolean isCollision;
 		double minDis;
 		double dis;
 		TreeNode parentNode;
 
-		// Èç¹ûÕ»ÄÚ½ÚµãÒÑ¾­È«²¿µ¯³ö£¬Ôò±éÀú½áÊø
+		// å¦‚æœæ ˆå†…èŠ‚ç‚¹å·²ç»å…¨éƒ¨å¼¹å‡ºï¼Œåˆ™éå†ç»“æŸ
 		if (stack.isEmpty()) {
 			return nearestNode;
 		}
 
-		// »ñÈ¡¸¸½Úµã
+		// è·å–çˆ¶èŠ‚ç‚¹
 		parentNode = stack.pop();
 
 		minDis = desPoint.ouDistance(nearestNode.nodeData);
 		dis = desPoint.ouDistance(parentNode.nodeData);
 
-		// Èç¹ûÓëµ±Ç°»ØËİµ½µÄ¸¸½Úµã¾àÀë¸ü¶Ì£¬ÔòËÑË÷µ½µÄ½Úµã½øĞĞ¸üĞÂ
+		// å¦‚æœä¸å½“å‰å›æº¯åˆ°çš„çˆ¶èŠ‚ç‚¹è·ç¦»æ›´çŸ­ï¼Œåˆ™æœç´¢åˆ°çš„èŠ‚ç‚¹è¿›è¡Œæ›´æ–°
 		if (dis < minDis) {
 			minDis = dis;
 			nearestNode = parentNode;
 		}
 
-		// Ä¬ÈÏÃ»ÓĞÅö×²µ½
+		// é»˜è®¤æ²¡æœ‰ç¢°æ’åˆ°
 		isCollision = false;
-		// ÅĞ¶ÏÊÇ·ñ´¥Åöµ½ÁË¸¸½ÚµãµÄ¿Õ¼ä·Ö¸îÏß
+		// åˆ¤æ–­æ˜¯å¦è§¦ç¢°åˆ°äº†çˆ¶èŠ‚ç‚¹çš„ç©ºé—´åˆ†å‰²çº¿
 		if (parentNode.spilt == DIRECTION_X) {
 			if (parentNode.nodeData.x > desPoint.x - minDis
 					&& parentNode.nodeData.x < desPoint.x + minDis) {
@@ -215,13 +215,13 @@ public class KDTreeTool {
 			}
 		}
 
-		// Èç¹û´¥Åöµ½¸¸±ß½çÁË£¬²¢ÇÒ´Ë½ÚµãµÄº¢×Ó½Úµã»¹Î´ÍêÈ«±éÀúÍê£¬Ôò¿ÉÒÔ¼ÌĞø±éÀú
+		// å¦‚æœè§¦ç¢°åˆ°çˆ¶è¾¹ç•Œäº†ï¼Œå¹¶ä¸”æ­¤èŠ‚ç‚¹çš„å­©å­èŠ‚ç‚¹è¿˜æœªå®Œå…¨éå†å®Œï¼Œåˆ™å¯ä»¥ç»§ç»­éå†
 		if (isCollision
 				&& (!parentNode.leftNode.isVisited || !parentNode.rightNode.isVisited)) {
 			TreeNode newNode;
-			// ĞÂ½¨µ±Ç°µÄĞ¡¾Ö²¿½ÚµãÕ»
+			// æ–°å»ºå½“å‰çš„å°å±€éƒ¨èŠ‚ç‚¹æ ˆ
 			Stack<TreeNode> otherStack = new Stack<>();
-			// ´ÓparentNodeµÄÊ÷ÒÔÏÂ¼ÌĞøÑ°ÕÒ
+			// ä»parentNodeçš„æ ‘ä»¥ä¸‹ç»§ç»­å¯»æ‰¾
 			findedNearestLeafNode(desPoint, parentNode, otherStack);
 			newNode = dfsSearchNodes(otherStack, desPoint, otherStack.pop());
 
@@ -231,44 +231,44 @@ public class KDTreeTool {
 			}
 		}
 
-		// ¼ÌĞøÍùÉÏ»ØËİ
+		// ç»§ç»­å¾€ä¸Šå›æº¯
 		nearestNode = dfsSearchNodes(stack, desPoint, nearestNode);
 
 		return nearestNode;
 	}
 
 	/**
-	 * ÕÒµ½ÓëËù¸ø¶¨½ÚµãµÄ×î½üµÄÒ¶×Ó½Úµã
+	 * æ‰¾åˆ°ä¸æ‰€ç»™å®šèŠ‚ç‚¹çš„æœ€è¿‘çš„å¶å­èŠ‚ç‚¹
 	 * 
 	 * @param p
-	 *            ´ı±È½Ï½Úµã
+	 *            å¾…æ¯”è¾ƒèŠ‚ç‚¹
 	 * @param node
-	 *            µ±Ç°ËÑË÷µ½µÄ½Úµã
+	 *            å½“å‰æœç´¢åˆ°çš„èŠ‚ç‚¹
 	 * @param stack
-	 *            ±éÀú¹ıµÄ½ÚµãÕ»
+	 *            éå†è¿‡çš„èŠ‚ç‚¹æ ˆ
 	 */
 	private void findedNearestLeafNode(Point p, TreeNode node,
 			Stack<TreeNode> stack) {
-		// ·Ö¸î·½Ïò
+		// åˆ†å‰²æ–¹å‘
 		int splitDic;
 
-		// ½«±éÀú¹ıµÄ½Úµã¼ÓÈëÕ»ÖĞ
+		// å°†éå†è¿‡çš„èŠ‚ç‚¹åŠ å…¥æ ˆä¸­
 		stack.push(node);
-		// ±ê¼ÇÎª·ÃÎÊ¹ı
+		// æ ‡è®°ä¸ºè®¿é—®è¿‡
 		node.isVisited = true;
-		// Èç¹û´Ë½ÚµãÃ»ÓĞ×óÓÒº¢×Ó½ÚµãËµÃ÷ÒÑ¾­ÊÇÒ¶×Ó½ÚµãÁË
+		// å¦‚æœæ­¤èŠ‚ç‚¹æ²¡æœ‰å·¦å³å­©å­èŠ‚ç‚¹è¯´æ˜å·²ç»æ˜¯å¶å­èŠ‚ç‚¹äº†
 		if (node.leftNode == null && node.rightNode == null) {
 			return;
 		}
 
 		splitDic = node.spilt;
-		// Ñ¡ÔñÒ»¸ö·ûºÏ·Ö¸î·¶Î§µÄ½Úµã¼ÌĞøµİ¹éËÑÑ°
+		// é€‰æ‹©ä¸€ä¸ªç¬¦åˆåˆ†å‰²èŒƒå›´çš„èŠ‚ç‚¹ç»§ç»­é€’å½’æœå¯»
 		if ((splitDic == DIRECTION_X && p.x < node.nodeData.x)
 				|| (splitDic == DIRECTION_Y && p.y < node.nodeData.y)) {
 			if (!node.leftNode.isVisited) {
 				findedNearestLeafNode(p, node.leftNode, stack);
 			} else {
-				// Èç¹û×óº¢×Ó½ÚµãÒÑ¾­·ÃÎÊ¹ı£¬Ôò·ÃÎÊÁíÒ»±ß
+				// å¦‚æœå·¦å­©å­èŠ‚ç‚¹å·²ç»è®¿é—®è¿‡ï¼Œåˆ™è®¿é—®å¦ä¸€è¾¹
 				findedNearestLeafNode(p, node.rightNode, stack);
 			}
 		} else if ((splitDic == DIRECTION_X && p.x > node.nodeData.x)
@@ -276,17 +276,17 @@ public class KDTreeTool {
 			if (!node.rightNode.isVisited) {
 				findedNearestLeafNode(p, node.rightNode, stack);
 			} else {
-				// Èç¹ûÓÒº¢×Ó½ÚµãÒÑ¾­·ÃÎÊ¹ı£¬Ôò·ÃÎÊÁíÒ»±ß
+				// å¦‚æœå³å­©å­èŠ‚ç‚¹å·²ç»è®¿é—®è¿‡ï¼Œåˆ™è®¿é—®å¦ä¸€è¾¹
 				findedNearestLeafNode(p, node.leftNode, stack);
 			}
 		}
 	}
 
 	/**
-	 * ¸ù¾İ¸ø¶¨µÄÊı¾İµãÍ¨¹ı¼ÆËã·´²îÑ¡ÔñµÄ·Ö¸îµã
+	 * æ ¹æ®ç»™å®šçš„æ•°æ®ç‚¹é€šè¿‡è®¡ç®—åå·®é€‰æ‹©çš„åˆ†å‰²ç‚¹
 	 * 
 	 * @param datas
-	 *            ²¿·ÖµÄ¼¯ºÏµã¼¯ºÏ
+	 *            éƒ¨åˆ†çš„é›†åˆç‚¹é›†åˆ
 	 * @return
 	 */
 	private int selectSplitDrc(ArrayList<Point> datas) {
@@ -309,23 +309,23 @@ public class KDTreeTool {
 			varianceY += (p.y - avgY) * (p.y - avgY);
 		}
 
-		// Çó×îºóµÄ·½²î
+		// æ±‚æœ€åçš„æ–¹å·®
 		varianceX /= datas.size();
 		varianceY /= datas.size();
 
-		// Í¨¹ı±È½Ï·½²îµÄ´óĞ¡¾ö¶¨·Ö¸î·½Ïò£¬Ñ¡Ôñ²¨¶¯½Ï´óµÄ½øĞĞ»®·Ö
+		// é€šè¿‡æ¯”è¾ƒæ–¹å·®çš„å¤§å°å†³å®šåˆ†å‰²æ–¹å‘ï¼Œé€‰æ‹©æ³¢åŠ¨è¾ƒå¤§çš„è¿›è¡Œåˆ’åˆ†
 		direction = varianceX > varianceY ? DIRECTION_X : DIRECTION_Y;
 
 		return direction;
 	}
 
 	/**
-	 * ¸ù¾İ×ø±êµã·½Î»½øĞĞÅÅĞò£¬Ñ¡³öÖĞ¼äµãµÄ×ø±êÊı¾İ
+	 * æ ¹æ®åæ ‡ç‚¹æ–¹ä½è¿›è¡Œæ’åºï¼Œé€‰å‡ºä¸­é—´ç‚¹çš„åæ ‡æ•°æ®
 	 * 
 	 * @param datas
-	 *            Êı¾İµã¼¯ºÏ
+	 *            æ•°æ®ç‚¹é›†åˆ
 	 * @param dir
-	 *            ÅÅĞòµÄ×ø±ê·½Ïò
+	 *            æ’åºçš„åæ ‡æ–¹å‘
 	 */
 	private Point getMiddlePoint(ArrayList<Point> datas, int dir) {
 		int index = 0;
@@ -352,21 +352,21 @@ public class KDTreeTool {
 			});
 		}
 
-		// È¡³öÖĞÎ»Êı
+		// å–å‡ºä¸­ä½æ•°
 		middlePoint = datas.get(index);
 
 		return middlePoint;
 	}
 
 	/**
-	 * ¸ù¾İ·½ÏòµÃµ½Ô­²¿·Ö½Úµã¼¯ºÏ×ó²àµÄÊı¾İµã
+	 * æ ¹æ®æ–¹å‘å¾—åˆ°åŸéƒ¨åˆ†èŠ‚ç‚¹é›†åˆå·¦ä¾§çš„æ•°æ®ç‚¹
 	 * 
 	 * @param datas
-	 *            Ô­Ê¼Êı¾İµã¼¯ºÏ
+	 *            åŸå§‹æ•°æ®ç‚¹é›†åˆ
 	 * @param nodeData
-	 *            Êı¾İÊ¸Á¿
+	 *            æ•°æ®çŸ¢é‡
 	 * @param dir
-	 *            ·Ö¸î·½Ïò
+	 *            åˆ†å‰²æ–¹å‘
 	 * @return
 	 */
 	private ArrayList<Point> getLeftSideDatas(ArrayList<Point> datas,

@@ -1,16 +1,16 @@
 package DataMining_Chameleon;
 
 /**
- * Chameleon(±äÉ«Áú)Á½½×¶Î¾ÛÀàËã·¨
+ * Chameleon(å˜è‰²é¾™)ä¸¤é˜¶æ®µèšç±»ç®—æ³•
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\graphData.txt";
-		//k-½üÁÚµÄkÉèÖÃ
+		//k-è¿‘é‚»çš„kè®¾ç½®
 		int k = 1;
-		//¶ÈÁ¿º¯ÊıãĞÖµ
+		//åº¦é‡å‡½æ•°é˜ˆå€¼
 		double minMetric = 0.1;
 		
 		ChameleonTool tool = new ChameleonTool(filePath, k, minMetric);

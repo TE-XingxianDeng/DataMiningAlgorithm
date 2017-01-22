@@ -8,23 +8,23 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
- * DBSCAN»ùÓÚÃÜ¶È¾ÛÀàËã·¨¹¤¾ßÀà
+ * DBSCANåŸºäºå¯†åº¦èšç±»ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class DBSCANTool {
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ´ØÉ¨Ãè°ë¾¶
+	// ç°‡æ‰«æåŠå¾„
 	private double eps;
-	// ×îĞ¡°üº¬µãÊıãĞÖµ
+	// æœ€å°åŒ…å«ç‚¹æ•°é˜ˆå€¼
 	private int minPts;
-	// ËùÓĞµÄÊı¾İ×ø±êµã
+	// æ‰€æœ‰çš„æ•°æ®åæ ‡ç‚¹
 	private ArrayList<Point> totalPoints;
-	// ¾Û´Ø½á¹û
+	// èšç°‡ç»“æœ
 	private ArrayList<ArrayList<Point>> resultClusters;
-	//ÔëÉùÊı¾İ
+	//å™ªå£°æ•°æ®
 	private ArrayList<Point> noisePoint;
 
 	public DBSCANTool(String filePath, double eps, int minPts) {
@@ -35,7 +35,7 @@ public class DBSCANTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	public void readDataFile() {
 		File file = new File(filePath);
@@ -63,18 +63,18 @@ public class DBSCANTool {
 	}
 
 	/**
-	 * µİ¹éµÄÑ°ÕÒ¾Û´Ø
+	 * é€’å½’çš„å¯»æ‰¾èšç°‡
 	 * 
 	 * @param pointList
-	 *            µ±Ç°µÄµãÁĞ±í
+	 *            å½“å‰çš„ç‚¹åˆ—è¡¨
 	 * @param parentCluster
-	 *            ¸¸¾Û´Ø
+	 *            çˆ¶èšç°‡
 	 */
 	private void recursiveCluster(Point point, ArrayList<Point> parentCluster) {
 		double distance = 0;
 		ArrayList<Point> cluster;
 
-		// Èç¹ûÒÑ¾­·ÃÎÊ¹ıÁË£¬ÔòÌø¹ı
+		// å¦‚æœå·²ç»è®¿é—®è¿‡äº†ï¼Œåˆ™è·³è¿‡
 		if (point.isVisited) {
 			return;
 		}
@@ -82,22 +82,22 @@ public class DBSCANTool {
 		point.isVisited = true;
 		cluster = new ArrayList<>();
 		for (Point p2 : totalPoints) {
-			// ¹ıÂËµô×ÔÉíµÄ×ø±êµã
+			// è¿‡æ»¤æ‰è‡ªèº«çš„åæ ‡ç‚¹
 			if (point.isTheSame(p2)) {
 				continue;
 			}
 
 			distance = point.ouDistance(p2);
 			if (distance <= eps) {
-				// Èç¹û¾ÛÀàĞ¡ÓÚ¸ø¶¨µÄ°ë¾¶£¬Ôò¼ÓÈë´ØÖĞ
+				// å¦‚æœèšç±»å°äºç»™å®šçš„åŠå¾„ï¼Œåˆ™åŠ å…¥ç°‡ä¸­
 				cluster.add(p2);
 			}
 		}
 
 		if (cluster.size() >= minPts) {
-			// ½«×Ô¼ºÒ²¼ÓÈëµ½¾Û´ØÖĞ
+			// å°†è‡ªå·±ä¹ŸåŠ å…¥åˆ°èšç°‡ä¸­
 			cluster.add(point);
-			// Èç¹û¸½½üµÄ½Úµã¸öÊı³¬¹ı×îÏÂÖµ£¬Ôò¼ÓÈëµ½¸¸¾Û´ØÖĞ,Í¬Ê±È¥³ıÖØ¸´µÄµã
+			// å¦‚æœé™„è¿‘çš„èŠ‚ç‚¹ä¸ªæ•°è¶…è¿‡æœ€ä¸‹å€¼ï¼Œåˆ™åŠ å…¥åˆ°çˆ¶èšç°‡ä¸­,åŒæ—¶å»é™¤é‡å¤çš„ç‚¹
 			addCluster(parentCluster, cluster);
 
 			for (Point p : cluster) {
@@ -107,12 +107,12 @@ public class DBSCANTool {
 	}
 
 	/**
-	 * Íù¸¸¾Û´ØÖĞÌí¼Ó¾Ö²¿´Ø×ø±êµã
+	 * å¾€çˆ¶èšç°‡ä¸­æ·»åŠ å±€éƒ¨ç°‡åæ ‡ç‚¹
 	 * 
 	 * @param parentCluster
-	 *            Ô­Ê¼¸¸¾Û´Ø×ø±êµã
+	 *            åŸå§‹çˆ¶èšç°‡åæ ‡ç‚¹
 	 * @param cluster
-	 *            ´ıºÏ²¢µÄ¾Û´Ø
+	 *            å¾…åˆå¹¶çš„èšç°‡
 	 */
 	private void addCluster(ArrayList<Point> parentCluster,
 			ArrayList<Point> cluster) {
@@ -137,7 +137,7 @@ public class DBSCANTool {
 	}
 
 	/**
-	 * dbScanËã·¨»ùÓÚÃÜ¶ÈµÄ¾ÛÀà
+	 * dbScanç®—æ³•åŸºäºå¯†åº¦çš„èšç±»
 	 */
 	public void dbScanCluster() {
 		ArrayList<Point> cluster = null;
@@ -164,13 +164,13 @@ public class DBSCANTool {
 	}
 	
 	/**
-	 * ÒÆ³ı±»´íÎó·ÖÀàµÄÔëÉùµãÊı¾İ
+	 * ç§»é™¤è¢«é”™è¯¯åˆ†ç±»çš„å™ªå£°ç‚¹æ•°æ®
 	 */
 	private void removeFalseNoise(){
 		ArrayList<Point> totalCluster = new ArrayList<>();
 		ArrayList<Point> deletePoints = new ArrayList<>();
 		
-		//½«¾Û´ØºÏ²¢
+		//å°†èšç°‡åˆå¹¶
 		for(ArrayList<Point> list: resultClusters){
 			totalCluster.addAll(list);
 		} 
@@ -187,12 +187,12 @@ public class DBSCANTool {
 	}
 
 	/**
-	 * Êä³ö¾ÛÀà½á¹û
+	 * è¾“å‡ºèšç±»ç»“æœ
 	 */
 	private void printClusters() {
 		int i = 1;
 		for (ArrayList<Point> pList : resultClusters) {
-			System.out.print("¾Û´Ø" + (i++) + ":");
+			System.out.print("èšç°‡" + (i++) + ":");
 			for (Point p : pList) {
 				System.out.print(MessageFormat.format("({0},{1}) ", p.x, p.y));
 			}
@@ -200,7 +200,7 @@ public class DBSCANTool {
 		}
 		
 		System.out.println();
-		System.out.print("ÔëÉùÊı¾İ:");
+		System.out.print("å™ªå£°æ•°æ®:");
 		for (Point p : noisePoint) {
 			System.out.print(MessageFormat.format("({0},{1}) ", p.x, p.y));
 		}

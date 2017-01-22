@@ -1,15 +1,15 @@
 package DataMining_KDTree;
 
 /**
- * ×ø±êµãÀà
+ * åæ ‡ç‚¹ç±»
  * 
  * @author lyq
  * 
  */
 public class Point{
-	// ×ø±êµãºá×ø±ê
+	// åæ ‡ç‚¹æ¨ªåæ ‡
 	Double x;
-	// ×ø±êµã×İ×ø±ê
+	// åæ ‡ç‚¹çºµåæ ‡
 	Double y;
 
 	public Point(double x, double y){
@@ -23,10 +23,10 @@ public class Point{
 	}
 
 	/**
-	 * ¼ÆËãµ±Ç°µãÓëÖÆ¶¨µãÖ®¼äµÄÅ·Ê½¾àÀë
+	 * è®¡ç®—å½“å‰ç‚¹ä¸åˆ¶å®šç‚¹ä¹‹é—´çš„æ¬§å¼è·ç¦»
 	 * 
 	 * @param p
-	 *            ´ı¼ÆËã¾ÛÀàµÄpµã
+	 *            å¾…è®¡ç®—èšç±»çš„pç‚¹
 	 * @return
 	 */
 	public double ouDistance(Point p) {
@@ -40,10 +40,10 @@ public class Point{
 	}
 
 	/**
-	 * ÅĞ¶Ï2¸ö×ø±êµãÊÇ·ñÎªÓÃ¸ö×ø±êµã
+	 * åˆ¤æ–­2ä¸ªåæ ‡ç‚¹æ˜¯å¦ä¸ºç”¨ä¸ªåæ ‡ç‚¹
 	 * 
 	 * @param p
-	 *            ´ı±È½Ï×ø±êµã
+	 *            å¾…æ¯”è¾ƒåæ ‡ç‚¹
 	 * @return
 	 */
 	public boolean isTheSame(Point p) {

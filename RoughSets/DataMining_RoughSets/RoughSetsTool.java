@@ -9,26 +9,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ´Ö²Ú¼¯ÊôĞÔÔ¼¼òËã·¨¹¤¾ßÀà
+ * ç²—ç³™é›†å±æ€§çº¦ç®€ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class RoughSetsTool {
-	// ¾ö²ßÊôĞÔÃû³Æ
+	// å†³ç­–å±æ€§åç§°
 	public static String DECISION_ATTR_NAME;
 
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// Êı¾İÊôĞÔÁĞÃû³Æ
+	// æ•°æ®å±æ€§åˆ—åç§°
 	private String[] attrNames;
-	// ËùÓĞµÄÊı¾İ
+	// æ‰€æœ‰çš„æ•°æ®
 	private ArrayList<String[]> totalDatas;
-	// ËùÓĞµÄÊı¾İ¼ÇÂ¼,ÓëÉÏÃæµÄÇø±ğÊÇ¼ÇÂ¼µÄÊôĞÔÊÇ¿ÉÔ¼¼òµÄ£¬Ô­Ê¼Êı¾İÊÇ²»ÄÜ±äµÄ
+	// æ‰€æœ‰çš„æ•°æ®è®°å½•,ä¸ä¸Šé¢çš„åŒºåˆ«æ˜¯è®°å½•çš„å±æ€§æ˜¯å¯çº¦ç®€çš„ï¼ŒåŸå§‹æ•°æ®æ˜¯ä¸èƒ½å˜çš„
 	private ArrayList<Record> totalRecords;
-	// Ìõ¼şÊôĞÔÍ¼
+	// æ¡ä»¶å±æ€§å›¾
 	private HashMap<String, ArrayList<String>> conditionAttr;
-	// ÊôĞÔ¼ÇÂ¼¼¯ºÏ
+	// å±æ€§è®°å½•é›†åˆ
 	private ArrayList<RecordCollection> collectionList;
 
 	public RoughSetsTool(String filePath) {
@@ -37,7 +37,7 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -63,14 +63,14 @@ public class RoughSetsTool {
 		totalDatas = new ArrayList<>();
 		totalRecords = new ArrayList<>();
 		conditionAttr = new HashMap<>();
-		// ¸³ÖµÊôĞÔÃû³ÆĞĞ
+		// èµ‹å€¼å±æ€§åç§°è¡Œ
 		attrNames = dataArray.get(0);
 		DECISION_ATTR_NAME = attrNames[attrNames.length - 1];
 		for (int j = 0; j < dataArray.size(); j++) {
 			array = dataArray.get(j);
 			totalDatas.add(array);
 			if (j == 0) {
-				// ¹ıÂËµôµÚÒ»ĞĞÁĞÃû³ÆÊı¾İ
+				// è¿‡æ»¤æ‰ç¬¬ä¸€è¡Œåˆ—åç§°æ•°æ®
 				continue;
 			}
 
@@ -78,7 +78,7 @@ public class RoughSetsTool {
 			for (int i = 0; i < attrNames.length; i++) {
 				attrMap.put(attrNames[i], array[i]);
 
-				// Ñ°ÕÒÌõ¼şÊôĞÔ
+				// å¯»æ‰¾æ¡ä»¶å±æ€§
 				if (i > 0 && i < attrNames.length - 1) {
 					if (conditionAttr.containsKey(attrNames[i])) {
 						attrList = conditionAttr.get(attrNames[i]);
@@ -98,7 +98,7 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * ½«Êı¾İ¼ÇÂ¼¸ù¾İÊôĞÔ·Ö¸îµ½¼¯ºÏÖĞ
+	 * å°†æ•°æ®è®°å½•æ ¹æ®å±æ€§åˆ†å‰²åˆ°é›†åˆä¸­
 	 */
 	private void recordSpiltToCollection() {
 		String attrName;
@@ -114,7 +114,7 @@ public class RoughSetsTool {
 
 			for (String s : attrList) {
 				recordList = new ArrayList<>();
-				// Ñ°ÕÒÊôĞÔÎªsµÄÊı¾İ¼ÇÂ¼·ÖÈëµ½¼¯ºÏÖĞ
+				// å¯»æ‰¾å±æ€§ä¸ºsçš„æ•°æ®è®°å½•åˆ†å…¥åˆ°é›†åˆä¸­
 				for (Record record : totalRecords) {
 					if (record.isContainedAttr(s)) {
 						recordList.add(record);
@@ -131,24 +131,24 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * ¹¹ÔìÊôĞÔ¼¯ºÏÍ¼
+	 * æ„é€ å±æ€§é›†åˆå›¾
 	 * 
 	 * @param reductAttr
-	 *            ĞèÒªÔ¼¼òµÄÊôĞÔ
+	 *            éœ€è¦çº¦ç®€çš„å±æ€§
 	 * @return
 	 */
 	private HashMap<String, ArrayList<RecordCollection>> constructCollectionMap(
 			ArrayList<String> reductAttr) {
 		String currentAtttrName;
 		ArrayList<RecordCollection> cList;
-		// ¼¯ºÏÊôĞÔ¶ÔÓ¦Í¼
+		// é›†åˆå±æ€§å¯¹åº”å›¾
 		HashMap<String, ArrayList<RecordCollection>> collectionMap = new HashMap<>();
 
-		// ½ØÈ¡³öÌõ¼şÊôĞÔ²¿·Ö
+		// æˆªå–å‡ºæ¡ä»¶å±æ€§éƒ¨åˆ†
 		for (int i = 1; i < attrNames.length - 1; i++) {
 			currentAtttrName = attrNames[i];
 
-			// ÅĞ¶Ï´ËÊôĞÔÁĞÊÇ·ñĞèÒªÔ¼¼ò
+			// åˆ¤æ–­æ­¤å±æ€§åˆ—æ˜¯å¦éœ€è¦çº¦ç®€
 			if (reductAttr != null && reductAttr.contains(currentAtttrName)) {
 				continue;
 			}
@@ -168,18 +168,18 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * ¸ù¾İÒÑÓĞµÄ·ÖÁÑ¼¯ºÏ¼ÆËãÖªÊ¶ÏµÍ³
+	 * æ ¹æ®å·²æœ‰çš„åˆ†è£‚é›†åˆè®¡ç®—çŸ¥è¯†ç³»ç»Ÿ
 	 */
 	private ArrayList<RecordCollection> computeKnowledgeSystem(
 			HashMap<String, ArrayList<RecordCollection>> collectionMap) {
 		String attrName = null;
 		ArrayList<RecordCollection> cList = null;
-		// ÖªÊ¶ÏµÍ³
+		// çŸ¥è¯†ç³»ç»Ÿ
 		ArrayList<RecordCollection> ksCollections;
 
 		ksCollections = new ArrayList<>();
 
-		// È¡³ö1Ïî
+		// å–å‡º1é¡¹
 		for (Map.Entry entry : collectionMap.entrySet()) {
 			attrName = (String) entry.getKey();
 			cList = (ArrayList<RecordCollection>) entry.getValue();
@@ -195,14 +195,14 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * µİ¹é¼ÆËãËùÓĞµÄÖªÊ¶ÏµÍ³£¬Í¨¹ı¼ÆËãËùÓĞ¼¯ºÏµÄ½»¼¯
+	 * é€’å½’è®¡ç®—æ‰€æœ‰çš„çŸ¥è¯†ç³»ç»Ÿï¼Œé€šè¿‡è®¡ç®—æ‰€æœ‰é›†åˆçš„äº¤é›†
 	 * 
 	 * @param ksCollection
-	 *            ÒÑ¾­ÇóµÃÖªÊ¶ÏµÍ³µÄ¼¯ºÏ
+	 *            å·²ç»æ±‚å¾—çŸ¥ï¿½æ–­ä½è½¦å‹Ÿî‡¯ï¿½
 	 * @param map
-	 *            »¹Î´Ôø½øĞĞ¹ı½»ÔËËãµÄ¼¯ºÏ
+	 *            è¿˜æœªæ›¾è¿›è¡Œè¿‡äº¤è¿ç®—çš„é›†åˆ
 	 * @param preCollection
-	 *            Ç°¸ö²½ÖèÖĞÒÑ¾­Í¨¹ı½»ÔËËã¼ÆËã³öµÄ¼¯ºÏ
+	 *            å‰ä¸ªæ­¥éª¤ä¸­å·²ç»é€šè¿‡äº¤è¿ç®—è®¡ç®—å‡ºçš„é›†åˆ
 	 */
 	private void recurrenceComputeKS(ArrayList<RecordCollection> ksCollections,
 			HashMap<String, ArrayList<RecordCollection>> map,
@@ -212,7 +212,7 @@ public class RoughSetsTool {
 		ArrayList<RecordCollection> cList = null;
 		HashMap<String, ArrayList<RecordCollection>> mapCopy = new HashMap<>();
 		
-		//Èç¹ûÒÑ¾­Ã»ÓĞÊı¾İÁË£¬ÔòÖ±½ÓÌí¼Ó
+		//å¦‚æœå·²ç»æ²¡æœ‰æ•°æ®äº†ï¼Œåˆ™ç›´æ¥æ·»åŠ 
 		if(map.size() == 0){
 			ksCollections.add(preCollection);
 			return;
@@ -223,7 +223,7 @@ public class RoughSetsTool {
 			mapCopy.put((String) entry.getKey(), cList);
 		}
 
-		// È¡³ö1Ïî
+		// å–å‡º1é¡¹
 		for (Map.Entry entry : map.entrySet()) {
 			attrName = (String) entry.getKey();
 			cList = (ArrayList<RecordCollection>) entry.getValue();
@@ -232,14 +232,14 @@ public class RoughSetsTool {
 
 		mapCopy.remove(attrName);
 		for (RecordCollection rc : cList) {
-			// ÌôÑ¡´ËÊôĞÔµÄÒ»¸ö¼¯ºÏ½øĞĞ½»ÔËËã£¬È»ºóÔÙ´Îµİ¹é
+			// æŒ‘é€‰æ­¤å±æ€§çš„ä¸€ä¸ªé›†åˆè¿›è¡Œäº¤è¿ç®—ï¼Œç„¶åå†æ¬¡é€’å½’
 			tempCollection = preCollection.overlapCalculate(rc);
 
 			if (tempCollection == null) {
 				continue;
 			}
 
-			// Èç¹ûmapÖĞÒÑ¾­Ã»ÓĞÊı¾İÁË,ËµÃ÷µİ¹éµ½Í·ÁË
+			// å¦‚æœmapä¸­å·²ç»æ²¡æœ‰æ•°æ®äº†,è¯´æ˜é€’å½’åˆ°å¤´äº†
 			if (mapCopy.size() == 0) {
 				ksCollections.add(tempCollection);
 			} else {
@@ -249,27 +249,27 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * ½øĞĞ´Ö²Ú¼¯ÊôĞÔÔ¼¼òËã·¨
+	 * è¿›è¡Œç²—ç³™é›†å±æ€§çº¦ç®€ç®—æ³•
 	 */
 	public void findingReduct() {
 		RecordCollection[] sameClassRcs;
 		KnowledgeSystem ks;
 		ArrayList<RecordCollection> ksCollections;
-		// ´ıÔ¼¼òµÄÊôĞÔ
+		// å¾…çº¦ç®€çš„å±æ€§
 		ArrayList<String> reductAttr = null;
 		ArrayList<String> attrNameList;
-		// ×îÖÕ¿ÉÔ¼¼òµÄÊôĞÔ×é
+		// æœ€ç»ˆå¯çº¦ç®€çš„å±æ€§ç»„
 		ArrayList<ArrayList<String>> canReductAttrs;
 		HashMap<String, ArrayList<RecordCollection>> collectionMap;
 
 		sameClassRcs = selectTheSameClassRC();
-		// ÕâÀï½²Êı¾İ°´ÕÕ¸÷¸ö·ÖÀàµÄĞ¡ÊôĞÔ»®·ÖÁË9¸ö¼¯ºÏ
+		// è¿™é‡Œè®²æ•°æ®æŒ‰ç…§å„ä¸ªåˆ†ç±»çš„å°å±æ€§åˆ’åˆ†äº†9ä¸ªé›†åˆ
 		recordSpiltToCollection();
 
 		collectionMap = constructCollectionMap(reductAttr);
 		ksCollections = computeKnowledgeSystem(collectionMap);
 		ks = new KnowledgeSystem(ksCollections);
-		System.out.println("Ô­Ê¼¼¯ºÏ·ÖÀàµÄÉÏÏÂ½üËÆ¼¯ºÏ");
+		System.out.println("åŸå§‹é›†åˆåˆ†ç±»çš„ä¸Šä¸‹è¿‘ä¼¼é›†åˆ");
 		ks.getDownSimilarRC(sameClassRcs[0]).printRc();
 		ks.getUpSimilarRC(sameClassRcs[0]).printRc();
 		ks.getDownSimilarRC(sameClassRcs[1]).printRc();
@@ -283,7 +283,7 @@ public class RoughSetsTool {
 		ArrayList<String> remainAttr;
 		canReductAttrs = new ArrayList<>();
 		reductAttr = new ArrayList<>();
-		// ½øĞĞÌõ¼şÊôĞÔµÄµİ¹éÔ¼¼ò
+		// è¿›è¡Œæ¡ä»¶å±æ€§çš„é€’å½’çº¦ç®€
 		for (String s : attrNameList) {
 			remainAttr = (ArrayList<String>) attrNameList.clone();
 			remainAttr.remove(s);
@@ -297,16 +297,16 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * µİ¹é½øĞĞÊôĞÔÔ¼¼ò
+	 * é€’å½’è¿›è¡Œå±æ€§çº¦ç®€
 	 * 
 	 * @param resultAttr
-	 *            ÒÑ¾­¼ÆËã³öµÄÔ¼¼òÊôĞÔ×é
+	 *            å·²ç»è®¡ç®—å‡ºçš„çº¦ç®€å±æ€§ç»„
 	 * @param reductAttr
-	 *            ½«ÒªÔ¼¼òµÄÊôĞÔ×é
+	 *            å°†è¦çº¦ç®€çš„å±æ€§ç»„
 	 * @param remainAttr
-	 *            Ê£ÓàµÄÊôĞÔ
+	 *            å‰©ä½™çš„å±æ€§
 	 * @param sameClassRc
-	 *            ´ı¼ÆËãÉÏÏÂ½üËÆ¼¯ºÏµÄÍ¬Àà¼¯ºÏ
+	 *            å¾…è®¡ç®—ä¸Šä¸‹è¿‘ä¼¼é›†åˆçš„åŒç±»é›†åˆ
 	 */
 	private void recurrenceFindingReduct(
 			ArrayList<ArrayList<String>> resultAttr,
@@ -331,20 +331,20 @@ public class RoughSetsTool {
 		downRc2 = ks.getDownSimilarRC(sameClassRc[1]);
 		upRc2 = ks.getUpSimilarRC(sameClassRc[1]);
 
-		// Èç¹ûÉÏÏÂ½üËÆÃ»ÓĞÍêÈ«ÄâºÏÔ­¼¯ºÏÔòÈÏÎªÊôĞÔ²»ÄÜ±»Ô¼¼ò
+		// å¦‚æœä¸Šä¸‹è¿‘ï¿½æ³¼æŒ¥å‹è€†î‚å¤‚æ˜¾î„µî‡¯æ˜¾è›‰è¡”î€©ç²œåœ†è’é¼™è¾‰æŠ€ï¿½
 		if (!upRc1.isCollectionSame(sameClassRc[0])
 				|| !downRc1.isCollectionSame(sameClassRc[0])) {
 			return;
 		}
-		//ÕıÀàºÍ¸ºÀà¶¼Ğè±È½Ï
+		//æ­£ç±»å’Œè´Ÿç±»éƒ½éœ€æ¯”è¾ƒ
 		if (!upRc2.isCollectionSame(sameClassRc[1])
 				|| !downRc2.isCollectionSame(sameClassRc[1])) {
 			return;
 		}
 
-		// ¼ÓÈëµ½½á¹û¼¯ÖĞ
+		// åŠ å…¥åˆ°ç»“æœé›†ä¸­
 		resultAttr.add(reductAttr);
-		//Ö»Ê£ÏÂ1¸öÊôĞÔ²»ÄÜÔÙÔ¼¼ò
+		//åªå‰©ä¸‹1ä¸ªå±æ€§ä¸èƒ½å†çº¦ç®€
 		if (remainAttr.size() == 1) {
 			return;
 		}
@@ -360,7 +360,7 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * Ñ¡³ö¾ö²ßÊôĞÔÒ»ÖÂµÄ¼¯ºÏ
+	 * é€‰å‡ºå†³ç­–å±æ€§ä¸€è‡´çš„é›†åˆ
 	 * 
 	 * @return
 	 */
@@ -370,7 +370,7 @@ public class RoughSetsTool {
 		resultRc[1] = new RecordCollection();
 		String attrValue;
 
-		// ÕÒ³öµÚÒ»¸ö¼ÇÂ¼µÄ¾ö²ßÊôĞÔ×÷ÎªÒ»¸ö·ÖÀà
+		// æ‰¾å‡ºç¬¬ä¸€ä¸ªè®°å½•çš„å†³ç­–å±æ€§ä½œä¸ºä¸€ä¸ªåˆ†ç±»
 		attrValue = totalRecords.get(0).getRecordDecisionClass();
 		for (Record r : totalRecords) {
 			if (attrValue.equals(r.getRecordDecisionClass())) {
@@ -384,18 +384,18 @@ public class RoughSetsTool {
 	}
 	
 	/**
-	 * Êä³ö¾ö²ß¹æÔò
+	 * è¾“å‡ºå†³ç­–è§„åˆ™
 	 * @param reductAttrArray
-	 * Ô¼¼òÊôĞÔ×é
+	 * çº¦ç®€å±æ€§ç»„
 	 */
 	public void printRules(ArrayList<ArrayList<String>> reductAttrArray){
-		//ÓÃÀ´±£´æÒÑ¾­ÃèÊö¹ıµÄ¹æÔò£¬±ÜÃâÖØ¸´Êä³ö
+		//ç”¨æ¥ä¿å­˜å·²ç»æè¿°è¿‡çš„è§„åˆ™ï¼Œé¿å…é‡å¤è¾“å‡º
 		ArrayList<String> rulesArray;
 		String rule;
 		
 		for(ArrayList<String> ra: reductAttrArray){
 			rulesArray = new ArrayList<>();
-			System.out.print("Ô¼¼òµÄÊôĞÔ£º");
+			System.out.print("çº¦ç®€çš„å±æ€§ï¼š");
 			for(String s: ra){
 				System.out.print(s + ",");
 			}
@@ -413,10 +413,10 @@ public class RoughSetsTool {
 	}
 
 	/**
-	 * Êä³ö¼ÇÂ¼¼¯ºÏ
+	 * è¾“å‡ºè®°å½•é›†åˆ
 	 * 
 	 * @param rcList
-	 *            ´ıÊä³ö¼ÇÂ¼¼¯ºÏ
+	 *            å¾…è¾“å‡ºè®°å½•é›†åˆ
 	 */
 	public void printRecordCollectionList(ArrayList<RecordCollection> rcList) {
 		for (RecordCollection rc : rcList) {

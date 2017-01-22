@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Á¬Í¨Í¼Àà
+ * è¿é€šå›¾ç±»
  * 
  * @author lyq
  * 
  */
 public class Graph {
-	// ×ø±êµãÖ®¼äµÄÁ¬½ÓÊôĞÔ£¬À¨ºÅÄÚÎª×ø±êidºÅ
+	// åæ ‡ç‚¹ä¹‹é—´çš„è¿æ¥å±æ€§ï¼Œæ‹¬å·å†…ä¸ºåæ ‡idå·
 	int[][] edges;
-	// Á¬Í¨Í¼ÄÚµÄ×ø±êµãÊı
+	// è¿é€šå›¾å†…çš„åæ ‡ç‚¹æ•°
 	ArrayList<Point> points;
-	// ´ËÍ¼ÏÂ·Ö¸îºóµÄ¾ÛÀà×ÓÍ¼
+	// æ­¤å›¾ä¸‹åˆ†å‰²åçš„èšç±»å­å›¾
 	ArrayList<ArrayList<Point>> clusters;
 
 	public Graph(int[][] edges) {
@@ -44,10 +44,10 @@ public class Graph {
 	}
 
 	/**
-	 * ¸ù¾İ¾àÀëãĞÖµ×öÁ¬Í¨Í¼µÄ»®·Ö,¹¹³ÉÁ¬Í¨Í¼¼¯
+	 * æ ¹æ®è·ç¦»é˜ˆå€¼åšè¿é€šå›¾çš„åˆ’åˆ†,æ„æˆè¿é€šå›¾é›†
 	 * 
 	 * @param length
-	 *            ¾àÀëãĞÖµ
+	 *            è·ç¦»é˜ˆå€¼
 	 * @return
 	 */
 	public ArrayList<Graph> splitGraphByLength(int length) {
@@ -57,7 +57,7 @@ public class Graph {
 
 		for (Point p : points) {
 			if (!p.isVisited) {
-				// À¨ºÅÖĞµÄÏÂ±êÎªidºÅ
+				// æ‹¬å·ä¸­çš„ä¸‹æ ‡ä¸ºidå·
 				edges = new int[points.size()][points.size()];
 				dfsExpand(p, length, edges);
 
@@ -72,14 +72,14 @@ public class Graph {
 	}
 
 	/**
-	 * Éî¶ÈÓÅÏÈ·½Ê½À©Õ¹Á¬Í¨Í¼
+	 * æ·±åº¦ä¼˜å…ˆæ–¹å¼æ‰©å±•è¿é€šå›¾
 	 * 
 	 * @param points
-	 *            ĞèÒª¼ÌĞøÉîËÑµÄ×ø±êµã
+	 *            éœ€è¦ç»§ç»­æ·±æœçš„åæ ‡ç‚¹
 	 * @param length
-	 *            ¾àÀëãĞÖµ
+	 *            è·ç¦»é˜ˆå€¼
 	 * @param edges
-	 *            ±ßÊı×é
+	 *            è¾¹æ•°ç»„
 	 */
 	private void dfsExpand(Point point, int length, int edges[][]) {
 		int id1 = 0;
@@ -87,7 +87,7 @@ public class Graph {
 		double distance = 0;
 		ArrayList<Point> tempPoints;
 
-		// Èç¹û´¦Àí¹ıÁË£¬ÔòÌø¹ı
+		// å¦‚æœå¤„ç†è¿‡äº†ï¼Œåˆ™è·³è¿‡
 		if (point.isVisited) {
 			return;
 		}
@@ -111,33 +111,33 @@ public class Graph {
 			}
 		}
 
-		// ¼ÌĞøµİ¹é
+		// ç»§ç»­é€’å½’
 		for (Point p : tempPoints) {
 			dfsExpand(p, length, edges);
 		}
 	}
 
 	/**
-	 * ÅĞ¶ÏÁ¬Í¨Í¼ÊÇ·ñ»¹ĞèÒªÔÙ±»»®·Ö
+	 * åˆ¤æ–­è¿é€šå›¾æ˜¯å¦è¿˜éœ€è¦å†è¢«åˆ’åˆ†
 	 * 
 	 * @param pointList1
-	 *            ×ø±êµã¼¯ºÏ1
+	 *            åæ ‡ç‚¹é›†åˆ1
 	 * @param pointList2
-	 *            ×ø±êµã¼¯ºÏ2
+	 *            åæ ‡ç‚¹é›†åˆ2
 	 * @return
 	 */
 	private boolean needDivided(ArrayList<Point> pointList1,
 			ArrayList<Point> pointList2) {
 		boolean needDivided = false;
-		// ³ĞÊÜÏµÊıt=ÇáµÄ¼¯ºÏµÄ×ø±êµãÊı/2²¿·ÖÁ¬½ÓµÄ±ßÊı
+		// æ‰¿å—ç³»æ•°t=è½»çš„é›†åˆçš„åæ ‡ç‚¹æ•°/2éƒ¨åˆ†è¿æ¥çš„è¾¹æ•°
 		double t = 0;
-		// ·ÖÁÑãĞÖµ£¬¼´Æ½¾ùÃ¿±ßËùÒª³ĞÊÜµÄÖØÁ¿
+		// åˆ†è£‚é˜ˆå€¼ï¼Œå³å¹³å‡æ¯è¾¹æ‰€è¦æ‰¿å—çš„é‡é‡
 		double landa = 0;
 		int pointNum1 = pointList1.size();
 		int pointNum2 = pointList2.size();
-		// ×Ü±ßÊı
+		// æ€»è¾¹æ•°
 		int totalEdgeNum = 0;
-		// Á¬½Ó2²¿·ÖµÄ±ßÊıÁ¿
+		// è¿æ¥2éƒ¨åˆ†çš„è¾¹æ•°é‡
 		int connectedEdgeNum = 0;
 		ArrayList<Point> totalPoints = new ArrayList<>();
 
@@ -162,16 +162,16 @@ public class Graph {
 		}
 
 		if (pointNum1 < pointNum2) {
-			// ³ĞÊÜÏµÊıt=ÇáµÄ¼¯ºÏµÄ×ø±êµãÊı/Á¬½Ó2²¿·ÖµÄ±ßÊı
+			// æ‰¿å—ç³»æ•°t=è½»çš„é›†åˆçš„åæ ‡ç‚¹æ•°/è¿æ¥2éƒ¨åˆ†çš„è¾¹æ•°
 			t = 1.0 * pointNum1 / connectedEdgeNum;
 		} else {
 			t = 1.0 * pointNum2 / connectedEdgeNum;
 		}
 
-		// ¼ÆËã·ÖÁÑãĞÖµ,À¨ºÅÄÚÎª×Ü±ßÊı/×ÜµãÊı£¬¾ÍÊÇÆ½¾ùÃ¿±ßËù³ĞÊÜµÄµãÊıÁ¿
+		// è®¡ç®—åˆ†è£‚é˜ˆå€¼,æ‹¬å·å†…ä¸ºæ€»è¾¹æ•°/æ€»ç‚¹æ•°ï¼Œå°±æ˜¯å¹³å‡æ¯è¾¹æ‰€æ‰¿å—çš„ç‚¹æ•°é‡
 		landa = 0.5 * Math.exp((1.0 * totalEdgeNum / (pointNum1 + pointNum2)));
 
-		// Èç¹û³ĞÊÜÏµÊı²»Ğ¡ÓÚ·ÖÁÑãĞÖµ£¬Ôò´ú±íĞèÒª·ÖÁÑ
+		// å¦‚æœæ‰¿å—ç³»æ•°ä¸å°äºåˆ†è£‚é˜ˆå€¼ï¼Œåˆ™ä»£è¡¨éœ€è¦åˆ†è£‚
 		if (t >= landa) {
 			needDivided = true;
 		}
@@ -180,25 +180,25 @@ public class Graph {
 	}
 
 	/**
-	 * µİ¹éµÄ»®·ÖÁ¬Í¨Í¼
+	 * é€’å½’çš„åˆ’åˆ†è¿é€šå›¾
 	 * 
 	 * @param pointList
-	 *            ´ı»®·ÖµÄÁ¬Í¨Í¼µÄËùÓĞ×ø±êµã
+	 *            å¾…åˆ’åˆ†çš„è¿é€šå›¾çš„æ‰€æœ‰åæ ‡ç‚¹
 	 */
 	public void divideGraph(ArrayList<Point> pointList) {
-		// ÅĞ¶Ï´Ë×ø±êµã¼¯ºÏÊÇ·ñÄÜ¹»±»·Ö¸î
+		// åˆ¤æ–­æ­¤åæ ‡ç‚¹é›†åˆæ˜¯å¦èƒ½å¤Ÿè¢«åˆ†å‰²
 		boolean canDivide = false;
 		ArrayList<ArrayList<Point>> pointGroup;
 		ArrayList<Point> pointList1 = new ArrayList<>();
 		ArrayList<Point> pointList2 = new ArrayList<>();
 
 		for (int m = 2; m <= pointList.size() / 2; m++) {
-			// ½øĞĞ×ø±êµãµÄ·Ö¸î
+			// è¿›è¡Œåæ ‡ç‚¹çš„åˆ†å‰²
 			pointGroup = removePoint(pointList, m);
 			pointList1 = pointGroup.get(0);
 			pointList2 = pointGroup.get(1);
 
-			// ÅĞ¶ÏÊÇ·ñÂú×ã·ÖÁÑÌõ¼ş
+			// åˆ¤æ–­æ˜¯å¦æ»¡è¶³åˆ†è£‚æ¡ä»¶
 			if (needDivided(pointList1, pointList2)) {
 				canDivide = true;
 				divideGraph(pointList1);
@@ -206,14 +206,14 @@ public class Graph {
 			}
 		}
 
-		// Èç¹ûËùÓĞµÄ·Ö¸î×éºÏ¶¼ÎŞ·¨·Ö¸î£¬ÔòËµÃ÷´ËÒÑ¾­ÊÇÒ»¸ö¾ÛÀà
+		// å¦‚æœæ‰€æœ‰çš„åˆ†å‰²ç»„åˆéƒ½æ— æ³•åˆ†å‰²ï¼Œåˆ™è¯´æ˜æ­¤å·²ç»æ˜¯ä¸€ä¸ªèšç±»
 		if (!canDivide) {
 			clusters.add(pointList);
 		}
 	}
 
 	/**
-	 * »ñÈ¡·ÖÁÑµÃµ½µÄ¾ÛÀà½á¹û
+	 * è·å–åˆ†è£‚å¾—åˆ°çš„èšç±»ç»“æœ
 	 * 
 	 * @return
 	 */
@@ -226,20 +226,20 @@ public class Graph {
 	}
 
 	/**
-	 * ½«µ±Ç°×ø±êµã¼¯ºÏÒÆ³ıremoveNum¸öµã£¬¹¹³É2¸ö×Ó×ø±êµã¼¯ºÏ
+	 * å°†å½“å‰åæ ‡ç‚¹é›†åˆç§»é™¤removeNumä¸ªç‚¹ï¼Œæ„æˆ2ä¸ªå­åæ ‡ç‚¹é›†åˆ
 	 * 
 	 * @param pointList
-	 *            Ô­¼¯ºÏµã
+	 *            åŸé›†åˆç‚¹
 	 * @param removeNum
-	 *            ÒÆ³ıµÄÊıÁ¿
+	 *            ç§»é™¤çš„æ•°é‡
 	 */
 	private ArrayList<ArrayList<Point>> removePoint(ArrayList<Point> pointList,
 			int removeNum) {
-		//Ç³¿½±´Ò»·İÔ­×ø±êµãÊı¾İ
+		//æµ…æ‹·è´ä¸€ä»½åŸåæ ‡ç‚¹æ•°æ®
 		ArrayList<Point> copyPointList = (ArrayList<Point>) pointList.clone();
 		ArrayList<ArrayList<Point>> pointGroup = new ArrayList<>();
 		ArrayList<Point> pointList2 = new ArrayList<>();
-		// ½øĞĞ°´ÕÕ×ø±êÖá´óĞ¡ÅÅĞò
+		// è¿›è¡ŒæŒ‰ç…§åæ ‡è½´å¤§å°æ’åº
 		Collections.sort(copyPointList);
 
 		for (int i = 0; i < removeNum; i++) {
@@ -254,10 +254,10 @@ public class Graph {
 	}
 
 	/**
-	 * ¸ù¾İ±ßµÄÇé¿ö»ñÈ¡ÆäÖĞµÄµã
+	 * æ ¹æ®è¾¹çš„æƒ…å†µè·å–å…¶ä¸­çš„ç‚¹
 	 * 
 	 * @param edges
-	 *            µ±Ç°µÄÒÑÖªµÄ±ßµÄÇé¿ö
+	 *            å½“å‰çš„å·²çŸ¥çš„è¾¹çš„æƒ…å†µ
 	 * @return
 	 */
 	private ArrayList<Point> getPointByEdges(int[][] edges) {

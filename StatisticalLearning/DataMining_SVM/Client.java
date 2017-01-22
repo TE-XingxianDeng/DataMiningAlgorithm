@@ -1,19 +1,19 @@
 package DataMining_SVM;
 
 /**
- * SVMÖ§³ÖÏòÁ¿»ú³¡¾°µ÷ÓÃÀà
+ * SVMæ”¯æŒå‘é‡æœºåœºæ™¯è°ƒç”¨ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
-		//ÑµÁ·¼¯Êı¾İÎÄ¼şÂ·¾¶
+		//è®­ç»ƒé›†æ•°æ®æ–‡ä»¶è·¯å¾„
 		String trainDataPath = "C:\\Users\\lyq\\Desktop\\icon\\trainInput.txt";
-		//²âÊÔÊı¾İÎÄ¼şÂ·¾¶
+		//æµ‹è¯•æ•°æ®æ–‡ä»¶è·¯å¾„
 		String testDataPath = "C:\\Users\\lyq\\Desktop\\icon\\testInput.txt";
 		
 		SVMTool tool = new SVMTool(trainDataPath);
-		//¶Ô²âÊÔÊı¾İ½øĞĞsvmÖ§³ÖÏòÁ¿»ú·ÖÀà
+		//å¯¹æµ‹è¯•æ•°æ®è¿›è¡Œsvmæ”¯æŒå‘é‡æœºåˆ†ç±»
 		tool.svmPredictData(testDataPath);
 	}
 

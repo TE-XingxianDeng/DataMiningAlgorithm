@@ -1,16 +1,16 @@
 package GA;
 
 /**
- * GeneticÒÅ´«Ëã·¨²âÊÔÀà
+ * Geneticé—ä¼ ç®—æ³•æµ‹è¯•ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
-		//±äÁ¿×îĞ¡ÖµºÍ×î´óÖµ
+		//å˜é‡æœ€å°å€¼å’Œæœ€å¤§å€¼
 		int minNum = 1;
 		int maxNum = 7;
-		//³õÊ¼ÈºÌå¹æÄ£
+		//åˆå§‹ç¾¤ä½“è§„æ¨¡
 		int initSetsNum = 4;
 		
 		GATool tool = new GATool(minNum, maxNum, initSetsNum);

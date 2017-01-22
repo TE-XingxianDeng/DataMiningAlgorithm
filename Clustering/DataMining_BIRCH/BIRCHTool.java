@@ -9,26 +9,26 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * BIRCH¾ÛÀàËã·¨¹¤¾ßÀà
+ * BIRCHèšç±»ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class BIRCHTool {
-	// ½ÚµãÀàĞÍÃû³Æ
-	public static final String NON_LEAFNODE = "¡¾NonLeafNode¡¿";
-	public static final String LEAFNODE = "¡¾LeafNode¡¿";
-	public static final String CLUSTER = "¡¾Cluster¡¿";
+	// èŠ‚ç‚¹ç±»å‹åç§°
+	public static final String NON_LEAFNODE = "ã€NonLeafNodeã€‘";
+	public static final String LEAFNODE = "ã€LeafNodeã€‘";
+	public static final String CLUSTER = "ã€Clusterã€‘";
 
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ÄÚ²¿½ÚµãÆ½ºâÒò×ÓB
+	// å†…éƒ¨èŠ‚ç‚¹å¹³è¡¡å› å­B
 	public static int B;
-	// Ò¶×Ó½ÚµãÆ½ºâÒò×ÓL
+	// å¶å­èŠ‚ç‚¹å¹³è¡¡å› å­L
 	public static int L;
-	// ´ØÖ±¾¶ãĞÖµT
+	// ç°‡ç›´å¾„é˜ˆå€¼T
 	public static double T;
-	// ×ÜµÄ²âÊÔÊı¾İ¼ÇÂ¼
+	// æ€»çš„æµ‹è¯•æ•°æ®è®°å½•
 	private ArrayList<String[]> totalDataRecords;
 
 	public BIRCHTool(String filePath, int B, int L, double T) {
@@ -40,7 +40,7 @@ public class BIRCHTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -66,7 +66,7 @@ public class BIRCHTool {
 	}
 
 	/**
-	 * ¹¹½¨CF¾ÛÀàÌØÕ÷Ê÷
+	 * æ„å»ºCFèšç±»ç‰¹å¾æ ‘
 	 * 
 	 * @return
 	 */
@@ -79,7 +79,7 @@ public class BIRCHTool {
 			cluster = new Cluster(record);
 
 			if (rootNode == null) {
-				// CFÊ÷Ö»ÓĞ1¸ö½ÚµãµÄÊ±ºòµÄÇé¿ö
+				// CFæ ‘åªæœ‰1ä¸ªèŠ‚ç‚¹çš„æ—¶å€™çš„æƒ…å†µ
 				if (leafNode == null) {
 					leafNode = new LeafNode();
 				}
@@ -92,13 +92,13 @@ public class BIRCHTool {
 					rootNode = rootNode.getParentNode();
 				}
 
-				// ´Ó¸ù½Úµã¿ªÊ¼£¬´ÓÉÏÍùÏÂÑ°ÕÒµ½×î½üµÄÌí¼ÓÄ¿±êÒ¶×Ó½Úµã
+				// ä»æ ¹èŠ‚ç‚¹å¼€å§‹ï¼Œä»ä¸Šå¾€ä¸‹å¯»æ‰¾åˆ°æœ€è¿‘çš„æ·»åŠ ç›®æ ‡å¶å­èŠ‚ç‚¹
 				LeafNode temp = rootNode.findedClosestNode(cluster);
 				temp.addingCluster(cluster);
 			}
 		}
 
-		// ´ÓÏÂÍùÉÏÕÒ³ö×îÉÏÃæµÄ½Úµã
+		// ä»ä¸‹å¾€ä¸Šæ‰¾å‡ºæœ€ä¸Šé¢çš„èŠ‚ç‚¹
 		LeafNode node = cluster.getParentNode();
 		NonLeafNode upNode = node.getParentNode();
 		if (upNode == null) {
@@ -113,10 +113,10 @@ public class BIRCHTool {
 	}
 
 	/**
-	 * ¿ªÊ¼¹¹½¨CF¾ÛÀàÌØÕ÷Ê÷
+	 * å¼€å§‹æ„å»ºCFèšç±»ç‰¹å¾æ ‘
 	 */
 	public void startBuilding() {
-		// Ê÷Éî¶È
+		// æ ‘æ·±åº¦
 		int level = 1;
 		ClusteringFeature rootNode = buildCFTree();
 
@@ -125,12 +125,12 @@ public class BIRCHTool {
 	}
 
 	/**
-	 * ÉèÖÃ½ÚµãÉî¶È
+	 * è®¾ç½®èŠ‚ç‚¹æ·±åº¦
 	 * 
 	 * @param clusteringFeature
-	 *            µ±Ç°½Úµã
+	 *            å½“å‰èŠ‚ç‚¹
 	 * @param level
-	 *            µ±Ç°Éî¶ÈÖµ
+	 *            å½“å‰æ·±åº¦å€¼
 	 */
 	private void setTreeLevel(ClusteringFeature clusteringFeature, int level) {
 		LeafNode leafNode = null;
@@ -145,7 +145,7 @@ public class BIRCHTool {
 		if (nonLeafNode != null) {
 			nonLeafNode.setLevel(level);
 			level++;
-			// ÉèÖÃ×Ó½Úµã
+			// è®¾ç½®å­èŠ‚ç‚¹
 			if (nonLeafNode.getNonLeafChilds() != null) {
 				for (NonLeafNode n1 : nonLeafNode.getNonLeafChilds()) {
 					setTreeLevel(n1, level);
@@ -158,7 +158,7 @@ public class BIRCHTool {
 		} else {
 			leafNode.setLevel(level);
 			level++;
-			// ÉèÖÃ×Ó¾Û´Ø
+			// è®¾ç½®å­èšç°‡
 			for (Cluster c : leafNode.getClusterChilds()) {
 				c.setLevel(level);
 			}
@@ -166,15 +166,15 @@ public class BIRCHTool {
 	}
 
 	/**
-	 * ÏÔÊ¾CF¾ÛÀàÌØÕ÷Ê÷
+	 * æ˜¾ç¤ºCFèšç±»ç‰¹å¾æ ‘
 	 * 
 	 * @param rootNode
-	 *            CFÊ÷¸ù½Úµã
+	 *            CFæ ‘æ ¹èŠ‚ç‚¹
 	 */
 	private void showCFTree(ClusteringFeature rootNode) {
-		// ¿Õ¸ñÊı£¬ÓÃÓÚÊä³ö
+		// ç©ºæ ¼æ•°ï¼Œç”¨äºè¾“å‡º
 		int blankNum = 5;
-		// µ±Ç°Ê÷Éî¶È
+		// å½“å‰æ ‘æ·±åº¦
 		int currentLevel = 1;
 		LinkedList<ClusteringFeature> nodeQueue = new LinkedList<>();
 		ClusteringFeature cf;
@@ -235,10 +235,10 @@ public class BIRCHTool {
 		}
 		
 		System.out.println();
-		System.out.println("*******×îÖÕ·ÖºÃµÄ¾Û´Ø****");
-		//ÏÔÊ¾ÒÑ¾­·ÖºÃÀàµÄ¾Û´Øµã
+		System.out.println("*******æœ€ç»ˆåˆ†å¥½çš„èšç°‡****");
+		//æ˜¾ç¤ºå·²ç»åˆ†å¥½ç±»çš„èšç°‡ç‚¹
 		for(int i=0; i<clusterList.size(); i++){
-			System.out.println("Cluster" + (i+1) + "£º");
+			System.out.println("Cluster" + (i+1) + "ï¼š");
 			for(double[] point: clusterList.get(i).getData()){
 				System.out.print("[");
 				for (double d : point) {

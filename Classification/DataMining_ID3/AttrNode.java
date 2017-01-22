@@ -3,18 +3,18 @@ package DataMing_ID3;
 import java.util.ArrayList;
 
 /**
- * ÊôĞÔ½Úµã£¬²»ÊÇÒ¶×Ó½Úµã
+ * å±æ€§èŠ‚ç‚¹ï¼Œä¸æ˜¯å¶å­èŠ‚ç‚¹
  * @author lyq
  *
  */
 public class AttrNode {
-	//µ±Ç°ÊôĞÔµÄÃû×Ö
+	//å½“å‰å±æ€§çš„åå­—
 	private String attrName;
-	//¸¸½ÚµãµÄ·ÖÀàÊôĞÔÖµ
+	//çˆ¶èŠ‚ç‚¹çš„åˆ†ç±»å±æ€§å€¼
 	private String parentAttrValue;
-	//ÊôĞÔ×Ó½Úµã
+	//å±æ€§å­èŠ‚ç‚¹
 	private AttrNode[] childAttrNode;
-	//º¢×ÓÒ¶×Ó½Úµã
+	//å­©å­å¶å­èŠ‚ç‚¹
 	private ArrayList<String> childDataIndex;
 
 	public String getAttrName() {

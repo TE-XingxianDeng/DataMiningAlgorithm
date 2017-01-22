@@ -3,13 +3,13 @@ package DataMining_PrefixSpan;
 import java.util.ArrayList;
 
 /**
- * ×Ö·ûÏî¼¯Àà
+ * å­—ç¬¦é¡¹é›†ç±»
  * 
  * @author lyq
  * 
  */
 public class ItemSet {
-	// Ïî¼¯ÄÚµÄ×Ö·û
+	// é¡¹é›†å†…çš„å­—ç¬¦
 	private ArrayList<String> items;
 
 	public ItemSet(String[] str) {
@@ -39,7 +39,7 @@ public class ItemSet {
 	}
 
 	/**
-	 * »ñÈ¡Ïî¼¯×îºó1¸öÔªËØ
+	 * è·å–é¡¹é›†æœ€å1ä¸ªå…ƒç´ 
 	 * 
 	 * @return
 	 */

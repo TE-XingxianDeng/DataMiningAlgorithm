@@ -8,25 +8,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * ±´Ò¶Ë¹ÍøÂçËã·¨¹¤¾ßÀà
+ * è´å¶æ–¯ç½‘ç»œç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class BayesNetWorkTool {
-	// ÁªºÏ¸ÅÂÊ·Ö²¼Êı¾İÎÄ¼şµØÖ·
+	// è”åˆæ¦‚ç‡åˆ†å¸ƒæ•°æ®æ–‡ä»¶åœ°å€
 	private String dataFilePath;
-	// ÊÂ¼ş¹ØÁªÊı¾İÎÄ¼şµØÖ·
+	// äº‹ä»¶å…³è”æ•°æ®æ–‡ä»¶åœ°å€
 	private String attachFilePath;
-	// ÊôĞÔÁĞÁĞÊı
+	// å±æ€§åˆ—åˆ—æ•°
 	private int columns;
-	// ¸ÅÂÊ·Ö²¼Êı¾İ
+	// æ¦‚ç‡åˆ†å¸ƒæ•°æ®
 	private String[][] totalData;
-	// ¹ØÁªÊı¾İ¶Ô
+	// å…³è”æ•°æ®å¯¹
 	private ArrayList<String[]> attachData;
-	// ½Úµã´æ·ÅÁĞ±í
+	// èŠ‚ç‚¹å­˜æ”¾åˆ—è¡¨
 	private ArrayList<Node> nodes;
-	// ÊôĞÔÃûÓëÁĞÊıÖ®¼äµÄ¶ÔÓ¦¹ØÏµ
+	// å±æ€§åä¸åˆ—æ•°ä¹‹é—´çš„å¯¹åº”å…³ç³»
 	private HashMap<String, Integer> attr2Column;
 
 	public BayesNetWorkTool(String dataFilePath, String attachFilePath) {
@@ -37,7 +37,7 @@ public class BayesNetWorkTool {
 	}
 
 	/**
-	 * ³õÊ¼»¯¹ØÁªÊı¾İºÍ¸ÅÂÊ·Ö²¼Êı¾İ
+	 * åˆå§‹åŒ–å…³è”æ•°æ®å’Œæ¦‚ç‡åˆ†å¸ƒæ•°æ®
 	 */
 	private void initDatas() {
 		String[] columnValues;
@@ -45,16 +45,16 @@ public class BayesNetWorkTool {
 		ArrayList<String> datas;
 		ArrayList<String> adatas;
 
-		// ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+		// ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 		datas = readDataFile(dataFilePath);
 		adatas = readDataFile(attachFilePath);
 
 		columnValues = datas.get(0).split(" ");
-		// ÊôĞÔ¸îÃû³Æ´ú±íÊÂ¼şB(µÁÇÔ)£¬E(µØÕğ)£¬A(¾¯ÁåÏì).M(½Óµ½MµÄµç»°)£¬JÍ¬MµÄÒâË¼,
-		// ÊôĞÔÖµ¶¼ÊÇy,n´ú±íyes·¢ÉúºÍno²»·¢Éú
+		// å±æ€§å‰²åç§°ä»£è¡¨äº‹ä»¶B(ç›—çªƒ)ï¼ŒE(åœ°éœ‡)ï¼ŒA(è­¦é“ƒå“).M(æ¥åˆ°Mçš„ç”µè¯)ï¼ŒJåŒMçš„æ„æ€,
+		// å±æ€§å€¼éƒ½æ˜¯y,nä»£è¡¨yeså‘ç”Ÿå’Œnoä¸å‘ç”Ÿ
 		this.attr2Column = new HashMap<>();
 		for (int i = 0; i < columnValues.length; i++) {
-			// ´ÓÊı¾İÖĞÈ¡³öÊôĞÔÃû³ÆĞĞ£¬ÁĞÊıÖµ´æÈëÍ¼ÖĞ
+			// ä»æ•°æ®ä¸­å–å‡ºå±æ€§åç§°è¡Œï¼Œåˆ—æ•°å€¼å­˜å…¥å›¾ä¸­
 			this.attr2Column.put(columnValues[i], i);
 		}
 
@@ -65,18 +65,18 @@ public class BayesNetWorkTool {
 		}
 
 		this.attachData = new ArrayList<>();
-		// ½âÎö¹ØÁªÊı¾İ¶Ô
+		// è§£æå…³è”æ•°æ®å¯¹
 		for (String str : adatas) {
 			array = str.split(" ");
 			this.attachData.add(array);
 		}
 
-		// ¹¹Ôì±´Ò¶Ë¹ÍøÂç½á¹¹Í¼
+		// æ„é€ è´å¶æ–¯ç½‘ç»œç»“æ„å›¾
 		constructDAG();
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private ArrayList<String> readDataFile(String filePath) {
 		File file = new File(filePath);
@@ -97,10 +97,10 @@ public class BayesNetWorkTool {
 	}
 
 	/**
-	 * ¸ù¾İ¹ØÁªÊı¾İ¹¹Ôì±´Ò¶Ë¹ÍøÂçÎŞ»·ÓĞÏòÍ¼
+	 * æ ¹æ®å…³è”æ•°æ®æ„é€ è´å¶æ–¯ç½‘ç»œæ— ç¯æœ‰å‘å›¾
 	 */
 	private void constructDAG() {
-		// ½Úµã´æÔÚ±êÊ¶
+		// èŠ‚ç‚¹å­˜åœ¨æ ‡è¯†
 		boolean srcExist;
 		boolean desExist;
 		String name1;
@@ -116,12 +116,12 @@ public class BayesNetWorkTool {
 			name1 = array[0];
 			name2 = array[1];
 
-			// ĞÂ½¨½Úµã
+			// æ–°å»ºèŠ‚ç‚¹
 			srcNode = new Node(name1);
 			desNode = new Node(name2);
 
 			for (Node temp : this.nodes) {
-				// Èç¹ûÕÒµ½ÏàÍ¬½Úµã£¬ÔòÈ¡³ö
+				// å¦‚æœæ‰¾åˆ°ç›¸åŒèŠ‚ç‚¹ï¼Œåˆ™å–å‡º
 				if (srcNode.isEqual(temp)) {
 					srcExist = true;
 					srcNode = temp;
@@ -130,16 +130,16 @@ public class BayesNetWorkTool {
 					desNode = temp;
 				}
 
-				// Èç¹û2¸ö½Úµã¶¼ÒÑÕÒµ½£¬ÔòÌø³öÑ­»·
+				// å¦‚æœ2ä¸ªèŠ‚ç‚¹éƒ½å·²æ‰¾åˆ°ï¼Œåˆ™è·³å‡ºå¾ªç¯
 				if (srcExist && desExist) {
 					break;
 				}
 			}
 
-			// ½«2¸ö½Úµã½øĞĞÁ¬½Ó
+			// å°†2ä¸ªèŠ‚ç‚¹è¿›è¡Œè¿æ¥
 			srcNode.connectNode(desNode);
 
-			// ¸ù¾İ±êÊ¶ÅĞ¶ÏÊÇ·ñĞèÒª¼ÓÈëÁĞ±íÈİÆ÷ÖĞ
+			// æ ¹æ®æ ‡è¯†åˆ¤æ–­æ˜¯å¦éœ€è¦åŠ å…¥åˆ—è¡¨å®¹å™¨ä¸­
 			if (!srcExist) {
 				this.nodes.add(srcNode);
 			}
@@ -151,16 +151,16 @@ public class BayesNetWorkTool {
 	}
 
 	/**
-	 * ²éÑ¯Ìõ¼ş¸ÅÂÊ
+	 * æŸ¥è¯¢æ¡ä»¶æ¦‚ç‡
 	 * 
 	 * @param attrValues
-	 *            Ìõ¼şÊôĞÔÖµ
+	 *            æ¡ä»¶å±æ€§å€¼
 	 * @return
 	 */
 	private double queryConditionPro(ArrayList<String[]> attrValues) {
-		// ÅĞ¶ÏÊÇ·ñÂú×ãÏÈÑéÊôĞÔÖµÌõ¼ş
+		// åˆ¤æ–­æ˜¯å¦æ»¡è¶³å…ˆéªŒå±æ€§å€¼æ¡ä»¶
 		boolean hasPrior;
-		// ÅĞ¶ÏÊÇ·ñÂú×ãºóÑéÊôĞÔÖµÌõ¼ş
+		// åˆ¤æ–­æ˜¯å¦æ»¡è¶³åéªŒå±æ€§å€¼æ¡ä»¶
 		boolean hasBack;
 		int priorIndex;
 		int attrIndex;
@@ -168,7 +168,7 @@ public class BayesNetWorkTool {
 		double totalPro;
 		double pro;
 		double currentPro;
-		// ÏÈÑéÊôĞÔ
+		// å…ˆéªŒå±æ€§
 		String[] priorValue;
 		String[] tempData;
 
@@ -177,21 +177,21 @@ public class BayesNetWorkTool {
 		backPro = 0;
 		attrValues.get(0);
 		priorValue = attrValues.get(0);
-		// µÃµ½ºóÑé¸ÅÂÊ
+		// å¾—åˆ°åéªŒæ¦‚ç‡
 		attrValues.remove(0);
 
-		// È¡³öÏÈÑéÊôĞÔµÄÁĞÊı
+		// å–å‡ºå…ˆéªŒå±æ€§çš„åˆ—æ•°
 		priorIndex = this.attr2Column.get(priorValue[0]);
-		// Ìø¹ıµÚÒ»ĞĞµÄÊôĞÔÃû³ÆĞĞ
+		// è·³è¿‡ç¬¬ä¸€è¡Œçš„å±æ€§åç§°è¡Œ
 		for (int i = 1; i < this.totalData.length; i++) {
 			tempData = this.totalData[i];
 
 			hasPrior = false;
 			hasBack = true;
 
-			// µ±Ç°ĞĞµÄ¸ÅÂÊ
+			// å½“å‰è¡Œçš„æ¦‚ç‡
 			currentPro = Double.parseDouble(tempData[this.columns - 1]);
-			// ÅĞ¶ÏÊÇ·ñÂú×ãÏÈÑéÌõ¼ş
+			// åˆ¤æ–­æ˜¯å¦æ»¡è¶³å…ˆéªŒæ¡ä»¶
 			if (tempData[priorIndex].equals(priorValue[1])) {
 				hasPrior = true;
 			}
@@ -199,60 +199,60 @@ public class BayesNetWorkTool {
 			for (String[] array : attrValues) {
 				attrIndex = this.attr2Column.get(array[0]);
 
-				// ÅĞ¶ÏÖµÊÇ·ñÂú×ãÌõ¼ş
+				// åˆ¤æ–­å€¼æ˜¯å¦æ»¡è¶³æ¡ä»¶
 				if (!tempData[attrIndex].equals(array[1])) {
 					hasBack = false;
 					break;
 				}
 			}
 
-			// ½øĞĞ¼ÆÊıÍ³¼Æ£¬·Ö±ğ¼ÆËãÂú×ãºóÑéÊôĞÔµÄÖµºÍÍ¬Ê±Âú×ãÌõ¼şµÄ¸öÊı
+			// è¿›è¡Œè®¡æ•°ç»Ÿè®¡ï¼Œåˆ†åˆ«è®¡ç®—æ»¡è¶³åéªŒå±æ€§çš„å€¼å’ŒåŒæ—¶æ»¡è¶³æ¡ä»¶çš„ä¸ªæ•°
 			if (hasBack) {
 				backPro += currentPro;
 				if (hasPrior) {
 					totalPro += currentPro;
 				}
 			} else if (hasPrior && attrValues.size() == 0) {
-				// Èç¹ûÖ»ÓĞÏÈÑé¸ÅÂÊÔòÎª´¿¸ÅÂÊµÄ¼ÆËã
+				// å¦‚æœåªæœ‰å…ˆéªŒæ¦‚ç‡åˆ™ä¸ºçº¯æ¦‚ç‡çš„è®¡ç®—
 				totalPro += currentPro;
 				backPro = 1.0;
 			}
 		}
 
-		// ¼ÆËã×ÜµÄ¸ÅÂÊ=¶¼·¢Éú¸ÅÂÊ/Ö»·¢ÉúºóÑéÌõ¼şµÄÊ±¼ä¸ÅÂÊ
+		// è®¡ç®—æ€»çš„æ¦‚ç‡=éƒ½å‘ç”Ÿæ¦‚ç‡/åªå‘ç”ŸåéªŒæ¡ä»¶çš„æ—¶é—´æ¦‚ç‡
 		pro = totalPro / backPro;
 
 		return pro;
 	}
 
 	/**
-	 * ¸ù¾İ±´Ò¶Ë¹ÍøÂç¼ÆËã¸ÅÂÊ
+	 * æ ¹æ®è´ï¿½ç«¯é›‡î‰•ç¼‚æ‰‘æ„€æ€•ï¿½
 	 * 
 	 * @param queryStr
-	 *            ²éÑ¯Ìõ¼ş´®
+	 *            æŸ¥è¯¢æ¡ä»¶ä¸²
 	 * @return
 	 */
 	public double calProByNetWork(String queryStr) {
 		double temp;
 		double pro;
 		String[] array;
-		// ÏÈÑéÌõ¼şÖµ
+		// å…ˆéªŒæ¡ä»¶å€¼
 		String[] preValue;
-		// ºóÑéÌõ¼şÖµ
+		// åéªŒæ¡ä»¶å€¼
 		String[] backValue;
-		// ËùÓĞÏÈÑéÌõ¼şºÍºóÑéÌõ¼şÖµµÄÊôĞÔÖµµÄ»ã×Ü
+		// æ‰€æœ‰å…ˆéªŒæ¡ä»¶å’ŒåéªŒæ¡ä»¶å€¼çš„å±æ€§å€¼çš„æ±‡æ€»
 		ArrayList<String[]> attrValues;
 
-		// ÅĞ¶ÏÊÇ·ñÂú×ãÍøÂç½á¹¹
+		// åˆ¤æ–­æ˜¯å¦æ»¡è¶³ç½‘ç»œç»“æ„
 		if (!satisfiedNewWork(queryStr)) {
 			return -1;
 		}
 
 		pro = 1;
-		// Ê×ÏÈ×ö²éÑ¯Ìõ¼şµÄ·Ö½â
+		// é¦–å…ˆåšæŸ¥è¯¢æ¡ä»¶çš„åˆ†è§£
 		array = queryStr.split(",");
 
-		// ¸ÅÂÊµÄ³õÖµµÈÓÚµÚÒ»¸öÊÂ¼ş·¢ÉúµÄËæ»ú¸ÅÂÊ
+		// æ¦‚ç‡çš„åˆå€¼ç­‰äºç¬¬ä¸€ä¸ªäº‹ä»¶å‘ç”Ÿçš„éšæœºæ¦‚ç‡
 		attrValues = new ArrayList<>();
 		attrValues.add(array[0].split("="));
 		pro = queryConditionPro(attrValues);
@@ -260,15 +260,15 @@ public class BayesNetWorkTool {
 		for (int i = 0; i < array.length - 1; i++) {
 			attrValues.clear();
 
-			// ÏÂ±êĞ¡µÄÔÚÇ°ÃæµÄÊôÓÚºóÑéÊôĞÔ
+			// ä¸‹æ ‡å°çš„åœ¨å‰é¢çš„å±äºåéªŒå±æ€§
 			backValue = array[i].split("=");
 			preValue = array[i + 1].split("=");
 			attrValues.add(preValue);
 			attrValues.add(backValue);
 
-			// Ëã³ö´ËÖÖÇé¿öµÄ¸ÅÂÊÖµ
+			// ç®—å‡ºæ­¤ç§æƒ…å†µçš„æ¦‚ç‡å€¼
 			temp = queryConditionPro(attrValues);
-			// ½øĞĞ»ıµÄÏà³Ë
+			// è¿›è¡Œç§¯çš„ç›¸ä¹˜
 			pro *= temp;
 		}
 
@@ -276,10 +276,10 @@ public class BayesNetWorkTool {
 	}
 
 	/**
-	 * ÑéÖ¤ÊÂ¼şµÄ²éÑ¯Òò¹û¹ØÏµÊÇ·ñÂú×ã±´Ò¶Ë¹ÍøÂç
+	 * éªŒè¯äº‹ä»¶çš„æŸ¥è¯¢å› æœå…³ç³»æ˜¯å¦æ»¡è¶³è´å¶æ–¯ç½‘ç»œ
 	 * 
 	 * @param queryStr
-	 *            ²éÑ¯×Ö·û´®
+	 *            æŸ¥è¯¢å­—ç¬¦ä¸²
 	 * @return
 	 */
 	private boolean satisfiedNewWork(String queryStr) {
@@ -287,21 +287,21 @@ public class BayesNetWorkTool {
 		String[] array;
 		boolean isExist;
 		boolean isSatisfied;
-		// µ±Ç°½Úµã
+		// å½“å‰èŠ‚ç‚¹
 		Node currentNode;
-		// ºòÑ¡½ÚµãÁĞ±í
+		// å€™é€‰èŠ‚ç‚¹åˆ—è¡¨
 		ArrayList<Node> nodeList;
 
 		isSatisfied = true;
 		currentNode = null;
-		// ×ö²éÑ¯×Ö·û´®µÄ·Ö½â
+		// åšæŸ¥è¯¢å­—ç¬¦ä¸²çš„åˆ†è§£
 		array = queryStr.split(",");
 		nodeList = this.nodes;
 
 		for (String s : array) {
-			// ¿ªÊ¼Ê±Ä¬ÈÏÊôĞÔ¶ÔÓ¦µÄ½Úµã²»´æÔÚ
+			// å¼€å§‹æ—¶é»˜è®¤å±æ€§å¯¹åº”çš„èŠ‚ç‚¹ä¸å­˜åœ¨
 			isExist = false;
-			// µÃµ½ÊôĞÔÊÂ¼şÃû
+			// å¾—åˆ°å±æ€§äº‹ä»¶å
 			attrName = s.split("=")[0];
 
 			for (Node n : nodeList) {
@@ -309,14 +309,14 @@ public class BayesNetWorkTool {
 					isExist = true;
 
 					currentNode = n;
-					// ÏÂÒ»ÂÖµÄºòÑ¡½ÚµãÎªµ±Ç°½ÚµãµÄº¢×Ó½Úµã
+					// ä¸‹ä¸€è½®çš„å€™é€‰èŠ‚ç‚¹ä¸ºå½“å‰èŠ‚ç‚¹çš„å­©å­èŠ‚ç‚¹
 					nodeList = currentNode.childNodes;
 
 					break;
 				}
 			}
 
-			// Èç¹û´æÔÚÎ´ÕÒµ½µÄ½Úµã£¬ÔòËµÃ÷²»Âú×ãÒÀÀµ½á¹¹Ìø³öÑ­»·
+			// å¦‚æœå­˜åœ¨æœªæ‰¾åˆ°çš„èŠ‚ç‚¹ï¼Œåˆ™è¯´æ˜ä¸æ»¡è¶³ä¾èµ–ç»“æ„è·³å‡ºå¾ªç¯
 			if (!isExist) {
 				isSatisfied = false;
 				break;

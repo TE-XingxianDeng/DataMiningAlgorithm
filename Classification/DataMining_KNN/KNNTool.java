@@ -15,27 +15,27 @@ import java.util.Map;
 import org.apache.activemq.filter.ComparisonExpression;
 
 /**
- * k×î½üÁÚËã·¨¹¤¾ßÀà
+ * kæœ€è¿‘é‚»ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class KNNTool {
-	// Îª4¸öÀà±ğÉèÖÃÈ¨ÖØ£¬Ä¬ÈÏÈ¨ÖØ±ÈÒ»ÖÂ
+	// ä¸º4ä¸ªç±»åˆ«è®¾ç½®æƒé‡ï¼Œé»˜è®¤æƒé‡æ¯”ä¸€è‡´
 	public int[] classWeightArray = new int[] { 1, 1, 1, 1 };
-	// ²âÊÔÊı¾İ
+	// æµ‹è¯•æ•°æ®
 	private String testDataPath;
-	// ÑµÁ·¼¯Êı¾İµØÖ·
+	// è®­ç»ƒé›†æ•°æ®åœ°å€
 	private String trainDataPath;
-	// ·ÖÀàµÄ²»Í¬ÀàĞÍ
+	// åˆ†ç±»çš„ä¸åŒç±»å‹
 	private ArrayList<String> classTypes;
-	// ½á¹ûÊı¾İ
+	// ç»“æœæ•°æ®
 	private ArrayList<Sample> resultSamples;
-	// ÑµÁ·¼¯Êı¾İÁĞ±íÈİÆ÷
+	// è®­ç»ƒé›†æ•°æ®åˆ—è¡¨å®¹å™¨
 	private ArrayList<Sample> trainSamples;
-	// ÑµÁ·¼¯Êı¾İ
+	// è®­ç»ƒé›†æ•°æ®
 	private String[][] trainData;
-	// ²âÊÔ¼¯Êı¾İ
+	// æµ‹è¯•é›†æ•°æ®
 	private String[][] testData;
 
 	public KNNTool(String trainDataPath, String testDataPath) {
@@ -45,7 +45,7 @@ public class KNNTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞÔÄ¶Á²âÊÔÊıºÍÑµÁ·Êı¾İ¼¯
+	 * ä»æ–‡ä»¶ä¸­é˜…è¯»æµ‹è¯•æ•°å’Œè®­ç»ƒæ•°æ®é›†
 	 */
 	private void readDataFormFile() {
 		ArrayList<String[]> tempArray;
@@ -57,7 +57,7 @@ public class KNNTool {
 		classTypes = new ArrayList<>();
 		for (String[] s : tempArray) {
 			if (!classTypes.contains(s[0])) {
-				// Ìí¼ÓÀàĞÍ
+				// æ·»åŠ ç±»å‹
 				classTypes.add(s[0]);
 			}
 		}
@@ -68,10 +68,10 @@ public class KNNTool {
 	}
 
 	/**
-	 * ½«ÎÄ¼ş×ªÎªÁĞ±íÊı¾İÊä³ö
+	 * å°†æ–‡ä»¶è½¬ä¸ºåˆ—è¡¨æ•°æ®è¾“å‡º
 	 * 
 	 * @param filePath
-	 *            Êı¾İÎÄ¼şµÄÄÚÈİ
+	 *            æ•°æ®æ–‡ä»¶çš„å†…å®¹
 	 */
 	private ArrayList<String[]> fileDataToArray(String filePath) {
 		File file = new File(filePath);
@@ -94,18 +94,18 @@ public class KNNTool {
 	}
 
 	/**
-	 * ¼ÆËãÑù±¾ÌØÕ÷ÏòÁ¿µÄÅ·¼¸ÀïµÃ¾àÀë
+	 * è®¡ç®—æ ·æœ¬ç‰¹å¾å‘é‡çš„æ¬§å‡ é‡Œå¾—è·ç¦»
 	 * 
 	 * @param f1
-	 *            ´ı±È½ÏÑù±¾1
+	 *            å¾…æ¯”è¾ƒæ ·æœ¬1
 	 * @param f2
-	 *            ´ı±È½ÏÑù±¾2
+	 *            å¾…æ¯”è¾ƒæ ·æœ¬2
 	 * @return
 	 */
 	private int computeEuclideanDistance(Sample s1, Sample s2) {
 		String[] f1 = s1.getFeatures();
 		String[] f2 = s2.getFeatures();
-		// Å·¼¸ÀïµÃ¾àÀë
+		// æ¬§å‡ é‡Œå¾—è·ç¦»
 		int distance = 0;
 
 		for (int i = 0; i < f1.length; i++) {
@@ -119,9 +119,9 @@ public class KNNTool {
 	}
 
 	/**
-	 * ¼ÆËãK×î½üÁÚ
+	 * è®¡ç®—Kæœ€è¿‘é‚»
 	 * @param k
-	 * ÔÚ¶àÉÙµÄk·¶Î§ÄÚ
+	 * åœ¨å¤šå°‘çš„kèŒƒå›´å†…
 	 */
 	public void knnCompute(int k) {
 		String className = "";
@@ -129,11 +129,11 @@ public class KNNTool {
 		Sample temp;
 		resultSamples = new ArrayList<>();
 		trainSamples = new ArrayList<>();
-		// ·ÖÀàÀà±ğ¼ÆÊı
+		// åˆ†ç±»ç±»åˆ«è®¡æ•°
 		HashMap<String, Integer> classCount;
-		// Àà±ğÈ¨ÖØ±È
+		// ç±»åˆ«æƒé‡æ¯”
 		HashMap<String, Integer> classWeight = new HashMap<>();
-		// Ê×ÏÈ½²²âÊÔÊı¾İ×ª»¯µ½½á¹ûÊı¾İÖĞ
+		// é¦–å…ˆè®²æµ‹è¯•æ•°æ®è½¬åŒ–åˆ°ç»“æœæ•°æ®ä¸­
 		for (String[] s : testData) {
 			temp = new Sample(s);
 			resultSamples.add(temp);
@@ -147,14 +147,14 @@ public class KNNTool {
 			trainSamples.add(temp);
 		}
 
-		// ÀëÑù±¾×î½üÅÅĞòµÄµÄÑµÁ·¼¯Êı¾İ
+		// ç¦»æ ·æœ¬æœ€è¿‘æ’åºçš„çš„è®­ç»ƒé›†æ•°æ®
 		ArrayList<Sample> kNNSample = new ArrayList<>();
-		// ¼ÆËãÑµÁ·Êı¾İ¼¯ÖĞÀëÑù±¾Êı¾İ×î½üµÄK¸öÑµÁ·¼¯Êı¾İ
+		// è®¡ç®—è®­ç»ƒæ•°æ®é›†ä¸­ç¦»æ ·æœ¬æ•°æ®æœ€è¿‘çš„Kä¸ªè®­ç»ƒé›†æ•°æ®
 		for (Sample s : resultSamples) {
 			classCount = new HashMap<>();
 			int index = 0;
 			for (String type : classTypes) {
-				// ¿ªÊ¼Ê±¼ÆÊıÎª0
+				// å¼€å§‹æ—¶è®¡æ•°ä¸º0
 				classCount.put(type, 0);
 				classWeight.put(type, classWeightArray[index++]);
 			}
@@ -165,7 +165,7 @@ public class KNNTool {
 
 			Collections.sort(trainSamples);
 			kNNSample.clear();
-			// ÌôÑ¡³öÇ°k¸öÊı¾İ×÷Îª·ÖÀà±ê×¼
+			// æŒ‘é€‰å‡ºå‰kä¸ªæ•°æ®ä½œä¸ºåˆ†ç±»æ ‡å‡†
 			for (int i = 0; i < trainSamples.size(); i++) {
 				if (i < k) {
 					kNNSample.add(trainSamples.get(i));
@@ -173,16 +173,16 @@ public class KNNTool {
 					break;
 				}
 			}
-			// ÅĞ¶¨K¸öÑµÁ·Êı¾İµÄ¶àÊıµÄ·ÖÀà±ê×¼
+			// åˆ¤å®šKä¸ªè®­ç»ƒæ•°æ®çš„å¤šæ•°çš„åˆ†ç±»æ ‡å‡†
 			for (Sample s1 : kNNSample) {
 				int num = classCount.get(s1.getClassName());
-				// ½øĞĞ·ÖÀàÈ¨ÖØµÄµş¼Ó£¬Ä¬ÈÏÀà±ğÈ¨ÖØÆ½µÈ£¬¿É×ÔĞĞ¸Ä±ä£¬½üµÄÈ¨ÖØ´ó£¬Ô¶µÄÈ¨ÖØĞ¡
+				// è¿›è¡Œåˆ†ç±»æƒé‡çš„å åŠ ï¼Œé»˜è®¤ç±»åˆ«æƒé‡å¹³ç­‰ï¼Œå¯è‡ªè¡Œæ”¹å˜ï¼Œè¿‘çš„æƒé‡å¤§ï¼Œè¿œçš„æƒé‡å°
 				num += classWeight.get(s1.getClassName());
 				classCount.put(s1.getClassName(), num);
 			}
 
 			int maxCount = 0;
-			// É¸Ñ¡³ök¸öÑµÁ·¼¯Êı¾İÖĞ×î¶àµÄÒ»¸ö·ÖÀà
+			// ç­›é€‰å‡ºkä¸ªè®­ç»ƒé›†æ•°æ®ä¸­æœ€å¤šçš„ä¸€ä¸ªåˆ†ç±»
 			for (Map.Entry entry : classCount.entrySet()) {
 				if ((Integer) entry.getValue() > maxCount) {
 					maxCount = (Integer) entry.getValue();
@@ -190,11 +190,11 @@ public class KNNTool {
 				}
 			}
 
-			System.out.print("²âÊÔÊı¾İÌØÕ÷£º");
+			System.out.print("æµ‹è¯•æ•°æ®ç‰¹å¾ï¼š");
 			for (String s1 : s.getFeatures()) {
 				System.out.print(s1 + " ");
 			}
-			System.out.println("·ÖÀà£º" + s.getClassName());
+			System.out.println("åˆ†ç±»ï¼š" + s.getClassName());
 		}
 	}
 }

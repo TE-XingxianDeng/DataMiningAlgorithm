@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * k¾ùÖµËã·¨¹¤¾ßÀà
+ * kå‡å€¼ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class KMeansTool {
-	// ÊäÈëÊı¾İÎÄ¼şµØÖ·
+	// è¾“å…¥æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ·ÖÀàÀà±ğ¸öÊı
+	// åˆ†ç±»ç±»åˆ«ä¸ªæ•°
 	private int classNum;
-	// ÀàÃû³Æ
+	// ç±»åç§°
 	private ArrayList<String> classNames;
-	// ¾ÛÀà×ø±êµã
+	// èšç±»åæ ‡ç‚¹
 	private ArrayList<Point> classPoints;
-	// ËùÓĞµÄÊı¾İ×ó±ßµã
+	// æ‰€æœ‰çš„æ•°æ®å·¦è¾¹ç‚¹
 	private ArrayList<Point> totalPoints;
 
 	public KMeansTool(String filePath, int classNum) {
@@ -33,7 +33,7 @@ public class KMeansTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -68,7 +68,7 @@ public class KMeansTool {
 	}
 
 	/**
-	 * K¾ùÖµ¾ÛÀàËã·¨ÊµÏÖ
+	 * Kå‡å€¼èšç±»ç®—æ³•å®ç°
 	 */
 	public void kMeansClustering() {
 		double tempX = 0;
@@ -79,18 +79,18 @@ public class KMeansTool {
 
 		while (error > 0.01 * classNum) {
 			for (Point p1 : totalPoints) {
-				// ½«ËùÓĞµÄ²âÊÔ×ø±êµã¾Í½ü·ÖÀà
+				// å°†æ‰€æœ‰çš„æµ‹è¯•åæ ‡ç‚¹å°±è¿‘åˆ†ç±»
 				for (Point p2 : classPoints) {
 					p2.computerDistance(p1);
 				}
 				Collections.sort(classPoints);
 
-				// È¡³öp1ÀëÀà×ø±êµã×î½üµÄÄÇ¸öµã
+				// å–å‡ºp1ç¦»ç±»åæ ‡ç‚¹æœ€è¿‘çš„é‚£ä¸ªç‚¹
 				p1.setClassName(classPoints.get(0).getClassName());
 			}
 
 			error = 0;
-			// °´ÕÕ¾ùÖµÖØĞÂ»®·Ö¾ÛÀàÖĞĞÄµã
+			// æŒ‰ç…§å‡å€¼é‡æ–°åˆ’åˆ†èšç±»ä¸­å¿ƒç‚¹
 			for (Point p1 : classPoints) {
 				count = 0;
 				tempX = 0;
@@ -107,7 +107,7 @@ public class KMeansTool {
 
 				error += Math.abs((tempX - p1.getX()));
 				error += Math.abs((tempY - p1.getY()));
-				// ¼ÆËã¾ùÖµ
+				// è®¡ç®—å‡å€¼
 				p1.setX(tempX);
 				p1.setY(tempY);
 
@@ -115,16 +115,16 @@ public class KMeansTool {
 			
 			for (int i = 0; i < classPoints.size(); i++) {
 				temp = classPoints.get(i);
-				System.out.println(MessageFormat.format("¾ÛÀàÖĞĞÄµã{0}£¬x={1},y={2}",
+				System.out.println(MessageFormat.format("èšç±»ä¸­å¿ƒç‚¹{0}ï¼Œx={1},y={2}",
 						(i + 1), temp.getX(), temp.getY()));
 			}
 			System.out.println("----------");
 		}
 
-		System.out.println("½á¹ûÖµÊÕÁ²");
+		System.out.println("ç»“æœå€¼æ”¶æ•›");
 		for (int i = 0; i < classPoints.size(); i++) {
 			temp = classPoints.get(i);
-			System.out.println(MessageFormat.format("¾ÛÀàÖĞĞÄµã{0}£¬x={1},y={2}",
+			System.out.println(MessageFormat.format("èšç±»ä¸­å¿ƒç‚¹{0}ï¼Œx={1},y={2}",
 					(i + 1), temp.getX(), temp.getY()));
 		}
 

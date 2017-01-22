@@ -1,7 +1,7 @@
 package DataMining_HITS;
 
 /**
- * HITSÁ´½Ó·ÖÎöËã·¨
+ * HITSé“¾æ¥åˆ†æç®—æ³•
  * @author lyq
  *
  */

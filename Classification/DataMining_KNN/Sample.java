@@ -1,17 +1,17 @@
 package DataMining_KNN;
 
 /**
- * Ñù±¾Êı¾İÀà
+ * æ ·æœ¬æ•°æ®ç±»
  * 
  * @author lyq
  * 
  */
 public class Sample implements Comparable<Sample>{
-	// Ñù±¾Êı¾İµÄ·ÖÀàÃû³Æ
+	// æ ·æœ¬æ•°æ®çš„åˆ†ç±»åç§°
 	private String className;
-	// Ñù±¾Êı¾İµÄÌØÕ÷ÏòÁ¿
+	// æ ·æœ¬æ•°æ®çš„ç‰¹å¾å‘é‡
 	private String[] features;
-	//²âÊÔÑù±¾Ö®¼äµÄ¼ä¾àÖµ£¬ÒÔ´Ë×öÅÅĞò
+	//æµ‹è¯•æ ·æœ¬ä¹‹é—´çš„é—´è·å€¼ï¼Œä»¥æ­¤åšæ’åº
 	private Integer distance;
 	
 	public Sample(String[] features){

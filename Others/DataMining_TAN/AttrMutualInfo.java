@@ -1,14 +1,14 @@
 package DataMining_TAN;
 
 /**
- * ÊôĞÔÖ®¼äµÄ»¥ĞÅÏ¢Öµ£¬±íÊ¾ÊôĞÔÖ®¼äµÄ¹ØÁªĞÔ´óĞ¡
+ * å±æ€§ä¹‹é—´çš„äº’ä¿¡æ¯å€¼ï¼Œè¡¨ç¤ºå±æ€§ä¹‹é—´çš„å…³è”æ€§å¤§å°
  * @author lyq
  *
  */
 public class AttrMutualInfo implements Comparable<AttrMutualInfo>{
-	//»¥ĞÅÏ¢Öµ
+	//äº’ä¿¡æ¯å€¼
 	Double value;
-	//¹ØÁªÊôĞÔÖµ¶Ô
+	//å…³è”å±æ€§å€¼å¯¹
 	Node[] nodeArray;
 	
 	public AttrMutualInfo(double value, Node node1, Node node2){

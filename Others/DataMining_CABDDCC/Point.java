@@ -3,18 +3,18 @@ package DataMining_CABDDCC;
 
 
 /**
- * ×ø±êµãÀà
+ * åæ ‡ç‚¹ç±»
  * @author lyq
  *
  */
 public class Point implements Comparable<Point>{
-	//×ø±êµãidºÅ,idºÅÎ¨Ò»
+	//åæ ‡ç‚¹idå·,idå·å”¯ä¸€
 	int id;
-	//×ø±êºá×ø±ê
+	//åæ ‡æ¨ªåæ ‡
 	Integer x;
-	//×ø±ê×İ×ø±ê
+	//åæ ‡çºµåæ ‡
 	Integer y;
-	//×ø±êµãÊÇ·ñÒÑ¾­±»·ÃÎÊ(´¦Àí)¹ı£¬ÔÚÉú³ÉÁ¬Í¨×ÓÍ¼µÄÊ±ºòÓÃµ½
+	//åæ ‡ç‚¹æ˜¯å¦å·²ç»è¢«è®¿é—®(å¤„ç†)è¿‡ï¼Œåœ¨ç”Ÿæˆè¿é€šå­å›¾çš„æ—¶å€™ç”¨åˆ°
 	boolean isVisited;
 	
 	public Point(String id, String x, String y){
@@ -24,10 +24,10 @@ public class Point implements Comparable<Point>{
 	}
 	
 	/**
-	 * ¼ÆËãµ±Ç°µãÓëÖÆ¶¨µãÖ®¼äµÄÅ·Ê½¾àÀë
+	 * è®¡ç®—å½“å‰ç‚¹ä¸åˆ¶å®šç‚¹ä¹‹é—´çš„æ¬§å¼è·ç¦»
 	 * 
 	 * @param p
-	 *            ´ı¼ÆËã¾ÛÀàµÄpµã
+	 *            å¾…è®¡ç®—èšç±»çš„pç‚¹
 	 * @return
 	 */
 	public double ouDistance(Point p) {
@@ -41,10 +41,10 @@ public class Point implements Comparable<Point>{
 	}
 	
 	/**
-	 * ÅĞ¶Ï2¸ö×ø±êµãÊÇ·ñÎªÓÃ¸ö×ø±êµã
+	 * åˆ¤æ–­2ä¸ªåæ ‡ç‚¹æ˜¯å¦ä¸ºç”¨ä¸ªåæ ‡ç‚¹
 	 * 
 	 * @param p
-	 *            ´ı±È½Ï×ø±êµã
+	 *            å¾…æ¯”è¾ƒåæ ‡ç‚¹
 	 * @return
 	 */
 	public boolean isTheSame(Point p) {
@@ -62,7 +62,7 @@ public class Point implements Comparable<Point>{
 		if(this.x.compareTo(p.x) != 0){
 			return this.x.compareTo(p.x);
 		}else{
-			//Èç¹ûÔÚx×ø±êÏàµÈµÄÇé¿öÏÂ±È½Ïy×ø±ê
+			//å¦‚æœåœ¨xåæ ‡ç›¸ç­‰çš„æƒ…å†µä¸‹æ¯”è¾ƒyåæ ‡
 			return this.y.compareTo(p.y);
 		}
 	}

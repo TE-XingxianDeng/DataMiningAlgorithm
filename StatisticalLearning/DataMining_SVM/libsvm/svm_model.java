@@ -4,9 +4,9 @@
 package DataMining_SVM.libsvm;
 public class svm_model implements java.io.Serializable
 {
-	//svmÖ§³ÖÏòÁ¿»úµÄ²ÎÊı
+	//svmæ”¯æŒå‘é‡æœºçš„å‚æ•°
 	svm_parameter param;	// parameter
-	//·ÖÀàµÄÀàĞÍÊı
+	//åˆ†ç±»çš„ç±»å‹æ•°
 	int nr_class;		// number of classes, = 2 in regression/one class svm
 	int l;			// total #SV
 	svm_node[][] SV;	// SVs (SV[l])
@@ -17,7 +17,7 @@ public class svm_model implements java.io.Serializable
 
 	// for classification only
 
-	//Ã¿¸öÀàĞÍµÄÀàĞÍÖµ
+	//æ¯ä¸ªç±»å‹çš„ç±»å‹å€¼
 	int[] label;		// label of each class (label[k])
 	int[] nSV;		// number of SVs for each class (nSV[k])
 				// nSV[0] + nSV[1] + ... + nSV[k-1] = l

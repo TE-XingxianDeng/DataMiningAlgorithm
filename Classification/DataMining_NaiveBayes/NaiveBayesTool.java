@@ -9,24 +9,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÆÓËØ±´Ò¶Ë¹Ëã·¨¹¤¾ßÀà
+ * æœ´ç´ è´å¶æ–¯ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class NaiveBayesTool {
-	// Àà±ê¼Ç·û£¬ÕâÀï·ÖÎª2Àà£¬YESºÍNO
+	// ç±»æ ‡è®°ç¬¦ï¼Œè¿™é‡Œåˆ†ä¸º2ç±»ï¼ŒYESå’ŒNO
 	private String YES = "Yes";
 	private String NO = "No";
 
-	// ÒÑ·ÖÀàÑµÁ·Êı¾İ¼¯ÎÄ¼şÂ·¾¶
+	// å·²åˆ†ç±»è®­ç»ƒæ•°æ®é›†æ–‡ä»¶è·¯å¾„
 	private String filePath;
-	// ÊôĞÔÃû³ÆÊı×é
+	// å±æ€§åç§°æ•°ç»„
 	private String[] attrNames;
-	// ÑµÁ·Êı¾İ¼¯
+	// è®­ç»ƒæ•°æ®é›†
 	private String[][] data;
 
-	// Ã¿¸öÊôĞÔµÄÖµËùÓĞÀàĞÍ
+	// æ¯ä¸ªå±æ€§çš„å€¼æ‰€æœ‰ç±»å‹
 	private HashMap<String, ArrayList<String>> attrValue;
 
 	public NaiveBayesTool(String filePath) {
@@ -37,7 +37,7 @@ public class NaiveBayesTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -69,51 +69,51 @@ public class NaiveBayesTool {
 	}
 
 	/**
-	 * Ê×ÏÈ³õÊ¼»¯Ã¿ÖÖÊôĞÔµÄÖµµÄËùÓĞÀàĞÍ£¬ÓÃÓÚºóÃæµÄ×ÓÀàìØµÄ¼ÆËãÊ±ÓÃ
+	 * é¦–å…ˆåˆå§‹åŒ–æ¯ç§å±æ€§çš„å€¼çš„æ‰€æœ‰ç±»å‹ï¼Œç”¨äºåé¢çš„å­ç±»ç†µçš„è®¡ç®—æ—¶ç”¨
 	 */
 	private void initAttrValue() {
 		attrValue = new HashMap<>();
 		ArrayList<String> tempValues;
 
-		// °´ÕÕÁĞµÄ·½Ê½£¬´Ó×óÍùÓÒÕÒ
+		// æŒ‰ç…§åˆ—çš„æ–¹å¼ï¼Œä»å·¦å¾€å³æ‰¾
 		for (int j = 1; j < attrNames.length; j++) {
-			// ´ÓÒ»ÁĞÖĞµÄÉÏÍùÏÂ¿ªÊ¼Ñ°ÕÒÖµ
+			// ä»ä¸€åˆ—ä¸­çš„ä¸Šå¾€ä¸‹å¼€å§‹å¯»æ‰¾å€¼
 			tempValues = new ArrayList<>();
 			for (int i = 1; i < data.length; i++) {
 				if (!tempValues.contains(data[i][j])) {
-					// Èç¹ûÕâ¸öÊôĞÔµÄÖµÃ»ÓĞÌí¼Ó¹ı£¬ÔòÌí¼Ó
+					// å¦‚æœè¿™ä¸ªå±æ€§çš„å€¼æ²¡æœ‰æ·»åŠ è¿‡ï¼Œåˆ™æ·»åŠ 
 					tempValues.add(data[i][j]);
 				}
 			}
 
-			// Ò»ÁĞÊôĞÔµÄÖµÒÑ¾­±éÀúÍê±Ï£¬¸´ÖÆµ½mapÊôĞÔ±íÖĞ
+			// ä¸€åˆ—å±æ€§çš„å€¼å·²ç»éå†å®Œï¿½å¸Œîƒ“ç²—é¢‘çµ¤apå±æ€§è¡¨ä¸­
 			attrValue.put(data[0][j], tempValues);
 		}
 
 	}
 
 	/**
-	 * ÔÚclassTypeµÄÇé¿öÏÂ£¬·¢ÉúconditionÌõ¼şµÄ¸ÅÂÊ
+	 * åœ¨classTypeçš„æƒ…å†µä¸‹ï¼Œå‘ç”Ÿconditionæ¡ä»¶çš„æ¦‚ç‡
 	 * 
 	 * @param condition
-	 *            ÊôĞÔÌõ¼ş
+	 *            å±æ€§æ¡ä»¶
 	 * @param classType
-	 *            ·ÖÀàµÄÀàĞÍ
+	 *            åˆ†ç±»çš„ç±»å‹
 	 * @return
 	 */
 	private double computeConditionProbably(String condition, String classType) {
-		// Ìõ¼ş¼ÆÊıÆ÷
+		// æ¡ä»¶è®¡æ•°å™¨
 		int count = 0;
-		// Ìõ¼şÊôĞÔµÄË÷ÒıÁĞ
+		// æ¡ä»¶å±æ€§çš„ç´¢å¼•åˆ—
 		int attrIndex = 1;
-		// yesÀà±ê¼Ç·ûÊı¾İ
+		// yesç±»æ ‡è®°ç¬¦æ•°æ®
 		ArrayList<String[]> yClassData = new ArrayList<>();
-		// noÀà±ê¼Ç·ûÊı¾İ
+		// noç±»æ ‡è®°ç¬¦æ•°æ®
 		ArrayList<String[]> nClassData = new ArrayList<>();
 		ArrayList<String[]> classData;
 
 		for (int i = 1; i < data.length; i++) {
-			// dataÊı¾İ°´ÕÕyesºÍno·ÖÀà
+			// dataæ•°æ®æŒ‰ç…§yeså’Œnoåˆ†ç±»
 			if (data[i][attrNames.length - 1].equals(YES)) {
 				yClassData.add(data[i]);
 			} else {
@@ -127,12 +127,12 @@ public class NaiveBayesTool {
 			classData = nClassData;
 		}
 
-		// Èç¹ûÃ»ÓĞÉèÖÃÌõ¼şÔò£¬¼ÆËãµÄÊÇ´¿´âµÄÀàÊÂ¼ş¸ÅÂÊ
+		// å¦‚æœæ²¡æœ‰è®¾ç½®æ¡ä»¶åˆ™ï¼Œè®¡ç®—çš„æ˜¯çº¯ç²¹çš„ç±»äº‹ä»¶æ¦‚ç‡
 		if (condition == null) {
 			return 1.0 * classData.size() / (data.length - 1);
 		}
 
-		// Ñ°ÕÒ´ËÌõ¼şµÄÊôĞÔÁĞ
+		// å¯»æ‰¾æ­¤æ¡ä»¶çš„å±æ€§åˆ—
 		attrIndex = getConditionAttrName(condition);
 
 		for (String[] s : classData) {
@@ -145,18 +145,18 @@ public class NaiveBayesTool {
 	}
 
 	/**
-	 * ¸ù¾İÌõ¼şÖµ·µ»ØÌõ¼şËùÊôÊôĞÔµÄÁĞÖµ
+	 * æ ¹æ®æ¡ä»¶å€¼è¿”å›æ¡ä»¶æ‰€å±å±æ€§çš„åˆ—å€¼
 	 * 
 	 * @param condition
-	 *            Ìõ¼ş
+	 *            æ¡ä»¶
 	 * @return
 	 */
 	private int getConditionAttrName(String condition) {
-		// Ìõ¼şËùÊôÊôĞÔÃû
+		// æ¡ä»¶æ‰€å±å±æ€§å
 		String attrName = "";
-		// Ìõ¼şËùÔÚÊôĞÔÁĞË÷Òı
+		// æ¡ä»¶æ‰€åœ¨å±æ€§åˆ—ç´¢å¼•
 		int attrIndex = 1;
-		// ÁÙÊ±ÊôĞÔÖµÀàĞÍ
+		// ä¸´æ—¶å±æ€§å€¼ç±»å‹
 		ArrayList<String[]> valueTypes;
 		for (Map.Entry entry : attrValue.entrySet()) {
 			valueTypes = (ArrayList<String[]>) entry.getValue();
@@ -177,25 +177,25 @@ public class NaiveBayesTool {
 	}
 
 	/**
-	 * ½øĞĞÆÓËØ±´Ò¶Ë¹·ÖÀà
+	 * è¿›è¡Œæœ´ç´ è´å¶æ–¯åˆ†ç±»
 	 * 
 	 * @param data
-	 *            ´ı·ÖÀàÊı¾İ
+	 *            å¾…åˆ†ç±»æ•°æ®
 	 */
 	public String naiveBayesClassificate(String data) {
-		// ²âÊÔÊı¾İµÄÊôĞÔÖµÌØÕ÷
+		// æµ‹è¯•æ•°æ®çš„å±æ€§å€¼ç‰¹å¾
 		String[] dataFeatures;
-		// ÔÚyesµÄÌõ¼şÏÂ£¬xÊÂ¼ş·¢ÉúµÄ¸ÅÂÊ
+		// åœ¨yesçš„æ¡ä»¶ä¸‹ï¼Œxäº‹ä»¶å‘ç”Ÿçš„æ¦‚ç‡
 		double xWhenYes = 1.0;
-		// ÔÚnoµÄÌõ¼şÏÂ£¬xÊÂ¼ş·¢ÉúµÄ¸ÅÂÊ
+		// åœ¨noçš„æ¡ä»¶ä¸‹ï¼Œxäº‹ä»¶å‘ç”Ÿçš„æ¦‚ç‡
 		double xWhenNo = 1.0;
-		// ×îºóÒ²ÊÇyesºÍno·ÖÀàµÄ×Ü¸ÅÂÊ£¬ÓÃP(X|Ci)*P(Ci)µÄ¹«Ê½¼ÆËã
+		// æœ€åä¹Ÿæ˜¯yeså’Œnoåˆ†ç±»çš„æ€»æ¦‚ç‡ï¼Œç”¨P(X|Ci)*P(Ci)çš„å…¬å¼è®¡ç®—
 		double pYes = 1;
 		double pNo = 1;
 
 		dataFeatures = data.split(" ");
 		for (int i = 0; i < dataFeatures.length; i++) {
-			// ÒòÎªÆÓËØ±´Ò¶Ë¹Ëã·¨ÊÇÀàÌõ¼ş¶ÀÁ¢µÄ£¬ËùÒÔ¿ÉÒÔ½øĞĞÀÛ»ıµÄ¼ÆËã
+			// å› ä¸ºæœ´ç´ è´å¶æ–¯ç®—æ³•æ˜¯ç±»æ¡ä»¶ç‹¬ç«‹çš„ï¼Œæ‰€ä»¥å¯ä»¥è¿›è¡Œç´¯ç§¯çš„è®¡ç®—
 			xWhenYes *= computeConditionProbably(dataFeatures[i], YES);
 			xWhenNo *= computeConditionProbably(dataFeatures[i], NO);
 		}

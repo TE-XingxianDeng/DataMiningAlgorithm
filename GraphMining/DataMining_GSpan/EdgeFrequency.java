@@ -1,16 +1,16 @@
 package DataMining_GSpan;
 
 /**
- * ±ßµÄÆµ·±Í³¼Æ
+ * è¾¹çš„é¢‘ç¹ç»Ÿè®¡
  * @author lyq
  *
  */
 public class EdgeFrequency {
-	//½Úµã±êºÅÊıÁ¿
+	//èŠ‚ç‚¹æ ‡å·æ•°é‡
 	private int nodeLabelNum;
-	//±ßµÄ±êºÅÊıÁ¿
+	//è¾¹çš„æ ‡å·æ•°é‡
 	private int edgeLabelNum;
-	//ÓÃÓÚ´æ·Å±ß¼ÆÊıµÄ3Î¬Êı×é
+	//ç”¨äºå­˜æ”¾è¾¹è®¡æ•°çš„3ç»´æ•°ç»„
 	public int[][][] edgeFreqCount;
 	
 	public EdgeFrequency(int nodeLabelNum, int edgeLabelNum){
@@ -18,7 +18,7 @@ public class EdgeFrequency {
 		this.edgeLabelNum = edgeLabelNum;
 		
 		edgeFreqCount = new int[nodeLabelNum][edgeLabelNum][nodeLabelNum];
-		//×î³õÊ¼»¯²Ù×÷
+		//æœ€åˆå§‹åŒ–æ“ä½œ
 		for(int i=0; i<nodeLabelNum; i++){
 			for(int j=0; j<edgeLabelNum; j++){
 				for(int k=0; k<nodeLabelNum; k++){

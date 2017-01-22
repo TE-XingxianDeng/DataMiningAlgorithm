@@ -1,7 +1,7 @@
 package DataMining_TAN;
 
 /**
- * TANÊ÷ĞÍÆÓËØ±´Ò¶Ë¹Ëã·¨
+ * TANæ ‘å‹æœ´ç´ è´å¶æ–¯ç®—æ³•
  * 
  * @author lyq
  * 
@@ -9,11 +9,11 @@ package DataMining_TAN;
 public class Client {
 	public static void main(String[] args) {
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		// Ìõ¼ş²éÑ¯Óï¾ä
+		// æ¡ä»¶æŸ¥è¯¢è¯­å¥
 		String queryStr;
-		// ·ÖÀà½á¹û¸ÅÂÊ1
+		// åˆ†ç±»ç»“æœæ¦‚ç‡1
 		double classResult1;
-		// ·ÖÀà½á¹û¸ÅÂÊ2
+		// åˆ†ç±»ç»“æœæ¦‚ç‡2
 		double classResult2;
 
 		TANTool tool = new TANTool(filePath);
@@ -23,14 +23,14 @@ public class Client {
 		queryStr = "OutLook=Sunny,Temperature=Hot,Humidity=High,Wind=Weak,PlayTennis=Yes";
 		classResult2 = tool.calHappenedPro(queryStr);
 
-		System.out.println(String.format("Àà±ğÎª%sËùÇóµÃµÄ¸ÅÂÊÎª%s", "PlayTennis=No",
+		System.out.println(String.format("ç±»åˆ«ä¸º%sæ‰€æ±‚å¾—çš„æ¦‚ç‡ä¸º%s", "PlayTennis=No",
 				classResult1));
-		System.out.println(String.format("Àà±ğÎª%sËùÇóµÃµÄ¸ÅÂÊÎª%s", "PlayTennis=Yes",
+		System.out.println(String.format("ç±»åˆ«ä¸º%sæ‰€æ±‚å¾—çš„æ¦‚ç‡ä¸º%s", "PlayTennis=Yes",
 				classResult2));
 		if (classResult1 > classResult2) {
-			System.out.println("·ÖÀàÀà±ğÎªPlayTennis=No");
+			System.out.println("åˆ†ç±»ç±»åˆ«ä¸ºPlayTennis=No");
 		} else {
-			System.out.println("·ÖÀàÀà±ğÎªPlayTennis=Yes");
+			System.out.println("åˆ†ç±»ç±»åˆ«ä¸ºPlayTennis=Yes");
 		}
 	}
 }

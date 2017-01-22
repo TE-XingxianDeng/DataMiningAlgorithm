@@ -8,21 +8,21 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
- * »ùÓÚÁ¬Í¨Í¼µÄ·ÖÁÑ¾ÛÀàËã·¨
+ * åŸºäºè¿é€šå›¾çš„åˆ†è£‚èšç±»ç®—æ³•
  * 
  * @author lyq
  * 
  */
 public class CABDDCCTool {
-	// ²âÊÔÊı¾İµãÊı¾İ
+	// æµ‹è¯•æ•°æ®ç‚¹æ•°æ®
 	private String filePath;
-	// Á¬Í¨Í¼¾àÀëãĞÖµl
+	// è¿é€šå›¾è·ç¦»é˜ˆå€¼l
 	private int length;
-	// Ô­Ê¼×ø±êµã
+	// åŸå§‹åæ ‡ç‚¹
 	public static ArrayList<Point> totalPoints;
-	// ¾ÛÀà½á¹û×ø±êµã¼¯ºÏ
+	// èšç±»ç»“æœåæ ‡ç‚¹é›†åˆ
 	private ArrayList<ArrayList<Point>> resultClusters;
-	// Á¬Í¨Í¼
+	// è¿é€šå›¾
 	private Graph graph;
 
 	public CABDDCCTool(String filePath, int length) {
@@ -33,7 +33,7 @@ public class CABDDCCTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	public void readDataFile() {
 		File file = new File(filePath);
@@ -59,15 +59,15 @@ public class CABDDCCTool {
 			totalPoints.add(p);
 		}
 
-		// ÓÃ±ßºÍµã¹¹ÔìÍ¼
+		// ç”¨è¾¹å’Œç‚¹æ„é€ å›¾
 		graph = new Graph(null, totalPoints);
 	}
 
 	/**
-	 * ·ÖÁÑÁ¬Í¨Í¼µÃµ½¾ÛÀà
+	 * åˆ†è£‚è¿é€šå›¾å¾—åˆ°èšç±»
 	 */
 	public void splitCluster() {
-		// »ñÈ¡ĞÎ³ÉÁ¬Í¨×ÓÍ¼
+		// è·å–å½¢æˆè¿é€šå­å›¾
 		ArrayList<Graph> subGraphs;
 		ArrayList<ArrayList<Point>> pointList;
 		resultClusters = new ArrayList<>();
@@ -75,7 +75,7 @@ public class CABDDCCTool {
 		subGraphs = graph.splitGraphByLength(length);
 
 		for (Graph g : subGraphs) {
-			// »ñÈ¡Ã¿¸öÁ¬Í¨×ÓÍ¼·ÖÁÑºóµÄ¾ÛÀà½á¹û
+			// è·å–æ¯ä¸ªè¿é€šå­å›¾åˆ†è£‚åçš„èšç±»ç»“æœ
 			pointList = g.getClusterByDivding();
 			resultClusters.addAll(pointList);
 		}
@@ -84,12 +84,12 @@ public class CABDDCCTool {
 	}
 
 	/**
-	 * Êä³ö½á¹û¾Û´Ø
+	 * è¾“å‡ºç»“æœèšç°‡
 	 */
 	private void printResultCluster() {
 		int i = 1;
 		for (ArrayList<Point> cluster : resultClusters) {
-			System.out.print("¾Û´Ø" + i + ":");
+			System.out.print("èšç°‡" + i + ":");
 			for (Point p : cluster){
 				System.out.print(MessageFormat.format("({0}, {1}) ", p.x, p.y));
 			}

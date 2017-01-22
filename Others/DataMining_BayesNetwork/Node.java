@@ -3,52 +3,52 @@ package DataMining_BayesNetwork;
 import java.util.ArrayList;
 
 /**
- * ±´Ò¶Ë¹ÍøÂç½ÚµãÀà
+ * è´å¶æ–¯ç½‘ç»œèŠ‚ç‚¹ç±»
  * 
  * @author lyq
  * 
  */
 public class Node {
-	// ½ÚµãµÄÊôĞÔÃû³Æ
+	// èŠ‚ç‚¹çš„å±æ€§åç§°
 	String name;
-	// ½ÚµãµÄ¸¸Ç×½Úµã£¬Ò²¾ÍÊÇÉÏÓÎ½Úµã£¬¿ÉÄÜ¶à¸ö
+	// èŠ‚ç‚¹çš„çˆ¶äº²èŠ‚ç‚¹ï¼Œä¹Ÿå°±æ˜¯ä¸Šæ¸¸èŠ‚ç‚¹ï¼Œå¯èƒ½å¤šä¸ª
 	ArrayList<Node> parentNodes;
-	// ½ÚµãµÄ×Ó½Úµã£¬Ò²¾ÍÊÇÏÂÓÎ½Úµã£¬¿ÉÄÜ¶à¸ö
+	// èŠ‚ç‚¹çš„å­èŠ‚ç‚¹ï¼Œä¹Ÿå°±æ˜¯ä¸‹æ¸¸èŠ‚ç‚¹ï¼Œå¯èƒ½å¤šä¸ª
 	ArrayList<Node> childNodes;
 
 	public Node(String name) {
 		this.name = name;
 
-		// ³õÊ¼»¯±äÁ¿
+		// åˆå§‹åŒ–å˜é‡
 		this.parentNodes = new ArrayList<>();
 		this.childNodes = new ArrayList<>();
 	}
 
 	/**
-	 * ½«×ÔÉí½ÚµãÁ¬½Óµ½Ä¿±ê¸ø¶¨µÄ½Úµã
+	 * å°†è‡ªèº«èŠ‚ç‚¹è¿æ¥åˆ°ç›®æ ‡ç»™å®šçš„èŠ‚ç‚¹
 	 * 
 	 * @param node
-	 *            ÏÂÓÎ½Úµã
+	 *            ä¸‹æ¸¸èŠ‚ç‚¹
 	 */
 	public void connectNode(Node node) {
-		// ½«ÏÂÓÎ½Úµã¼ÓÈë×ÔÉí½ÚµãµÄº¢×Ó½ÚµãÖĞ
+		// å°†ä¸‹æ¸¸èŠ‚ç‚¹åŠ å…¥è‡ªèº«èŠ‚ç‚¹çš„å­©å­èŠ‚ç‚¹ä¸­
 		this.childNodes.add(node);
-		// ½«×ÔÉí½Úµã¼ÓÈëµ½ÏÂÓÎ½ÚµãµÄ¸¸½ÚµãÖĞ
+		// å°†è‡ªèº«èŠ‚ç‚¹åŠ å…¥åˆ°ä¸‹æ¸¸èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹ä¸­
 		node.parentNodes.add(this);
 	}
 
 	/**
-	 * ÅĞ¶ÏÓëÄ¿±ê½ÚµãÊÇ·ñÏàÍ¬£¬Ö÷Òª±È½ÏÃû³ÆÊÇ·ñÏàÍ¬¼´¿É
+	 * åˆ¤æ–­ä¸ç›®æ ‡èŠ‚ç‚¹æ˜¯å¦ç›¸åŒï¼Œä¸»è¦æ¯”è¾ƒåç§°æ˜¯å¦ç›¸åŒå³å¯
 	 * 
 	 * @param node
-	 *            Ä¿±ê½áµã
+	 *            ç›®æ ‡ç»“ç‚¹
 	 * @return
 	 */
 	public boolean isEqual(Node node) {
 		boolean isEqual;
 
 		isEqual = false;
-		// ½ÚµãÃû³ÆÏàÍ¬ÔòÊÓÎªÏàµÈ
+		// èŠ‚ç‚¹åç§°ç›¸åŒåˆ™è§†ä¸ºç›¸ç­‰
 		if (this.name.equals(node.name)) {
 			isEqual = true;
 		}

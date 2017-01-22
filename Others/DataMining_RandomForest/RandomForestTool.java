@@ -10,31 +10,31 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Ëæ»úÉ­ÁÖËã·¨¹¤¾ßÀà
+ * éšæœºæ£®æ—ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class RandomForestTool {
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ¾ö²ßÊ÷µÄÑù±¾Õ¼×ÜÊıµÄÕ¼±ÈÂÊ
+	// å†³ç­–æ ‘çš„æ ·æœ¬å æ€»æ•°çš„å æ¯”ç‡
 	private double sampleNumRatio;
-	// Ñù±¾Êı¾İµÄ²É¼¯ÌØÕ÷ÊıÁ¿Õ¼×ÜÌØÕ÷µÄ±ÈÀı
+	// æ ·æœ¬æ•°æ®çš„é‡‡é›†ç‰¹å¾æ•°é‡å æ€»ç‰¹å¾çš„æ¯”ä¾‹
 	private double featureNumRatio;
-	// ¾ö²ßÊ÷µÄ²ÉÑùÑù±¾Êı
+	// å†³ç­–æ ‘çš„é‡‡æ ·æ ·æœ¬æ•°
 	private int sampleNum;
-	// Ñù±¾Êı¾İµÄ²É¼¯²ÉÑùÌØÕ÷Êı
+	// æ ·æœ¬æ•°æ®çš„é‡‡é›†é‡‡æ ·ç‰¹å¾æ•°
 	private int featureNum;
-	// Ëæ»úÉ­ÁÖÖĞµÄ¾ö²ßÊ÷µÄÊıÄ¿,µÈÓÚ×ÜµÄÊı¾İÊı/ÓÃÓÚ¹¹ÔìÃ¿¿ÃÊ÷µÄÊı¾İµÄÊıÁ¿
+	// éšæœºæ£®æ—ä¸­çš„å†³ç­–æ ‘çš„æ•°ç›®,ç­‰äºæ€»çš„æ•°æ®æ•°/ç”¨äºæ„é€ æ¯æ£µæ ‘çš„æ•°æ®çš„æ•°é‡
 	private int treeNum;
-	// Ëæ»úÊı²úÉúÆ÷
+	// éšæœºæ•°äº§ç”Ÿå™¨
 	private Random random;
-	// Ñù±¾Êı¾İÁĞÊôĞÔÃû³ÆĞĞ
+	// æ ·æœ¬æ•°æ®åˆ—å±æ€§åç§°è¡Œ
 	private String[] featureNames;
-	// Ô­Ê¼µÄ×ÜµÄÊı¾İ
+	// åŸå§‹çš„æ€»çš„æ•°æ®
 	private ArrayList<String[]> totalDatas;
-	// ¾ö²ßÊ÷É­ÁÖ
+	// å†³ç­–æ ‘æ£®æ—
 	private ArrayList<DecisionTree> decisionForest;
 
 	public RandomForestTool(String filePath, double sampleNumRatio,
@@ -47,7 +47,7 @@ public class RandomForestTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -69,22 +69,22 @@ public class RandomForestTool {
 		totalDatas = dataArray;
 		featureNames = totalDatas.get(0);
 		sampleNum = (int) ((totalDatas.size() - 1) * sampleNumRatio);
-		//ËãÊôĞÔÊıÁ¿µÄÊ±ºòĞèÒªÈ¥µôidÊôĞÔºÍ¾ö²ßÊôĞÔ£¬ÓÃÌõ¼şÊôĞÔ¼ÆËã
+		//ç®—å±æ€§æ•°é‡çš„æ—¶å€™éœ€è¦å»æ‰idå±æ€§å’Œå†³ç­–å±æ€§ï¼Œç”¨æ¡ä»¶å±æ€§è®¡ç®—
 		featureNum = (int) ((featureNames.length -2) * featureNumRatio);
-		// ËãÊıÁ¿µÄÊ±ºòĞèÒªÈ¥µôÊ×ĞĞÊôĞÔÃû³ÆĞĞ
+		// ç®—æ•°é‡çš„æ—¶å€™éœ€è¦å»æ‰é¦–è¡Œå±æ€§åç§°è¡Œ
 		treeNum = (totalDatas.size() - 1) / sampleNum;
 	}
 
 	/**
-	 * ²úÉú¾ö²ßÊ÷
+	 * äº§ç”Ÿå†³ç­–ï¿½ï¿½
 	 */
 	private DecisionTree produceDecisionTree() {
 		int temp = 0;
 		DecisionTree tree;
 		String[] tempData;
-		//²ÉÑùÊı¾İµÄËæ»úĞĞºÅ×é
+		//é‡‡æ ·æ•°æ®çš„éšæœºè¡Œå·ç»„
 		ArrayList<Integer> sampleRandomNum;
-		//²ÉÑùÊôĞÔÌØÕ÷µÄËæ»úÁĞºÅ×é
+		//é‡‡æ ·å±æ€§ç‰¹å¾çš„éšæœºåˆ—å·ç»„
 		ArrayList<Integer> featureRandomNum;
 		ArrayList<String[]> datas;
 		
@@ -95,7 +95,7 @@ public class RandomForestTool {
 		for(int i=0; i<sampleNum;){
 			temp = random.nextInt(totalDatas.size());
 			
-			//Èç¹ûÊÇĞĞÊ×ÊôĞÔÃû³ÆĞĞ£¬ÔòÌø¹ı
+			//å¦‚æœæ˜¯è¡Œé¦–å±æ€§åç§°è¡Œï¼Œåˆ™è·³è¿‡
 			if(temp == 0){
 				continue;
 			}
@@ -109,7 +109,7 @@ public class RandomForestTool {
 		for(int i=0; i<featureNum;){
 			temp = random.nextInt(featureNames.length);
 			
-			//Èç¹ûÊÇµÚÒ»ÁĞµÄÊı¾İidºÅ»òÕßÊÇ¾ö²ßÊôĞÔÁĞ£¬ÔòÌø¹ı
+			//å¦‚æœæ˜¯ç¬¬ä¸€åˆ—çš„æ•°æ®idå·æˆ–è€…æ˜¯å†³ç­–å±æ€§åˆ—ï¼Œåˆ™è·³è¿‡
 			if(temp == 0 || temp == featureNames.length-1){
 				continue;
 			}
@@ -122,11 +122,11 @@ public class RandomForestTool {
 
 		String[] singleRecord;
 		String[] headCulumn = null;
-		// »ñÈ¡Ëæ»úÊı¾İĞĞ
+		// è·å–éšæœºæ•°æ®è¡Œ
 		for(int dataIndex: sampleRandomNum){
 			singleRecord = totalDatas.get(dataIndex);
 			
-			//Ã¿ĞĞµÄÁĞÊı=ËùÑ¡µÄÌØÕ÷Êı+idºÅ
+			//æ¯è¡Œçš„åˆ—æ•°=æ‰€é€‰çš„ç‰¹å¾æ•°+idå·
 			tempData = new String[featureNum+2];
 			headCulumn = new String[featureNum+2];
 			
@@ -137,22 +137,22 @@ public class RandomForestTool {
 				tempData[k] = singleRecord[temp];
 			}
 			
-			//¼ÓÉÏidÁĞµÄĞÅÏ¢
+			//åŠ ä¸Šidåˆ—çš„ä¿¡æ¯
 			headCulumn[0] = featureNames[0];
-			//¼ÓÉÏ¾ö²ß·ÖÀàÁĞµÄĞÅÏ¢
+			//åŠ ä¸Šå†³ç­–åˆ†ç±»åˆ—çš„ä¿¡æ¯
 			headCulumn[featureNum+1] = featureNames[featureNames.length-1];
 			tempData[featureNum+1] = singleRecord[featureNames.length-1];
 			
-			//¼ÓÈë´ËĞĞÊı¾İ
+			//åŠ å…¥æ­¤è¡Œæ•°æ®
 			datas.add(tempData);
 		}
 		
-		//¼ÓÈëĞĞÊ×ÁĞ³öÏÖÃû³Æ
+		//åŠ å…¥è¡Œé¦–åˆ—å‡ºç°åç§°
 		datas.add(0, headCulumn);
-		//¶ÔÉ¸Ñ¡³öµÄÊı¾İÖØĞÂ×öid·ÖÅä
+		//å¯¹ç­›é€‰å‡ºçš„æ•°æ®é‡æ–°åšidåˆ†é…
 		temp = 0;
 		for(String[] array: datas){
-			//´ÓµÚ2ĞĞ¿ªÊ¼¸³Öµ
+			//ä»ç¬¬2è¡Œå¼€å§‹èµ‹å€¼
 			if(temp > 0){
 				array[0] = temp + "";
 			}
@@ -166,31 +166,31 @@ public class RandomForestTool {
 	}
 
 	/**
-	 * ¹¹ÔìËæ»úÉ­ÁÖ
+	 * æ„é€ éšæœºæ£®æ—
 	 */
 	public void constructRandomTree() {
 		DecisionTree tree;
 		random = new Random();
 		decisionForest = new ArrayList<>();
 
-		System.out.println("ÏÂÃæÊÇËæ»úÉ­ÁÖÖĞµÄ¾ö²ßÊ÷£º");
-		// ¹¹Ôì¾ö²ßÊ÷¼ÓÈëÉ­ÁÖÖĞ
+		System.out.println("ä¸‹é¢æ˜¯éšæœºæ£®æ—ä¸­çš„å†³ç­–æ ‘ï¼š");
+		// æ„é€ å†³ç­–æ ‘åŠ å…¥æ£®æ—ä¸­
 		for (int i = 0; i < treeNum; i++) {
-			System.out.println("\n¾ö²ßÊ÷" + (i+1));
+			System.out.println("\nå†³ç­–æ ‘" + (i+1));
 			tree = produceDecisionTree();
 			decisionForest.add(tree);
 		}
 	}
 
 	/**
-	 * ¸ù¾İ¸ø¶¨µÄÊôĞÔÌõ¼ş½øĞĞÀà±ğµÄ¾ö²ß
+	 * æ ¹æ®ç»™å®šçš„å±æ€§æ¡ä»¶è¿›è¡Œç±»åˆ«çš„å†³ç­–
 	 * 
 	 * @param features
-	 *            ¸ø¶¨µÄÒÑÖªµÄÊôĞÔÃèÊö
+	 *            ç»™å®šçš„å·²çŸ¥çš„å±æ€§æè¿°
 	 * @return
 	 */
 	public String judgeClassType(String features) {
-		// ½á¹ûÀàĞÍÖµ
+		// ç»“æœç±»å‹å€¼
 		String resultClassType = "";
 		String classType = "";
 		int count = 0;
@@ -199,7 +199,7 @@ public class RandomForestTool {
 		for (DecisionTree tree : decisionForest) {
 			classType = tree.decideClassType(features);
 			if (type2Num.containsKey(classType)) {
-				// Èç¹ûÀà±ğÒÑ¾­´æÔÚ£¬ÔòÊ¹Æä¼ÆÊı¼Ó1
+				// å¦‚æœç±»åˆ«å·²ç»å­˜åœ¨ï¼Œåˆ™ä½¿å…¶è®¡æ•°åŠ 1
 				count = type2Num.get(classType);
 				count++;
 			} else {
@@ -209,7 +209,7 @@ public class RandomForestTool {
 			type2Num.put(classType, count);
 		}
 
-		// Ñ¡³öÆäÖĞÀà±ğÖ§³Ö¼ÆÊı×î¶àµÄÒ»¸öÀà±ğÖµ
+		// é€‰å‡ºå…¶ä¸­ç±»åˆ«æ”¯æŒè®¡æ•°æœ€å¤šçš„ä¸€ä¸ªç±»åˆ«å€¼
 		count = -1;
 		for (Map.Entry entry : type2Num.entrySet()) {
 			if ((int) entry.getValue() > count) {

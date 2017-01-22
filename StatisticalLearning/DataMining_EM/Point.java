@@ -1,19 +1,19 @@
 package DataMining_EM;
 
 /**
- * 坐标点类
+ * 鍧愭爣鐐圭被
  * 
  * @author lyq
  * 
  */
 public class Point {
-	// 坐标点横坐标
+	// 鍧愭爣鐐规í鍧愭爣
 	private double x;
-	// 坐标点纵坐标
+	// 鍧愭爣鐐圭旱鍧愭爣
 	private double y;
-	// 坐标点对于P1的隶属度
+	// 鍧愭爣鐐瑰浜嶱1鐨勯毝灞炲害
 	private double memberShip1;
-	// 坐标点对于P2的隶属度
+	// 鍧愭爣鐐瑰浜嶱2鐨勯毝灞炲害
 	private double memberShip2;
 
 	public Point(double d, double e) {

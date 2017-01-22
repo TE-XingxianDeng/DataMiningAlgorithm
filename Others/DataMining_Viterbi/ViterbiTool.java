@@ -9,31 +9,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Î¬ÌØ±ÈËã·¨¹¤¾ßÀà
+ * ç»´ç‰¹æ¯”ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class ViterbiTool {
-	// ×´Ì¬×ªÒÆ¸ÅÂÊ¾ØÕóÎÄ¼şµØÖ·
+	// çŠ¶æ€è½¬ç§»æ¦‚ç‡çŸ©é˜µæ–‡ä»¶åœ°å€
 	private String stmFilePath;
-	// »ìÏı¾ØÕóÎÄ¼şµØÖ·
+	// æ··æ·†çŸ©é˜µæ–‡ä»¶åœ°å€
 	private String confusionFilePath;
-	// ³õÊ¼×´Ì¬¸ÅÂÊ
+	// åˆå§‹çŠ¶æ€æ¦‚ç‡
 	private double[] initStatePro;
-	// ¹Û²ìµ½µÄ×´Ì¬ĞòÁĞ
+	// è§‚å¯Ÿåˆ°çš„çŠ¶æ€åºåˆ—
 	public String[] observeStates;
-	// ×´Ì¬×ªÒÆ¾ØÕóÖµ
+	// çŠ¶æ€è½¬ç§»çŸ©é˜µå€¼
 	private double[][] stMatrix;
-	// »ìÏı¾ØÕóÖµ
+	// æ··æ·†çŸ©é˜µå€¼
 	private double[][] confusionMatrix;
-	// ¸÷¸öÌõ¼şÏÂµÄÇ±ÔÚÌØÕ÷¸ÅÂÊÖµ
+	// å„ä¸ªæ¡ä»¶ä¸‹çš„æ½œåœ¨ç‰¹å¾æ¦‚ç‡å€¼
 	private double[][] potentialValues;
-	// Ç±ÔÚÌØÕ÷
+	// æ½œåœ¨ç‰¹å¾
 	private ArrayList<String> potentialAttrs;
-	// ÊôĞÔÖµÁĞ×ø±êÓ³ÉäÍ¼
+	// å±æ€§å€¼åˆ—åæ ‡æ˜ å°„å›¾
 	private HashMap<String, Integer> name2Index;
-	// ÁĞ×ø±êÊôĞÔÖµÓ³ÉäÍ¼
+	// åˆ—åæ ‡å±æ€§å€¼æ˜ å°„å›¾
 	private HashMap<Integer, String> index2name;
 
 	public ViterbiTool(String stmFilePath, String confusionFilePath,
@@ -47,7 +47,7 @@ public class ViterbiTool {
 	}
 
 	/**
-	 * ³õÊ¼»¯Êı¾İ²Ù×÷
+	 * åˆå§‹åŒ–æ•°æ®æ“ä½œ
 	 */
 	private void initOperation() {
 		double[] temp;
@@ -70,7 +70,7 @@ public class ViterbiTool {
 				}
 			}
 
-			// ½«×ª»»ºóµÄÖµ¸³¸øÊı×éÖĞ
+			// å°†è½¬æ¢åçš„å€¼èµ‹ç»™æ•°ç»„ä¸­
 			this.stMatrix[index] = temp;
 			index++;
 		}
@@ -87,26 +87,26 @@ public class ViterbiTool {
 				}
 			}
 
-			// ½«×ª»»ºóµÄÖµ¸³¸øÊı×éÖĞ
+			// å°†è½¬æ¢åçš„å€¼èµ‹ç»™æ•°ç»„ä¸­
 			this.confusionMatrix[index] = temp;
 			index++;
 		}
 
 		this.potentialAttrs = new ArrayList<>();
-		// Ìí¼ÓÇ±ÔÚÌØÕ÷ÊôĞÔ
+		// æ·»åŠ æ½œåœ¨ç‰¹å¾å±æ€§
 		for (String s : smtDatas.get(0)) {
 			this.potentialAttrs.add(s);
 		}
-		// È¥³ıÊ×ÁĞÎŞĞ§ÁĞ
+		// å»é™¤é¦–åˆ—æ— æ•ˆåˆ—
 		potentialAttrs.remove(0);
 
 		this.name2Index = new HashMap<>();
 		this.index2name = new HashMap<>();
 
-		// Ìí¼ÓÃû³ÆÏÂ±êÓ³Éä¹ØÏµ
+		// æ·»åŠ åç§°ä¸‹æ ‡æ˜ å°„å…³ç³»
 		for (int i = 1; i < smtDatas.get(0).length; i++) {
 			this.name2Index.put(smtDatas.get(0)[i], i);
-			// Ìí¼ÓÏÂ±êµ½Ãû³ÆµÄÓ³Éä
+			// æ·»åŠ ä¸‹æ ‡åˆ°åç§°çš„æ˜ å°„
 			this.index2name.put(i, smtDatas.get(0)[i]);
 		}
 
@@ -116,7 +116,7 @@ public class ViterbiTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private ArrayList<String[]> readDataFile(String filePath) {
 		File file = new File(filePath);
@@ -139,16 +139,16 @@ public class ViterbiTool {
 	}
 
 	/**
-	 * ¸ù¾İ¹Û²ìÌØÕ÷¼ÆËãÒş²ØµÄÌØÕ÷¸ÅÂÊ¾ØÕó
+	 * æ ¹æ®è§‚å¯Ÿç‰¹å¾è®¡ç®—éšè—çš„ç‰¹å¾æ¦‚ç‡çŸ©é˜µ
 	 */
 	private void calPotencialProMatrix() {
 		String curObserveState;
-		// ¹Û²ìÌØÕ÷ºÍÇ±ÔÚÌØÕ÷µÄÏÂ±ê
+		// è§‚å¯Ÿç‰¹å¾å’Œæ½œåœ¨ç‰¹å¾çš„ä¸‹æ ‡
 		int osIndex;
 		int psIndex;
 		double temp;
 		double maxPro;
-		// »ìÏı¾ØÕó¸ÅÂÊÖµ£¬¾ÍÊÇÏà¹ØÓ°ÏìµÄÒòËØ¸ÅÂÊ
+		// æ··æ·†çŸ©é˜µæ¦‚ç‡å€¼ï¼Œå°±æ˜¯ç›¸å…³å½±å“çš„å› ç´ æ¦‚ç‡
 		double confusionPro;
 
 		this.potentialValues = new double[observeStates.length][potentialAttrs
@@ -158,7 +158,7 @@ public class ViterbiTool {
 			osIndex = this.name2Index.get(curObserveState);
 			maxPro = -1;
 
-			// ÒòÎªÊÇµÚÒ»¸ö¹Û²ìÌØÕ÷£¬Ã»ÓĞÇ°ÃæµÄÓ°Ïì£¬¸ù¾İ³õÊ¼×´Ì¬¼ÆËã
+			// å› ä¸ºæ˜¯ç¬¬ä¸€ä¸ªè§‚å¯Ÿç‰¹å¾ï¼Œæ²¡æœ‰å‰é¢çš„å½±å“ï¼Œæ ¹æ®åˆå§‹çŠ¶æ€è®¡ç®—
 			if (i == 0) {
 				for (String attr : this.potentialAttrs) {
 					psIndex = this.name2Index.get(attr);
@@ -168,20 +168,20 @@ public class ViterbiTool {
 					this.potentialValues[BaseNames.DAY1][psIndex] = temp;
 				}
 			} else {
-				// ºóÃæµÄÇ±ÔÚÌØÕ÷ÊÜÇ°Ò»¸öÌØÕ÷µÄÓ°Ïì£¬ÒÔ¼°µ±Ç°µÄ»ìÏıÒòËØÓ°Ïì
+				// åé¢çš„æ½œåœ¨ç‰¹å¾å—å‰ä¸€ä¸ªç‰¹å¾çš„å½±å“ï¼Œä»¥åŠå½“å‰çš„æ··æ·†å› ç´ å½±å“
 				for (String toDayAttr : this.potentialAttrs) {
 					psIndex = this.name2Index.get(toDayAttr);
 					confusionPro = this.confusionMatrix[psIndex][osIndex];
 
 					int index;
 					maxPro = -1;
-					// Í¨¹ı×òÌìµÄ¸ÅÂÊ¼ÆËã½ñÌì´ËÌØÕ÷µÄ×î´ó¸ÅÂÊ
+					// é€šè¿‡æ˜¨å¤©çš„æ¦‚ç‡è®¡ç®—ä»Šå¤©æ­¤ç‰¹å¾çš„æœ€å¤§æ¦‚ç‡
 					for (String yAttr : this.potentialAttrs) {
 						index = this.name2Index.get(yAttr);
 						temp = this.potentialValues[i - 1][index]
 								* this.stMatrix[index][psIndex];
 
-						// ¼ÆËãµÃµ½½ñÌì´ËÇ±ÔÚÌØÕ÷µÄ×î´ó¸ÅÂÊ
+						// è®¡ç®—å¾—åˆ°ä»Šå¤©æ­¤æ½œåœ¨ç‰¹å¾çš„æœ€å¤§æ¦‚ç‡
 						if (temp > maxPro) {
 							maxPro = temp;
 						}
@@ -194,7 +194,7 @@ public class ViterbiTool {
 	}
 
 	/**
-	 * ¸ù¾İÍ¬Ê±ÆÚ×î´ó¸ÅÂÊÖµÊä³öÇ±ÔÚÌØÕ÷Öµ
+	 * æ ¹æ®åŒæ—¶æœŸæœ€å¤§æ¦‚ç‡å€¼è¾“å‡ºæ½œåœ¨ç‰¹å¾å€¼
 	 */
 	private void outputResultAttr() {
 		double maxPro;
@@ -213,17 +213,17 @@ public class ViterbiTool {
 				}
 			}
 
-			// È¡³ö×î´ó¸ÅÂÊÏÂ±ê¶ÔÓ¦µÄÇ±ÔÚÌØÕ÷
+			// å–å‡ºæœ€å¤§æ¦‚ç‡ä¸‹æ ‡å¯¹åº”çš„æ½œåœ¨ç‰¹å¾
 			psValues.add(this.index2name.get(maxIndex));
 		}
 
-		System.out.println("¹Û²ìÌØÕ÷Îª£º");
+		System.out.println("è§‚å¯Ÿç‰¹å¾ä¸ºï¼š");
 		for (String s : this.observeStates) {
 			System.out.print(s + ", ");
 		}
 		System.out.println();
 
-		System.out.println("Ç±ÔÚÌØÕ÷Îª£º");
+		System.out.println("æ½œåœ¨ç‰¹å¾ä¸ºï¼š");
 		for (String s : psValues) {
 			System.out.print(s + ", ");
 		}
@@ -231,7 +231,7 @@ public class ViterbiTool {
 	}
 
 	/**
-	 * ¸ù¾İ¹Û²ìÊôĞÔ£¬µÃµ½Ç±ÔÚÊôĞÔĞÅÏ¢
+	 * æ ¹æ®è§‚å¯Ÿå±æ€§ï¼Œå¾—åˆ°æ½œåœ¨å±æ€§ä¿¡æ¯
 	 */
 	public void calHMMObserve() {
 		calPotencialProMatrix();

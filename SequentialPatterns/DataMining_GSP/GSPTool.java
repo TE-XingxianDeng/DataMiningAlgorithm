@@ -10,25 +10,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * GSPĞòÁĞÄ£Ê½·ÖÎöËã·¨
+ * GSPåºåˆ—æ¨¡å¼åˆ†æç®—æ³•
  * 
  * @author lyq
  * 
  */
 public class GSPTool {
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ×îĞ¡Ö§³Ö¶ÈãĞÖµ
+	// æœ€å°æ”¯æŒåº¦é˜ˆå€¼
 	private int minSupportCount;
-	// Ê±¼ä×îĞ¡¼ä¸ô
+	// æ—¶é—´æœ€å°é—´éš”
 	private int min_gap;
-	// Ê±¼ä×î´ó¼ä¸ô
+	// æ—¶é—´æœ€å¤§é—´éš”
 	private int max_gap;
-	// Ô­Ê¼Êı¾İĞòÁĞ
+	// åŸå§‹æ•°æ®åºåˆ—
 	private ArrayList<Sequence> totalSequences;
-	// GSPËã·¨ÖĞ²úÉúµÄËùÓĞµÄÆµ·±Ïî¼¯ĞòÁĞ
+	// GSPç®—æ³•ä¸­äº§ç”Ÿçš„æ‰€æœ‰çš„é¢‘ç¹é¡¹é›†åºåˆ—
 	private ArrayList<Sequence> totalFrequencySeqs;
-	// ĞòÁĞÏîÊı×Ö¶ÔÊ±¼äµÄÓ³ÉäÍ¼ÈİÆ÷
+	// åºåˆ—é¡¹æ•°å­—å¯¹æ—¶é—´çš„æ˜ å°„å›¾å®¹å™¨
 	private ArrayList<ArrayList<HashMap<Integer, Integer>>> itemNum2Time;
 
 	public GSPTool(String filePath, int minSupportCount, int min_gap,
@@ -42,7 +42,7 @@ public class GSPTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -81,7 +81,7 @@ public class GSPTool {
 			mapSeq.put(tID, seq);
 		}
 
-		// ½«ĞòÁĞÍ¼¼ÓÈëµ½ĞòÁĞListÖĞ
+		// å°†åºåˆ—å›¾åŠ å…¥åˆ°åºåˆ—Listä¸­
 		totalSequences = new ArrayList<>();
 		for (Map.Entry entry : mapSeq.entrySet()) {
 			totalSequences.add((Sequence) entry.getValue());
@@ -89,7 +89,7 @@ public class GSPTool {
 	}
 
 	/**
-	 * Éú³É1Æµ·±Ïî¼¯
+	 * ç”Ÿæˆ1é¢‘ç¹é¡¹é›†
 	 * 
 	 * @return
 	 */
@@ -104,7 +104,7 @@ public class GSPTool {
 		for (Sequence seq : totalSequences) {
 			for (ItemSet itemSet : seq.getItemSetList()) {
 				for (int num : itemSet.getItems()) {
-					// Èç¹ûÃ»ÓĞ´ËÖÖÀàĞÍÏî£¬Ôò½øĞĞÌí¼Ó²Ù×÷
+					// å¦‚æœæ²¡æœ‰æ­¤ç§ç±»å‹é¡¹ï¼Œåˆ™è¿›è¡Œæ·»åŠ æ“ä½œ
 					if (!itemNumMap.containsKey(num)) {
 						itemNumMap.put(num, 1);
 					}
@@ -122,7 +122,7 @@ public class GSPTool {
 				
 				for (ItemSet itemSet : seq.getItemSetList()) {
 					for (int num : itemSet.getItems()) {
-						// Èç¹ûÃ»ÓĞ´ËÖÖÀàĞÍÏî£¬Ôò½øĞĞÌí¼Ó²Ù×÷
+						// å¦‚æœæ²¡æœ‰æ­¤ç§ç±»å‹é¡¹ï¼Œåˆ™è¿›è¡Œæ·»åŠ æ“ä½œ
 						if (num == number) {
 							isContain = true;
 							break;
@@ -154,19 +154,19 @@ public class GSPTool {
 			}
 
 		}
-		// ½«ĞòÁĞÉıĞòÅÅÁĞ
+		// å°†åºåˆ—å‡åºæ’åˆ—
 		Collections.sort(seqList);
-		// ½«Æµ·±1Ïî¼¯¼ÓÈë×ÜÆµ·±Ïî¼¯ÁĞ±íÖĞ
+		// å°†é¢‘ç¹1é¡¹é›†åŠ å…¥æ€»é¢‘ç¹é¡¹é›†åˆ—è¡¨ä¸­
 		totalFrequencySeqs.addAll(seqList);
 
 		return seqList;
 	}
 
 	/**
-	 * Í¨¹ı1Æµ·±Ïî¼¯Á¬½Ó²úÉú2Æµ·±Ïî¼¯
+	 * é€šè¿‡1é¢‘ç¹é¡¹é›†è¿æ¥äº§ç”Ÿ2é¢‘ç¹é¡¹é›†
 	 * 
 	 * @param oneSeq
-	 *            1Æµ·±Ïî¼¯ĞòÁĞ
+	 *            1é¢‘ç¹é¡¹é›†åºåˆ—
 	 * @return
 	 */
 	private ArrayList<Sequence> generateTwoFrequencyItem(
@@ -177,8 +177,8 @@ public class GSPTool {
 		int num1;
 		int num2;
 
-		// ¼ÙÈç½«<a>,<b>2¸ö1Æµ·±Ïî¼¯×öÁ¬½Ó×éºÏ£¬¿ÉÒÔ·ÖÎª<a a>£¬<a b>£¬<b a>,<b b>4¸öĞòÁĞÄ£Ê½
-		// ×¢Òâ´ËÊ±µÄÃ¿¸öĞòÁĞÖĞ°üº¬2¸ö¶ÀÁ¢Ïî¼¯
+		// å‡å¦‚å°†<a>,<b>2ä¸ª1é¢‘ç¹é¡¹é›†åšè¿æ¥ç»„åˆï¼Œå¯ä»¥åˆ†ä¸º<a a>ï¼Œ<a b>ï¼Œ<b a>,<b b>4ä¸ªåºåˆ—æ¨¡å¼
+		// æ³¨æ„æ­¤æ—¶çš„æ¯ä¸ªåºåˆ—ä¸­åŒ…å«2ä¸ªç‹¬ç«‹é¡¹é›†
 		for (int i = 0; i < oneSeq.size(); i++) {
 			num1 = oneSeq.get(i).getFirstItemSetNum();
 			for (int j = 0; j < oneSeq.size(); j++) {
@@ -196,7 +196,7 @@ public class GSPTool {
 			}
 		}
 
-		// ÉÏÃæÁ¬½Ó»¹ÓĞ1ÖÖÇé¿öÊÇÃ¿¸öĞòÁĞÖĞÖ»°üº¬ÓĞÒ»¸öÏî¼¯µÄÇé¿ö£¬´ËÊ±a,bµÄ»®·ÖÔòÊÇ<(a,a)> <(a,b)> <(b,b)>
+		// ä¸Šé¢è¿æ¥è¿˜æœ‰1ç§æƒ…å†µæ˜¯æ¯ä¸ªåºåˆ—ä¸­åªåŒ…å«æœ‰ä¸€ä¸ªé¡¹é›†çš„æƒ…å†µï¼Œæ­¤æ—¶a,bçš„åˆ’åˆ†åˆ™æ˜¯<(a,a)> <(a,b)> <(b,b)>
 		for (int i = 0; i < oneSeq.size(); i++) {
 			num1 = oneSeq.get(i).getFirstItemSetNum();
 			for (int j = i; j < oneSeq.size(); j++) {
@@ -211,17 +211,17 @@ public class GSPTool {
 				}
 			}
 		}
-		// Í¬Ñù½«2Æµ·±Ïî¼¯¼ÓÈëµ½×ÜÆµ·±Ïî¼¯ÖĞ
+		// åŒæ ·å°†2é¢‘ç¹é¡¹é›†åŠ å…¥åˆ°æ€»é¢‘ç¹é¡¹é›†ä¸­
 		totalFrequencySeqs.addAll(resultSeq);
 
 		return resultSeq;
 	}
 
 	/**
-	 * ¸ù¾İÉÏ´ÎµÄÆµ·±¼¯Á¬½Ó²úÉúĞÂµÄºîÑ¡¼¯
+	 * æ ¹æ®ä¸Šæ¬¡çš„é¢‘ç¹é›†è¿æ¥äº§ç”Ÿæ–°çš„ä¾¯é€‰é›†
 	 * 
 	 * @param seqList
-	 *            ÉÏ´Î²úÉúµÄºòÑ¡¼¯
+	 *            ä¸Šæ¬¡äº§ç”Ÿçš„å€™é€‰é›†
 	 * @return
 	 */
 	private ArrayList<Sequence> generateCandidateItem(
@@ -229,7 +229,7 @@ public class GSPTool {
 		Sequence tempSeq;
 		ArrayList<Integer> tempNumArray;
 		ArrayList<Sequence> resultSeq = new ArrayList<>();
-		// ĞòÁĞÊı×ÖÏîÁĞ±í
+		// åºåˆ—æ•°å­—é¡¹åˆ—è¡¨
 		ArrayList<ArrayList<Integer>> seqNums = new ArrayList<>();
 
 		for (int i = 0; i < seqList.size(); i++) {
@@ -243,18 +243,18 @@ public class GSPTool {
 
 		ArrayList<Integer> array1;
 		ArrayList<Integer> array2;
-		// ĞòÁĞi,jµÄ¿½±´
+		// åºåˆ—i,jçš„æ‹·è´
 		Sequence seqi = null;
 		Sequence seqj = null;
-		// ÅĞ¶ÏÊÇ·ñÄÜ¹»Á¬½Ó£¬Ä¬ÈÏÄÜÁ¬½Ó
+		// åˆ¤æ–­æ˜¯å¦èƒ½å¤Ÿè¿æ¥ï¼Œé»˜è®¤èƒ½è¿æ¥
 		boolean canConnect = true;
-		// ½øĞĞÁ¬½ÓÔËËã£¬°üÀ¨×Ô¼ºÓë×Ô¼ºÁ¬½Ó
+		// è¿›è¡Œè¿æ¥è¿ç®—ï¼ŒåŒ…æ‹¬è‡ªå·±ä¸è‡ªå·±è¿æ¥
 		for (int i = 0; i < seqNums.size(); i++) {
 			for (int j = 0; j < seqNums.size(); j++) {
 				array1 = (ArrayList<Integer>) seqNums.get(i).clone();
 				array2 = (ArrayList<Integer>) seqNums.get(j).clone();
 
-				// ½«µÚÒ»¸öÊı×Ö×éÈ¥µôµÚÒ»¸ö£¬µÚ¶ş¸öÊı×Ö×éÈ¥µô×îºóÒ»¸ö£¬Èç¹ûÊ£ÏÂµÄ²¿·ÖÏàµÈ£¬Ôò¿ÉÒÔÁ¬½Ó
+				// å°†ç¬¬ä¸€ä¸ªæ•°å­—ç»„å»æ‰ç¬¬ä¸€ä¸ªï¼Œç¬¬äºŒä¸ªæ•°å­—ç»„å»æ‰æœ€åä¸€ä¸ªï¼Œå¦‚æœå‰©ä¸‹çš„éƒ¨åˆ†ç›¸ç­‰ï¼Œåˆ™å¯ä»¥è¿æ¥
 				array1.remove(0);
 				array2.remove(array2.size() - 1);
 
@@ -272,16 +272,16 @@ public class GSPTool {
 
 					int lastItemNum = seqj.getLastItemSetNum();
 					if (seqj.isLastItemSetSingleNum()) {
-						// Èç¹ûjĞòÁĞµÄ×îºóÏî¼¯Îªµ¥Ò»Öµ£¬Ôò×îºóÒ»¸öÊı×ÖÒÔ¶ÀÁ¢Ïî¼¯¼ÓÈëiĞòÁĞ
+						// å¦‚æœjåºåˆ—çš„æœ€åé¡¹é›†ä¸ºå•ä¸€å€¼ï¼Œåˆ™æœ€åä¸€ä¸ªæ•°å­—ä»¥ç‹¬ç«‹é¡¹é›†åŠ å…¥iåºåˆ—
 						ItemSet itemSet = new ItemSet(new int[] { lastItemNum });
 						seqi.getItemSetList().add(itemSet);
 					} else {
-						// Èç¹ûjĞòÁĞµÄ×îºóÏî¼¯Îª·Çµ¥Ò»Öµ£¬Ôò×îºóÒ»¸öÊı×Ö¼ÓÈëiĞòÁĞ×îºóÒ»¸öÏî¼¯ÖĞ
+						// å¦‚æœjåºåˆ—çš„æœ€åé¡¹é›†ä¸ºéå•ä¸€å€¼ï¼Œåˆ™æœ€åä¸€ä¸ªæ•°å­—åŠ å…¥iåºåˆ—æœ€åä¸€ä¸ªé¡¹é›†ä¸­
 						ItemSet itemSet = seqi.getLastItemSet();
 						itemSet.getItems().add(lastItemNum);
 					}
 
-					// ÅĞ¶ÏÊÇ·ñ³¬¹ı×îĞ¡Ö§³Ö¶ÈãĞÖµ
+					// åˆ¤æ–­æ˜¯å¦è¶…è¿‡æœ€å°æ”¯æŒåº¦é˜ˆå€¼
 					if (isChildSeqContained(seqi)
 							&& countSupport(seqi) >= minSupportCount) {
 						resultSeq.add(seqi);
@@ -295,10 +295,10 @@ public class GSPTool {
 	}
 
 	/**
-	 * ÅĞ¶Ï´ËĞòÁĞµÄËùÓĞ×ÓĞòÁĞÊÇ·ñÒ²ÊÇÆµ·±ĞòÁĞ
+	 * åˆ¤æ–­æ­¤åºåˆ—çš„æ‰€æœ‰å­åºåˆ—æ˜¯å¦ä¹Ÿæ˜¯é¢‘ç¹åºåˆ—
 	 * 
 	 * @param seq
-	 *            ´ı±È½ÏĞòÁĞ
+	 *            å¾…æ¯”è¾ƒåºåˆ—
 	 * @return
 	 */
 	private boolean isChildSeqContained(Sequence seq) {
@@ -325,10 +325,10 @@ public class GSPTool {
 	}
 
 	/**
-	 * ºòÑ¡¼¯ÅĞ¶ÏÖ§³Ö¶ÈµÄÖµ
+	 * å€™é€‰é›†åˆ¤æ–­æ”¯æŒåº¦çš„å€¼
 	 * 
 	 * @param seq
-	 *            ´ıÅĞ¶ÏĞòÁĞ
+	 *            å¾…åˆ¤æ–­åºåˆ—
 	 * @return
 	 */
 	private int countSupport(Sequence seq) {
@@ -339,7 +339,7 @@ public class GSPTool {
 		HashMap<Integer, Integer> timeMap;
 		ArrayList<ItemSet> itemSetList;
 		ArrayList<ArrayList<Integer>> numArray = new ArrayList<>();
-		// Ã¿Ïî¼¯¶ÔÓ¦µÄÊ±¼äÁ´±í
+		// æ¯é¡¹é›†å¯¹åº”çš„æ—¶é—´é“¾è¡¨
 		ArrayList<ArrayList<Integer>> timeArray = new ArrayList<>();
 
 		for (ItemSet itemSet : seq.getItemSetList()) {
@@ -362,7 +362,7 @@ public class GSPTool {
 
 					if (tempItemSet.getItems().size() == childNum.size()) {
 						timeMap = itemNum2Time.get(i).get(j);
-						// Ö»ÓĞµ±Ïî¼¯³¤¶ÈÆ¥ÅäÊ±²ÅÆ¥Åä
+						// åªæœ‰å½“é¡¹é›†é•¿åº¦åŒ¹é…æ—¶æ‰åŒ¹é…
 						for (int k = 0; k < childNum.size(); k++) {
 							if (timeMap.containsKey(childNum.get(k))) {
 								matchNum++;
@@ -370,7 +370,7 @@ public class GSPTool {
 							}
 						}
 
-						// Èç¹ûÍêÈ«Æ¥Åä£¬Ôò¼ÇÂ¼Ê±¼ä
+						// å¦‚æœå®Œå…¨åŒ¹é…ï¼Œåˆ™è®°å½•æ—¶é—´
 						if (matchNum == childNum.size()) {
 							localTime.add(t);
 						}
@@ -383,7 +383,7 @@ public class GSPTool {
 				}
 			}
 
-			// ÅĞ¶ÏÊ±¼äÊÇ·ñÂú×ãÊ±¼ä×î´ó×îĞ¡Ô¼Êø£¬Èç¹ûÂú×ã£¬Ôò´ËÌõÊÂÎñ°üº¬ºòÑ¡ÊÂÎñ
+			// åˆ¤æ–­æ—¶é—´æ˜¯å¦æ»¡è¶³æ—¶é—´æœ€å¤§æœ€å°çº¦æŸï¼Œå¦‚æœæ»¡è¶³ï¼Œåˆ™æ­¤æ¡äº‹åŠ¡åŒ…å«å€™é€‰äº‹åŠ¡
 			if (timeArray.size() == numArray.size()
 					&& judgeTimeInGap(timeArray)) {
 				count++;
@@ -394,10 +394,10 @@ public class GSPTool {
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÂÎñÊÇ·ñÂú×ãÊ±¼äÔ¼Êø
+	 * åˆ¤æ–­äº‹åŠ¡æ˜¯å¦æ»¡è¶³æ—¶é—´çº¦æŸ
 	 * 
 	 * @param timeArray
-	 *            Ê±¼äÊı×é£¬Ã¿ĞĞ´ú±í¸÷Ïî¼¯µÄÔÚÊÂÎñÖĞµÄ·¢ÉúÊ±¼äÁ´±í
+	 *            æ—¶é—´æ•°ç»„ï¼Œæ¯è¡Œä»£è¡¨å„é¡¹é›†çš„åœ¨äº‹åŠ¡ä¸­çš„å‘ç”Ÿæ—¶é—´é“¾è¡¨
 	 * @return
 	 */
 	private boolean judgeTimeInGap(ArrayList<ArrayList<Integer>> timeArray) {
@@ -423,7 +423,7 @@ public class GSPTool {
 	}
 
 	/**
-	 * Éî¶ÈÓÅÏÈ±éÀúÊ±¼ä£¬ÅĞ¶ÏÊÇ·ñÓĞ·ûºÏÌõ¼şµÄÊ±¼ä¼ä¸ô
+	 * æ·±åº¦ä¼˜å…ˆéå†æ—¶é—´ï¼Œåˆ¤æ–­æ˜¯å¦æœ‰ç¬¦åˆæ¡ä»¶çš„æ—¶é—´é—´éš”
 	 * 
 	 * @param preTime
 	 * @param timeArray
@@ -439,7 +439,7 @@ public class GSPTool {
 		for (int i = 0; i < firstItemItem.size(); i++) {
 			if (firstItemItem.get(i) - preTime >= min_gap
 					&& firstItemItem.get(i) - preTime <= max_gap) {
-				// Èç¹û´Ë2Ïî¼ä¸ôÊ±¼äÂú×ãÊ±¼äÔ¼Êø£¬Ôò¼ÌĞøÍùÏÂµİ¹é
+				// å¦‚æœæ­¤2é¡¹é—´éš”æ—¶é—´æ»¡è¶³æ—¶é—´çº¦æŸï¼Œåˆ™ç»§ç»­å¾€ä¸‹é€’å½’
 				preTime = firstItemItem.get(i);
 				timeArrayClone.remove(0);
 
@@ -458,7 +458,7 @@ public class GSPTool {
 	}
 
 	/**
-	 * ³õÊ¼»¯ĞòÁĞÏîµ½Ê±¼äµÄĞòÁĞÍ¼£¬ÎªÁËºóÃæµÄÊ±¼äÔ¼Êø¼ÆËã
+	 * åˆå§‹åŒ–åºåˆ—é¡¹åˆ°æ—¶é—´çš„åºåˆ—å›¾ï¼Œä¸ºäº†åé¢çš„æ—¶é—´çº¦æŸè®¡ç®—
 	 */
 	private void initItemNumToTimeMap() {
 		Sequence seq;
@@ -485,7 +485,7 @@ public class GSPTool {
 	}
 
 	/**
-	 * ½øĞĞGSPËã·¨¼ÆËã
+	 * è¿›è¡ŒGSPç®—æ³•è®¡ç®—
 	 */
 	public void gspCalculate() {
 		ArrayList<Sequence> oneSeq;
@@ -497,7 +497,7 @@ public class GSPTool {
 		twoSeq = generateTwoFrequencyItem(oneSeq);
 		candidateSeq = twoSeq;
 
-		// ²»¶ÏÁ¬½ÓÉú²úºòÑ¡¼¯£¬Ö±µ½Ã»ÓĞ²úÉú³öºîÑ¡¼¯
+		// ä¸æ–­è¿æ¥ç”Ÿäº§å€™é€‰é›†ï¼Œç›´åˆ°æ²¡æœ‰äº§ç”Ÿå‡ºä¾¯é€‰é›†
 		for (;;) {
 			candidateSeq = generateCandidateItem(candidateSeq);
 
@@ -511,10 +511,10 @@ public class GSPTool {
 	}
 
 	/**
-	 * Êä³öĞòÁĞÁĞ±íĞÅÏ¢
+	 * è¾“å‡ºåºåˆ—åˆ—è¡¨ä¿¡æ¯
 	 * 
 	 * @param outputSeqList
-	 *            ´ıÊä³öĞòÁĞÁĞ±í
+	 *            å¾…è¾“å‡ºåºåˆ—åˆ—è¡¨
 	 */
 	private void outputSeqence(ArrayList<Sequence> outputSeqList) {
 		for (Sequence seq : outputSeqList) {

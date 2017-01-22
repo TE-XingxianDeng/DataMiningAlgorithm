@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * ·ÇÒ¶×Ó½Úµã
+ * éå¶å­èŠ‚ç‚¹
  * 
  * @author lyq
  * 
  */
 public class NonLeafNode extends ClusteringFeature {
-	// ·ÇÒ¶×Ó½ÚµãµÄº¢×Ó½Úµã¿ÉÄÜÎª·ÇÒ¶×Ó½Úµã£¬Ò²¿ÉÄÜÎªÒ¶×Ó½Úµã
+	// éå¶å­èŠ‚ç‚¹çš„å­©å­èŠ‚ç‚¹å¯èƒ½ä¸ºéå¶å­èŠ‚ç‚¹ï¼Œä¹Ÿå¯èƒ½ä¸ºå¶å­èŠ‚ç‚¹
 	private ArrayList<NonLeafNode> nonLeafChilds;
-	// Èç¹ûÊÇÒ¶×Ó½ÚµãµÄº¢×Ó£¬ÔòÒÔË«ÏòÁ´±íµÄĞÎÊ½´æÔÚ
+	// å¦‚æœæ˜¯å¶å­èŠ‚ç‚¹çš„å­©å­ï¼Œåˆ™ä»¥åŒå‘é“¾è¡¨çš„å½¢å¼å­˜åœ¨
 	private LinkedList<LeafNode> leafChilds;
-	// ¸¸Ç×½Úµã
+	// çˆ¶äº²èŠ‚ç‚¹
 	private NonLeafNode parentNode;
 
 	public ArrayList<NonLeafNode> getNonLeafChilds() {
@@ -34,10 +34,10 @@ public class NonLeafNode extends ClusteringFeature {
 	}
 
 	/**
-	 * Ìí¼ÓÒ¶×Ó½Úµã
+	 * æ·»åŠ å¶å­èŠ‚ç‚¹
 	 * 
 	 * @param leafNode
-	 *            ´ıÌí¼ÓÒ¶×Ó½Úµã
+	 *            å¾…æ·»åŠ å¶å­èŠ‚ç‚¹
 	 * @return
 	 */
 	public boolean addingNeededDivide(LeafNode leafNode) {
@@ -47,14 +47,14 @@ public class NonLeafNode extends ClusteringFeature {
 			leafChilds.add(leafNode);
 			leafNode.setParentNode(this);
 		} else {
-			// Èç¹ûÌí¼Óºó£¬Ò¶×Ó½ÚµãÊı³¬¹ıÆ½ºâÒò×Ó£¬ÔòÌí¼ÓºóĞèÒª·ÖÁÑ
+			// å¦‚æœæ·»åŠ åï¼Œå¶å­èŠ‚ç‚¹æ•°è¶…è¿‡å¹³è¡¡å› å­ï¼Œåˆ™æ·»åŠ åéœ€è¦åˆ†è£‚
 			if (leafChilds.size() + 1 > BIRCHTool.B) {
 				needDivided = true;
 			}
 			leafChilds.add(leafNode);
 			leafNode.setParentNode(this);
 
-			// ²âÊÔ³ÌĞò
+			// æµ‹è¯•ç¨‹åº
 			/*
 			 * if(leafChilds.size() == 2){ if(BIRCHTool.B == 2){ needDivided =
 			 * true; LeafNode node = new LeafNode(); node.setN(1);
@@ -67,10 +67,10 @@ public class NonLeafNode extends ClusteringFeature {
 	}
 
 	/**
-	 * Ìí¼Ó·ÇÒ¶×Ó½Úµã
+	 * æ·»åŠ éå¶å­èŠ‚ç‚¹
 	 * 
 	 * @param nonLeafNode
-	 *            ´ıÌí¼Ó·ÇÒ¶×Ó½Úµã
+	 *            å¾…æ·»åŠ éå¶å­èŠ‚ç‚¹
 	 * @return
 	 */
 	public boolean addingNeededDivide(NonLeafNode nonLeafNode) {
@@ -80,7 +80,7 @@ public class NonLeafNode extends ClusteringFeature {
 			nonLeafChilds.add(nonLeafNode);
 			nonLeafNode.setParentNode(this);
 		} else {
-			// Èç¹ûÌí¼Óºó£¬Ò¶×Ó½ÚµãÊı³¬¹ıÆ½ºâÒò×Ó£¬ÔòÌí¼ÓÊ§°Ü
+			// å¦‚æœæ·»åŠ åï¼Œå¶å­èŠ‚ç‚¹æ•°è¶…è¿‡å¹³è¡¡å› å­ï¼Œåˆ™æ·»åŠ å¤±è´¥
 			if (nonLeafChilds.size() + 1 > BIRCHTool.B) {
 				needDivided = false;
 			}
@@ -92,21 +92,21 @@ public class NonLeafNode extends ClusteringFeature {
 	}
 
 	/**
-	 * ÒòÎªÒ¶×Ó½ÚµãÊı³¬¹ıãĞÖµ£¬½øĞĞ·ÖÁÑ
+	 * å› ä¸ºå¶å­èŠ‚ç‚¹æ•°è¶…è¿‡é˜ˆå€¼ï¼Œè¿›è¡Œåˆ†è£‚
 	 * 
 	 * @return
 	 */
 	public NonLeafNode[] leafNodeDivided() {
 		NonLeafNode[] nonLeafNodes = new NonLeafNode[2];
 
-		// ´Ø¼ä¾àÀë²î¾à×î´óµÄ2¸ö´Ø£¬ºóÃæµÄ´Ø°´ÕÕ¾Í½üÔ­Ôò»®·Ö¼´¿É
+		// ç°‡é—´è·ç¦»å·®è·æœ€å¤§çš„2ä¸ªç°‡ï¼Œåé¢çš„ç°‡æŒ‰ç…§å°±è¿‘åŸåˆ™åˆ’åˆ†å³å¯
 		LeafNode node1 = null;
 		LeafNode node2 = null;
 		LeafNode tempNode = null;
 		double maxValue = 0;
 		double temp = 0;
 
-		// ÕÒ³ö´ØĞÄ¾àÀë²î¾à×î´óµÄ2¸ö´Ø
+		// æ‰¾å‡ºç°‡å¿ƒè·ç¦»å·®è·æœ€å¤§çš„2ä¸ªç°‡
 		for (int i = 0; i < leafChilds.size() - 1; i++) {
 			tempNode = leafChilds.get(i);
 			for (int j = i + 1; j < leafChilds.size(); j++) {
@@ -126,11 +126,11 @@ public class NonLeafNode extends ClusteringFeature {
 		nonLeafNodes[1].addingCluster(node2);
 		leafChilds.remove(node1);
 		leafChilds.remove(node2);
-		// ¾Í½ü·ÖÅä´Ø
+		// å°±è¿‘åˆ†é…ç°‡
 		for (LeafNode c : leafChilds) {
 			if (node1.computerClusterDistance(c) < node2
 					.computerClusterDistance(c)) {
-				// ´Ø¼ä¾àÀëÈç¹û½Ó½ü×îĞ¡´Ø£¬¾Í¼ÓÈë×îĞ¡´ØËùÊôÒ¶×Ó½Úµã
+				// ç°‡é—´è·ç¦»å¦‚æœæ¥è¿‘æœ€å°ç°‡ï¼Œå°±åŠ å…¥æœ€å°ç°‡æ‰€å±å¶å­èŠ‚ç‚¹
 				nonLeafNodes[0].addingCluster(c);
 				c.setParentNode(nonLeafNodes[0]);
 			} else {
@@ -143,21 +143,21 @@ public class NonLeafNode extends ClusteringFeature {
 	}
 
 	/**
-	 * ÒòÎª·ÇÒ¶×Ó½ÚµãÊı³¬¹ıãĞÖµ£¬½øĞĞ·ÖÁÑ
+	 * å› ä¸ºéå¶å­èŠ‚ç‚¹æ•°è¶…è¿‡é˜ˆå€¼ï¼Œè¿›è¡Œåˆ†è£‚
 	 * 
 	 * @return
 	 */
 	public NonLeafNode[] nonLeafNodeDivided() {
 		NonLeafNode[] nonLeafNodes = new NonLeafNode[2];
 
-		// ´Ø¼ä¾àÀë²î¾à×î´óµÄ2¸ö´Ø£¬ºóÃæµÄ´Ø°´ÕÕ¾Í½üÔ­Ôò»®·Ö¼´¿É
+		// ç°‡é—´è·ç¦»å·®è·æœ€å¤§çš„2ä¸ªç°‡ï¼Œåé¢çš„ç°‡æŒ‰ç…§å°±è¿‘åŸåˆ™åˆ’åˆ†å³å¯
 		NonLeafNode node1 = null;
 		NonLeafNode node2 = null;
 		NonLeafNode tempNode = null;
 		double maxValue = 0;
 		double temp = 0;
 
-		// ÕÒ³ö´ØĞÄ¾àÀë²î¾à×î´óµÄ2¸ö´Ø
+		// æ‰¾å‡ºç°‡å¿ƒè·ç¦»å·®è·æœ€å¤§çš„2ä¸ªç°‡
 		for (int i = 0; i < nonLeafChilds.size() - 1; i++) {
 			tempNode = nonLeafChilds.get(i);
 			for (int j = i + 1; j < nonLeafChilds.size(); j++) {
@@ -177,11 +177,11 @@ public class NonLeafNode extends ClusteringFeature {
 		nonLeafNodes[1].addingCluster(node2);
 		nonLeafChilds.remove(node1);
 		nonLeafChilds.remove(node2);
-		// ¾Í½ü·ÖÅä´Ø
+		// å°±è¿‘åˆ†é…ç°‡
 		for (NonLeafNode c : nonLeafChilds) {
 			if (node1.computerClusterDistance(c) < node2
 					.computerClusterDistance(c)) {
-				// ´Ø¼ä¾àÀëÈç¹û½Ó½ü×îĞ¡´Ø£¬¾Í¼ÓÈë×îĞ¡´ØËùÊôÒ¶×Ó½Úµã
+				// ç°‡é—´è·ç¦»å¦‚æœæ¥è¿‘æœ€å°ç°‡ï¼Œå°±åŠ å…¥æœ€å°ç°‡æ‰€å±å¶å­èŠ‚ç‚¹
 				nonLeafNodes[0].addingCluster(c);
 				c.setParentNode(nonLeafNodes[0]);
 			} else {
@@ -194,10 +194,10 @@ public class NonLeafNode extends ClusteringFeature {
 	}
 
 	/**
-	 * Ñ°ÕÒµ½×î½Ó½üµÄÒ¶×Ó½Úµã
+	 * å¯»æ‰¾åˆ°æœ€æ¥è¿‘çš„å¶å­èŠ‚ç‚¹
 	 * 
 	 * @param cluster
-	 *            ´ıÌí¼Ó¾Û´Ø
+	 *            å¾…ï¿½ç ‘æ³³é„ï¿½
 	 * @return
 	 */
 	public LeafNode findedClosestNode(Cluster cluster) {
@@ -223,7 +223,7 @@ public class NonLeafNode extends ClusteringFeature {
 				}
 			}
 
-			// µİ¹é¼ÌĞøÍùÏÂÕÒ
+			// é€’å½’ç»§ç»­å¾€ä¸‹æ‰¾
 			node = nonLeafNode.findedClosestNode(cluster);
 		}
 
@@ -244,7 +244,7 @@ public class NonLeafNode extends ClusteringFeature {
 		NonLeafNode nonLeafNode = null;
 		NonLeafNode[] nonLeafNodeArrays;
 		boolean neededDivide = false;
-		// ¸üĞÂ¾ÛÀàÌØÕ÷Öµ
+		// æ›´æ–°èšç±»ç‰¹å¾å€¼
 		directAddCluster(clusteringFeature);
 
 		if (clusteringFeature instanceof LeafNode) {

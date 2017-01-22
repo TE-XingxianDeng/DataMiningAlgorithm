@@ -7,19 +7,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * aprioriËã·¨¹¤¾ßÀà
+ * aprioriç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class AprioriTool {
-	// ×îĞ¡Ö§³Ö¶È¼ÆÊı
+	// æœ€å°æ”¯æŒåº¦è®¡æ•°
 	private int minSupportCount;
-	// Ã¿¸öÊÂÎñÖĞµÄÉÌÆ·ID
+	// æ¯ä¸ªäº‹åŠ¡ä¸­çš„å•†å“ID
 	private ArrayList<String[]> totalGoodsIDs;
-	// ¹ı³ÌÖĞ¼ÆËã³öÀ´µÄËùÓĞÆµ·±Ïî¼¯ÁĞ±í
+	// è¿‡ç¨‹ä¸­è®¡ç®—å‡ºæ¥çš„æ‰€æœ‰é¢‘ç¹é¡¹é›†åˆ—è¡¨
 	private ArrayList<FrequentItem> resultItem;
-	// ¹ı³ÌÖĞ¼ÆËã³öÀ´Æµ·±Ïî¼¯µÄID¼¯ºÏ
+	// è¿‡ç¨‹ä¸­è®¡ç®—å‡ºæ¥é¢‘ç¹é¡¹é›†çš„IDé›†åˆ
 	private ArrayList<String[]> resultItemID;
 
 	public AprioriTool(ArrayList<String[]> totalGoodsIDs, int minSupportCount) {
@@ -29,7 +29,7 @@ public class AprioriTool {
 
 
 	/**
-	 * ÅĞ¶Á×Ö·ûÊı×éarray2ÊÇ·ñ°üº¬ÓÚÊı×éarray1ÖĞ
+	 * åˆ¤è¯»å­—ç¬¦æ•°ç»„array2æ˜¯å¦åŒ…å«äºæ•°ç»„array1ä¸­
 	 * 
 	 * @param array1
 	 * @param array2
@@ -42,9 +42,9 @@ public class AprioriTool {
 
 		boolean iSContain = false;
 		for (String s : array2) {
-			// ĞÂµÄ×ÖÄ¸±È½ÏÊ±£¬ÖØĞÂ³õÊ¼»¯±äÁ¿
+			// æ–°çš„å­—æ¯æ¯”è¾ƒæ—¶ï¼Œé‡æ–°åˆå§‹åŒ–å˜é‡
 			iSContain = false;
-			// ÅĞ¶Áarray2ÖĞÃ¿¸ö×Ö·û£¬Ö»Òª°üÀ¨ÔÚarray1ÖĞ £¬¾ÍËã°üº¬
+			// åˆ¤è¯»array2ä¸­æ¯ä¸ªå­—ç¬¦ï¼Œåªè¦åŒ…æ‹¬åœ¨array1ä¸­ ï¼Œå°±ç®—åŒ…å«
 			for (String s2 : array1) {
 				if (s.equals(s2)) {
 					iSContain = true;
@@ -52,7 +52,7 @@ public class AprioriTool {
 				}
 			}
 
-			// Èç¹ûÒÑ¾­ÅĞ¶Ï³ö²»°üº¬ÁË£¬ÔòÖ±½ÓÖĞ¶ÏÑ­»·
+			// å¦‚æœå·²ç»åˆ¤æ–­å‡ºä¸åŒ…å«äº†ï¼Œåˆ™ç›´æ¥ä¸­æ–­å¾ªç¯
 			if (!iSContain) {
 				break;
 			}
@@ -62,22 +62,22 @@ public class AprioriTool {
 	}
 
 	/**
-	 * Ïî¼¯½øĞĞÁ¬½ÓÔËËã
+	 * é¡¹é›†è¿›è¡Œè¿æ¥è¿ç®—
 	 */
 	public void computeLink() {
-		// Á¬½Ó¼ÆËãµÄÖÕÖ¹Êı£¬kÏî¼¯±ØĞëËãµ½k-1×ÓÏî¼¯ÎªÖ¹
+		// è¿æ¥è®¡ç®—çš„ç»ˆæ­¢æ•°ï¼Œké¡¹é›†å¿…é¡»ç®—åˆ°k-1å­é¡¹é›†ä¸ºæ­¢
 		int endNum = 0;
-		// µ±Ç°ÒÑ¾­½øĞĞÁ¬½ÓÔËËãµ½¼¸Ïî¼¯,¿ªÊ¼Ê±¾ÍÊÇ1Ïî¼¯
+		// å½“å‰å·²ç»è¿›è¡Œè¿æ¥è¿ç®—åˆ°å‡ é¡¹é›†,å¼€å§‹æ—¶å°±æ˜¯1é¡¹é›†
 		int currentNum = 1;
-		// ÉÌÆ·£¬1Æµ·±Ïî¼¯Ó³ÉäÍ¼
+		// å•†å“ï¼Œ1é¢‘ç¹é¡¹é›†æ˜ å°„å›¾
 		HashMap<String, FrequentItem> itemMap = new HashMap<>();
 		FrequentItem tempItem;
-		// ³õÊ¼ÁĞ±í
+		// åˆå§‹åˆ—è¡¨
 		ArrayList<FrequentItem> list = new ArrayList<>();
-		// ¾­¹ıÁ¬½ÓÔËËãºó²úÉúµÄ½á¹ûÏî¼¯
+		// ç»è¿‡è¿æ¥è¿ç®—åäº§ç”Ÿçš„ç»“æœé¡¹é›†
 		resultItem = new ArrayList<>();
 		resultItemID = new ArrayList<>();
-		// ÉÌÆ·IDµÄÖÖÀà
+		// å•†å“IDçš„ç§ç±»
 		ArrayList<String> idType = new ArrayList<>();
 		for (String[] a : totalGoodsIDs) {
 			for (String s : a) {
@@ -86,18 +86,18 @@ public class AprioriTool {
 					idType.add(s);
 					resultItemID.add(new String[] { s });
 				} else {
-					// Ö§³Ö¶È¼ÆÊı¼Ó1
+					// æ”¯æŒåº¦è®¡æ•°åŠ 1
 					tempItem = itemMap.get(s);
 					tempItem.setCount(tempItem.getCount() + 1);
 				}
 				itemMap.put(s, tempItem);
 			}
 		}
-		// ½«³õÊ¼Æµ·±Ïî¼¯×ªÈëµ½ÁĞ±íÖĞ£¬ÒÔ±ã¼ÌĞø×öÁ¬½ÓÔËËã
+		// å°†åˆå§‹é¢‘ç¹é¡¹é›†è½¬å…¥åˆ°åˆ—è¡¨ä¸­ï¼Œä»¥ä¾¿ç»§ç»­åšè¿æ¥è¿ç®—
 		for (Map.Entry entry : itemMap.entrySet()) {
 			list.add((FrequentItem) entry.getValue());
 		}
-		// °´ÕÕÉÌÆ·ID½øĞĞÅÅĞò£¬·ñÔòÁ¬½Ó¼ÆËã½á¹û½«»á²»Ò»ÖÂ£¬½«»á¼õÉÙ
+		// æŒ‰ç…§å•†å“IDè¿›è¡Œæ’åºï¼Œå¦åˆ™è¿æ¥è®¡ç®—ç»“æœå°†ä¼šä¸ä¸€è‡´ï¼Œå°†ä¼šå‡å°‘
 		Collections.sort(list);
 		resultItem.addAll(list);
 
@@ -106,7 +106,7 @@ public class AprioriTool {
 		String[] resultArray;
 		ArrayList<String> tempIds;
 		ArrayList<String[]> resultContainer;
-		// ×Ü¹²ÒªËãµ½endNumÏî¼¯
+		// æ€»å…±è¦ç®—åˆ°endNumé¡¹é›†
 		endNum = list.size() - 1;
 
 		while (currentNum < endNum) {
@@ -118,7 +118,7 @@ public class AprioriTool {
 					tempIds = new ArrayList<>();
 					array2 = list.get(j).getIdArray();
 					for (int k = 0; k < array1.length; k++) {
-						// Èç¹û¶ÔÓ¦Î»ÖÃÉÏµÄÖµÏàµÈµÄÊ±ºò£¬Ö»È¡ÆäÖĞÒ»¸öÖµ£¬×öÁËÒ»¸öÁ¬½ÓÉ¾³ı²Ù×÷
+						// å¦‚æœå¯¹åº”ä½ç½®ä¸Šçš„å€¼ç›¸ç­‰çš„æ—¶å€™ï¼Œåªå–å…¶ä¸­ä¸€ä¸ªå€¼ï¼Œåšäº†ä¸€ä¸ªè¿æ¥åˆ é™¤æ“ä½œ
 						if (array1[k].equals(array2[k])) {
 							tempIds.add(array1[k]);
 						} else {
@@ -130,7 +130,7 @@ public class AprioriTool {
 					tempIds.toArray(resultArray);
 
 					boolean isContain = false;
-					// ¹ıÂË²»·ûºÏÌõ¼şµÄµÄIDÊı×é£¬°üÀ¨ÖØ¸´µÄºÍ³¤¶È²»·ûºÏÒªÇóµÄ
+					// è¿‡æ»¤ä¸ç¬¦åˆæ¡ä»¶çš„çš„IDæ•°ç»„ï¼ŒåŒ…æ‹¬é‡å¤çš„å’Œé•¿åº¦ä¸ç¬¦åˆè¦æ±‚çš„
 					if (resultArray.length == (array1.length + 1)) {
 						isContain = isIDArrayContains(resultContainer,
 								resultArray);
@@ -141,14 +141,14 @@ public class AprioriTool {
 				}
 			}
 
-			// ×öÆµ·±Ïî¼¯µÄ¼ôÖ¦´¦Àí£¬±ØĞë±£Ö¤ĞÂµÄÆµ·±Ïî¼¯µÄ×ÓÏî¼¯Ò²±ØĞëÊÇÆµ·±Ïî¼¯
+			// åšé¢‘ç¹é¡¹é›†çš„å‰ªæå¤„ç†ï¼Œå¿…é¡»ä¿è¯æ–°çš„é¢‘ç¹é¡¹é›†çš„å­é¡¹é›†ä¹Ÿå¿…é¡»æ˜¯é¢‘ç¹é¡¹é›†
 			list = cutItem(resultContainer);
 			currentNum++;
 		}
 
-		// Êä³öÆµ·±Ïî¼¯
+		// è¾“å‡ºé¢‘ç¹é¡¹é›†
 		for (int k = 1; k <= currentNum; k++) {
-			System.out.println("Æµ·±" + k + "Ïî¼¯£º");
+			System.out.println("é¢‘ç¹" + k + "é¡¹é›†ï¼š");
 			for (FrequentItem i : resultItem) {
 				if (i.getLength() == k) {
 					System.out.print("{");
@@ -163,12 +163,12 @@ public class AprioriTool {
 	}
 
 	/**
-	 * ÅĞ¶ÏÁĞ±í½á¹ûÖĞÊÇ·ñÒÑ¾­°üº¬´ËÊı×é
+	 * åˆ¤æ–­åˆ—è¡¨ç»“æœä¸­æ˜¯å¦å·²ç»åŒ…å«æ­¤æ•°ç»„
 	 * 
 	 * @param container
-	 *            IDÊı×éÈİÆ÷
+	 *            IDæ•°ç»„å®¹å™¨
 	 * @param array
-	 *            ´ı±È½ÏÊı×é
+	 *            å¾…æ¯”è¾ƒæ•°ç»„
 	 * @return
 	 */
 	private boolean isIDArrayContains(ArrayList<String[]> container,
@@ -180,21 +180,21 @@ public class AprioriTool {
 		}
 
 		for (String[] s : container) {
-			// ±È½ÏµÄÊÓºõ±ØĞë±£Ö¤³¤¶ÈÒ»Ñù
+			// æ¯”è¾ƒçš„è§†ä¹å¿…é¡»ä¿è¯é•¿åº¦ä¸€æ ·
 			if (s.length != array.length) {
 				continue;
 			}
 
 			isContain = true;
 			for (int i = 0; i < s.length; i++) {
-				// Ö»ÒªÓĞÒ»¸öid²»µÈ£¬¾ÍËã²»ÏàµÈ
+				// åªè¦æœ‰ä¸€ä¸ªidä¸ç­‰ï¼Œå°±ç®—ä¸ç›¸ç­‰
 				if (s[i] != array[i]) {
 					isContain = false;
 					break;
 				}
 			}
 
-			// Èç¹ûÒÑ¾­ÅĞ¶ÏÊÇ°üº¬ÔÚÈİÆ÷ÖĞÊ±£¬Ö±½ÓÍË³ö
+			// å¦‚æœå·²ç»åˆ¤æ–­æ˜¯åŒ…å«åœ¨å®¹å™¨ä¸­æ—¶ï¼Œç›´æ¥é€€å‡º
 			if (isContain) {
 				break;
 			}
@@ -204,22 +204,22 @@ public class AprioriTool {
 	}
 
 	/**
-	 * ¶ÔÆµ·±Ïî¼¯×ö¼ôÖ¦²½Öè£¬±ØĞë±£Ö¤ĞÂµÄÆµ·±Ïî¼¯µÄ×ÓÏî¼¯Ò²±ØĞëÊÇÆµ·±Ïî¼¯
+	 * å¯¹é¢‘ç¹é¡¹é›†åšå‰ªææ­¥éª¤ï¼Œå¿…é¡»ä¿è¯æ–°çš„é¢‘ç¹é¡¹é›†çš„å­é¡¹é›†ä¹Ÿå¿…é¡»æ˜¯é¢‘ç¹é¡¹é›†
 	 */
 	private ArrayList<FrequentItem> cutItem(ArrayList<String[]> resultIds) {
 		String[] temp;
-		// ºöÂÔµÄË÷ÒıÎ»ÖÃ£¬ÒÔ´Ë¹¹½¨×Ó¼¯
+		// å¿½ç•¥çš„ç´¢å¼•ä½ç½®ï¼Œä»¥æ­¤æ„å»ºå­é›†
 		int igNoreIndex = 0;
 		FrequentItem tempItem;
-		// ¼ôÖ¦Éú³ÉĞÂµÄÆµ·±Ïî¼¯
+		// å‰ªæç”Ÿæˆæ–°çš„é¢‘ç¹é¡¹é›†
 		ArrayList<FrequentItem> newItem = new ArrayList<>();
-		// ²»·ûºÏÒªÇóµÄid
+		// ä¸ç¬¦åˆè¦æ±‚çš„id
 		ArrayList<String[]> deleteIdArray = new ArrayList<>();
-		// ×ÓÏî¼¯ÊÇ·ñÒ²ÎªÆµ·±×ÓÏî¼¯
+		// å­é¡¹é›†æ˜¯å¦ä¹Ÿä¸ºé¢‘ç¹å­é¡¹é›†
 		boolean isContain = true;
 
 		for (String[] array : resultIds) {
-			// ÁĞ¾Ù³öÆäÖĞµÄÒ»¸ö¸öµÄ×ÓÏî¼¯£¬ÅĞ¶Ï´æÔÚÓÚÆµ·±Ïî¼¯ÁĞ±íÖĞ
+			// åˆ—ä¸¾å‡ºå…¶ä¸­çš„ä¸€ä¸ªä¸ªçš„å­é¡¹é›†ï¼Œåˆ¤æ–­å­˜åœ¨äºé¢‘ç¹é¡¹é›†åˆ—è¡¨ä¸­
 			temp = new String[array.length - 1];
 			for (igNoreIndex = 0; igNoreIndex < array.length; igNoreIndex++) {
 				isContain = true;
@@ -241,10 +241,10 @@ public class AprioriTool {
 			}
 		}
 
-		// ÒÆ³ı²»·ûºÏÌõ¼şµÄID×éºÏ
+		// ç§»é™¤ä¸ç¬¦åˆæ¡ä»¶çš„IDç»„åˆ
 		resultIds.removeAll(deleteIdArray);
 
-		// ÒÆ³ıÖ§³Ö¶È¼ÆÊı²»¹»µÄid¼¯ºÏ
+		// ç§»é™¤æ”¯æŒåº¦è®¡æ•°ä¸å¤Ÿçš„idé›†åˆ
 		int tempCount = 0;
 		for (String[] array : resultIds) {
 			tempCount = 0;
@@ -254,7 +254,7 @@ public class AprioriTool {
 				}
 			}
 
-			// Èç¹ûÖ§³Ö¶È¼ÆÊı´óÓÚµÈÓÚ×îĞ¡×îĞ¡Ö§³Ö¶È¼ÆÊıÔòÉú³ÉĞÂµÄÆµ·±Ïî¼¯£¬²¢¼ÓÈë½á¹û¼¯ÖĞ
+			// å¦‚æœæ”¯æŒåº¦è®¡æ•°å¤§äºç­‰äºæœ€å°æœ€å°æ”¯æŒåº¦è®¡æ•°åˆ™ç”Ÿæˆæ–°çš„é¢‘ç¹é¡¹é›†ï¼Œå¹¶åŠ å…¥ç»“æœé›†ä¸­
 			if (tempCount >= minSupportCount) {
 				tempItem = new FrequentItem(array, tempCount);
 				newItem.add(tempItem);
@@ -267,7 +267,7 @@ public class AprioriTool {
 	}
 
 	/**
-	 * Êı×éarray2ÊÇ·ñ°üº¬ÓÚarray1ÖĞ£¬²»ĞèÒªÍêÈ«Ò»Ñù
+	 * æ•°ç»„array2æ˜¯å¦åŒ…å«äºarray1ä¸­ï¼Œä¸éœ€è¦å®Œå…¨ä¸€æ ·
 	 * 
 	 * @param array1
 	 * @param array2
@@ -278,14 +278,14 @@ public class AprioriTool {
 		for (String s2 : array2) {
 			isContain = false;
 			for (String s1 : array1) {
-				// Ö»Òªs2×Ö·û´æÔÚÓÚarray1ÖĞ£¬Õâ¸ö×Ö·û¾ÍËã°üº¬ÔÚarray1ÖĞ
+				// åªè¦s2å­—ç¬¦å­˜åœ¨äºarray1ä¸­ï¼Œè¿™ä¸ªå­—ç¬¦å°±ç®—åŒ…å«åœ¨array1ä¸­
 				if (s2.equals(s1)) {
 					isContain = true;
 					break;
 				}
 			}
 
-			// Ò»µ©·¢ÏÖ²»°üº¬µÄ×Ö·û£¬Ôòarray2Êı×é²»°üº¬ÓÚarray1ÖĞ
+			// ä¸€æ—¦å‘ç°ä¸åŒ…å«çš„å­—ç¬¦ï¼Œåˆ™array2æ•°ç»„ä¸åŒ…å«äºarray1ä¸­
 			if (!isContain) {
 				break;
 			}
@@ -295,13 +295,13 @@ public class AprioriTool {
 	}
 
 	/**
-	 * ¸ù¾İ²úÉúµÄÆµ·±Ïî¼¯Êä³ö¹ØÁª¹æÔò
+	 * æ ¹æ®äº§ç”Ÿçš„é¢‘ç¹é¡¹é›†è¾“å‡ºå…³è”è§„åˆ™
 	 * 
 	 * @param minConf
-	 *            ×îĞ¡ÖÃĞÅ¶ÈãĞÖµ
+	 *            æœ€å°ç½®ä¿¡åº¦é˜ˆå€¼
 	 */
 	public void printAttachRule(double minConf) {
-		// ½øĞĞÁ¬½ÓºÍ¼ôÖ¦²Ù×÷
+		// è¿›è¡Œè¿æ¥å’Œå‰ªææ“ä½œ
 		computeLink();
 
 		int count1 = 0;
@@ -310,14 +310,14 @@ public class AprioriTool {
 		ArrayList<String> childGroup2;
 		String[] group1;
 		String[] group2;
-		// ÒÔ×îºóÒ»¸öÆµ·±Ïî¼¯×ö¹ØÁª¹æÔòµÄÊä³ö
+		// ä»¥æœ€åä¸€ä¸ªé¢‘ç¹é¡¹é›†åšå…³è”è§„åˆ™çš„è¾“å‡º
 		String[] array = resultItem.get(resultItem.size() - 1).getIdArray();
-		// ×Ó¼¯×ÜÊı£¬¼ÆËãµÄÊ±ºò³ıÈ¥×ÔÉíºÍ¿Õ¼¯
+		// å­é›†æ€»æ•°ï¼Œè®¡ç®—çš„æ—¶å€™é™¤å»è‡ªèº«å’Œç©ºé›†
 		int totalNum = (int) Math.pow(2, array.length);
 		String[] temp;
-		// ¶ş½øÖÆÊı×é£¬ÓÃÀ´´ú±í¸÷¸ö×Ó¼¯
+		// äºŒè¿›åˆ¶æ•°ç»„ï¼Œç”¨æ¥ä»£è¡¨å„ä¸ªå­é›†
 		int[] binaryArray;
-		// ³ıÈ¥Í·ºÍÎ²²¿
+		// é™¤å»å¤´å’Œå°¾éƒ¨
 		for (int i = 1; i < totalNum - 1; i++) {
 			binaryArray = new int[array.length];
 			numToBinaryArray(binaryArray, i);
@@ -326,7 +326,7 @@ public class AprioriTool {
 			childGroup2 = new ArrayList<>();
 			count1 = 0;
 			count2 = 0;
-			// °´ÕÕ¶ş½øÖÆÎ»¹ØÏµÈ¡³ö×Ó¼¯
+			// æŒ‰ç…§äºŒè¿›åˆ¶ä½å…³ç³»å–å‡ºå­é›†
 			for (int j = 0; j < binaryArray.length; j++) {
 				if (binaryArray[j] == 1) {
 					childGroup1.add(array[j]);
@@ -345,14 +345,14 @@ public class AprioriTool {
 				if (isStrArrayContain(a, group1)) {
 					count1++;
 
-					// ÔÚgroup1µÄÌõ¼şÏÂ£¬Í³¼Ægroup2µÄÊÂ¼ş·¢Éú´ÎÊı
+					// åœ¨group1çš„æ¡ä»¶ä¸‹ï¼Œç»Ÿè®¡group2çš„äº‹ä»¶å‘ç”Ÿæ¬¡æ•°
 					if (isStrArrayContain(a, group2)) {
 						count2++;
 					}
 				}
 			}
 
-			// {A}-->{B}µÄÒâË¼ÎªÔÚAµÄÇé¿öÏÂ·¢ÉúBµÄ¸ÅÂÊ
+			// {A}-->{B}çš„æ„æ€ä¸ºåœ¨Açš„æƒ…å†µä¸‹å‘ç”ŸBçš„æ¦‚ç‡
 			System.out.print("{");
 			for (String s : group1) {
 				System.out.print(s + ", ");
@@ -363,25 +363,25 @@ public class AprioriTool {
 				System.out.print(s + ", ");
 			}
 			System.out.print(MessageFormat.format(
-					"},confidence(ÖÃĞÅ¶È)£º{0}/{1}={2}", count2, count1, count2
+					"},confidence(ç½®ä¿¡åº¦)ï¼š{0}/{1}={2}", count2, count1, count2
 							* 1.0 / count1));
 			if (count2 * 1.0 / count1 < minConf) {
-				// ²»·ûºÏÒªÇó£¬²»ÊÇÇ¿¹æÔò
-				System.out.println("ÓÉÓÚ´Ë¹æÔòÖÃĞÅ¶ÈÎ´´ïµ½×îĞ¡ÖÃĞÅ¶ÈµÄÒªÇó£¬²»ÊÇÇ¿¹æÔò");
+				// ä¸ç¬¦åˆè¦æ±‚ï¼Œä¸æ˜¯å¼ºè§„åˆ™
+				System.out.println("ç”±äºæ­¤è§„åˆ™ç½®ä¿¡åº¦æœªè¾¾åˆ°æœ€å°ç½®ä¿¡åº¦çš„è¦æ±‚ï¼Œä¸æ˜¯å¼ºè§„åˆ™");
 			} else {
-				System.out.println("ÎªÇ¿¹æÔò");
+				System.out.println("ä¸ºå¼ºè§„åˆ™");
 			}
 		}
 
 	}
 
 	/**
-	 * Êı×Ö×ªÎª¶ş½øÖÆĞÎÊ½
+	 * æ•°å­—è½¬ä¸ºäºŒè¿›åˆ¶å½¢å¼
 	 * 
 	 * @param binaryArray
-	 *            ×ª»¯ºóµÄ¶ş½øÖÆÊı×éĞÎÊ½
+	 *            è½¬åŒ–åçš„äºŒè¿›åˆ¶æ•°ç»„å½¢å¼
 	 * @param num
-	 *            ´ı×ª»¯Êı×Ö
+	 *            å¾…è½¬åŒ–æ•°å­—
 	 */
 	private void numToBinaryArray(int[] binaryArray, int num) {
 		int index = 0;
@@ -393,7 +393,7 @@ public class AprioriTool {
 	}
 	
 	/**
-	 * »ñÈ¡Ëã·¨ÍÚ¾òµÄËùÓĞÆµ·±Ïî¼¯
+	 * è·å–ç®—æ³•æŒ–æ˜çš„æ‰€æœ‰é¢‘ç¹é¡¹é›†
 	 * @return
 	 */
 	public ArrayList<FrequentItem> getTotalFrequentItems(){

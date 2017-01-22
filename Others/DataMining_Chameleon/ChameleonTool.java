@@ -8,29 +8,29 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
- * Chameleon Á½½×¶Î¾ÛÀàËã·¨¹¤¾ßÀà
+ * Chameleon ä¸¤é˜¶æ®µèšç±»ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class ChameleonTool {
-	// ²âÊÔÊı¾İµãÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®ç‚¹æ–‡ä»¶åœ°å€
 	private String filePath;
-	// µÚÒ»½×¶ÎµÄk½üÁÚµÄk´óĞ¡
+	// ç¬¬ä¸€é˜¶æ®µçš„kè¿‘é‚»çš„kå¤§å°
 	private int k;
-	// ´Ø¶ÈÁ¿º¯ÊıãĞÖµ
+	// ç°‡åº¦é‡å‡½æ•°é˜ˆå€¼
 	private double minMetric;
-	// ×ÜµÄ×ø±êµãµÄ¸öÊı
+	// æ€»çš„åæ ‡ç‚¹çš„ä¸ªæ•°
 	private int pointNum;
-	// ×ÜµÄÁ¬½Ó¾ØÕóµÄÇé¿ö,À¨ºÅ±íÊ¾µÄÊÇ×ø±êµãµÄidºÅ
+	// æ€»çš„è¿æ¥çŸ©é˜µçš„æƒ…å†µ,æ‹¬å·è¡¨ç¤ºçš„æ˜¯åæ ‡ç‚¹çš„idå·
 	public static int[][] edges;
-	// µãÓëµãÖ®¼äµÄ±ßµÄÈ¨ÖØ
+	// ç‚¹ä¸ç‚¹ä¹‹é—´çš„è¾¹çš„æƒé‡
 	public static double[][] weights;
-	// Ô­Ê¼×ø±êµãÊı¾İ
+	// åŸå§‹åæ ‡ç‚¹æ•°æ®
 	private ArrayList<Point> totalPoints;
-	// µÚÒ»½×¶Î²úÉúµÄËùÓĞµÄÁ¬Í¨×ÓÍ¼×÷Îª×î³õÊ¼µÄ¾ÛÀà
+	// ç¬¬ä¸€é˜¶æ®µäº§ç”Ÿçš„æ‰€æœ‰çš„è¿é€šå­å›¾ä½œä¸ºæœ€åˆå§‹çš„èšç±»
 	private ArrayList<Cluster> initClusters;
-	// ½á¹û´Ø½áºÏ
+	// ç»“æœç°‡ç»“åˆ
 	private ArrayList<Cluster> resultClusters;
 
 	public ChameleonTool(String filePath, int k, double minMetric) {
@@ -42,7 +42,7 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -71,14 +71,14 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * µİ¹éµÄºÏ²¢Ğ¡¾Û´Ø
+	 * é€’å½’çš„åˆå¹¶å°èšç°‡
 	 */
 	private void combineSubClusters() {
 		Cluster cluster = null;
 
 		resultClusters = new ArrayList<>();
 
-		// µ±×îºóµÄ¾Û´ØÖ»Ê£ÏÂÒ»¸öµÄÊ±ºò£¬ÔòÍË³öÑ­»·
+		// å½“æœ€åçš„èšç°‡åªå‰©ä¸‹ä¸€ä¸ªçš„æ—¶å€™ï¼Œåˆ™é€€å‡ºå¾ªç¯
 		while (initClusters.size() > 1) {
 			cluster = initClusters.get(0);
 			combineAndRemove(cluster, initClusters);
@@ -86,7 +86,7 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * µİ¹éµÄºÏ²¢¾Û´ØºÍÒÆ³ı¾Û´Ø
+	 * é€’å½’çš„åˆå¹¶èšç°‡å’Œç§»é™¤èšç°‡
 	 * 
 	 * @param clusterList
 	 */
@@ -112,12 +112,12 @@ public class ChameleonTool {
 			}
 		}
 
-		// Èç¹û¶ÈÁ¿º¯ÊıÖµ³¬¹ıãĞÖµ£¬Ôò½øĞĞºÏ²¢,¼ÌĞøËÑÑ°¿ÉÒÔºÏ²¢µÄ´Ø
+		// å¦‚æœåº¦é‡å‡½æ•°å€¼è¶…è¿‡é˜ˆå€¼ï¼Œåˆ™è¿›è¡Œåˆå¹¶,ç»§ç»­æœå¯»å¯ä»¥åˆå¹¶çš„ç°‡
 		if (maxMetric > minMetric) {
 			clusterList.remove(cluster2);
-			//½«±ß½øĞĞÁ¬½Ó
+			//å°†è¾¹è¿›è¡Œè¿æ¥
 			connectClusterToCluster(cluster1, cluster2);
-			// ½«´Ø1ºÍ´Ø2ºÏ²¢
+			// å°†ç°‡1å’Œç°‡2åˆå¹¶
 			cluster1.points.addAll(cluster2.points);
 			remainClusters = combineAndRemove(cluster1, clusterList);
 		} else {
@@ -130,11 +130,11 @@ public class ChameleonTool {
 	}
 	
 	/**
-	 * ½«2¸ö´Ø½øĞĞ±ßµÄÁ¬½Ó
+	 * å°†2ä¸ªç°‡è¿›è¡Œè¾¹çš„è¿æ¥
 	 * @param c1
-	 * ¾Û´Ø1
+	 * èšç°‡1
 	 * @param c2
-	 * ¾Û´Ø2
+	 * èšç°‡2
 	 */
 	private void connectClusterToCluster(Cluster c1, Cluster c2){
 		ArrayList<int[]> connectedEdges;
@@ -148,14 +148,14 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * Ëã·¨µÚÒ»½×¶ÎĞÎ³É¾Ö²¿µÄÁ¬Í¨Í¼
+	 * ç®—æ³•ç¬¬ä¸€é˜¶æ®µå½¢æˆå±€éƒ¨çš„è¿é€šå›¾
 	 */
 	private void connectedGraph() {
 		double distance = 0;
 		Point p1;
 		Point p2;
 
-		// ³õÊ¼»¯È¨ÖØ¾ØÕóºÍÁ¬½Ó¾ØÕó
+		// åˆå§‹åŒ–æƒé‡çŸ©é˜µå’Œè¿æ¥çŸ©é˜µ
 		weights = new double[pointNum][pointNum];
 		edges = new int[pointNum][pointNum];
 		for (int i = 0; i < pointNum; i++) {
@@ -165,10 +165,10 @@ public class ChameleonTool {
 
 				distance = p1.ouDistance(p2);
 				if (distance == 0) {
-					// Èç¹ûµãÎª×ÔÉíµÄ»°£¬ÔòÈ¨ÖØÉèÖÃÎª0
+					// å¦‚æœç‚¹ä¸ºè‡ªèº«çš„è¯ï¼Œåˆ™æƒé‡è®¾ç½®ä¸º0
 					weights[i][j] = 0;
 				} else {
-					// ±ßµÄÈ¨ÖØ²ÉÓÃµÄÖµÎª¾àÀëµÄµ¹Êı,¾àÀëÔ½½ü£¬È¨ÖØÔ½´ó
+					// è¾¹çš„æƒé‡é‡‡ç”¨çš„å€¼ä¸ºè·ç¦»çš„å€’æ•°,è·ç¦»è¶Šè¿‘ï¼Œæƒé‡è¶Šå¤§
 					weights[i][j] = 1.0 / distance;
 				}
 			}
@@ -178,13 +178,13 @@ public class ChameleonTool {
 		int[] ids;
 		int id1 = 0;
 		int id2 = 0;
-		// ¶ÔÃ¿¸öid×ø±êµã£¬È¡ÆäÈ¨ÖØÇ°k¸ö×î´óµÄµã½øĞĞÏàÁ¬
+		// å¯¹æ¯ä¸ªidåæ ‡ç‚¹ï¼Œå–å…¶æƒé‡å‰kä¸ªæœ€å¤§çš„ç‚¹è¿›è¡Œç›¸è¿
 		for (int i = 0; i < pointNum; i++) {
 			tempWeight = weights[i];
-			// ½øĞĞÅÅĞò
+			// è¿›è¡Œæ’åº
 			ids = sortWeightArray(tempWeight);
 			
-			// È¡³öÇ°k¸öÈ¨ÖØ×î´óµÄ±ß½øĞĞÁ¬½Ó
+			// å–å‡ºå‰kä¸ªæƒé‡æœ€å¤§çš„è¾¹è¿›è¡Œè¿æ¥
 			for (int j = 0; j < ids.length; j++) {
 				if (j < k) {
 					id1 = i;
@@ -198,10 +198,10 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * È¨ÖØµÄÃ°ÅİËã·¨ÅÅĞò
+	 * æƒé‡çš„å†’æ³¡ç®—æ³•æ’åº
 	 * 
 	 * @param array
-	 *            ´ıÅÅĞòÊı×é
+	 *            å¾…æ’åºæ•°ç»„
 	 */
 	private int[] sortWeightArray(double[] array) {
 		double[] copyArray = array.clone();
@@ -221,7 +221,7 @@ public class ChameleonTool {
 			}
 			
 			ids[i] = k;
-			//½«µ±Ç°ÕÒµ½µÄ×î´óµÄÖµÖØÖÃÎª-1´ú±íÒÑ¾­ÕÒµ½¹ıÁË
+			//å°†å½“å‰æ‰¾åˆ°çš„æœ€å¤§çš„å€¼é‡ç½®ä¸º-1ä»£è¡¨å·²ç»æ‰¾åˆ°è¿‡äº†
 			copyArray[k] = -1;
 		}
 		
@@ -229,7 +229,7 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * ¸ù¾İ±ßµÄÁ¬Í¨ĞÔÈ¥Éî¶ÈÓÅÏÈËÑË÷ËùÓĞµÄĞ¡¾Û´Ø
+	 * æ ¹æ®è¾¹çš„è¿é€šæ€§å»æ·±åº¦ä¼˜å…ˆæœç´¢æ‰€æœ‰çš„å°èšç°‡
 	 */
 	private void searchSmallCluster() {
 		int currentId = 0;
@@ -238,7 +238,7 @@ public class ChameleonTool {
 		initClusters = new ArrayList<>();
 		ArrayList<Point> pointList = null;
 
-		// ÒÔidµÄ·½Ê½Öğ¸öÈ¥dfsËÑË÷
+		// ä»¥idçš„æ–¹å¼é€ä¸ªå»dfsæœç´¢
 		for (int i = 0; i < pointNum; i++) {
 			p = totalPoints.get(i);
 
@@ -258,14 +258,14 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * Éî¶ÈÓÅÏÈµÄ·½Ê½ÕÒµ½±ßËùÁ¬½Ó×ÅµÄËùÓĞ×ø±êµã
+	 * æ·±åº¦ä¼˜å…ˆçš„æ–¹å¼æ‰¾åˆ°è¾¹æ‰€è¿æ¥ç€çš„æ‰€æœ‰åæ ‡ç‚¹
 	 * 
 	 * @param p
-	 *            µ±Ç°ËÑË÷µÄÆğµã
+	 *            å½“å‰æœç´¢çš„èµ·ç‚¹
 	 * @param lastId
-	 *            ´ËµãµÄ¸¸×ø±êµã
+	 *            æ­¤ç‚¹çš„çˆ¶åæ ‡ç‚¹
 	 * @param pList
-	 *            ×ø±êµãÁĞ±í
+	 *            åæ ‡ç‚¹åˆ—è¡¨
 	 */
 	private void recusiveDfsSearch(Point p, int parentId, ArrayList<Point> pList) {
 		int id1 = 0;
@@ -284,19 +284,19 @@ public class ChameleonTool {
 			if (edges[id1][id2] == 1 && id2 != parentId) {
 				newPoint = totalPoints.get(j);
 				pList.add(newPoint);
-				// ÒÔ´ËµãÎªÆğµã£¬¼ÌĞøµİ¹éËÑË÷
+				// ä»¥æ­¤ç‚¹ä¸ºèµ·ç‚¹ï¼Œç»§ç»­é€’å½’æœç´¢
 				recusiveDfsSearch(newPoint, id1, pList);
 			}
 		}
 	}
 
 	/**
-	 * ¼ÆËãÁ¬½Ó2¸ö´ØµÄ±ßµÄÈ¨ÖØ
+	 * è®¡ç®—è¿æ¥2ä¸ªç°‡çš„è¾¹çš„æƒé‡
 	 * 
 	 * @param c1
-	 *            ¾Û´Ø1
+	 *            èšç°‡1
 	 * @param c2
-	 *            ¾Û´Ø2
+	 *            èšç°‡2
 	 * @return
 	 */
 	private double calEC(Cluster c1, Cluster c2) {
@@ -305,7 +305,7 @@ public class ChameleonTool {
 
 		connectedEdges = c1.calNearestEdge(c2, 2);
 
-		// ¼ÆËãÁ¬½Ó2²¿·ÖµÄ±ßµÄÈ¨ÖØºÍ
+		// è®¡ç®—è¿æ¥2éƒ¨åˆ†çš„è¾¹çš„æƒé‡å’Œ
 		for (int[] array : connectedEdges) {
 			resultEC += weights[array[0]][array[1]];
 		}
@@ -314,7 +314,7 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * ¼ÆËã2¸ö´ØµÄÏà¶Ô»¥Á¬ĞÔ
+	 * è®¡ç®—2ä¸ªç°‡çš„ç›¸å¯¹äº’è¿æ€§
 	 * 
 	 * @param c1
 	 * @param c2
@@ -336,12 +336,12 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * ¼ÆËã´ØµÄÏà¶Ô½üËÆ¶È
+	 * è®¡ç®—ç°‡çš„ç›¸å¯¹è¿‘ä¼¼åº¦
 	 * 
 	 * @param c1
-	 *            ´Ø1
+	 *            ç°‡1
 	 * @param c2
-	 *            ´Ø2
+	 *            ç°‡2
 	 * @return
 	 */
 	private double calRC(Cluster c1, Cluster c2) {
@@ -362,40 +362,40 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * ¼ÆËã¶ÈÁ¿º¯ÊıµÄÖµ
+	 * è®¡ç®—åº¦é‡å‡½æ•°çš„å€¼
 	 * 
 	 * @param c1
-	 *            ´Ø1
+	 *            ç°‡1
 	 * @param c2
-	 *            ´Ø2
+	 *            ç°‡2
 	 * @param alpha
-	 *            ÃİµÄ²ÎÊıÖµ
+	 *            å¹‚çš„å‚æ•°å€¼
 	 * @return
 	 */
 	private double calMetricfunction(Cluster c1, Cluster c2, int alpha) {
-		// ¶ÈÁ¿º¯ÊıÖµ
+		// åº¦é‡å‡½æ•°å€¼
 		double metricValue = 0;
 		double RI = 0;
 		double RC = 0;
 
 		RI = calRI(c1, c2);
 		RC = calRC(c1, c2);
-		// Èç¹ûalpha´óÓÚ1£¬Ôò¸üÖØÊÓÏà¶Ô½üËÆĞÔ£¬Èç¹ûalphaåĞÒ£ÓÚ1£¬×¢ÖØÏà¶Ô»¥Á¬ĞÔ
+		// å¦‚æœalphaå¤§äº1ï¼Œåˆ™æ›´é‡è§†ç›¸å¯¹è¿‘ä¼¼æ€§ï¼Œå¦‚æœalphaé€é¥äº1ï¼Œæ³¨é‡ç›¸å¯¹äº’è¿æ€§
 		metricValue = RI * Math.pow(RC, alpha);
 
 		return metricValue;
 	}
 
 	/**
-	 * Êä³ö¾Û´ØÁĞ
+	 * è¾“å‡ºèšç°‡åˆ—
 	 * @param clusterList
-	 * Êä³ö¾Û´ØÁĞ
+	 * è¾“å‡ºèšç°‡åˆ—
 	 */
 	private void printClusters(ArrayList<Cluster> clusterList) {
 		int i = 1;
 
 		for (Cluster cluster : clusterList) {
-			System.out.print("¾Û´Ø" + i + ":");
+			System.out.print("èšç°‡" + i + ":");
 			for (Point p : cluster.points) {
 				System.out.print(MessageFormat.format("({0}, {1}) ", p.x, p.y));
 			}
@@ -406,18 +406,18 @@ public class ChameleonTool {
 	}
 
 	/**
-	 * ´´½¨¾Û´Ø
+	 * åˆ›å»ºèšç°‡
 	 */
 	public void buildCluster() {
-		// µÚÒ»½×¶ÎĞÎ³ÉĞ¡¾Û´Ø
+		// ç¬¬ä¸€é˜¶æ®µå½¢æˆå°èšç°‡
 		connectedGraph();
 		searchSmallCluster();
-		System.out.println("µÚÒ»½×¶ÎĞÎ³ÉµÄĞ¡´Ø¼¯ºÏ£º");
+		System.out.println("ç¬¬ä¸€é˜¶æ®µå½¢æˆçš„å°ç°‡é›†åˆï¼š");
 		printClusters(initClusters);
 		
-		// µÚ¶ş½×¶Î¸ù¾İRIºÍRCµÄÖµºÏ²¢Ğ¡¾Û´ØĞÎ³É×îÖÕ½á¹û¾Û´Ø
+		// ç¬¬äºŒé˜¶æ®µæ ¹æ®RIå’ŒRCçš„å€¼åˆå¹¶å°èšç°‡å½¢æˆæœ€ç»ˆç»“æœèšç°‡
 		combineSubClusters();
-		System.out.println("×îÖÕµÄ¾Û´Ø¼¯ºÏ£º");
+		System.out.println("æœ€ç»ˆçš„èšç°‡é›†åˆï¼š");
 		printClusters(resultClusters);
 	}
 }

@@ -3,25 +3,25 @@ package DataMining_RandomForest;
 import java.util.ArrayList;
 
 /**
- * »Ø¹é·ÖÀàÊ÷½Úµã
+ * å›å½’åˆ†ç±»æ ‘èŠ‚ç‚¹
  * 
  * @author lyq
  * 
  */
 public class TreeNode {
-	// ½ÚµãÊôĞÔÃû×Ö
+	// èŠ‚ç‚¹å±æ€§åå­—
 	private String attrName;
-	// ½ÚµãË÷Òı±êºÅ
+	// èŠ‚ç‚¹ç´¢å¼•æ ‡å·
 	private int nodeIndex;
-	//°üº¬µÄÒ¶×Ó½ÚµãÊı
+	//åŒ…å«çš„å¶å­èŠ‚ç‚¹æ•°
 	private int leafNum;
-	// ½ÚµãÎó²îÂÊ
+	// èŠ‚ç‚¹è¯¯å·®ç‡
 	private double alpha;
-	// ¸¸Ç×·ÖÀàÊôĞÔÖµ
+	// çˆ¶äº²åˆ†ç±»å±æ€§å€¼
 	private String parentAttrValue;
-	// º¢×Ó½Úµã
+	// å­©å­èŠ‚ç‚¹
 	private TreeNode[] childAttrNode;
-	// Êı¾İ¼ÇÂ¼Ë÷Òı
+	// æ•°æ®è®°å½•ç´¢å¼•
 	private ArrayList<String> dataIndex;
 
 	public String getAttrName() {

@@ -3,19 +3,19 @@ package DataMining_BIRCH;
 import java.util.ArrayList;
 
 /**
- * ¾ÛÀàÌØÕ÷»ù±¾ÊôĞÔ
+ * èšç±»ç‰¹å¾åŸºæœ¬å±æ€§
  * 
  * @author lyq
  * 
  */
 public abstract class ClusteringFeature {
-	// ×ÓÀàÖĞ½ÚµãµÄ×ÜÊıÄ¿
+	// å­ç±»ä¸­èŠ‚ç‚¹çš„æ€»æ•°ç›®
 	protected int N;
-	// ×ÓÀàÖĞN¸ö½ÚµãµÄÏßĞÔºÍ
+	// å­ç±»ä¸­Nä¸ªèŠ‚ç‚¹çš„çº¿æ€§å’Œ
 	protected double[] LS;
-	// ×ÓÀàÖĞN¸ö½ÚµãµÄÆ½·½ºÍ
+	// å­ç±»ä¸­Nä¸ªèŠ‚ç‚¹çš„å¹³æ–¹å’Œ
 	protected double[] SS;
-	//½ÚµãÉî¶È£¬ÓÃÓÚCFÊ÷µÄÊä³ö
+	//èŠ‚ç‚¹æ·±åº¦ï¼Œç”¨äºCFæ ‘çš„è¾“å‡º
 	protected int level;
 
 	public int getN() {
@@ -55,10 +55,10 @@ public abstract class ClusteringFeature {
 	}
 
 	/**
-	 * ¸ù¾İ½ÚµãÊı¾İ¼ÆËãÏßĞÔºÍ
+	 * æ ¹æ®èŠ‚ç‚¹æ•°æ®è®¡ç®—çº¿æ€§å’Œ
 	 * 
 	 * @param dataRecords
-	 *            ½ÚµãÊı¾İ¼ÇÂ¼
+	 *            èŠ‚ç‚¹æ•°æ®è®°å½•
 	 */
 	protected void setLS(ArrayList<double[]> dataRecords) {
 		int num = dataRecords.get(0).length;
@@ -77,10 +77,10 @@ public abstract class ClusteringFeature {
 	}
 
 	/**
-	 * ¸ù¾İ½ÚµãÊı¾İ¼ÆËãÆ½·½
+	 * æ ¹æ®èŠ‚ç‚¹æ•°æ®è®¡ç®—å¹³æ–¹
 	 * 
 	 * @param dataRecords
-	 *            ½ÚµãÊı¾İ
+	 *            èŠ‚ç‚¹æ•°æ®
 	 */
 	protected void setSS(ArrayList<double[]> dataRecords) {
 		int num = dataRecords.get(0).length;
@@ -99,7 +99,7 @@ public abstract class ClusteringFeature {
 	}
 
 	/**
-	 * CFÏòÁ¿ÌØÕ÷µÄµş¼Ó£¬ÎŞĞë¿¼ÂÇ»®·Ö
+	 * CFå‘é‡ç‰¹å¾çš„å åŠ ï¼Œæ— é¡»è€ƒè™‘åˆ’åˆ†
 	 * 
 	 * @param node
 	 */
@@ -119,7 +119,7 @@ public abstract class ClusteringFeature {
 			}
 		}
 
-		// 3¸öÊıÁ¿ÉÏ½øĞĞµş¼Ó
+		// 3ä¸ªæ•°é‡ä¸Šè¿›è¡Œå åŠ 
 		for (int i = 0; i < LS.length; i++) {
 			LS[i] += otherLS[i];
 			SS[i] += otherSS[i];
@@ -128,7 +128,7 @@ public abstract class ClusteringFeature {
 	}
 
 	/**
-	 * ¼ÆËã´ØÓë´ØÖ®¼äµÄ¾àÀë¼´´ØÖĞĞÄÖ®¼äµÄ¾àÀë
+	 * è®¡ç®—ç°‡ä¸ç°‡ä¹‹é—´çš„è·ç¦»å³ç°‡ä¸­å¿ƒä¹‹é—´çš„è·ç¦»
 	 * 
 	 * @return
 	 */
@@ -149,17 +149,17 @@ public abstract class ClusteringFeature {
 	}
 
 	/**
-	 * ¼ÆËã´ØÄÚ¶ÔÏóµÄÆ½¾ù¾àÀë
+	 * è®¡ç®—ç°‡å†…å¯¹è±¡çš„å¹³å‡è·ç¦»
 	 * 
 	 * @param records
-	 *            ´ØÄÚµÄÊı¾İ¼ÇÂ¼
+	 *            ç°‡å†…çš„æ•°æ®è®°å½•
 	 * @return
 	 */
 	protected double computerInClusterDistance(ArrayList<double[]> records) {
 		double sumDistance = 0;
 		double[] data1;
 		double[] data2;
-		// Êı¾İ×ÜÊı
+		// æ•°æ®æ€»æ•°
 		int totalNum = records.size();
 
 		for (int i = 0; i < totalNum - 1; i++) {
@@ -170,17 +170,17 @@ public abstract class ClusteringFeature {
 			}
 		}
 
-		// ·µ»ØµÄÖµ³ıÒÔ×Ü¶ÔÊı£¬×Ü¶ÔÊıÓ¦¼õ°ë£¬»áÖØ¸´ËãÒ»´Î
+		// è¿”å›çš„å€¼é™¤ä»¥æ€»å¯¹æ•°ï¼Œæ€»å¯¹æ•°åº”å‡åŠï¼Œä¼šé‡å¤ç®—ä¸€æ¬¡
 		return Math.sqrt(sumDistance / (totalNum * (totalNum - 1) / 2));
 	}
 
 	/**
-	 * ¶Ô¸ø¶¨µÄ2¸öÏòÁ¿£¬¼ÆËãÅ·Ê½¾àÀë
+	 * å¯¹ç»™å®šçš„2ä¸ªå‘é‡ï¼Œè®¡ç®—æ¬§å¼è·ç¦»
 	 * 
 	 * @param record1
-	 *            ÏòÁ¿µã1
+	 *            å‘é‡ç‚¹1
 	 * @param record2
-	 *            ÏòÁ¿µã2
+	 *            å‘é‡ç‚¹2
 	 */
 	private double computeOuDistance(double[] record1, double[] record2) {
 		double distance = 0;
@@ -193,10 +193,10 @@ public abstract class ClusteringFeature {
 	}
 
 	/**
-	 * ¾ÛÀàÌí¼Ó½Úµã°üÀ¨£¬³¬³öãĞÖµ½øĞĞ·ÖÁÑµÄ²Ù×÷
+	 * èšç±»æ·»åŠ èŠ‚ç‚¹åŒ…æ‹¬ï¼Œè¶…å‡ºé˜ˆå€¼è¿›è¡Œåˆ†è£‚çš„æ“ä½œ
 	 * 
 	 * @param clusteringFeature
-	 *            ´ıÌí¼Ó¾Û´Ø
+	 *            å¾…æ·»åŠ èšç°‡
 	 */
 	public abstract void addingCluster(ClusteringFeature clusteringFeature);
 }

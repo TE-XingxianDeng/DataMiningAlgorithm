@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * º¢×ÓÍ¼ËÑÑ°Àà£¬ÔÚµ±Ç°±ßµÄ»ù´¡ÉÏÑ°ÕÒ¿ÉÄÜµÄº¢×Ó±ß
+ * å­©å­å›¾æœå¯»ç±»ï¼Œåœ¨å½“å‰è¾¹çš„åŸºç¡€ä¸Šå¯»æ‰¾å¯èƒ½çš„å­©å­è¾¹
  * 
  * @author lyq
  * 
  */
 public class SubChildTraveler {
-	// µ±Ç°µÄÎåÔª×é±ß
+	// å½“å‰çš„äº”å…ƒç»„è¾¹
 	ArrayList<Edge> edgeSeq;
-	// µ±Ç°µÄÍ¼
+	// å½“å‰çš„å›¾
 	Graph graph;
-	// ½á¹ûÊı¾İ£¬º¢×Ó±ß¶ÔËùÊôµÄÍ¼id×é
+	// ç»“æœæ•°æ®ï¼Œå­©å­è¾¹å¯¹æ‰€å±çš„å›¾idç»„
 	ArrayList<Edge> childEdge;
-	// Í¼µÄµãid¶ÔÎåÔª×éid±êÊ¶µÄÓ³Éä
+	// å›¾çš„ç‚¹idå¯¹äº”å…ƒç»„idæ ‡è¯†çš„æ˜ å°„
 	int[] g2s;
-	// ÎåÔª×éid±êÊ¶¶ÔÍ¼µÄµãidµÄÓ³Éä
+	// äº”å…ƒç»„idæ ‡è¯†å¯¹å›¾çš„ç‚¹idçš„æ˜ å°„
 	int[] s2g;
-	// Í¼ÖĞ±ßÊÇ·ñ±»ÓÃµÄÇé¿ö
+	// å›¾ä¸­è¾¹æ˜¯å¦è¢«ç”¨çš„æƒ…å†µ
 	boolean f[][];
-	// ×îÓÒÂ·¾¶£¬rm[id]±íÊ¾µÄÊÇ´Ëid½ÚµãÔÚ×îÓÒÂ·¾¶ÖĞµÄÏÂÒ»¸ö½Úµãid
+	// æœ€å³è·¯å¾„ï¼Œrm[id]è¡¨ç¤ºçš„æ˜¯æ­¤idèŠ‚ç‚¹åœ¨æœ€å³è·¯å¾„ä¸­çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹id
 	int[] rm;
-	// ÏÂÒ»¸öÎåÔª×éµÄid
+	// ä¸‹ä¸€ä¸ªäº”å…ƒç»„çš„id
 	int next;
 
 	public SubChildTraveler(ArrayList<Edge> edgeSeq, Graph graph) {
@@ -34,15 +34,15 @@ public class SubChildTraveler {
 	}
 
 	/**
-	 * ÔÚÍ¼ÖĞËÑË÷¿ÉÄÜ´æÔÚµÄº¢×Ó±ß
+	 * åœ¨å›¾ä¸­æœç´¢å¯èƒ½å­˜åœ¨çš„å­©å­è¾¹
 	 * 
 	 * @param next
-	 *            ĞÂ¼ÓÈë±ßµÄ½Úµã½«ÉèÖÃµÄid
+	 *            æ–°åŠ å…¥è¾¹çš„èŠ‚ç‚¹å°†è®¾ç½®çš„id
 	 */
 	public void traveler() {
 		this.next = edgeSeq.size() + 1;
 		int size = graph.nodeLabels.size();
-		// ×öidÓ³ÉäµÄ³õÊ¼»¯²Ù×÷
+		// åšidæ˜ å°„çš„åˆå§‹åŒ–æ“ä½œ
 		g2s = new int[size];
 		s2g = new int[size];
 		f = new boolean[size][size];
@@ -52,7 +52,7 @@ public class SubChildTraveler {
 			s2g[i] = -1;
 
 			for (int j = 0; j < size; j++) {
-				// ´ú±íµãidÎªiµ½idÎªjµã´Ë±ßÃ»ÓĞ±»ÓÃ¹ı
+				// ä»£è¡¨ç‚¹idä¸ºiåˆ°idä¸ºjç‚¹æ­¤è¾¹æ²¡æœ‰è¢«ç”¨è¿‡
 				f[i][j] = false;
 			}
 		}
@@ -61,7 +61,7 @@ public class SubChildTraveler {
 		for (int i = 0; i < edgeSeq.size()+1; i++) {
 			rm[i] = -1;
 		}
-		// Ñ°ÕÒ×îÓÒÂ·¾¶
+		// å¯»æ‰¾æœ€å³è·¯å¾„
 		for (Edge e : edgeSeq) {
 			if (e.ix < e.iy && e.iy > rm[e.ix]) {
 				rm[e.ix] = e.iy;
@@ -69,7 +69,7 @@ public class SubChildTraveler {
 		}
 
 		for (int i = 0; i < size; i++) {
-			// Ñ°ÕÒµÚÒ»¸ö±êºÅÏàµÈµÄµã
+			// å¯»æ‰¾ç¬¬ä¸€ä¸ªæ ‡å·ç›¸ç­‰çš„ç‚¹
 			if (edgeSeq.get(0).x != graph.nodeLabels.get(i)) {
 				continue;
 			}
@@ -84,39 +84,39 @@ public class SubChildTraveler {
 	}
 
 	/**
-	 * ÔÚµ±Ç°Í¼ÖĞÉî¶ÈÓÅÏÈÑ°ÕÒÕıÈ·µÄ×ÓÍ¼
+	 * åœ¨å½“å‰å›¾ä¸­æ·±åº¦ä¼˜å…ˆå¯»æ‰¾æ­£ç¡®çš„å­å›¾
 	 * 
 	 * @param currentPosition
-	 *            µ±Ç°ÕÒµ½µÄÎ»ÖÃ
+	 *            å½“å‰æ‰¾åˆ°çš„ä½ç½®
 	 */
 	public void dfsSearchEdge(int currentPosition) {
 		int rmPosition = 0;
-		// Èç¹ûÕÒµ½µ×ÁË£¬ÔòÔÚµ±Ç°µÄ×ÓÍ¼µÄ×îÓÒÂ·¾¶ÖĞÑ°ÕÒ¿ÉÄÜµÄ±ß
+		// å¦‚æœæ‰¾åˆ°åº•äº†ï¼Œåˆ™åœ¨å½“å‰çš„å­å›¾çš„æœ€å³è·¯å¾„ä¸­å¯»æ‰¾å¯èƒ½çš„è¾¹
 		if (currentPosition >= edgeSeq.size()) {
 			rmPosition = 0;
 			while (rmPosition >= 0) {
 				int gId = s2g[rmPosition];
-				// ÔÚ´Ëµã¸½½üÑ°ÕÒ¿ÉÄÜµÄ±ß
+				// åœ¨æ­¤ç‚¹é™„è¿‘å¯»æ‰¾å¯èƒ½çš„è¾¹
 				for (int i = 0; i < graph.edgeNexts.get(gId).size(); i++) {
 					int gId2 = graph.edgeNexts.get(gId).get(i);
-					// Èç¹ûÕâÌõ±ßÒÑ¾­±»ÓÃ¹ı
+					// å¦‚æœè¿™æ¡è¾¹å·²ç»è¢«ç”¨è¿‡
 					if (f[gId][gId2] || f[gId][gId2]) {
 						continue;
 					}
 
-					// ÔÚ×îÓÒÂ·¾¶ÖĞÌí¼Ó±ß·ÖÎª2ÖÖÇé¿ö£¬µÚÒ»ÖÖÎªÔÚ×îÓÒ½ÚµãÉÏÌí¼Ó£¬µÚ¶şÖĞÎªÔÚ×îÓÒÂ·¾¶ÉÏ µÄµãÌí¼Ó
-					// Èç¹ûÕÒµ½µÄµãÃ»ÓĞ±»ÓÃ¹ı£¬¿ÉÒÔ½øĞĞ±ßµÄÍØÕ¹
+					// åœ¨æœ€å³è·¯å¾„ä¸­æ·»åŠ è¾¹åˆ†ä¸º2ç§æƒ…å†µï¼Œç¬¬ä¸€ç§ä¸ºåœ¨æœ€å³èŠ‚ç‚¹ä¸Šæ·»åŠ ï¼Œç¬¬äºŒä¸­ä¸ºåœ¨æœ€å³è·¯å¾„ä¸Š çš„ç‚¹æ·»åŠ 
+					// å¦‚æœæ‰¾åˆ°çš„ç‚¹æ²¡æœ‰è¢«ç”¨è¿‡ï¼Œå¯ä»¥è¿›è¡Œè¾¹çš„æ‹“å±•
 					if (g2s[gId2] < 0) {
 						g2s[gId2] = next;
 						Edge e = new Edge(g2s[gId], g2s[gId2],
 								graph.nodeLabels.get(gId), graph.edgeLabels
 										.get(gId).get(i),
 								graph.nodeLabels.get(gId2));
-						// ½«ĞÂ½¨µÄ×Ó±ß¼ÓÈë¼¯ºÏ
+						// å°†æ–°å»ºçš„å­è¾¹åŠ å…¥é›†åˆ
 						childEdge.add(e);
 					} else {
 						boolean flag = true;
-						// Èç¹ûÕâµãÒÑ¾­´æÔÚ£¬ÅĞ¶ÏËûÊÇ²»ÊÇ×îÓÒµÄµã
+						// å¦‚æœè¿™ç‚¹å·²ç»å­˜åœ¨ï¼Œåˆ¤æ–­ä»–æ˜¯ä¸æ˜¯æœ€å³çš„ç‚¹
 						for (int j = 0; j < graph.edgeNexts.get(gId2).size(); j++) {
 							int tempId = graph.edgeNexts.get(gId2).get(j);
 							if (g2s[gId2] < g2s[tempId]) {
@@ -130,39 +130,39 @@ public class SubChildTraveler {
 									graph.nodeLabels.get(gId), graph.edgeLabels
 											.get(gId).get(i),
 									graph.nodeLabels.get(gId2));
-							// ½«ĞÂ½¨µÄ×Ó±ß¼ÓÈë¼¯ºÏ
+							// å°†æ–°å»ºçš„å­è¾¹åŠ å…¥é›†åˆ
 							childEdge.add(e);
 						}
 					}
 				}
-				// Ò»¸ö×îÓÒÂ·¾¶ÉÏµãÕÒÍê£¬¼ÌĞøÏÂÒ»¸ö
+				// ä¸€ä¸ªæœ€å³è·¯å¾„ä¸Šç‚¹æ‰¾å®Œï¼Œç»§ç»­ä¸‹ä¸€ä¸ª
 				rmPosition = rm[rmPosition];
 			}
 			return;
 		}
 
 		Edge e = edgeSeq.get(currentPosition);
-		// ËùÁ¬½ÓµÄµã±êºÅ
+		// æ‰€è¿æ¥çš„ç‚¹æ ‡å·
 		int y = e.y;
-		// ËùÁ¬½ÓµÄ±ß±êºÅ
+		// æ‰€è¿æ¥çš„è¾¹æ ‡å·
 		int a = e.a;
 		int gId1 = s2g[e.ix];
 		int gId2 = 0;
 
 		for (int i = 0; i < graph.edgeLabels.get(gId1).size(); i++) {
-			// ÅĞ¶ÏËùÁ¬½ÓµÄ±ß¶ÔÓ¦µÄ±êºÅ
+			// åˆ¤æ–­æ‰€è¿æ¥çš„è¾¹å¯¹åº”çš„æ ‡å·
 			if (graph.edgeLabels.get(gId1).get(i) != a) {
 				continue;
 			}
 
-			// ÅĞ¶ÏËùÁ¬½ÓµÄµãµÄ±êºÅ
+			// åˆ¤æ–­æ‰€è¿æ¥çš„ç‚¹çš„æ ‡å·
 			int tempId = graph.edgeNexts.get(gId1).get(i);
 			if (graph.nodeLabels.get(tempId) != y) {
 				continue;
 			}
 
 			gId2 = tempId;
-			// Èç¹ûÕâÁ½µãÊÇÃ»ÓĞÉèÖÃ¹ıµÄ
+			// å¦‚æœè¿™ä¸¤ç‚¹æ˜¯æ²¡æœ‰è®¾ç½®è¿‡çš„
 			if (g2s[gId2] == -1 && s2g[e.iy] == -1) {
 				g2s[gId2] = e.iy;
 				s2g[e.iy] = gId2;
@@ -191,7 +191,7 @@ public class SubChildTraveler {
 	}
 
 	/**
-	 * »ñÈ¡½á¹ûÊı¾İ¶Ô
+	 * è·å–ç»“æœæ•°æ®å¯¹
 	 * 
 	 * @return
 	 */

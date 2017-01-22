@@ -3,14 +3,14 @@ package DataMining_GSP;
 import java.util.ArrayList;
 
 /**
- * ĞòÁĞÖĞµÄ×ÓÏî¼¯
+ * åºåˆ—ä¸­çš„å­é¡¹é›†
  * 
  * @author lyq
  * 
  */
 public class ItemSet {
 	/**
-	 * Ïî¼¯ÖĞ±£´æµÄÊÇÊı×ÖÏîÊı×é
+	 * é¡¹é›†ä¸­ä¿å­˜çš„æ˜¯æ•°å­—é¡¹æ•°ç»„
 	 */
 	private ArrayList<Integer> items;
 
@@ -41,10 +41,10 @@ public class ItemSet {
 	}
 
 	/**
-	 * ÅĞ¶Ï2¸öÏî¼¯ÊÇ·ñÏàµÈ
+	 * åˆ¤æ–­2ä¸ªé¡¹é›†æ˜¯å¦ç›¸ç­‰
 	 * 
 	 * @param itemSet
-	 *            ±È½Ï¶ÔÏó
+	 *            æ¯”è¾ƒå¯¹è±¡
 	 * @return
 	 */
 	public boolean compareIsSame(ItemSet itemSet) {
@@ -56,7 +56,7 @@ public class ItemSet {
 
 		for (int i = 0; i < itemSet.items.size(); i++) {
 			if (this.items.get(i) != itemSet.items.get(i)) {
-				// Ö»ÒªÓĞÖµ²»ÏàµÈ£¬Ö±½ÓËã×÷²»ÏàµÈ
+				// åªè¦æœ‰å€¼ä¸ç›¸ç­‰ï¼Œç›´æ¥ç®—ä½œä¸ç›¸ç­‰
 				result = false;
 				break;
 			}
@@ -66,7 +66,7 @@ public class ItemSet {
 	}
 
 	/**
-	 * ¿½±´Ïî¼¯ÖĞÍ¬ÑùµÄÊı¾İÒ»·İ
+	 * æ‹·è´é¡¹é›†ä¸­åŒæ ·çš„æ•°æ®ä¸€ä»½
 	 * 
 	 * @return
 	 */

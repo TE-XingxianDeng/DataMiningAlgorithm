@@ -1,19 +1,19 @@
 package DataMining_ACO;
 
 /**
- * ÒÏÈºËã·¨²âÊÔÀà
+ * èšç¾¤ç®—æ³•æµ‹è¯•ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
-		//²âÊÔÊı¾İ
+		//æµ‹è¯•æ•°æ®
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		//ÂìÒÏÊıÁ¿
+		//èš‚èšæ•°é‡
 		int antNum;
-		//ÒÏÈºËã·¨µü´ú´ÎÊı
+		//èšç¾¤ç®—æ³•è¿­ä»£æ¬¡æ•°
 		int loopCount;
-		//¿ØÖÆ²ÎÊı
+		//æ§åˆ¶å‚æ•°
 		double alpha;
 		double beita;
 		double p;

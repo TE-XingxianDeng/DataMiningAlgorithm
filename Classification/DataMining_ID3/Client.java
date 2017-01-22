@@ -1,7 +1,7 @@
 package DataMing_ID3;
 
 /**
- * ID3决策树分类算法测试场景类
+ * ID3鍐崇瓥鏍戝垎绫荤畻娉曟祴璇曞満鏅被
  * @author lyq
  *
  */

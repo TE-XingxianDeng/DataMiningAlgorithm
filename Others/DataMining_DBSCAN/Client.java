@@ -1,16 +1,16 @@
 package DataMining_DBSCAN;
 
 /**
- * Dbscan»ùÓÚÃÜ¶ÈµÄ¾ÛÀàËã·¨²âÊÔÀà
+ * DbscanåŸºäºå¯†åº¦çš„èšç±»ç®—æ³•æµ‹è¯•ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		//´ØÉ¨Ãè°ë¾¶
+		//ç°‡æ‰«æåŠå¾„
 		double eps = 3;
-		//×îĞ¡°üº¬µãÊıãĞÖµ
+		//æœ€å°åŒ…å«ç‚¹æ•°é˜ˆå€¼
 		int minPts = 3;
 		
 		DBSCANTool tool = new DBSCANTool(filePath, eps, minPts);

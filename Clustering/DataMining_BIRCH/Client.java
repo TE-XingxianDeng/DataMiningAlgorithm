@@ -1,18 +1,18 @@
 package DataMining_BIRCH;
 
 /**
- * BIRCH¾ÛÀàËã·¨µ÷ÓÃÀà
+ * BIRCHèšç±»ç®—æ³•è°ƒç”¨ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\testInput.txt";
-		//ÄÚ²¿½ÚµãÆ½ºâÒò×ÓB
+		//å†…éƒ¨èŠ‚ç‚¹å¹³è¡¡å› å­B
 		int B = 2;
-		//Ò¶×Ó½ÚµãÆ½ºâÒò×ÓL
+		//å¶å­èŠ‚ç‚¹å¹³è¡¡å› å­L
 		int L = 2;
-		//´ØÖ±¾¶ãĞÖµT
+		//ç°‡ç›´å¾„é˜ˆå€¼T
 		double T = 0.6;
 		
 		BIRCHTool tool = new BIRCHTool(filePath, B, L, T);

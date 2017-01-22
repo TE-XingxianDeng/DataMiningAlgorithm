@@ -1,20 +1,20 @@
 package DataMining_Viterbi;
 
 /**
- * Î¬ÌØ±ÈËã·¨
+ * ç»´ç‰¹æ¯”ç®—æ³•
  * 
  * @author lyq
  * 
  */
 public class Client {
 	public static void main(String[] args) {
-		// ×´Ì¬×ªÒÆ¸ÅÂÊ¾ØÕóÂ·¾¶
+		// çŠ¶æ€è½¬ç§»æ¦‚ç‡çŸ©é˜µè·¯å¾„
 		String stmFilePath;
-		// »ìÏı¾ØÕóÂ·¾¶
+		// æ··æ·†çŸ©é˜µè·¯å¾„
 		String cfFilePath;
-		// ¹Û²ìµ½µÄ×´Ì¬
+		// è§‚å¯Ÿåˆ°çš„çŠ¶æ€
 		String[] observeStates;
-		// ³õÊ¼×´Ì¬
+		// åˆå§‹çŠ¶æ€
 		double[] initStatePro;
 		ViterbiTool tool;
 

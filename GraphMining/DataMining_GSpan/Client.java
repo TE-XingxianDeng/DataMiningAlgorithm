@@ -1,15 +1,15 @@
 package DataMining_GSpan;
 
 /**
- * gSpanÆµ·±×ÓÍ¼ÍÚ¾òËã·¨
+ * gSpané¢‘ç¹å­å›¾æŒ–æ˜ç®—æ³•
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
-		//²âÊÔÊı¾İÎÄ¼şµØÖ·
+		//æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		//×îĞ¡Ö§³Ö¶ÈÂÊ
+		//æœ€å°æ”¯æŒåº¦ç‡
 		double minSupportRate = 0.2;
 		
 		GSpanTool tool = new GSpanTool(filePath, minSupportRate);

@@ -12,24 +12,24 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * ID3Ëã·¨ÊµÏÖÀà
+ * ID3ç®—æ³•å®ç°ç±»
  * 
  * @author lyq
  * 
  */
 public class ID3Tool {
-	// Àà±êºÅµÄÖµÀàĞÍ
+	// ç±»æ ‡å·çš„å€¼ç±»å‹
 	private final String YES = "Yes";
 	private final String NO = "No";
 
-	// ËùÓĞÊôĞÔµÄÀàĞÍ×ÜÊı,ÔÚÕâÀï¾ÍÊÇdataÔ´Êı¾İµÄÁĞÊı
+	// æ‰€æœ‰å±æ€§çš„ç±»å‹æ€»æ•°,åœ¨è¿™é‡Œå°±æ˜¯dataæºæ•°æ®çš„åˆ—æ•°
 	private int attrNum;
 	private String filePath;
-	// ³õÊ¼Ô´Êı¾İ£¬ÓÃÒ»¸ö¶şÎ¬×Ö·ûÊı×é´æ·ÅÄ£·Â±í¸ñÊı¾İ
+	// åˆå§‹æºæ•°æ®ï¼Œç”¨ä¸€ä¸ªäºŒç»´å­—ç¬¦æ•°ç»„å­˜æ”¾æ¨¡ä»¿è¡¨æ ¼æ•°æ®
 	private String[][] data;
-	// Êı¾İµÄÊôĞÔĞĞµÄÃû×Ö
+	// æ•°æ®çš„å±æ€§è¡Œçš„åå­—
 	private String[] attrNames;
-	// Ã¿¸öÊôĞÔµÄÖµËùÓĞÀàĞÍ
+	// æ¯ä¸ªå±æ€§çš„å€¼æ‰€æœ‰ç±»å‹
 	private HashMap<String, ArrayList<String>> attrValue;
 
 	public ID3Tool(String filePath) {
@@ -38,7 +38,7 @@ public class ID3Tool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -71,23 +71,23 @@ public class ID3Tool {
 	}
 
 	/**
-	 * Ê×ÏÈ³õÊ¼»¯Ã¿ÖÖÊôĞÔµÄÖµµÄËùÓĞÀàĞÍ£¬ÓÃÓÚºóÃæµÄ×ÓÀàìØµÄ¼ÆËãÊ±ÓÃ
+	 * é¦–å…ˆåˆå§‹åŒ–æ¯ç§å±æ€§çš„å€¼çš„æ‰€æœ‰ç±»å‹ï¼Œç”¨äºåé¢çš„å­ç±»ç†µçš„è®¡ç®—æ—¶ç”¨
 	 */
 	private void initAttrValue() {
 		ArrayList<String> tempValues;
 
-		// °´ÕÕÁĞµÄ·½Ê½£¬´Ó×óÍùÓÒÕÒ
+		// æŒ‰ç…§åˆ—çš„æ–¹å¼ï¼Œä»å·¦å¾€å³æ‰¾
 		for (int j = 1; j < attrNum; j++) {
-			// ´ÓÒ»ÁĞÖĞµÄÉÏÍùÏÂ¿ªÊ¼Ñ°ÕÒÖµ
+			// ä»ä¸€åˆ—ä¸­çš„ä¸Šå¾€ä¸‹å¼€å§‹å¯»æ‰¾å€¼
 			tempValues = new ArrayList<>();
 			for (int i = 1; i < data.length; i++) {
 				if (!tempValues.contains(data[i][j])) {
-					// Èç¹ûÕâ¸öÊôĞÔµÄÖµÃ»ÓĞÌí¼Ó¹ı£¬ÔòÌí¼Ó
+					// å¦‚æœï¿½é£§éªç²œç¼˜é—¹å¾—æŒ¥åˆ‘ç ‘åº¸îŒîƒ¯è›±ç ‘ï¿½
 					tempValues.add(data[i][j]);
 				}
 			}
 
-			// Ò»ÁĞÊôĞÔµÄÖµÒÑ¾­±éÀúÍê±Ï£¬¸´ÖÆµ½mapÊôĞÔ±íÖĞ
+			// ä¸€åˆ—å±æ€§çš„å€¼å·²ç»éå†å®Œæ¯•ï¼Œå¤åˆ¶åˆ°mapå±æ€§è¡¨ä¸­
 			attrValue.put(data[0][j], tempValues);
 		}
 
@@ -99,36 +99,36 @@ public class ID3Tool {
 	}
 
 	/**
-	 * ¼ÆËãÊı¾İ°´ÕÕ²»Í¬·½Ê½»®·ÖµÄìØ
+	 * è®¡ç®—æ•°æ®æŒ‰ç…§ä¸åŒæ–¹å¼åˆ’åˆ†çš„ç†µ
 	 * 
 	 * @param remainData
-	 *            Ê£ÓàµÄÊı¾İ
+	 *            å‰©ä½™çš„æ•°æ®
 	 * @param attrName
-	 *            ´ı»®·ÖµÄÊôĞÔ£¬ÔÚËãĞÅÏ¢ÔöÒæµÄÊ±ºò»áÊ¹ÓÃµ½
+	 *            å¾…åˆ’åˆ†çš„å±æ€§ï¼Œåœ¨ç®—ä¿¡æ¯å¢ç›Šçš„æ—¶å€™ä¼šä½¿ç”¨åˆ°
 	 * @param attrValue
-	 *            »®·ÖµÄ×ÓÊôĞÔÖµ
+	 *            åˆ’åˆ†çš„å­å±æ€§å€¼
 	 * @param isParent
-	 *            ÊÇ·ñ·Ö×ÓÊôĞÔ»®·Ö»¹ÊÇÔ­À´²»±äµÄ»®·Ö
+	 *            æ˜¯å¦åˆ†å­å±æ€§åˆ’åˆ†è¿˜æ˜¯åŸæ¥ä¸å˜çš„åˆ’åˆ†
 	 */
 	private double computeEntropy(String[][] remainData, String attrName,
 			String value, boolean isParent) {
-		// ÊµÀı×ÜÊı
+		// å®ä¾‹æ€»æ•°
 		int total = 0;
-		// ÕıÊµÀıÊı
+		// æ­£å®ä¾‹æ•°
 		int posNum = 0;
-		// ¸ºÊµÀıÊı
+		// è´Ÿå®ä¾‹æ•°
 		int negNum = 0;
 
-		// »¹ÊÇ°´ÁĞ´Ó×óÍùÓÒ±éÀúÊôĞÔ
+		// è¿˜æ˜¯æŒ‰åˆ—ä»å·¦å¾€å³éå†å±æ€§
 		for (int j = 1; j < attrNames.length; j++) {
-			// ÕÒµ½ÁËÖ¸¶¨µÄÊôĞÔ
+			// æ‰¾åˆ°äº†æŒ‡å®šçš„å±æ€§
 			if (attrName.equals(attrNames[j])) {
 				for (int i = 1; i < remainData.length; i++) {
-					// Èç¹ûÊÇ¸¸½áµãÖ±½Ó¼ÆËãìØ»òÕßÊÇÍ¨¹ı×ÓÊôĞÔ»®·Ö¼ÆËãìØ£¬ÕâÊ±Òª½øĞĞÊôĞÔÖµµÄ¹ıÂË
+					// å¦‚æœæ˜¯çˆ¶ç»“ç‚¹ç›´æ¥è®¡ç®—ç†µæˆ–è€…æ˜¯é€šè¿‡å­å±æ€§åˆ’åˆ†è®¡ç®—ç†µï¼Œè¿™æ—¶è¦è¿›è¡Œå±æ€§å€¼çš„è¿‡æ»¤
 					if (isParent
 							|| (!isParent && remainData[i][j].equals(value))) {
 						if (remainData[i][attrNames.length - 1].equals(YES)) {
-							// ÅĞ¶Ï´ËĞĞÊı¾İÊÇ·ñÎªÕıÊµÀı
+							// åˆ¤æ–­æ­¤è¡Œæ•°æ®æ˜¯å¦ä¸ºæ­£å®ä¾‹
 							posNum++;
 						} else {
 							negNum++;
@@ -143,7 +143,7 @@ public class ID3Tool {
 		double negProbobly = (double) negNum / total;
 
 		if (posProbobly == 1 || posProbobly == 0) {
-			// Èç¹ûÊı¾İÈ«ÎªÍ¬ÖÖÀàĞÍ£¬ÔòìØÎª0£¬·ñÔò´øÈëÏÂÃæµÄ¹«Ê½»á±¨´í
+			// å¦‚æœæ•°æ®å…¨ä¸ºåŒç§ç±»å‹ï¼Œåˆ™ç†µä¸º0ï¼Œå¦åˆ™å¸¦å…¥ä¸‹é¢çš„å…¬å¼ä¼šæŠ¥é”™
 			return 0;
 		}
 
@@ -151,51 +151,51 @@ public class ID3Tool {
 				/ Math.log(2.0) - negProbobly * Math.log(negProbobly)
 				/ Math.log(2.0);
 
-		// ·µ»Ø¼ÆËãËùµÃìØ
+		// è¿”å›è®¡ç®—æ‰€å¾—ç†µ
 		return entropyValue;
 	}
 
 	/**
-	 * ÎªÄ³¸öÊôĞÔ¼ÆËãĞÅÏ¢ÔöÒæ
+	 * ä¸ºæŸä¸ªå±æ€§è®¡ç®—ä¿¡æ¯å¢ç›Š
 	 * 
 	 * @param remainData
-	 *            Ê£ÓàµÄÊı¾İ
+	 *            å‰©ä½™çš„æ•°æ®
 	 * @param value
-	 *            ´ı»®·ÖµÄÊôĞÔÃû³Æ
+	 *            å¾…åˆ’åˆ†çš„å±æ€§åç§°
 	 * @return
 	 */
 	private double computeGain(String[][] remainData, String value) {
 		double gainValue = 0;
-		// Ô´ìØµÄ´óĞ¡½«»áÓëÊôĞÔ»®·Öºó½øĞĞ±È½Ï
+		// æºç†µçš„å¤§å°å°†ä¼šä¸å±æ€§åˆ’åˆ†åè¿›è¡Œæ¯”è¾ƒ
 		double entropyOri = 0;
-		// ×Ó»®·ÖìØºÍ
+		// å­åˆ’åˆ†ç†µå’Œ
 		double childEntropySum = 0;
-		// ÊôĞÔ×ÓÀàĞÍµÄ¸öÊı
+		// å±æ€§å­ç±»å‹çš„ä¸ªæ•°
 		int childValueNum = 0;
-		// ÊôĞÔÖµµÄÖÖÊı
+		// å±æ€§å€¼çš„ç§æ•°
 		ArrayList<String> attrTypes = attrValue.get(value);
-		// ×ÓÊôĞÔ¶ÔÓ¦µÄÈ¨ÖØ±È
+		// å­å±æ€§å¯¹åº”çš„æƒé‡æ¯”
 		HashMap<String, Integer> ratioValues = new HashMap<>();
 
 		for (int i = 0; i < attrTypes.size(); i++) {
-			// Ê×ÏÈ¶¼Í³Ò»¼ÆÊıÎª0
+			// é¦–å…ˆéƒ½ç»Ÿä¸€è®¡æ•°ä¸º0
 			ratioValues.put(attrTypes.get(i), 0);
 		}
 
-		// »¹ÊÇ°´ÕÕÒ»ÁĞ£¬´Ó×óÍùÓÒ±éÀú
+		// è¿˜æ˜¯æŒ‰ç…§ä¸€åˆ—ï¼Œä»å·¦å¾€å³éå†
 		for (int j = 1; j < attrNames.length; j++) {
-			// ÅĞ¶ÏÊÇ·ñµ½ÁË»®·ÖµÄÊôĞÔÁĞ
+			// åˆ¤æ–­æ˜¯å¦åˆ°äº†åˆ’åˆ†çš„å±æ€§åˆ—
 			if (value.equals(attrNames[j])) {
 				for (int i = 1; i <= remainData.length - 1; i++) {
 					childValueNum = ratioValues.get(remainData[i][j]);
-					// Ôö¼Ó¸öÊı²¢ÇÒÖØĞÂ´æÈë
+					// å¢åŠ ä¸ªæ•°å¹¶ä¸”é‡æ–°å­˜å…¥
 					childValueNum++;
 					ratioValues.put(remainData[i][j], childValueNum);
 				}
 			}
 		}
 
-		// ¼ÆËãÔ­ìØµÄ´óĞ¡
+		// è®¡ç®—åŸç†µçš„å¤§å°
 		entropyOri = computeEntropy(remainData, value, null, true);
 		for (int i = 0; i < attrTypes.size(); i++) {
 			double ratio = (double) ratioValues.get(attrTypes.get(i))
@@ -208,62 +208,62 @@ public class ID3Tool {
 			// attrTypes.get(i), false));
 		}
 
-		// ¶şÕßìØÏà¼õ¾ÍÊÇĞÅÏ¢ÔöÒæ
+		// äºŒè€…ç†µç›¸å‡å°±æ˜¯ä¿¡æ¯å¢ç›Š
 		gainValue = entropyOri - childEntropySum;
 		return gainValue;
 	}
 
 	/**
-	 * ¼ÆËãĞÅÏ¢ÔöÒæ±È
+	 * è®¡ç®—ä¿¡æ¯å¢ç›Šæ¯”
 	 * 
 	 * @param remainData
-	 *            Ê£ÓàÊı¾İ
+	 *            å‰©ä½™æ•°æ®
 	 * @param value
-	 *            ´ı»®·ÖÊôĞÔ
+	 *            å¾…åˆ’åˆ†å±æ€§
 	 * @return
 	 */
 	private double computeGainRatio(String[][] remainData, String value) {
 		double gain = 0;
 		double spiltInfo = 0;
 		int childValueNum = 0;
-		// ÊôĞÔÖµµÄÖÖÊı
+		// å±æ€§å€¼çš„ç§æ•°
 		ArrayList<String> attrTypes = attrValue.get(value);
-		// ×ÓÊôĞÔ¶ÔÓ¦µÄÈ¨ÖØ±È
+		// å­å±æ€§å¯¹åº”çš„æƒé‡æ¯”
 		HashMap<String, Integer> ratioValues = new HashMap<>();
 
 		for (int i = 0; i < attrTypes.size(); i++) {
-			// Ê×ÏÈ¶¼Í³Ò»¼ÆÊıÎª0
+			// é¦–å…ˆéƒ½ç»Ÿä¸€è®¡æ•°ä¸º0
 			ratioValues.put(attrTypes.get(i), 0);
 		}
 
-		// »¹ÊÇ°´ÕÕÒ»ÁĞ£¬´Ó×óÍùÓÒ±éÀú
+		// è¿˜æ˜¯ï¿½å‡‘æ‰¾æ¶£æ ¡îƒå¹¼ç¬¸î‹„å†¶æ§”ï¿½
 		for (int j = 1; j < attrNames.length; j++) {
-			// ÅĞ¶ÏÊÇ·ñµ½ÁË»®·ÖµÄÊôĞÔÁĞ
+			// åˆ¤æ–­æ˜¯å¦åˆ°äº†åˆ’åˆ†çš„å±æ€§åˆ—
 			if (value.equals(attrNames[j])) {
 				for (int i = 1; i <= remainData.length - 1; i++) {
 					childValueNum = ratioValues.get(remainData[i][j]);
-					// Ôö¼Ó¸öÊı²¢ÇÒÖØĞÂ´æÈë
+					// å¢åŠ ä¸ªæ•°å¹¶ä¸”é‡æ–°å­˜å…¥
 					childValueNum++;
 					ratioValues.put(remainData[i][j], childValueNum);
 				}
 			}
 		}
 
-		// ¼ÆËãĞÅÏ¢ÔöÒæ
+		// è®¡ç®—ä¿¡æ¯å¢ç›Š
 		gain = computeGain(remainData, value);
-		// ¼ÆËã·ÖÁÑĞÅÏ¢£¬·ÖÁÑĞÅÏ¢¶ÈÁ¿±»¶¨ÒåÎª(·ÖÁÑĞÅÏ¢ÓÃÀ´ºâÁ¿ÊôĞÔ·ÖÁÑÊı¾İµÄ¹ã¶ÈºÍ¾ùÔÈ)£º
+		// è®¡ç®—åˆ†è£‚ä¿¡æ¯ï¼Œåˆ†è£‚ä¿¡æ¯åº¦é‡è¢«å®šä¹‰ä¸º(åˆ†è£‚ä¿¡æ¯ç”¨æ¥è¡¡é‡å±æ€§åˆ†è£‚æ•°æ®çš„å¹¿åº¦å’Œå‡åŒ€)ï¼š
 		for (int i = 0; i < attrTypes.size(); i++) {
 			double ratio = (double) ratioValues.get(attrTypes.get(i))
 					/ (remainData.length - 1);
 			spiltInfo += -ratio * Math.log(ratio) / Math.log(2.0);
 		}
 
-		// ¼ÆËã»úĞÅÏ¢ÔöÒæÂÊ
+		// è®¡ç®—æœºä¿¡æ¯å¢ç›Šç‡
 		return gain / spiltInfo;
 	}
 
 	/**
-	 * ÀûÓÃÔ´Êı¾İ¹¹Ôì¾ö²ßÊ÷
+	 * åˆ©ç”¨æºæ•°æ®æ„é€ å†³ç­–æ ‘
 	 */
 	private void buildDecisionTree(AttrNode node, String parentAttrValue,
 			String[][] remainData, ArrayList<String> remainAttr, boolean isID3) {
@@ -273,20 +273,20 @@ public class ID3Tool {
 		double gainValue = 0;
 		double tempValue = 0;
 
-		// Èç¹ûÖ»ÓĞ1¸öÊôĞÔÔòÖ±½Ó·µ»Ø
+		// å¦‚æœåªæœ‰1ä¸ªå±æ€§åˆ™ç›´æ¥è¿”å›
 		if (remainAttr.size() == 1) {
 			System.out.println("attr null");
 			return;
 		}
 
-		// Ñ¡ÔñÊ£ÓàÊôĞÔÖĞĞÅÏ¢ÔöÒæ×î´óµÄ×÷ÎªÏÂÒ»¸ö·ÖÀàµÄÊôĞÔ
+		// é€‰æ‹©å‰©ä½™å±æ€§ä¸­ä¿¡æ¯å¢ç›Šæœ€å¤§çš„ä½œä¸ºä¸‹ä¸€ä¸ªåˆ†ç±»çš„å±æ€§
 		for (int i = 0; i < remainAttr.size(); i++) {
-			// ÅĞ¶ÏÊÇ·ñÓÃID3Ëã·¨»¹ÊÇC4.5Ëã·¨
+			// åˆ¤æ–­æ˜¯å¦ç”¨ID3ç®—æ³•è¿˜æ˜¯C4.5ç®—æ³•
 			if (isID3) {
-				// ID3Ëã·¨²ÉÓÃµÄÊÇ°´ÕÕĞÅÏ¢ÔöÒæµÄÖµÀ´±È
+				// ID3ç®—æ³•é‡‡ç”¨çš„æ˜¯æŒ‰ç…§ä¿¡æ¯å¢ç›Šçš„å€¼æ¥æ¯”
 				tempValue = computeGain(remainData, remainAttr.get(i));
 			} else {
-				// C4.5Ëã·¨½øĞĞÁË¸Ä½ø£¬ÓÃµÄÊÇĞÅÏ¢ÔöÒæÂÊÀ´±È,¿Ë·şÁËÓÃĞÅÏ¢ÔöÒæÑ¡ÔñÊôĞÔÊ±Æ«ÏòÑ¡ÔñÈ¡Öµ¶àµÄÊôĞÔµÄ²»×ã
+				// C4.5ç®—æ³•è¿›è¡Œäº†æ”¹è¿›ï¼Œç”¨çš„æ˜¯ä¿¡æ¯å¢ç›Šç‡æ¥æ¯”,å…‹æœäº†ç”¨ä¿¡æ¯å¢ç›Šé€‰æ‹©å±æ€§æ—¶åå‘é€‰æ‹©å–å€¼å¤šçš„å±æ€§çš„ä¸è¶³
 				tempValue = computeGainRatio(remainData, remainAttr.get(i));
 			}
 
@@ -303,7 +303,7 @@ public class ID3Tool {
 		AttrNode[] childNode = new AttrNode[valueTypes.size()];
 		String[][] rData;
 		for (int i = 0; i < valueTypes.size(); i++) {
-			// ÒÆ³ı·Ç´ËÖµÀàĞÍµÄÊı¾İ
+			// ç§»é™¤éæ­¤å€¼ç±»å‹çš„æ•°æ®
 			rData = removeData(remainData, attrName, valueTypes.get(i));
 
 			childNode[i] = new AttrNode();
@@ -311,17 +311,17 @@ public class ID3Tool {
 			ArrayList<String> indexArray = new ArrayList<>();
 			for (int k = 1; k < rData.length; k++) {
 				indexArray.add(rData[k][0]);
-				// ÅĞ¶ÏÊÇ·ñÎªÍ¬Ò»ÀàµÄ
+				// åˆ¤æ–­æ˜¯å¦ä¸ºåŒä¸€ç±»çš„
 				if (!rData[k][attrNames.length - 1]
 						.equals(rData[1][attrNames.length - 1])) {
-					// Ö»ÒªÓĞ1¸ö²»ÏàµÈ£¬¾Í²»ÊÇÍ¬ÀàĞÍµÄ
+					// åªè¦æœ‰1ä¸ªä¸ç›¸ç­‰ï¼Œå°±ä¸æ˜¯åŒç±»å‹çš„
 					sameClass = false;
 					break;
 				}
 			}
 
 			if (!sameClass) {
-				// ´´½¨ĞÂµÄ¶ÔÏóÊôĞÔ£¬¶ÔÏóµÄÍ¬¸öÒıÓÃ»á³ö´í
+				// åˆ›å»ºæ–°çš„å¯¹è±¡å±æ€§ï¼Œå¯¹è±¡çš„åŒä¸ªå¼•ç”¨ä¼šå‡ºé”™
 				ArrayList<String> rAttr = new ArrayList<>();
 				for (String str : remainAttr) {
 					rAttr.add(str);
@@ -330,7 +330,7 @@ public class ID3Tool {
 				buildDecisionTree(childNode[i], valueTypes.get(i), rData,
 						rAttr, isID3);
 			} else {
-				// Èç¹ûÊÇÍ¬ÖÖÀàĞÍ£¬ÔòÖ±½ÓÎªÊı¾İ½Úµã
+				// å¦‚æœæ˜¯åŒç§ç±»å‹ï¼Œåˆ™ç›´æ¥ä¸ºæ•°æ®èŠ‚ç‚¹
 				childNode[i].setParentAttrValue(valueTypes.get(i));
 				childNode[i].setChildDataIndex(indexArray);
 			}
@@ -340,34 +340,34 @@ public class ID3Tool {
 	}
 
 	/**
-	 * ÊôĞÔ»®·ÖÍê±Ï£¬½øĞĞÊı¾İµÄÒÆ³ı
+	 * å±æ€§åˆ’åˆ†å®Œæ¯•ï¼Œè¿›è¡Œæ•°æ®çš„ç§»é™¤
 	 * 
 	 * @param srcData
-	 *            Ô´Êı¾İ
+	 *            æºæ•°æ®
 	 * @param attrName
-	 *            »®·ÖµÄÊôĞÔÃû³Æ
+	 *            åˆ’åˆ†çš„å±æ€§åç§°
 	 * @param valueType
-	 *            ÊôĞÔµÄÖµÀàĞÍ
+	 *            å±æ€§çš„å€¼ç±»å‹
 	 */
 	private String[][] removeData(String[][] srcData, String attrName,
 			String valueType) {
 		String[][] desDataArray;
 		ArrayList<String[]> desData = new ArrayList<>();
-		// ´ıÉ¾³ıÊı¾İ
+		// å¾…åˆ é™¤æ•°æ®
 		ArrayList<String[]> selectData = new ArrayList<>();
 		selectData.add(attrNames);
 
-		// Êı×éÊı¾İ×ª»¯µ½ÁĞ±íÖĞ£¬·½±ãÒÆ³ı
+		// æ•°ç»„æ•°æ®è½¬åŒ–åˆ°åˆ—è¡¨ä¸­ï¼Œæ–¹ä¾¿ç§»é™¤
 		for (int i = 0; i < srcData.length; i++) {
 			desData.add(srcData[i]);
 		}
 
-		// »¹ÊÇ´Ó×óÍùÓÒÒ»ÁĞÁĞµÄ²éÕÒ
+		// è¿˜æ˜¯ä»å·¦å¾€å³ä¸€åˆ—åˆ—çš„æŸ¥æ‰¾
 		for (int j = 1; j < attrNames.length; j++) {
 			if (attrNames[j].equals(attrName)) {
 				for (int i = 1; i < desData.size(); i++) {
 					if (desData.get(i)[j].equals(valueType)) {
-						// Èç¹ûÆ¥ÅäÕâ¸öÊı¾İ£¬ÔòÒÆ³ıÆäËûµÄÊı¾İ
+						// å¦‚æœåŒ¹é…è¿™ä¸ªæ•°æ®ï¼Œåˆ™ç§»é™¤å…¶ä»–çš„æ•°æ®
 						selectData.add(desData.get(i));
 					}
 				}
@@ -381,17 +381,17 @@ public class ID3Tool {
 	}
 
 	/**
-	 * ¿ªÊ¼¹¹½¨¾ö²ßÊ÷
+	 * å¼€å§‹æ„å»ºå†³ç­–æ ‘
 	 * 
 	 * @param isID3
-	 *            ÊÇ·ñ²ÉÓÃID3Ëã·¨¹¹¼Ü¾ö²ßÊ÷
+	 *            æ˜¯å¦é‡‡ç”¨ID3ç®—æ³•æ„æ¶å†³ç­–æ ‘
 	 */
 	public void startBuildingTree(boolean isID3) {
 		readDataFile();
 		initAttrValue();
 
 		ArrayList<String> remainAttr = new ArrayList<>();
-		// Ìí¼ÓÊôĞÔ£¬³ıÁË×îºóÒ»¸öÀà±êºÅÊôĞÔ
+		// æ·»åŠ å±æ€§ï¼Œé™¤äº†æœ€åä¸€ä¸ªç±»æ ‡å·å±æ€§
 		for (int i = 1; i < attrNames.length - 1; i++) {
 			remainAttr.add(attrNames[i]);
 		}
@@ -402,12 +402,12 @@ public class ID3Tool {
 	}
 
 	/**
-	 * ÏÔÊ¾¾ö²ßÊ÷
+	 * æ˜¾ç¤ºå†³ç­–æ ‘
 	 * 
 	 * @param node
-	 *            ´ıÏÔÊ¾µÄ½Úµã
+	 *            å¾…æ˜¾ç¤ºçš„èŠ‚ç‚¹
 	 * @param blankNum
-	 *            ĞĞ¿Õ¸ñ·û£¬ÓÃÓÚÏÔÊ¾Ê÷ĞÍ½á¹¹
+	 *            è¡Œç©ºæ ¼ç¬¦ï¼Œç”¨äºæ˜¾ç¤ºæ ‘å‹ç»“æ„
 	 */
 	private void showDecisionTree(AttrNode node, int blankNum) {
 		System.out.println();
@@ -415,7 +415,7 @@ public class ID3Tool {
 			System.out.print("\t");
 		}
 		System.out.print("--");
-		// ÏÔÊ¾·ÖÀàµÄÊôĞÔÖµ
+		// æ˜¾ç¤ºåˆ†ç±»çš„å±æ€§å€¼
 		if (node.getParentAttrValue() != null
 				&& node.getParentAttrValue().length() > 0) {
 			System.out.print(node.getParentAttrValue());
@@ -427,7 +427,7 @@ public class ID3Tool {
 		if (node.getChildDataIndex() != null
 				&& node.getChildDataIndex().size() > 0) {
 			String i = node.getChildDataIndex().get(0);
-			System.out.print("Àà±ğ:"
+			System.out.print("ç±»åˆ«:"
 					+ data[Integer.parseInt(i)][attrNames.length - 1]);
 			System.out.print("[");
 			for (String index : node.getChildDataIndex()) {
@@ -435,8 +435,8 @@ public class ID3Tool {
 			}
 			System.out.print("]");
 		} else {
-			// µİ¹éÏÔÊ¾×Ó½Úµã
-			System.out.print("¡¾" + node.getAttrName() + "¡¿");
+			// é€’å½’æ˜¾ç¤ºå­èŠ‚ç‚¹
+			System.out.print("ã€" + node.getAttrName() + "ã€‘");
 			for (AttrNode childNode : node.getChildAttrNode()) {
 				showDecisionTree(childNode, 2 * blankNum);
 			}

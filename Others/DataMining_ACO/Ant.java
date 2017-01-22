@@ -3,23 +3,23 @@ package DataMining_ACO;
 import java.util.ArrayList;
 
 /**
- * ÂìÒÏÀà£¬½øĞĞÂ·¾¶ËÑË÷µÄÔØÌå
+ * èš‚èšç±»ï¼Œè¿›è¡Œè·¯å¾„æœç´¢çš„è½½ä½“
  * 
  * @author lyq
  * 
  */
 public class Ant implements Comparable<Ant> {
-	// ÂìÒÏµ±Ç°ËùÔÚ³ÇÊĞ
+	// èš‚èšå½“å‰æ‰€åœ¨åŸå¸‚
 	String currentPos;
-	// ÂìÒÏ±éÀúÍê»Øµ½Ô­µãËùÓÃµÄ×Ü¾àÀë
+	// èš‚èšéå†å®Œå›åˆ°åŸç‚¹æ‰€ç”¨çš„æ€»è·ç¦»
 	Double sumDistance;
-	// ³ÇÊĞ¼äµÄĞÅÏ¢ËØÅ¨¶È¾ØÕó£¬Ëæ×ÅÊ±¼äµÄÔö¶à¶ø¼õÉÙ
+	// åŸå¸‚é—´çš„ä¿¡æ¯ç´ æµ“åº¦çŸ©é˜µï¼Œéšç€æ—¶é—´çš„å¢å¤šè€Œå‡å°‘
 	double[][] pheromoneMatrix;
-	// ÂìÒÏÒÑ¾­×ß¹ıµÄ³ÇÊĞ¼¯ºÏ
+	// èš‚èšå·²ç»èµ°è¿‡çš„åŸå¸‚é›†åˆ
 	ArrayList<String> visitedCitys;
-	// »¹Î´×ß¹ıµÄ³ÇÊĞ¼¯ºÏ
+	// è¿˜æœªèµ°è¿‡çš„åŸå¸‚é›†åˆ
 	ArrayList<String> nonVisitedCitys;
-	// ÂìÒÏµ±Ç°×ß¹ıµÄÂ·¾¶
+	// èš‚èšå½“å‰èµ°è¿‡çš„è·¯å¾„
 	ArrayList<String> currentPath;
 
 	public Ant(double[][] pheromoneMatrix, ArrayList<String> nonVisitedCitys) {
@@ -31,7 +31,7 @@ public class Ant implements Comparable<Ant> {
 	}
 
 	/**
-	 * ¼ÆËãÂ·¾¶µÄ×Ü³É±¾(¾àÀë)
+	 * è®¡ç®—è·¯å¾„çš„æ€»æˆæœ¬(è·ç¦»)
 	 * 
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public class Ant implements Comparable<Ant> {
 			lastCity = currentPath.get(i);
 			currentCity = currentPath.get(i + 1);
 
-			// Í¨¹ı¾àÀë¾ØÕó½øĞĞ¼ÆËã
+			// é€šè¿‡è·ç¦»çŸ©é˜µè¿›è¡Œè®¡ç®—
 			sumDistance += ACOTool.disMatrix[Integer.parseInt(lastCity)][Integer
 					.parseInt(currentCity)];
 		}
@@ -53,10 +53,10 @@ public class Ant implements Comparable<Ant> {
 	}
 
 	/**
-	 * ÂìÒÏÑ¡ÔñÇ°ÍùÏÂÒ»¸ö³ÇÊĞ
+	 * èš‚èšé€‰æ‹©å‰å¾€ä¸‹ä¸€ä¸ªåŸå¸‚
 	 * 
 	 * @param city
-	 *            ËùÑ¡µÄ³ÇÊĞ
+	 *            æ‰€é€‰çš„åŸå¸‚
 	 */
 	public void goToNextCity(String city) {
 		this.currentPath.add(city);
@@ -66,7 +66,7 @@ public class Ant implements Comparable<Ant> {
 	}
 
 	/**
-	 * ÅĞ¶ÏÂìÒÏÊÇ·ñÒÑ¾­ÓÖÖØĞÂ»Øµ½Æğµã
+	 * åˆ¤æ–­èš‚èšæ˜¯å¦å·²ç»åˆé‡æ–°å›åˆ°èµ·ç‚¹
 	 * 
 	 * @return
 	 */
@@ -89,12 +89,12 @@ public class Ant implements Comparable<Ant> {
 	}
 
 	/**
-	 * ÅĞ¶ÏÂìÒÏÔÚ±¾´ÎµÄ×ß¹ıµÄÂ·¾¶ÖĞÊÇ·ñ°üº¬´Ó³ÇÊĞiµ½³ÇÊĞj
+	 * åˆ¤æ–­èš‚èšåœ¨æœ¬æ¬¡çš„èµ°è¿‡çš„è·¯å¾„ä¸­æ˜¯å¦åŒ…å«ä»åŸå¸‚iåˆ°åŸå¸‚j
 	 * 
 	 * @param cityI
-	 *            ³ÇÊĞI
+	 *            åŸå¸‚I
 	 * @param cityJ
-	 *            ³ÇÊĞJ
+	 *            åŸå¸‚J
 	 * @return
 	 */
 	public boolean pathContained(String cityI, String cityJ) {
@@ -106,7 +106,7 @@ public class Ant implements Comparable<Ant> {
 			lastCity = currentPath.get(i);
 			currentCity = currentPath.get(i + 1);
 
-			// Èç¹ûÄ³Ò»¶ÎÂ·¾¶µÄÊ¼Ä©Î»ÖÃÒ»ÖÂ£¬ÔòÈÏÎªÓĞ¾­¹ı´Ë³ÇÊĞ
+			// å¦‚æœæŸä¸€æ®µè·¯å¾„çš„å§‹æœ«ä½ç½®ä¸€è‡´ï¼Œåˆ™è®¤ä¸ºæœ‰ç»è¿‡æ­¤åŸå¸‚
 			if ((lastCity.equals(cityI) && currentCity.equals(cityJ))
 					|| (lastCity.equals(cityJ) && currentCity.equals(cityI))) {
 				isContained = true;

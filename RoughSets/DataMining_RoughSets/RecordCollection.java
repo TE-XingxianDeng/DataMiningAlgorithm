@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Êı¾İ¼ÇÂ¼¼¯ºÏ£¬°üº¬Ò»Ğ©¹²Í¬µÄÊôĞÔ
+ * æ•°æ®è®°å½•é›†åˆï¼ŒåŒ…å«ä¸€äº›å…±åŒçš„å±æ€§
  * 
  * @author lyq
  * 
  */
 public class RecordCollection {
-	// ¼¯ºÏ°üº¬µÄÊôĞÔ
+	// é›†åˆåŒ…å«çš„å±æ€§
 	private HashMap<String, String> attrValues;
-	// Êı¾İ¼ÇÂ¼ÁĞ±í
+	// æ•°æ®è®°å½•åˆ—è¡¨
 	private ArrayList<Record> recordList;
 
 	public RecordCollection() {
@@ -32,7 +32,7 @@ public class RecordCollection {
 	}
 
 	/**
-	 * ·µ»Ø¼¯ºÏµÄ×Ö·ûÃû³ÆÊı×é
+	 * è¿”å›é›†åˆçš„å­—ç¬¦åç§°æ•°ç»„
 	 * 
 	 * @return
 	 */
@@ -47,10 +47,10 @@ public class RecordCollection {
 	}
 
 	/**
-	 * ÅĞ¶Ï¼¯ºÏÊÇ·ñ°üº¬´ËÊôĞÔÃû³Æ¶ÔÓ¦µÄÊôĞÔÖµ
+	 * åˆ¤æ–­é›†åˆæ˜¯å¦åŒ…å«æ­¤å±æ€§åç§°å¯¹åº”çš„å±æ€§å€¼
 	 * 
 	 * @param attrName
-	 *            ÊôĞÔÃû
+	 *            å±æ€§å
 	 * @return
 	 */
 	public boolean isContainedAttrName(String attrName) {
@@ -64,10 +64,10 @@ public class RecordCollection {
 	}
 
 	/**
-	 * ÅĞ¶Ï2¸ö¼¯ºÏÊÇ·ñÏàµÈ£¬±È½Ï°üº¬µÄÊı¾İ¼ÇÂ¼ÊÇ·ñÍêÈ«Ò»ÖÂ
+	 * åˆ¤æ–­2ä¸ªé›†åˆæ˜¯å¦ç›¸ç­‰ï¼Œæ¯”è¾ƒåŒ…å«çš„æ•°æ®è®°å½•æ˜¯å¦å®Œå…¨ä¸€è‡´
 	 * 
 	 * @param rc
-	 *            ´ı±È½Ï¼¯ºÏ
+	 *            å¾…æ¯”è¾ƒé›†åˆ
 	 * @return
 	 */
 	public boolean isCollectionSame(RecordCollection rc) {
@@ -83,7 +83,7 @@ public class RecordCollection {
 				}
 			}
 
-			// Èç¹ûÓĞ1¸ö¼ÇÂ¼²»°üº¬£¬¾ÍËã¼¯ºÏ²»ÏàµÈ
+			// å¦‚æœæœ‰1ä¸ªè®°å½•ä¸åŒ…å«ï¼Œå°±ç®—é›†åˆä¸ç›¸ç­‰
 			if (!isSame) {
 				break;
 			}
@@ -93,10 +93,10 @@ public class RecordCollection {
 	}
 
 	/**
-	 * ¼¯ºÏÖ®¼äµÄ½»ÔËËã
+	 * é›†åˆä¹‹é—´çš„äº¤è¿ç®—
 	 * 
 	 * @param rc
-	 *            ½»ÔËËãµÄ²ÎÓëÔËËãµÄÁíÍâÒ»¼¯ºÏ
+	 *            äº¤è¿ç®—çš„å‚ä¸è¿ç®—çš„å¦å¤–ä¸€é›†åˆ
 	 * @return
 	 */
 	public RecordCollection overlapCalculate(RecordCollection rc) {
@@ -106,7 +106,7 @@ public class RecordCollection {
 		HashMap<String, String> resultAttrValues = new HashMap<>();
 		ArrayList<Record> resultRecords = new ArrayList<>();
 
-		// ½øĞĞ¼¯ºÏµÄ½»ÔËËã£¬ÓĞÏàÍ¬µÄ¼ÇÂ¼µÄÔò½øĞĞÌí¼Ó
+		// è¿›è¡Œé›†åˆçš„äº¤è¿ç®—ï¼Œæœ‰ç›¸åŒçš„è®°å½•çš„åˆ™è¿›è¡Œæ·»åŠ 
 		for (Record record : this.recordList) {
 			for (Record record2 : rc.recordList) {
 				if (record.isRecordSame(record2)) {
@@ -116,12 +116,12 @@ public class RecordCollection {
 			}
 		}
 
-		// Èç¹ûÃ»ÓĞ½»¼¯£¬ÔòÖ±½Ó·µ»Ø
+		// å¦‚æœæ²¡æœ‰äº¤é›†ï¼Œåˆ™ç›´æ¥è¿”å›
 		if (resultRecords.size() == 0) {
 			return null;
 		}
 
-		// ½«2¸ö¼¯ºÏµÄÊôĞÔ½øĞĞºÏ²¢
+		// å°†2ä¸ªé›†åˆçš„å±æ€§è¿›è¡Œåˆå¹¶
 		for (Map.Entry entry : this.attrValues.entrySet()) {
 			key = (String) entry.getKey();
 			value = (String) entry.getValue();
@@ -141,10 +141,10 @@ public class RecordCollection {
 	}
 
 	/**
-	 * Çó¼¯ºÏµÄ²¢¼¯£¬¸÷×Ô±£Áô¸÷×ÔµÄÊôĞÔ
+	 * æ±‚é›†åˆçš„å¹¶é›†ï¼Œå„è‡ªä¿ç•™å„è‡ªçš„å±æ€§
 	 * 
 	 * @param rc
-	 *            ´ıºÏ²¢µÄ¼¯ºÏ
+	 *            å¾…åˆå¹¶çš„é›†åˆ
 	 * @return
 	 */
 	public RecordCollection unionCal(RecordCollection rc) {
@@ -164,7 +164,7 @@ public class RecordCollection {
 	}
 	
 	/**
-	 * Êä³ö¼¯ºÏÖĞ°üº¬µÄÔªËØ
+	 * è¾“å‡ºé›†åˆä¸­åŒ…å«çš„å…ƒç´ 
 	 */
 	public void printRc(){
 		System.out.print("{");

@@ -1,7 +1,7 @@
 package DataMining_RoughSets;
 
 /**
- * �ֲڼ�Լ���㷨
+ * 粗糙集约简算法
  * @author lyq
  *
  */

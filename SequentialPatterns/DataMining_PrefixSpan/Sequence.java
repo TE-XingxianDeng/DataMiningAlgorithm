@@ -3,13 +3,13 @@ package DataMining_PrefixSpan;
 import java.util.ArrayList;
 
 /**
- * ĞòÁĞÀà
+ * åºåˆ—ç±»
  * 
  * @author lyq
  * 
  */
 public class Sequence {
-	// ĞòÁĞÄÚµÄÏî¼¯
+	// åºåˆ—å†…çš„é¡¹é›†
 	private ArrayList<ItemSet> itemSetList;
 
 	public Sequence() {
@@ -25,10 +25,10 @@ public class Sequence {
 	}
 
 	/**
-	 * ÅĞ¶Ïµ¥Ò»ÏîÊÇ·ñ°üº¬ÓÚ´ËĞòÁĞ
+	 * åˆ¤æ–­å•ä¸€é¡¹æ˜¯å¦åŒ…å«äºæ­¤åºåˆ—
 	 * 
 	 * @param c
-	 *            ´ıÅĞ¶ÏÏî
+	 *            å¾…åˆ¤æ–­é¡¹
 	 * @return
 	 */
 	public boolean strIsContained(String c) {
@@ -49,7 +49,7 @@ public class Sequence {
 			}
 
 			if (isContained) {
-				// Èç¹ûÒÑ¾­¼ì²â³ö°üº¬ÁË£¬Ö±½ÓÌô³öÑ­»·
+				// å¦‚æœå·²ç»æ£€æµ‹å‡ºåŒ…å«äº†ï¼Œç›´æ¥æŒ‘å‡ºå¾ªç¯
 				break;
 			}
 		}
@@ -58,10 +58,10 @@ public class Sequence {
 	}
 
 	/**
-	 * ÅĞ¶Ï×éºÏÏî¼¯ÊÇ·ñ°üº¬ÓÚĞòÁĞÖĞ
+	 * åˆ¤æ–­ç»„åˆé¡¹é›†æ˜¯å¦åŒ…å«äºåºåˆ—ä¸­
 	 * 
 	 * @param itemSet
-	 *            ×éºÏµÄÏî¼¯£¬ÔªËØ³¬¹ı1¸ö
+	 *            ç»„åˆçš„é¡¹é›†ï¼Œå…ƒç´ è¶…è¿‡1ä¸ª
 	 * @return
 	 */
 	public boolean compoentItemIsContain(ItemSet itemSet) {
@@ -71,13 +71,13 @@ public class Sequence {
 
 		for (int i = 0; i < this.itemSetList.size(); i++) {
 			tempItems = this.itemSetList.get(i).getItems();
-			// ·Ö2ÖÖÇé¿ö²éÕÒ£¬µÚÒ»ÖÖ´Ó_XÖĞÕÒ³öxµÈÓÚÏî¼¯×îºóµÄÔªËØ£¬ÒòÎª_Ç°×ºÒÑ¾­ÎªÔ­±¾µÄÔªËØ
+			// åˆ†2ç§æƒ…å†µæŸ¥æ‰¾ï¼Œç¬¬ä¸€ç§ä»_Xä¸­æ‰¾å‡ºxç­‰äºé¡¹é›†æœ€åçš„å…ƒç´ ï¼Œå› ä¸º_å‰ç¼€å·²ç»ä¸ºåŸæœ¬çš„å…ƒç´ 
 			if (tempItems.size() > 1 && tempItems.get(0).equals("_")
 					&& tempItems.get(1).equals(lastItem)) {
 				isContained = true;
 				break;
 			} else if (!tempItems.get(0).equals("_")) {
-				// ´ÓÃ»ÓĞ_Ç°×ºµÄÏî¼¯¿ªÊ¼Ñ°ÕÒ£¬µÚ¶şÖÖÎª´ÓºóÃæµÄºó×ºÖĞÕÒ³öÖ±½ÓÕÒ³öÁ¬Ğø×Ö·ûÎªabÎªÍ¬Ò»Ïî¼¯µÄÏî¼¯
+				// ä»æ²¡æœ‰_å‰ç¼€çš„é¡¹é›†å¼€å§‹å¯»æ‰¾ï¼Œç¬¬äºŒç§ä¸ºä»åé¢çš„åç¼€ä¸­æ‰¾å‡ºç›´æ¥æ‰¾å‡ºè¿ç»­å­—ç¬¦ä¸ºabä¸ºåŒä¸€é¡¹é›†çš„é¡¹é›†
 				if (strArrayContains(tempItems, itemSet.getItems())) {
 					isContained = true;
 					break;
@@ -93,10 +93,10 @@ public class Sequence {
 	}
 
 	/**
-	 * É¾³ıµ¥¸öÏî
+	 * åˆ é™¤å•ä¸ªé¡¹
 	 * 
 	 * @param s
-	 *            ´ıÉ¾³ıÏî
+	 *            å¾…åˆ é™¤é¡¹
 	 */
 	public void deleteSingleItem(String s) {
 		ArrayList<String> tempItems;
@@ -117,10 +117,10 @@ public class Sequence {
 	}
 
 	/**
-	 * ÌáÈ¡ÏîsÖ®ºóËùµÃµÄĞòÁĞ
+	 * æå–é¡¹sä¹‹åæ‰€å¾—çš„åºåˆ—
 	 * 
 	 * @param s
-	 *            Ä¿±êÌáÈ¡Ïîs
+	 *            ç›®æ ‡æå–é¡¹s
 	 */
 	public Sequence extractItem(String s) {
 		Sequence extractSeq = this.copySeqence();
@@ -133,24 +133,24 @@ public class Sequence {
 			itemSet = extractSeq.itemSetList.get(k);
 			items = itemSet.getItems();
 			if (items.size() == 1 && items.get(0).equals(s)) {
-				//Èç¹ûÕÒµ½µÄÊÇµ¥Ïî£¬ÔòÍêÈ«ÒÆ³ı£¬Ìø³öÑ­»·
+				//å¦‚æœæ‰¾åˆ°çš„æ˜¯å•é¡¹ï¼Œåˆ™å®Œå…¨ç§»é™¤ï¼Œè·³å‡ºå¾ªç¯
 				extractSeq.itemSetList.remove(k);
 				break;
 			} else if (items.size() > 1 && !items.get(0).equals("_")) {
-				//ÔÚºóĞøµÄ¶àÔªËØÏîÖĞÅĞ¶ÏÊÇ·ñ°üº¬´ËÔªËØ
+				//åœ¨åç»­çš„å¤šå…ƒç´ é¡¹ä¸­åˆ¤æ–­æ˜¯å¦åŒ…å«æ­¤å…ƒç´ 
 				if (items.contains(s)) {
-					//Èç¹û°üº¬°ÑsºóÃæµÄÔªËØ¼ÓÈëµ½ÁÙÊ±×Ö·ûÊı×éÖĞ
+					//å¦‚æœåŒ…å«æŠŠsåé¢çš„å…ƒç´ åŠ å…¥åˆ°ä¸´æ—¶å­—ç¬¦æ•°ç»„ä¸­
 					int index = items.indexOf(s);
 					for (int j = index; j < items.size(); j++) {
 						tempItems.add(items.get(j));
 					}
-					//½«µÚÒ»Î»µÄs±ä³ÉÏÂ±ê·û"_"
+					//å°†ç¬¬ä¸€ä½çš„så˜æˆä¸‹æ ‡ç¬¦"_"
 					tempItems.set(0, "_");
 					if (tempItems.size() == 1) {
-						// Èç¹û´ËÆ¥ÅäÎªÔÚ×îÄ©¶Ë£¬Í¬ÑùÒÆ³ı
+						// å¦‚æœæ­¤åŒ¹é…ä¸ºåœ¨æœ€æœ«ç«¯ï¼ŒåŒæ ·ç§»é™¤
 						deleteItemSets.add(itemSet);
 					} else {
-						//½«±ä»¯ºóµÄÏî¼¯Ìæ»»Ô­À´µÄ
+						//å°†å˜åŒ–åçš„é¡¹é›†æ›¿æ¢åŸæ¥çš„
 						extractSeq.itemSetList.set(k, new ItemSet(tempItems));
 					}
 					break;
@@ -158,7 +158,7 @@ public class Sequence {
 					deleteItemSets.add(itemSet);
 				}
 			} else {
-				// ²»·ûºÏÒÔÉÏ2ÏîÌõ¼şµÄÍ³Í³ÒÆ³ı
+				// ä¸ç¬¦åˆä»¥ä¸Š2é¡¹æ¡ä»¶çš„ç»Ÿç»Ÿç§»é™¤
 				deleteItemSets.add(itemSet);
 			}
 		}
@@ -168,14 +168,14 @@ public class Sequence {
 	}
 
 	/**
-	 * ÌáÈ¡×éºÏÏîÖ®ºóµÄĞòÁĞ
+	 * æå–ç»„åˆé¡¹ä¹‹åçš„åºåˆ—
 	 * 
 	 * @param array
-	 *            ×éºÏÊı×é
+	 *            ç»„åˆæ•°ç»„
 	 * @return
 	 */
 	public Sequence extractCompoentItem(ArrayList<String> array) {
-		// ÕÒµ½Ä¿±êÏî£¬ÊÇ·ñÁ¢¿ÌÍ£Ö¹
+		// æ‰¾åˆ°ç›®æ ‡é¡¹ï¼Œæ˜¯å¦ç«‹åˆ»åœæ­¢
 		boolean stopExtract = false;
 		Sequence seq = this.copySeqence();
 		String lastItem = array.get(array.size() - 1);
@@ -188,23 +188,23 @@ public class Sequence {
 			}
 
 			tempItems = seq.itemSetList.get(i).getItems();
-			// ·Ö2ÖÖÇé¿ö²éÕÒ£¬µÚÒ»ÖÖ´Ó_XÖĞÕÒ³öxµÈÓÚÏî¼¯×îºóµÄÔªËØ£¬ÒòÎª_Ç°×ºÒÑ¾­ÎªÔ­±¾µÄÔªËØ
+			// åˆ†2ç§æƒ…å†µæŸ¥æ‰¾ï¼Œç¬¬ä¸€ç§ä»_Xä¸­æ‰¾å‡ºxç­‰äºé¡¹é›†æœ€åçš„å…ƒç´ ï¼Œå› ä¸º_å‰ç¼€å·²ç»ä¸ºåŸæœ¬çš„å…ƒç´ 
 			if (tempItems.size() > 1 && tempItems.get(0).equals("_")
 					&& tempItems.get(1).equals(lastItem)) {
 				if (tempItems.size() == 2) {
 					seq.itemSetList.remove(i);
 				} else {
-					// °Ñ1ºÅÎ»ÖÃ±äÎªÏÂ±ê·û"_"£¬ÍùºóÒÆ1¸ö×Ö·ûµÄÎ»ÖÃ
+					// æŠŠ1å·ä½ç½®å˜ä¸ºä¸‹æ ‡ç¬¦"_"ï¼Œå¾€åç§»1ä¸ªå­—ç¬¦çš„ä½ç½®
 					tempItems.set(1, "_");
-					// ÒÆ³ıµÚÒ»¸öµÄ"_"ÏÂ»®·û
+					// ç§»é™¤ç¬¬ä¸€ä¸ªçš„"_"ä¸‹åˆ’ç¬¦
 					tempItems.remove(0);
 				}
 				stopExtract = true;
 				break;
 			} else if (!tempItems.get(0).equals("_")) {
-				// ´ÓÃ»ÓĞ_Ç°×ºµÄÏî¼¯¿ªÊ¼Ñ°ÕÒ£¬µÚ¶şÖÖÎª´ÓºóÃæµÄºó×ºÖĞÕÒ³öÖ±½ÓÕÒ³öÁ¬Ğø×Ö·ûÎªabÎªÍ¬Ò»Ïî¼¯µÄÏî¼¯
+				// ä»æ²¡æœ‰_å‰ç¼€çš„é¡¹é›†å¼€å§‹å¯»æ‰¾ï¼Œç¬¬äºŒç§ä¸ºä»åé¢çš„åç¼€ä¸­æ‰¾å‡ºç›´æ¥æ‰¾å‡ºè¿ç»­å­—ç¬¦ä¸ºabä¸ºåŒä¸€é¡¹ï¿½î‡ªå—ç½´ï¿½
 				if (strArrayContains(tempItems, array)) {
-					// ´Ó×óÍùÓÒÕÒ³öµÚÒ»¸ö¸ø¶¨×Ö·ûµÄÎ»ÖÃ£¬°ÑºóÃæµÄ²¿·Ö½ØÈ¡³öÀ´
+					// ä»å·¦å¾€å³æ‰¾å‡ºç¬¬ä¸€ä¸ªç»™å®šå­—ç¬¦çš„ä½ç½®ï¼ŒæŠŠåé¢çš„éƒ¨åˆ†æˆªå–å‡ºæ¥
 					int index = tempItems.indexOf(lastItem);
 					ArrayList<String> array2 = new ArrayList<String>();
 
@@ -214,7 +214,7 @@ public class Sequence {
 					array2.set(0, "_");
 
 					if (array2.size() == 1) {
-						//Èç¹û´ËÏîÔÚÄ©Î²µÄÎ»ÖÃ£¬ÔòÒÆ³ı¸ÃÏî£¬·ñÔò½øĞĞÌæ»»
+						//å¦‚æœæ­¤é¡¹åœ¨æœ«å°¾çš„ä½ç½®ï¼Œåˆ™ç§»é™¤è¯¥é¡¹ï¼Œå¦åˆ™è¿›è¡Œæ›¿æ¢
 						deleteItems.add(seq.itemSetList.get(i));
 					} else {
 						seq.itemSetList.set(i, new ItemSet(array2));
@@ -225,7 +225,7 @@ public class Sequence {
 					deleteItems.add(seq.itemSetList.get(i));
 				}
 			} else {
-				// ÕâÖÖÇé¿öÊÇ´¦Àí_XÖĞX²»µÈÓÚ×îºóÒ»¸öÔªËØµÄÇé¿ö
+				// è¿™ç§æƒ…å†µæ˜¯å¤„ç†_Xä¸­Xä¸ç­‰äºæœ€åä¸€ä¸ªå…ƒç´ çš„æƒ…å†µ
 				deleteItems.add(seq.itemSetList.get(i));
 			}
 		}
@@ -236,7 +236,7 @@ public class Sequence {
 	}
 
 	/**
-	 * Éî¿½±´Ò»¸öĞòÁĞ
+	 * æ·±æ‹·è´ä¸€ä¸ªåºåˆ—
 	 * 
 	 * @return
 	 */
@@ -255,7 +255,7 @@ public class Sequence {
 	}
 
 	/**
-	 * »ñÈ¡ĞòÁĞÖĞ×îºóÒ»¸öÏî¼¯µÄ×îºó1¸öÔªËØ
+	 * è·å–åºåˆ—ä¸­æœ€åä¸€ä¸ªé¡¹é›†çš„æœ€å1ä¸ªå…ƒç´ 
 	 * 
 	 * @return
 	 */
@@ -268,7 +268,7 @@ public class Sequence {
 	}
 
 	/**
-	 * ÅĞ¶ÏstrList2ÊÇ·ñÊÇstrList1µÄ×ÓĞòÁĞ
+	 * åˆ¤æ–­strList2æ˜¯å¦æ˜¯strList1çš„å­åºåˆ—
 	 * 
 	 * @param strList1
 	 * @param strList2

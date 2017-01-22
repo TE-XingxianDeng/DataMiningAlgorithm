@@ -1,17 +1,17 @@
 package DataMining_MSApriori;
 
 /**
- * 频繁项集
+ * 棰戠箒椤归泦
  * 
  * @author lyq
  * 
  */
 public class FrequentItem implements Comparable<FrequentItem>{
-	// 频繁项集的集合ID
+	// 棰戠箒椤归泦鐨勯泦鍚圛D
 	private String[] idArray;
-	// 频繁项集的支持度计数
+	// 棰戠箒椤归泦鐨勬敮鎸佸害璁℃暟
 	private int count;
-	//频繁项集的长度，1项集或是2项集，亦或是3项集
+	//棰戠箒椤归泦鐨勯暱搴︼紝1椤归泦鎴栨槸2椤归泦锛屼害鎴栨槸3椤归泦
 	private int length;
 	
 	public FrequentItem(String[] idArray, int count){

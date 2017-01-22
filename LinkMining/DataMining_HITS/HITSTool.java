@@ -7,22 +7,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * HITSÁ´½Ó·ÖÎöËã·¨¹¤¾ßÀà
+ * HITSé“¾æ¥åˆ†æç®—æ³•å·¥å…·ç±»
  * @author lyq
  *
  */
 public class HITSTool {
-	//ÊäÈëÊı¾İÎÄ¼şµØÖ·
+	//è¾“å…¥æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	//ÍøÒ³¸öÊı
+	//ç½‘é¡µä¸ªæ•°
 	private int pageNum;
-	//ÍøÒ³AuthorityÈ¨ÍşÖµ
+	//ç½‘é¡µAuthorityæƒå¨å€¼
 	private double[] authority;
-	//ÍøÒ³hubÖĞĞÄÖµ
+	//ç½‘é¡µhubä¸­å¿ƒå€¼
 	private double[] hub;
-	//Á´½Ó¾ØÕó¹ØÏµ
+	//é“¾æ¥çŸ©é˜µå…³ç³»
 	private int[][] linkMatrix;
-	//ÍøÒ³ÖÖÀà
+	//ç½‘é¡µç§ç±»
 	private ArrayList<String> pageClass;
 	
 	public HITSTool(String filePath){
@@ -31,7 +31,7 @@ public class HITSTool {
 	}
 	
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -51,7 +51,7 @@ public class HITSTool {
 		}
 
 		pageClass = new ArrayList<>();
-		// Í³¼ÆÍøÒ³ÀàĞÍÖÖÊı
+		// ç»Ÿè®¡ç½‘é¡µç±»å‹ç§æ•°
 		for (String[] array : dataArray) {
 			for (String s : array) {
 				if (!pageClass.contains(s)) {
@@ -67,7 +67,7 @@ public class HITSTool {
 		authority = new double[pageNum];
 		hub = new double[pageNum];
 		for(int k=0; k<pageNum; k++){
-			//³õÊ¼Ê±Ä¬ÈÏÈ¨ÍşÖµºÍÖĞĞÄÖµ¶¼Îª1
+			//åˆå§‹æ—¶é»˜è®¤æƒå¨å€¼å’Œä¸­å¿ƒå€¼éƒ½ä¸º1
 			authority[k] = 1;
 			hub[k] = 1;
 		}
@@ -77,20 +77,20 @@ public class HITSTool {
 			i = Integer.parseInt(array[0]);
 			j = Integer.parseInt(array[1]);
 
-			// ÉèÖÃlinkMatrix[i][j]Îª1´ú±íiÍøÒ³°üº¬Ö¸ÏòjÍøÒ³µÄÁ´½Ó
+			// è®¾ç½®linkMatrix[i][j]ä¸º1ä»£è¡¨iç½‘é¡µåŒ…å«æŒ‡å‘jç½‘é¡µçš„é“¾æ¥
 			linkMatrix[i - 1][j - 1] = 1;
 		}
 	}
 	
 	/**
-	 * Êä³ö½á¹ûÒ³Ãæ£¬Ò²¾ÍÊÇauthorityÈ¨ÍşÖµ×î¸ßµÄÒ³Ãæ
+	 * è¾“å‡ºç»“æœé¡µé¢ï¼Œä¹Ÿå°±æ˜¯authorityæƒå¨å€¼æœ€é«˜çš„é¡µé¢
 	 */
 	public void printResultPage(){
-		//×î´óHubºÍAuthorityÖµ£¬ÓÃÓÚºóÃæµÄ¹éÒ»»¯¼ÆËã
+		//æœ€å¤§Hubå’ŒAuthorityå€¼ï¼Œç”¨äºåé¢çš„å½’ä¸€åŒ–è®¡ç®—
 		double maxHub = 0;
 		double maxAuthority = 0;
 		int maxAuthorityIndex =0;
-		//Îó²îÖµ£¬ÓÃÓÚÊÕÁ²ÅĞ¶Ï
+		//è¯¯å·®å€¼ï¼Œç”¨äºæ”¶æ•›åˆ¤æ–­
 		double error = Integer.MAX_VALUE;
 		double[] newHub = new double[pageNum];
 		double[] newAuthority = new double[pageNum];
@@ -102,7 +102,7 @@ public class HITSTool {
 				newAuthority[k] = 0;
 			}
 			
-			//hubºÍauthorityÖµµÄ¸üĞÂ¼ÆËã
+			//hubå’Œauthorityå€¼çš„æ›´æ–°è®¡ç®—
 			for(int i=0; i<pageNum; i++){
 				for(int j=0; j<pageNum; j++){
 					if(linkMatrix[i][j] == 1){
@@ -126,7 +126,7 @@ public class HITSTool {
 			}
 			
 			error = 0;
-			//¹éÒ»»¯´¦Àí
+			//å½’ä¸€åŒ–å¤„ç†
 			for(int k=0; k<pageNum; k++){
 				newHub[k] /= maxHub;
 				newAuthority[k] /= maxAuthority;
@@ -140,11 +140,11 @@ public class HITSTool {
 			System.out.println("---------");
 		}
 		
-		System.out.println("****×îÖÕÊÕÁ²µÄÍøÒ³µÄÈ¨ÍşÖµºÍÖĞĞÄÖµ****");
+		System.out.println("****æœ€ç»ˆæ”¶æ•›çš„ç½‘é¡µçš„æƒå¨å€¼å’Œä¸­å¿ƒå€¼****");
 		for(int k=0; k<pageNum; k++){
-			System.out.println("ÍøÒ³" + pageClass.get(k) + ":"+ authority[k] + ":" + hub[k]);
+			System.out.println("ç½‘é¡µ" + pageClass.get(k) + ":"+ authority[k] + ":" + hub[k]);
 		}
-		System.out.println("È¨ÍşÖµ×î¸ßµÄÍøÒ³Îª£ºÍøÒ³" + pageClass.get(maxAuthorityIndex));
+		System.out.println("æƒå¨å€¼æœ€é«˜çš„ç½‘é¡µä¸ºï¼šç½‘é¡µ" + pageClass.get(maxAuthorityIndex));
 	}
 
 }

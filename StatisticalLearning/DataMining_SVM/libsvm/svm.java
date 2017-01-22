@@ -2638,7 +2638,7 @@ public class svm {
 	}
 
 	/**
-	 * ¶ÔsvmµÄÅäÖÃ²ÎÊý½ÐÑéÖ¤£¬ÒòÎªÓÐÐ©²ÎÊýÖ»Õë¶Ô²¿·ÖµÄÖ§³ÖÏòÁ¿»úµÄÀàÐÍ
+	 * å¯¹svmçš„é…ç½®å‚æ•°å«éªŒè¯ï¼Œå› ä¸ºæœ‰äº›å‚æ•°åªé’ˆå¯¹éƒ¨åˆ†çš„æ”¯æŒå‘é‡æœºçš„ç±»åž‹
 	 * @param prob
 	 * @param param
 	 * @return

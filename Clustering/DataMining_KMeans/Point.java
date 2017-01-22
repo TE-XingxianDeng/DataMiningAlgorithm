@@ -1,19 +1,19 @@
 package DataMining_KMeans;
 
 /**
- * ×ø±êµãÀà
+ * åæ ‡ç‚¹ç±»
  * 
  * @author lyq
  * 
  */
 public class Point implements Comparable<Point>{
-	// ×ø±êµãºá×ø±ê
+	// åæ ‡ç‚¹æ¨ªåæ ‡
 	private double x;
-	// ×ø±êµã×İ×ø±ê
+	// åæ ‡ç‚¹çºµåæ ‡
 	private double y;
-	//ÒÔ´Ëµã×÷Îª¾ÛÀàÖĞĞÄµÄÀàµÄÀàÃû³Æ
+	//ä»¥æ­¤ç‚¹ä½œä¸ºèšç±»ä¸­å¿ƒçš„ç±»çš„ç±»åç§°
 	private String className;
-	// ×ø±êµãÖ®¼äµÄÅ·Ê½¾àÀë
+	// åæ ‡ç‚¹ä¹‹é—´çš„æ¬§å¼è·ç¦»
 	private Double distance;
 
 	public Point(double x, double y) {
@@ -33,7 +33,7 @@ public class Point implements Comparable<Point>{
 	}
 
 	/**
-	 * ¾àÀëÄ¿±êµãpµÄÅ·¼¸ÀïµÃ¾àÀë
+	 * è·ç¦»ç›®æ ‡ç‚¹pçš„æ¬§å‡ é‡Œå¾—è·ç¦»
 	 * 
 	 * @param p
 	 */

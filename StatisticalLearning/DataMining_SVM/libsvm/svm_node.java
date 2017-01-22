@@ -1,14 +1,14 @@
 package DataMining_SVM.libsvm;
 /**
  * 
- * svmÏòÁ¿½Úµã
+ * svmå‘é‡èŠ‚ç‚¹
  * @author lyq
  *
  */
 public class svm_node implements java.io.Serializable
 {
-	//½ÚµãË÷Òı
+	//èŠ‚ç‚¹ç´¢å¼•
 	public int index;
-	//½ÚµãµÄÖµ
+	//èŠ‚ç‚¹çš„å€¼
 	public double value;
 }

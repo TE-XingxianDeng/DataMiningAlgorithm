@@ -10,40 +10,40 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * gSpanÆµ·±×ÓÍ¼ÍÚ¾òËã·¨¹¤¾ßÀà
+ * gSpané¢‘ç¹å­å›¾æŒ–æ˜ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class GSpanTool {
-	// ÎÄ¼şÊı¾İÀàĞÍ
+	// æ–‡ä»¶æ•°æ®ç±»å‹
 	public final String INPUT_NEW_GRAPH = "t";
 	public final String INPUT_VERTICE = "v";
 	public final String INPUT_EDGE = "e";
-	// Label±êºÅµÄ×î´óÊıÁ¿£¬°üÀ¨µã±êºÅºÍ±ß±êºÅ
+	// Labelæ ‡å·çš„æœ€å¤§æ•°é‡ï¼ŒåŒ…æ‹¬ç‚¹æ ‡å·å’Œè¾¹æ ‡å·
 	public final int LABEL_MAX = 100;
 
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ×îĞ¡Ö§³Ö¶ÈÂÊ
+	// æœ€å°æ”¯æŒåº¦ç‡
 	private double minSupportRate;
-	// ×îĞ¡Ö§³Ö¶ÈÊı£¬Í¨¹ıÍ¼×ÜÊıÓë×îĞ¡Ö§³Ö¶ÈÂÊµÄ³Ë»ı¼ÆËãËùµÃ
+	// æœ€å°æ”¯æŒåº¦æ•°ï¼Œé€šè¿‡å›¾æ€»æ•°ä¸æœ€å°æ”¯æŒåº¦ç‡çš„ä¹˜ç§¯è®¡ç®—æ‰€å¾—
 	private int minSupportCount;
-	// ³õÊ¼ËùÓĞÍ¼µÄÊı¾İ
+	// åˆå§‹æ‰€æœ‰å›¾çš„æ•°æ®
 	private ArrayList<GraphData> totalGraphDatas;
-	// ËùÓĞµÄÍ¼½á¹¹Êı¾İ
+	// æ‰€æœ‰çš„å›¾ç»“æ„æ•°æ®
 	private ArrayList<Graph> totalGraphs;
-	// ÍÚ¾ò³öµÄÆµ·±×ÓÍ¼
+	// æŒ–æ˜å‡ºçš„é¢‘ç¹å­å›¾
 	private ArrayList<Graph> resultGraphs;
-	// ±ßµÄÆµ¶ÈÍ³¼Æ
+	// è¾¹çš„é¢‘åº¦ç»Ÿè®¡
 	private EdgeFrequency ef;
-	// ½ÚµãµÄÆµ¶È
+	// èŠ‚ç‚¹çš„é¢‘åº¦
 	private int[] freqNodeLabel;
-	// ±ßµÄÆµ¶È
+	// è¾¹çš„é¢‘åº¦
 	private int[] freqEdgeLabel;
-	// ÖØĞÂ±êºÅÖ®ºóµÄµãµÄ±êºÅÊı
+	// é‡æ–°æ ‡å·ä¹‹åçš„ç‚¹çš„æ ‡å·æ•°
 	private int newNodeLabelNum = 0;
-	// ÖØĞÂ±êºÅºóµÄ±ßµÄ±êºÅÊı
+	// é‡æ–°æ ‡å·åçš„è¾¹çš„æ ‡å·æ•°
 	private int newEdgeLabelNum = 0;
 
 	public GSpanTool(String filePath, double minSupportRate) {
@@ -53,7 +53,7 @@ public class GSpanTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -76,19 +76,19 @@ public class GSpanTool {
 	}
 
 	/**
-	 * Í³¼Æ±ßºÍµãµÄÆµ¶È£¬²¢ÒÆ³ı²»Æµ·±µÄµã±ß£¬ÒÔ±êºÅ×÷ÎªÍ³¼ÆµÄ±äÁ¿
+	 * ç»Ÿè®¡è¾¹å’Œç‚¹çš„é¢‘åº¦ï¼Œå¹¶ç§»é™¤ä¸é¢‘ç¹çš„ç‚¹è¾¹ï¼Œä»¥æ ‡å·ä½œä¸ºç»Ÿè®¡çš„å˜é‡
 	 * 
 	 * @param dataArray
-	 *            Ô­Ê¼Êı¾İ
+	 *            åŸå§‹æ•°æ®
 	 */
 	private void calFrequentAndRemove(ArrayList<String[]> dataArray) {
 		int tempCount = 0;
 		freqNodeLabel = new int[LABEL_MAX];
 		freqEdgeLabel = new int[LABEL_MAX];
 
-		// ×ö³õÊ¼»¯²Ù×÷
+		// åšåˆå§‹åŒ–æ“ä½œ
 		for (int i = 0; i < LABEL_MAX; i++) {
-			// ´ú±í±êºÅÎªiµÄ½ÚµãÄ¿Ç°µÄÊıÁ¿Îª0
+			// ä»£è¡¨æ ‡å·ä¸ºiçš„èŠ‚ç‚¹ç›®å‰çš„æ•°é‡ä¸º0
 			freqNodeLabel[i] = 0;
 			freqEdgeLabel[i] = 0;
 		}
@@ -101,10 +101,10 @@ public class GSpanTool {
 					totalGraphDatas.add(gd);
 				}
 
-				// ĞÂ½¨Í¼
+				// æ–°å»ºå›¾
 				gd = new GraphData();
 			} else if (array[0].equals(INPUT_VERTICE)) {
-				// Ã¿¸öÍ¼ÖĞµÄÃ¿ÖÖÍ¼Ö»Í³¼ÆÒ»´Î
+				// æ¯ä¸ªå›¾ä¸­çš„æ¯ç§å›¾åªç»Ÿè®¡ä¸€æ¬¡
 				if (!gd.getNodeLabels().contains(Integer.parseInt(array[2]))) {
 					tempCount = freqNodeLabel[Integer.parseInt(array[2])];
 					tempCount++;
@@ -114,7 +114,7 @@ public class GSpanTool {
 				gd.getNodeLabels().add(Integer.parseInt(array[2]));
 				gd.getNodeVisibles().add(true);
 			} else if (array[0].equals(INPUT_EDGE)) {
-				// Ã¿¸öÍ¼ÖĞµÄÃ¿ÖÖÍ¼Ö»Í³¼ÆÒ»´Î
+				// æ¯ä¸ªå›¾ä¸­çš„æ¯ç§å›¾åªç»Ÿè®¡ä¸€æ¬¡
 				if (!gd.getEdgeLabels().contains(Integer.parseInt(array[3]))) {
 					tempCount = freqEdgeLabel[Integer.parseInt(array[3])];
 					tempCount++;
@@ -130,7 +130,7 @@ public class GSpanTool {
 				gd.getEdgeVisibles().add(true);
 			}
 		}
-		// °Ñ×îºóÒ»¿égdÊı¾İ¼ÓÈë
+		// æŠŠæœ€åä¸€å—gdæ•°æ®åŠ å…¥
 		totalGraphDatas.add(gd);
 		minSupportCount = (int) (minSupportRate * totalGraphDatas.size());
 
@@ -141,22 +141,22 @@ public class GSpanTool {
 	}
 
 	/**
-	 * ¸ù¾İ±êºÅÆµ·±¶È½øĞĞÅÅĞò²¢ÇÒÖØĞÂ±êºÅ
+	 * æ ¹æ®æ ‡å·é¢‘ç¹åº¦è¿›è¡Œæ’åºå¹¶ä¸”é‡æ–°æ ‡å·
 	 */
 	private void sortAndReLabel() {
 		int label1 = 0;
 		int label2 = 0;
 		int temp = 0;
-		// µãÅÅĞòÃû´Î
+		// ç‚¹æ’åºåæ¬¡
 		int[] rankNodeLabels = new int[LABEL_MAX];
-		// ±ßÅÅĞòÃû´Î
+		// è¾¹æ’åºåæ¬¡
 		int[] rankEdgeLabels = new int[LABEL_MAX];
-		// ±êºÅ¶ÔÓ¦ÅÅÃû
+		// æ ‡å·å¯¹åº”æ’å
 		int[] nodeLabel2Rank = new int[LABEL_MAX];
 		int[] edgeLabel2Rank = new int[LABEL_MAX];
 
 		for (int i = 0; i < LABEL_MAX; i++) {
-			// ±íÊ¾ÅÅÃûµÚiÎ»µÄ±êºÅÎªi£¬[i]ÖĞµÄi±íÊ¾ÅÅÃû
+			// è¡¨ç¤ºæ’åç¬¬iä½çš„æ ‡å·ä¸ºiï¼Œ[i]ä¸­çš„iè¡¨ç¤ºæ’å
 			rankNodeLabels[i] = i;
 			rankEdgeLabels[i] = i;
 		}
@@ -169,21 +169,21 @@ public class GSpanTool {
 				label2 = rankNodeLabels[j];
 
 				if (freqNodeLabel[temp] < freqNodeLabel[label2]) {
-					// ½øĞĞ±êºÅµÄ»¥»»
+					// è¿›è¡Œæ ‡å·çš„äº’æ¢
 					temp = label2;
 					k = j;
 				}
 			}
 
 			if (temp != label1) {
-				// ½øĞĞi£¬kÅÅÃûÏÂµÄ±êºÅ¶Ôµ÷
+				// è¿›è¡Œiï¼Œkæ’åä¸‹çš„æ ‡å·å¯¹è°ƒ
 				temp = rankNodeLabels[k];
 				rankNodeLabels[k] = rankNodeLabels[i];
 				rankNodeLabels[i] = temp;
 			}
 		}
 
-		// ¶Ô±ßÍ¬Ñù½øĞĞÅÅĞò
+		// å¯¹è¾¹åŒæ ·è¿›è¡Œæ’åº
 		for (int i = 0; i < freqEdgeLabel.length - 1; i++) {
 			int k = 0;
 			label1 = rankEdgeLabels[i];
@@ -192,21 +192,21 @@ public class GSpanTool {
 				label2 = rankEdgeLabels[j];
 
 				if (freqEdgeLabel[temp] < freqEdgeLabel[label2]) {
-					// ½øĞĞ±êºÅµÄ»¥»»
+					// è¿›è¡Œæ ‡å·çš„äº’æ¢
 					temp = label2;
 					k = j;
 				}
 			}
 
 			if (temp != label1) {
-				// ½øĞĞi£¬kÅÅÃûÏÂµÄ±êºÅ¶Ôµ÷
+				// è¿›è¡Œiï¼Œkæ’åä¸‹çš„æ ‡å·å¯¹è°ƒ
 				temp = rankEdgeLabels[k];
 				rankEdgeLabels[k] = rankEdgeLabels[i];
 				rankEdgeLabels[i] = temp;
 			}
 		}
 
-		// ½«ÅÅÃû¶Ô±êºÅ×ªÎª±êºÅ¶ÔÅÅÃû
+		// å°†æ’åå¯¹æ ‡å·è½¬ä¸ºæ ‡å·å¯¹æ’å
 		for (int i = 0; i < rankNodeLabels.length; i++) {
 			nodeLabel2Rank[rankNodeLabels[i]] = i;
 		}
@@ -219,7 +219,7 @@ public class GSpanTool {
 			gd.reLabelByRank(nodeLabel2Rank, edgeLabel2Rank);
 		}
 
-		// ¸ù¾İÅÅÃûÕÒ³öĞ¡ÓÚÖ§³Ö¶ÈÖµµÄ×î´óÅÅÃûÖµ
+		// æ ¹æ®æ’åæ‰¾å‡ºå°äºæ”¯æŒåº¦å€¼çš„æœ€å¤§æ’åå€¼
 		for (int i = 0; i < rankNodeLabels.length; i++) {
 			if (freqNodeLabel[rankNodeLabels[i]] > minSupportCount) {
 				newNodeLabelNum = i;
@@ -230,13 +230,13 @@ public class GSpanTool {
 				newEdgeLabelNum = i;
 			}
 		}
-		//ÅÅÃûºÅ±ÈÊıÁ¿ÉÙ1£¬ËùÒÔÒª¼Ó»ØÀ´
+		//æ’åå·æ¯”æ•°é‡å°‘1ï¼Œæ‰€ä»¥è¦åŠ å›æ¥
 		newNodeLabelNum++;
 		newEdgeLabelNum++;
 	}
 
 	/**
-	 * ½øĞĞÆµ·±×ÓÍ¼µÄÍÚ¾ò
+	 * è¿›è¡Œé¢‘ç¹å­å›¾çš„æŒ–æ˜
 	 */
 	public void freqGraphMining() {
 		long startTime =  System.currentTimeMillis();
@@ -246,14 +246,14 @@ public class GSpanTool {
 
 		resultGraphs = new ArrayList<>();
 		totalGraphs = new ArrayList<>();
-		// Í¨¹ıÍ¼Êı¾İ¹¹ÔìÍ¼½á¹¹
+		// é€šè¿‡å›¾æ•°æ®æ„é€ å›¾ç»“æ„
 		for (GraphData gd : totalGraphDatas) {
 			g = new Graph();
 			g = g.constructGraph(gd);
 			totalGraphs.add(g);
 		}
 
-		// ¸ù¾İĞÂµÄµã±ßµÄ±êºÅÊı³õÊ¼»¯±ßÆµ·±¶È¶ÔÏó
+		// æ ¹æ®æ–°çš„ç‚¹è¾¹çš„æ ‡å·æ•°åˆå§‹åŒ–è¾¹é¢‘ç¹åº¦å¯¹è±¡
 		ef = new EdgeFrequency(newNodeLabelNum, newEdgeLabelNum);
 		for (int i = 0; i < newNodeLabelNum; i++) {
 			for (int j = 0; j < newEdgeLabelNum; j++) {
@@ -277,13 +277,13 @@ public class GSpanTool {
 						edge = new Edge(0, 1, i, j, k);
 						gc.getEdgeSeq().add(edge);
 
-						// ½«º¬ÓĞ´Ë±ßµÄÍ¼id¼ÓÈëµ½gcÖĞ
+						// å°†å«æœ‰æ­¤è¾¹çš„å›¾idåŠ å…¥åˆ°gcä¸­
 						for (int y = 0; y < totalGraphs.size(); y++) {
 							if (totalGraphs.get(y).hasEdge(i, j, k)) {
 								gc.getGs().add(y);
 							}
 						}
-						// ¶ÔÄ³ÌõÂú×ããĞÖµµÄ±ß½øĞĞÍÚ¾ò
+						// å¯¹æŸæ¡æ»¡è¶³é˜ˆå€¼çš„è¾¹è¿›è¡ŒæŒ–æ˜
 						subMining(gc, 2);
 					}
 				}
@@ -291,17 +291,17 @@ public class GSpanTool {
 		}
 		
 		endTime = System.currentTimeMillis();
-		System.out.println("Ëã·¨Ö´ĞĞÊ±¼ä"+ (endTime-startTime) + "ms");
+		System.out.println("ç®—æ³•æ‰§è¡Œæ—¶é—´"+ (endTime-startTime) + "ms");
 		printResultGraphInfo();
 	}
 
 	/**
-	 * ½øĞĞÆµ·±×ÓÍ¼µÄÍÚ¾ò
+	 * è¿›è¡Œé¢‘ç¹å­å›¾çš„æŒ–æ˜
 	 * 
 	 * @param gc
-	 *            Í¼±àÂë
+	 *            å›¾ç¼–ç 
 	 * @param next
-	 *            Í¼Ëùº¬µÄµãµÄ¸öÊı
+	 *            å›¾æ‰€å«çš„ç‚¹çš„ä¸ªæ•°
 	 */
 	public void subMining(GraphCode gc, int next) {
 		Edge e;
@@ -315,7 +315,7 @@ public class GSpanTool {
 			graph.edgeNexts.add(new ArrayList<Integer>());
 		}
 
-		// Ê×ÏÈ¸ù¾İÍ¼±àÂëÖĞµÄ±ßÎåÔª×é¹¹ÔìÍ¼
+		// é¦–å…ˆæ ¹æ®å›¾ç¼–ç ä¸­çš„è¾¹äº”å…ƒç»„æ„é€ å›¾
 		for (int i = 0; i < gc.getEdgeSeq().size(); i++) {
 			e = gc.getEdgeSeq().get(i);
 			id1 = e.ix;
@@ -335,23 +335,23 @@ public class GSpanTool {
 			return;
 		}
 
-		// Èç¹ûµ±Ç°ÊÇ×îĞ¡±àÂëÔò½«´ËÍ¼¼ÓÈëµ½½á¹û¼¯ÖĞ
+		// å¦‚æœå½“å‰æ˜¯æœ€å°ç¼–ç åˆ™å°†æ­¤å›¾åŠ å…¥åˆ°ç»“æœé›†ä¸­
 		resultGraphs.add(graph);
 		Edge e1;
 		ArrayList<Integer> gIds;
 		SubChildTraveler sct;
 		ArrayList<Edge> edgeArray;
-		// Ìí¼ÓÇ±ÔÚµÄº¢×Ó±ß£¬Ã¿Ìõº¢×Ó±ßËùÊôµÄÍ¼id
+		// æ·»åŠ æ½œåœ¨çš„å­©å­è¾¹ï¼Œæ¯æ¡å­©å­è¾¹æ‰€å±çš„å›¾id
 		HashMap<Edge, ArrayList<Integer>> edge2GId = new HashMap<>();
 		for (int i = 0; i < gc.gs.size(); i++) {
 			int id = gc.gs.get(i);
 
-			// ÔÚ´Ë½á¹¹µÄÌõ¼şÏÂ£¬ÔÚ¶à¼ÓÒ»Ìõ±ß¹¹³É×ÓÍ¼¼ÌĞøÍÚ¾ò
+			// åœ¨æ­¤ç»“æ„çš„æ¡ä»¶ä¸‹ï¼Œåœ¨å¤šåŠ ä¸€æ¡è¾¹æ„æˆå­å›¾ç»§ç»­æŒ–æ˜
 			sct = new SubChildTraveler(gc.edgeSeq, totalGraphs.get(id));
 			sct.traveler();
 			edgeArray = sct.getResultChildEdge();
 
-			// ×ö±ßidµÄ¸üĞÂ
+			// åšè¾¹idçš„æ›´æ–°
 			for (Edge e2 : edgeArray) {
 				if (!edge2GId.containsKey(e2)) {
 					gIds = new ArrayList<>();
@@ -368,32 +368,32 @@ public class GSpanTool {
 			e1 = (Edge) entry.getKey();
 			gIds = (ArrayList<Integer>) entry.getValue();
 
-			// Èç¹û´Ë±ßµÄÆµ¶È´óÓÚ×îĞ¡Ö§³Ö¶ÈÖµ£¬Ôò¼ÌĞøÍÚ¾ò
+			// å¦‚æœæ­¤è¾¹çš„é¢‘åº¦å¤§äºæœ€å°æ”¯æŒåº¦å€¼ï¼Œåˆ™ç»§ç»­æŒ–æ˜
 			if (gIds.size() < minSupportCount) {
 				continue;
 			}
 
 			GraphCode nGc = new GraphCode();
 			nGc.edgeSeq.addAll(gc.edgeSeq);
-			// ÔÚµ±Ç°Í¼ÖĞĞÂ¼ÓÈëÒ»Ìõ±ß£¬¹¹³ÉĞÂµÄ×ÓÍ¼½øĞĞÍÚ¾ò
+			// åœ¨å½“å‰å›¾ä¸­æ–°åŠ å…¥ä¸€æ¡è¾¹ï¼Œæ„æˆæ–°çš„å­å›¾è¿›è¡ŒæŒ–æ˜
 			nGc.edgeSeq.add(e1);
 			nGc.gs.addAll(gIds);
 
 			if (e1.iy == next) {
-				// Èç¹û±ßµÄµãidÉèÖÃÊÇÎªµ±Ç°×î´óÖµµÄÊ±ºò£¬Ôò¿ªÊ¼Ñ°ÕÒÏÂÒ»¸öµã
+				// å¦‚æœè¾¹çš„ç‚¹idè®¾ç½®æ˜¯ä¸ºå½“å‰æœ€å¤§å€¼çš„æ—¶å€™ï¼Œåˆ™å¼€å§‹å¯»æ‰¾ä¸‹ä¸€ä¸ªç‚¹
 				subMining(nGc, next + 1);
 			} else {
-				// Èç¹û´ËµãÒÑ¾­´æÔÚ£¬ÔònextÖµ²»±ä
+				// å¦‚æœæ­¤ç‚¹å·²ç»å­˜åœ¨ï¼Œåˆ™nextå€¼ä¸å˜
 				subMining(nGc, next);
 			}
 		}
 	}
 	
 	/**
-	 * Êä³öÆµ·±×ÓÍ¼½á¹ûĞÅÏ¢
+	 * è¾“å‡ºé¢‘ç¹å­å›¾ç»“æœä¿¡æ¯
 	 */
 	public void printResultGraphInfo(){
-		System.out.println(MessageFormat.format("ÍÚ¾ò³öµÄÆµ·±×ÓÍ¼µÄ¸öÊıÎª£º{0}¸ö", resultGraphs.size()));
+		System.out.println(MessageFormat.format("æŒ–æ˜å‡ºçš„é¢‘ï¿½å¼Šæ²¹å«‰æ¯éªî·î€‚ç°•0}ä¸ª", resultGraphs.size()));
 	}
 
 }

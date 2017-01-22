@@ -3,14 +3,14 @@ package DataMining_BIRCH;
 import java.util.ArrayList;
 
 /**
- * Ò¶×Ó½ÚµãÖĞµÄĞ¡¼¯Èº
+ * å¶å­èŠ‚ç‚¹ä¸­çš„å°é›†ç¾¤
  * @author lyq
  *
  */
 public class Cluster extends ClusteringFeature{
-	//¼¯ÈºÖĞµÄÊı¾İµã
+	//é›†ç¾¤ä¸­çš„æ•°æ®ç‚¹
 	private ArrayList<double[]> data;
-	//¸¸Ç×½Úµã
+	//çˆ¶äº²èŠ‚ç‚¹
 	private LeafNode parentNode;
 	
 	public Cluster(String[] record){
@@ -20,7 +20,7 @@ public class Cluster extends ClusteringFeature{
 			d[i] = Double.parseDouble(record[i]);
 		}
 		data.add(d);
-		//¼ÆËãCF¾ÛÀàÌØÕ÷
+		//è®¡ç®—CFèšç±»ç‰¹å¾
 		this.setLS(data);
 		this.setSS(data);
 		this.setN(data);
@@ -36,7 +36,7 @@ public class Cluster extends ClusteringFeature{
 
 	@Override
 	protected void directAddCluster(ClusteringFeature node) {
-		//Èç¹ûÊÇ¾ÛÀà°üÀ¨Êı¾İ¼ÇÂ¼£¬Ôò»¹ĞèºÏ²¢Êı¾İ¼ÇÂ¼
+		//å¦‚æœæ˜¯èšç±»åŒ…æ‹¬æ•°æ®è®°å½•ï¼Œåˆ™è¿˜éœ€åˆå¹¶æ•°æ®è®°å½•
 		Cluster c = (Cluster)node;
 		ArrayList<double[]> dataRecords = c.getData();
 		this.data.addAll(dataRecords);

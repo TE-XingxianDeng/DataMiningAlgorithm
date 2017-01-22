@@ -1,13 +1,13 @@
 package DataMing_ID3;
 
 /**
- * ´æ·ÅÊı¾İµÄÒ¶×Ó½Úµã
+ * å­˜æ”¾æ•°æ®çš„å¶å­èŠ‚ç‚¹
  * @author lyq
  *
  */
 public class DataNode {
 	/**
-	 * Êı¾İµÄ±êºÅ
+	 * æ•°æ®çš„æ ‡å·
 	 */
 	private int dataIndex;
 	

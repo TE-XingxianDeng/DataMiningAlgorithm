@@ -1,14 +1,14 @@
 package DataMining_CABDDCC;
 
 /**
- * »ùÓÚÁ¬Í¨Í¼µÄ·ÖÁÑ¾ÛÀàËã·¨
+ * åŸºäºè¿é€šå›¾çš„åˆ†è£‚èšç±»ç®—æ³•
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] agrs){
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\graphData.txt";
-		//Á¬Í¨¾àÀëãĞÖµ
+		//è¿é€šè·ç¦»é˜ˆå€¼
 		int length = 3;
 		
 		CABDDCCTool tool = new CABDDCCTool(filePath, length);

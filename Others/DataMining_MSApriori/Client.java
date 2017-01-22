@@ -1,34 +1,34 @@
 package DataMining_MSApriori;
 
 /**
- * »ùÓÚ¶àÖ§³Ö¶ÈµÄAprioriËã·¨²âÊÔÀà
+ * åŸºäºå¤šæ”¯æŒåº¦çš„Aprioriç®—æ³•æµ‹è¯•ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
-		//ÊÇ·ñÊÇÊÂÎñĞÍÊı¾İ
+		//æ˜¯å¦æ˜¯äº‹åŠ¡å‹æ•°æ®
 		boolean isTransaction;
-		//²âÊÔÊı¾İÎÄ¼şµØÖ·
+		//æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		//¹ØÏµ±íĞÍÊı¾İÎÄ¼şµØÖ·
+		//å…³ç³»è¡¨å‹æ•°æ®æ–‡ä»¶åœ°å€
 		String tableFilePath = "C:\\Users\\lyq\\Desktop\\icon\\input2.txt";
-		//×îĞ¡Ö§³Ö¶ÈãĞÖµ
+		//æœ€å°æ”¯æŒåº¦é˜ˆå€¼
 		double minSup;
-		// ×îĞ¡ÖÃĞÅ¶ÈÂÊ
+		// æœ€å°ç½®ä¿¡åº¦ç‡
 		double minConf;
-		//×î´óÖ§³Ö¶È²î±ğãĞÖµ
+		//æœ€å¤§æ”¯æŒåº¦å·®åˆ«é˜ˆå€¼
 		double delta;
-		//¶àÏîÄ¿µÄ×îĞ¡Ö§³Ö¶ÈÊı,À¨ºÅÖĞµÄÏÂ±ê´ú±íµÄÊÇÉÌÆ·µÄID
+		//å¤šé¡¹ç›®çš„æœ€å°æ”¯æŒåº¦æ•°,æ‹¬å·ä¸­çš„ä¸‹æ ‡ä»£è¡¨çš„æ˜¯å•†å“çš„ID
 		double[] mis;
-		//msAprioriËã·¨¹¤¾ßÀà
+		//msAprioriç®—æ³•å·¥å…·ç±»
 		MSAprioriTool tool;
 		
-		//ÎªÁË²âÊÔµÄ·½±ã£¬È¡Ò»¸öÆ«µÍµÄÖÃĞÅ¶ÈÖµ0.3
+		//ä¸ºäº†æµ‹è¯•çš„æ–¹ä¾¿ï¼Œå–ä¸€ä¸ªåä½çš„ç½®ä¿¡åº¦å€¼0.3
 		minConf = 0.3;
 		minSup = 0.1;
 		delta = 0.5;
-		//Ã¿ÏîµÄÖ§³Ö¶ÈÂÊ¶¼Ä¬ÈÏÎª0.1£¬µÚÒ»Ïî²»Ê¹ÓÃ
+		//æ¯é¡¹çš„æ”¯æŒåº¦ç‡éƒ½é»˜è®¤ä¸º0.1ï¼Œç¬¬ä¸€é¡¹ä¸ä½¿ç”¨
 		mis = new double[]{-1, 0.1, 0.1, 0.1, 0.1, 0.1};
 		isTransaction = true;
 		
@@ -38,7 +38,7 @@ public class Client {
 		System.out.println();
 		
 		isTransaction = false;
-		//ÖØĞÂ³õÊ¼»¯Êı¾İ
+		//é‡æ–°åˆå§‹åŒ–æ•°æ®
 		tool = new MSAprioriTool(tableFilePath, minConf, minSup, isTransaction);
 		tool.calFItems();
 	}	

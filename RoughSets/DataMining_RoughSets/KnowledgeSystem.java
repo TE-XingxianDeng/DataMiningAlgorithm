@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * ÖªÊ¶ÏµÍ³
+ * çŸ¥è¯†ç³»ç»Ÿ
  * 
  * @author lyq
  * 
  */
 public class KnowledgeSystem {
-	// ÖªÊ¶ÏµÍ³ÄÚµÄ¼¯ºÏ
+	// çŸ¥è¯†ç³»ç»Ÿå†…çš„é›†åˆ
 	ArrayList<RecordCollection> ksCollections;
 
 	public KnowledgeSystem(ArrayList<RecordCollection> ksCollections) {
@@ -18,10 +18,10 @@ public class KnowledgeSystem {
 	}
 
 	/**
-	 * »ñÈ¡¼¯ºÏµÄÉÏ½üËÆ¼¯ºÏ
+	 * è·å–é›†åˆçš„ä¸Šè¿‘ä¼¼é›†åˆ
 	 * 
 	 * @param rc
-	 *            Ô­Ê¼¼¯ºÏ
+	 *            åŸå§‹é›†åˆ
 	 * @return
 	 */
 	public RecordCollection getUpSimilarRC(RecordCollection rc) {
@@ -32,7 +32,7 @@ public class KnowledgeSystem {
 		ArrayList<RecordCollection> deleteRcs = new ArrayList<>();
 		targetArray = rc.getRecordNames();
 
-		// ×öÒ»¸ö¼¯ºÏ¿½±´
+		// åšä¸€ä¸ªé›†åˆæ‹·è´
 		for (RecordCollection recordCollection : ksCollections) {
 			copyRcs.add(recordCollection);
 		}
@@ -47,7 +47,7 @@ public class KnowledgeSystem {
 				if (resultRc == null) {
 					resultRc = recordCollection;
 				} else {
-					// ½øĞĞ²¢ÔËËã
+					// è¿›è¡Œå¹¶è¿ç®—
 					resultRc = resultRc.unionCal(recordCollection);
 				}
 
@@ -56,11 +56,11 @@ public class KnowledgeSystem {
 				}
 			}
 		}
-		//È¥³ıÒÑ¾­Ìí¼Ó¹ıµÄ¼¯ºÏ
+		//å»é™¤å·²ç»æ·»åŠ è¿‡çš„é›†åˆ
 		copyRcs.removeAll(deleteRcs);
 
 		if (targetArray.size() > 0) {
-			// ËµÃ÷ÒÑ¾­ÍêÈ«»¹Î´ÕÒÈ«ÉÏ½üËÆµÄ¼¯ºÏ
+			// è¯´æ˜å·²ç»å®Œå…¨è¿˜æœªæ‰¾å…¨ä¸Šè¿‘ä¼¼çš„é›†åˆ
 			for (RecordCollection recordCollection : copyRcs) {
 				nameArray = recordCollection.getRecordNames();
 
@@ -70,7 +70,7 @@ public class KnowledgeSystem {
 					if (resultRc == null) {
 						resultRc = recordCollection;
 					} else {
-						// ½øĞĞ²¢ÔËËã
+						// è¿›è¡Œå¹¶è¿ç®—
 						resultRc = resultRc.unionCal(recordCollection);
 					}
 
@@ -85,10 +85,10 @@ public class KnowledgeSystem {
 	}
 
 	/**
-	 * »ñÈ¡¼¯ºÏµÄÏÂ½üËÆ¼¯ºÏ
+	 * è·å–é›†åˆçš„ä¸‹è¿‘ä¼¼é›†åˆ
 	 * 
 	 * @param rc
-	 *            Ô­Ê¼¼¯ºÏ
+	 *            åŸå§‹é›†åˆ
 	 * @return
 	 */
 	public RecordCollection getDownSimilarRC(RecordCollection rc) {
@@ -106,7 +106,7 @@ public class KnowledgeSystem {
 				if (resultRc == null) {
 					resultRc = recordCollection;
 				} else {
-					// ½øĞĞ²¢ÔËËã
+					// è¿›è¡Œå¹¶è¿ç®—
 					resultRc = resultRc.unionCal(recordCollection);
 				}
 
@@ -120,12 +120,12 @@ public class KnowledgeSystem {
 	}
 
 	/**
-	 * ÅĞ¶Ï2¸ö×Ö·ûÊı×éÖ®¼äÊÇ·ñÓĞ½»¼¯
+	 * åˆ¤æ–­2ä¸ªå­—ç¬¦æ•°ç»„ä¹‹é—´æ˜¯å¦æœ‰äº¤é›†
 	 * 
 	 * @param str1
-	 *            ×Ö·ûÁĞ±í1
+	 *            å­—ç¬¦åˆ—è¡¨1
 	 * @param str2
-	 *            ×Ö·ûÁĞ±í2
+	 *            å­—ç¬¦åˆ—è¡¨2
 	 * @return
 	 */
 	public boolean strHasOverlap(ArrayList<String> str1, ArrayList<String> str2) {
@@ -148,7 +148,7 @@ public class KnowledgeSystem {
 	}
 
 	/**
-	 * ÅĞ¶Ï×Ö·û¼¯str2ÊÇ·ñÍêÈ«°üº¬ÓÚstr1ÖĞ
+	 * åˆ¤æ–­å­—ç¬¦é›†str2æ˜¯å¦å®Œå…¨åŒ…å«äºstr1ä¸­
 	 * 
 	 * @param str1
 	 * @param str2
@@ -172,7 +172,7 @@ public class KnowledgeSystem {
 	}
 
 	/**
-	 * ×Ö·ûÁĞ±íÒÆ³ı¹«¹²ÔªËØ
+	 * å­—ç¬¦åˆ—è¡¨ç§»é™¤å…¬å…±å…ƒç´ 
 	 * 
 	 * @param str1
 	 * @param str2
@@ -189,7 +189,7 @@ public class KnowledgeSystem {
 			}
 		}
 
-		// ½øĞĞ¹«¹²ÔªËØµÄÒÆ³ı
+		// è¿›è¡Œå…¬å…±å…ƒç´ çš„ç§»é™¤
 		str1.removeAll(deleteStrs);
 	}
 }

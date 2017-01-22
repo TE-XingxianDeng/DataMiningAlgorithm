@@ -1,15 +1,15 @@
 package DataMining_SVM.libsvm;
 /**
- * °üº¬ÁËÑµÁ·¼¯Êı¾İµÄ»ù±¾ĞÅÏ¢
+ * åŒ…å«äº†è®­ç»ƒé›†æ•°æ®çš„åŸºæœ¬ä¿¡æ¯
  * @author lyq
  *
  */
 public class svm_problem implements java.io.Serializable
 {
-	//¶¨ÒåÁËÏòÁ¿µÄ×Ü¸öÊı
+	//å®šä¹‰äº†å‘é‡çš„æ€»ä¸ªæ•°
 	public int l;
-	//·ÖÀàÀàĞÍÖµÊı×é
+	//åˆ†ç±»ç±»å‹å€¼æ•°ç»„
 	public double[] y;
-	//ÑµÁ·¼¯ÏòÁ¿±í
+	//è®­ç»ƒé›†å‘é‡è¡¨
 	public svm_node[][] x;
 }

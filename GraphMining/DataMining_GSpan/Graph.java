@@ -3,17 +3,17 @@ package DataMining_GSpan;
 import java.util.ArrayList;
 
 /**
- * Í¼½á¹¹Àà
+ * å›¾ç»“æ„ç±»
  * 
  * @author lyq
  * 
  */
 public class Graph {
-	// Í¼½Úµã±êºÅ×é
+	// å›¾èŠ‚ç‚¹æ ‡å·ç»„
 	ArrayList<Integer> nodeLabels;
-	// Í¼µÄ±ß±êºÅ×é
+	// å›¾çš„è¾¹æ ‡å·ç»„
 	ArrayList<ArrayList<Integer>> edgeLabels;
-	// ±ß2Í·µÄ½ÚµãidºÅ,ÔÚÕâÀï¿ÉÒÔÀí½âÎªÏÂ±êºÅ
+	// è¾¹2å¤´çš„èŠ‚ç‚¹idå·,åœ¨è¿™é‡Œå¯ä»¥ç†è§£ä¸ºä¸‹æ ‡å·
 	ArrayList<ArrayList<Integer>> edgeNexts;
 
 	public Graph() {
@@ -31,14 +31,14 @@ public class Graph {
 	}
 
 	/**
-	 * ÅĞ¶ÏÍ¼ÖĞÊÇ·ñ´æÔÚÄ³Ìõ±ß
+	 * åˆ¤æ–­å›¾ä¸­æ˜¯å¦å­˜åœ¨æŸæ¡è¾¹
 	 * 
 	 * @param x
-	 *            ±ßµÄÒ»¶ËµÄ½Úµã±êºÅ
+	 *            è¾¹çš„ä¸€ç«¯çš„èŠ‚ç‚¹æ ‡å·
 	 * @param a
-	 *            ±ßµÄ±êºÅ
+	 *            è¾¹çš„æ ‡å·
 	 * @param y
-	 *            ±ßµÄÁíÍâÒ»¶Ë½Úµã±êºÅ
+	 *            è¾¹çš„å¦å¤–ä¸€ç«¯èŠ‚ç‚¹æ ‡å·
 	 * @return
 	 */
 	public boolean hasEdge(int x, int a, int y) {
@@ -46,7 +46,7 @@ public class Graph {
 		int t;
 
 		for (int i = 0; i < nodeLabels.size(); i++) {
-			// ÏÈÑ°ÕÒ2¸ö¶Ëµã±êºÅ,t´ú±íÕÒµ½µÄµãµÄÁíÍâÒ»¸ö¶Ëµã±êºÅ
+			// å…ˆå¯»æ‰¾2ä¸ªç«¯ç‚¹æ ‡å·,tä»£è¡¨æ‰¾åˆ°çš„ç‚¹çš„å¦å¤–ä¸€ä¸ªç«¯ç‚¹æ ‡å·
 			if (nodeLabels.get(i) == x) {
 				t = y;
 			} else if (nodeLabels.get(i) == y) {
@@ -56,7 +56,7 @@ public class Graph {
 			}
 
 			for (int j = 0; j < edgeNexts.get(i).size(); j++) {
-				// ´Ó´Ë¶ËµãµÄËùÁ¬½ÓµÄµãÈ¥±È½Ï¶ÔÓ¦µÄµãºÍ±ß
+				// ä»æ­¤ç«¯ç‚¹çš„æ‰€è¿æ¥çš„ç‚¹å»æ¯”è¾ƒå¯¹åº”çš„ç‚¹å’Œè¾¹
 				if (edgeLabels.get(i).get(j) == a
 						&& nodeLabels.get(edgeNexts.get(i).get(j)) == t) {
 					isContained = true;
@@ -69,20 +69,20 @@ public class Graph {
 	}
 
 	/**
-	 * ÔÚÍ¼ÖĞÒÆ³ıÄ³¸ö±ß
+	 * åœ¨å›¾ä¸­ç§»é™¤æŸä¸ªè¾¹
 	 * 
 	 * @param x
-	 *            ±ßµÄÄ³¶ËµÄÒ»¸öµã±êºÅ
+	 *            è¾¹çš„æŸç«¯çš„ä¸€ä¸ªç‚¹æ ‡å·
 	 * @param a
-	 *            ±ßµÄ±êºÅ
+	 *            è¾¹çš„æ ‡å·
 	 * @param y
-	 *            ±ßµÄÁíÒ»¶ËµÄÒ»¸öµã±êºÅ
+	 *            è¾¹çš„å¦ä¸€ç«¯çš„ä¸€ä¸ªç‚¹æ ‡å·
 	 */
 	public void removeEdge(int x, int a, int y) {
 		int t;
 
 		for (int i = 0; i < nodeLabels.size(); i++) {
-			// ÏÈÑ°ÕÒ2¸ö¶Ëµã±êºÅ,t´ú±íÕÒµ½µÄµãµÄÁíÍâÒ»¸ö¶Ëµã±êºÅ
+			// å…ˆå¯»æ‰¾2ä¸ªç«¯ç‚¹æ ‡å·,tä»£è¡¨æ‰¾åˆ°çš„ç‚¹çš„å¦å¤–ä¸€ä¸ªç«¯ç‚¹æ ‡å·
 			if (nodeLabels.get(i) == x) {
 				t = y;
 			} else if (nodeLabels.get(i) == y) {
@@ -92,11 +92,11 @@ public class Graph {
 			}
 
 			for (int j = 0; j < edgeNexts.get(i).size(); j++) {
-				// ´Ó´Ë¶ËµãµÄËùÁ¬½ÓµÄµãÈ¥±È½Ï¶ÔÓ¦µÄµãºÍ±ß
+				// ä»æ­¤ç«¯ç‚¹çš„æ‰€è¿æ¥çš„ç‚¹å»æ¯”è¾ƒå¯¹åº”çš„ï¿½æ„«æ…ï¿½
 				if (edgeLabels.get(i).get(j) == a
 						&& nodeLabels.get(edgeNexts.get(i).get(j)) == t) {
 					int id;
-					// ÔÚÁ¬½ÓµÄµãÖĞÈ¥³ı¸Ãµã
+					// åœ¨è¿æ¥çš„ç‚¹ä¸­å»é™¤è¯¥ç‚¹
 					edgeLabels.get(i).remove(j);
 
 					id = edgeNexts.get(i).get(j);
@@ -115,32 +115,32 @@ public class Graph {
 	}
 
 	/**
-	 * ¸ù¾İÍ¼Êı¾İ¹¹ÔìÒ»¸öÍ¼
+	 * æ ¹æ®å›¾æ•°æ®æ„é€ ä¸€ä¸ªå›¾
 	 * 
 	 * @param gd
-	 *            Í¼Êı¾İ
+	 *            å›¾æ•°æ®
 	 * @return
 	 */
 	public Graph constructGraph(GraphData gd) {
 		Graph graph = new Graph();
 
 		
-		// ¹¹ÔìÒ»¸öÍ¼ĞèÒªÖªµÀ3µã£¬1.Í¼ÖĞÓĞÄÄĞ©µã2.Í¼ÖĞµÄÃ¿¸öµãÖÜÎ§Á¬×ÅÄÄĞ©µã3.Ã¿¸öµãÖÜÎ§Á¬×ÅÄÄĞ©±ß
+		// æ„é€ ä¸€ä¸ªå›¾éœ€è¦çŸ¥é“3ç‚¹ï¼Œ1.å›¾ä¸­æœ‰å“ªäº›ç‚¹2.å›¾ä¸­çš„æ¯ä¸ªç‚¹å‘¨å›´è¿ç€å“ªäº›ç‚¹3.æ¯ä¸ªç‚¹å‘¨å›´è¿ç€å“ªäº›è¾¹
 		for (int i = 0; i < gd.getNodeVisibles().size(); i++) {
 			if (gd.getNodeVisibles().get(i)) {
 				graph.getNodeLabels().add(gd.getNodeLabels().get(i));
 			}
 			
-			// Ìí¼Ó¶ÔÓ¦idÏÂµÄ¼¯ºÏ
-			// id½ÚµãºóÓĞ¶àÉÙÏàÁ¬µÄ±ßµÄ±êºÅ
+			// æ·»åŠ å¯¹åº”idä¸‹çš„é›†åˆ
+			// idèŠ‚ç‚¹åæœ‰å¤šå°‘ç›¸è¿çš„è¾¹çš„æ ‡å·
 			graph.edgeLabels.add(new ArrayList<Integer>());
-			// id½ÚµãºóÓĞ¶àÉÙÏàÁ¬µÄ½ÚµãµÄid
+			// idèŠ‚ç‚¹åæœ‰å¤šå°‘ç›¸è¿çš„èŠ‚ç‚¹çš„id
 			graph.edgeNexts.add(new ArrayList<Integer>());
 		}
 
 		for (int i = 0; i < gd.getEdgeLabels().size(); i++) {
 			if (gd.getEdgeVisibles().get(i)) {
-				// ÔÚ´ËºóÃæÌí¼ÓÒ»¸ö±ß±êºÅ
+				// åœ¨æ­¤åé¢æ·»åŠ ä¸€ä¸ªè¾¹æ ‡å·
 				graph.edgeLabels.get(gd.getEdgeX().get(i)).add(gd.getEdgeLabels().get(i));
 				graph.edgeLabels.get(gd.getEdgeY().get(i)).add(gd.getEdgeLabels().get(i));
 				graph.edgeNexts.get(gd.getEdgeX().get(i)).add(

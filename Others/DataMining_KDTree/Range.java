@@ -1,19 +1,19 @@
 package DataMining_KDTree;
 
 /**
- * ¿Õ¼äÊ¸Á¿£¬±íÊ¾Ëù´ú±íµÄ¿Õ¼ä·¶Î§
+ * ç©ºé—´çŸ¢é‡ï¼Œè¡¨ç¤ºæ‰€ä»£è¡¨çš„ç©ºé—´èŒƒå›´
  * 
  * @author lyq
  * 
  */
 public class Range {
-	// ±ß½ç×ó±ß½ç
+	// è¾¹ç•Œå·¦è¾¹ç•Œ
 	double left;
-	// ±ß½çÓÒ±ß½ç
+	// è¾¹ç•Œå³è¾¹ç•Œ
 	double right;
-	// ±ß½çÉÏ±ß½ç
+	// è¾¹ç•Œä¸Šè¾¹ç•Œ
 	double top;
-	// ±ß½çÏÂ±ß½ç
+	// è¾¹ç•Œä¸‹è¾¹ç•Œ
 	double bottom;
 
 	public Range() {
@@ -31,7 +31,7 @@ public class Range {
 	}
 
 	/**
-	 * ¿Õ¼äÊ¸Á¿½øĞĞ²¢²Ù×÷
+	 * ç©ºé—´çŸ¢é‡è¿›è¡Œå¹¶æ“ä½œ
 	 * 
 	 * @param range
 	 * @return
@@ -39,28 +39,28 @@ public class Range {
 	public Range crossOperation(Range r) {
 		Range range = new Range();
 
-		// È¡¿¿½üÓÒ²àµÄ×ó±ß½ç
+		// å–é è¿‘å³ä¾§çš„å·¦è¾¹ç•Œ
 		if (r.left > this.left) {
 			range.left = r.left;
 		} else {
 			range.left = this.left;
 		}
 
-		// È¡¿¿½ü×ó²àµÄÓÒ±ß½ç
+		// å–é è¿‘å·¦ä¾§çš„å³è¾¹ç•Œ
 		if (r.right < this.right) {
 			range.right = r.right;
 		} else {
 			range.right = this.right;
 		}
 
-		// È¡¿¿½üÏÂ²àµÄÉÏ±ß½ç
+		// å–é è¿‘ä¸‹ä¾§çš„ä¸Šè¾¹ç•Œ
 		if (r.top < this.top) {
 			range.top = r.top;
 		} else {
 			range.top = this.top;
 		}
 
-		// È¡¿¿½üÉÏ²àµÄÏÂ±ß½ç
+		// å–é è¿‘ä¸Šä¾§çš„ä¸‹è¾¹ç•Œ
 		if (r.bottom > this.bottom) {
 			range.bottom = r.bottom;
 		} else {
@@ -71,12 +71,12 @@ public class Range {
 	}
 
 	/**
-	 * ¸ù¾İ×ø±êµã·Ö¸î·½ÏòÈ·¶¨×ó²à¿Õ¼äÊ¸Á¿
+	 * æ ¹æ®åæ ‡ç‚¹åˆ†å‰²æ–¹å‘ç¡®å®šå·¦ä¾§ç©ºé—´çŸ¢é‡
 	 * 
 	 * @param p
-	 *            Êı¾İÊ¸Á¿
+	 *            æ•°æ®çŸ¢é‡
 	 * @param dir
-	 *            ·Ö¸î·½Ïò
+	 *            åˆ†å‰²æ–¹å‘
 	 * @return
 	 */
 	public static Range initLeftRange(Point p, int dir) {
@@ -92,12 +92,12 @@ public class Range {
 	}
 
 	/**
-	 * ¸ù¾İ×ø±êµã·Ö¸î·½ÏòÈ·¶¨ÓÒ²à¿Õ¼äÊ¸Á¿
+	 * æ ¹æ®åæ ‡ç‚¹åˆ†å‰²æ–¹å‘ç¡®å®šå³ä¾§ç©ºé—´çŸ¢é‡
 	 * 
 	 * @param p
-	 *            Êı¾İÊ¸Á¿
+	 *            æ•°æ®çŸ¢é‡
 	 * @param dir
-	 *            ·Ö¸î·½Ïò
+	 *            åˆ†å‰²æ–¹å‘
 	 * @return
 	 */
 	public static Range initRightRange(Point p, int dir) {

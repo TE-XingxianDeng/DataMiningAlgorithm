@@ -3,14 +3,14 @@ package DataMining_GSpan;
 import java.util.ArrayList;
 
 /**
- * 图编码类
+ * 鍥剧紪鐮佺被
  * @author lyq
  *
  */
 public class GraphCode {
-	//边的集合，边的排序代表着边的添加次序
+	//杈圭殑闆嗗悎锛岃竟鐨勬帓搴忎唬琛ㄧ潃杈圭殑娣诲姞娆″簭
 	ArrayList<Edge> edgeSeq;
-	//拥有这些边的图的id
+	//鎷ユ湁杩欎簺杈圭殑鍥剧殑id
 	ArrayList<Integer> gs;
 	
 	public GraphCode() {

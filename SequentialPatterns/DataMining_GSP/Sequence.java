@@ -3,15 +3,15 @@ package DataMining_GSP;
 import java.util.ArrayList;
 
 /**
- * ĞòÁĞ£¬Ã¿¸öĞòÁĞÄÚ²¿°üº¬¶à×éItemSetÏî¼¯
+ * åºåˆ—ï¼Œæ¯ä¸ªåºåˆ—å†…éƒ¨åŒ…å«å¤šç»„ItemSeté¡¹é›†
  * 
  * @author lyq
  * 
  */
 public class Sequence implements Comparable<Sequence>, Cloneable {
-	// ĞòÁĞËùÊôÊÂÎñID
+	// åºåˆ—æ‰€å±äº‹åŠ¡ID
 	private int trsanctionID;
-	// Ïî¼¯ÁĞ±í
+	// é¡¹é›†åˆ—è¡¨
 	private ArrayList<ItemSet> itemSetList;
 
 	public Sequence(int trsanctionID) {
@@ -40,7 +40,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 	}
 
 	/**
-	 * È¡³öĞòÁĞÖĞµÚÒ»¸öÏî¼¯µÄµÚÒ»¸öÔªËØ
+	 * å–å‡ºåºåˆ—ä¸­ç¬¬ä¸€ä¸ªé¡¹é›†çš„ç¬¬ä¸€ä¸ªå…ƒç´ 
 	 * 
 	 * @return
 	 */
@@ -49,7 +49,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 	}
 
 	/**
-	 * »ñÈ¡ĞòÁĞÖĞ×îºóÒ»¸öÏî¼¯
+	 * è·å–åºåˆ—ä¸­æœ€åä¸€ä¸ªé¡¹é›†
 	 * 
 	 * @return
 	 */
@@ -58,7 +58,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 	}
 
 	/**
-	 * »ñÈ¡ĞòÁĞÖĞ×îºóÒ»¸öÏî¼¯µÄ×îºóÒ»¸öÒ»¸öÔªËØ
+	 * è·å–åºåˆ—ä¸­æœ€åä¸€ä¸ªé¡¹é›†çš„æœ€åä¸€ä¸ªä¸€ä¸ªå…ƒç´ 
 	 * 
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 	}
 
 	/**
-	 * ÅĞ¶ÏĞòÁĞÖĞ×îºóÒ»¸öÏî¼¯ÊÇ·ñÎªµ¥Ò»µÄÖµ
+	 * åˆ¤æ–­åºåˆ—ä¸­æœ€åä¸€ä¸ªé¡¹é›†æ˜¯å¦ä¸ºå•ä¸€çš„å€¼
 	 * 
 	 * @return
 	 */
@@ -95,7 +95,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 	}
 	
 	/**
-	 * ¿½±´Ò»·İÒ»Ä£Ò»ÑùµÄĞòÁĞ
+	 * æ‹·è´ä¸€ä»½ä¸€æ¨¡ä¸€æ ·çš„åºåˆ—
 	 */
 	public Sequence copySeqence(){
 		Sequence copySeq = new Sequence();
@@ -107,10 +107,10 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 	}
 
 	/**
-	 * ±È½Ï2¸öĞòÁĞÊÇ·ñÏàµÈ£¬ĞèÒªÅĞ¶ÏÄÚ²¿µÄÃ¿¸öÏî¼¯ÊÇ·ñÍêÈ«Ò»ÖÂ
+	 * æ¯”è¾ƒ2ä¸ªåºåˆ—æ˜¯å¦ç›¸ç­‰ï¼Œéœ€è¦åˆ¤æ–­å†…éƒ¨çš„æ¯ä¸ªé¡¹é›†æ˜¯å¦å®Œå…¨ä¸€è‡´
 	 * 
 	 * @param seq
-	 *            ±È½ÏµÄĞòÁĞ¶ÔÏó
+	 *            æ¯”è¾ƒçš„åºåˆ—å¯¹è±¡
 	 * @return
 	 */
 	public boolean compareIsSame(Sequence seq) {
@@ -127,7 +127,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 			tempItemSet2 = itemSetList2.get(i);
 
 			if (!tempItemSet1.compareIsSame(tempItemSet2)) {
-				// Ö»Òª²»ÏàµÈ£¬Ö±½ÓÍË³öº¯Êı
+				// åªè¦ä¸ç›¸ç­‰ï¼Œç›´æ¥é€€å‡ºå‡½æ•°
 				result = false;
 				break;
 			}
@@ -137,7 +137,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 	}
 
 	/**
-	 * Éú³É´ËĞòÁĞµÄËùÓĞ×ÓĞòÁĞ
+	 * ç”Ÿæˆæ­¤åºåˆ—çš„æ‰€æœ‰å­åºåˆ—
 	 * 
 	 * @return
 	 */
@@ -152,7 +152,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 			if (tempItemSet.getItems().size() == 1) {
 				tempSeq = this.copySeqence();
 				
-				// Èç¹ûÖ»ÓĞÏî¼¯ÖĞÖ»ÓĞ1¸öÔªËØ£¬ÔòÖ±½ÓÒÆ³ı
+				// å¦‚æœåªæœ‰é¡¹é›†ä¸­åªæœ‰1ä¸ªå…ƒç´ ï¼Œåˆ™ç›´æ¥ç§»é™¤
 				tempSeq.itemSetList.remove(i);
 				childSeqs.add(tempSeq);
 			} else {
@@ -160,7 +160,7 @@ public class Sequence implements Comparable<Sequence>, Cloneable {
 				for (int j = 0; j < tempItems.size(); j++) {
 					tempSeq = this.copySeqence();
 
-					// ÔÚ¿½±´µÄĞòÁĞÖĞÒÆ³ıÒ»¸öÊı×Ö
+					// åœ¨æ‹·è´çš„åºåˆ—ä¸­ç§»é™¤ä¸€ä¸ªæ•°å­—
 					tempSeq.getItemSetList().get(i).getItems().remove(j);
 					childSeqs.add(tempSeq);
 				}

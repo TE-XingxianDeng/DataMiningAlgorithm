@@ -3,23 +3,23 @@ package DataMining_GSpan;
 import java.util.ArrayList;
 
 /**
- * Í¼µÄÊı¾İÀà
+ * å›¾çš„æ•°æ®ç±»
  * 
  * @author lyq
  * 
  */
 public class GraphData {
-	// ½Úµã×é±êºÅ
+	// èŠ‚ç‚¹ç»„æ ‡å·
 	private ArrayList<Integer> nodeLabels;
-	// ½ÚµãÊÇ·ñ¿ÉÓÃ,¿ÉÄÜ±»ÒÆ³ı
+	// èŠ‚ç‚¹æ˜¯å¦å¯ç”¨,å¯èƒ½è¢«ç§»é™¤
 	private ArrayList<Boolean> nodeVisibles;
-	// ±ßµÄ¼¯ºÏ±êºÅ
+	// è¾¹çš„é›†åˆæ ‡å·
 	private ArrayList<Integer> edgeLabels;
-	// ±ßµÄÒ»±ßµãid
+	// è¾¹çš„ä¸€è¾¹ç‚¹id
 	private ArrayList<Integer> edgeX;
-	// ±ßµÄÁíÒ»±ßµÄµãid
+	// è¾¹çš„å¦ä¸€è¾¹çš„ç‚¹id
 	private ArrayList<Integer> edgeY;
-	// ±ßÊÇ·ñ¿ÉÓÃ
+	// è¾¹æ˜¯å¦å¯ç”¨
 	private ArrayList<Boolean> edgeVisibles;
 
 	public GraphData() {
@@ -81,14 +81,14 @@ public class GraphData {
 	}
 
 	/**
-	 * ¸ù¾İµã±ßÆµ·±¶ÈÒÆ³ıÍ¼ÖĞ²»Æµ·±µÄµã±ß
+	 * æ ¹æ®ç‚¹è¾¹é¢‘ç¹åº¦ç§»é™¤å›¾ä¸­ä¸é¢‘ç¹çš„ç‚¹è¾¹
 	 * 
 	 * @param freqNodeLabel
-	 *            µãµÄÆµ·±¶ÈÍ³¼Æ
+	 *            ç‚¹çš„é¢‘ç¹åº¦ç»Ÿè®¡
 	 * @param freqEdgeLabel
-	 *            ±ßµÄÆµ·±¶ÈÍ³¼Æ
+	 *            è¾¹çš„é¢‘ç¹åº¦ç»Ÿè®¡
 	 * @param minSupportCount
-	 *            ×îĞ¡Ö§³Ö¶È¼ÆÊı
+	 *            æœ€å°æ”¯æŒåº¦è®¡æ•°
 	 */
 	public void removeInFreqNodeAndEdge(int[] freqNodeLabel,
 			int[] freqEdgeLabel, int minSupportCount) {
@@ -99,7 +99,7 @@ public class GraphData {
 		for (int i = 0; i < nodeLabels.size(); i++) {
 			label = nodeLabels.get(i);
 			if (freqNodeLabel[label] < minSupportCount) {
-				// Èç¹ûĞ¡ÓÚÖ§³Ö¶È¼ÆÊı£¬Ôò´Ëµã²»¿ÉÓÃ
+				// å¦‚æœå°äºæ”¯æŒåº¦è®¡æ•°ï¼Œåˆ™æ­¤ç‚¹ä¸å¯ç”¨
 				nodeVisibles.set(i, false);
 			}
 		}
@@ -108,12 +108,12 @@ public class GraphData {
 			label = edgeLabels.get(i);
 
 			if (freqEdgeLabel[label] < minSupportCount) {
-				// Èç¹ûĞ¡ÓÚÖ§³Ö¶È¼ÆÊı£¬Ôò´Ë±ß²»¿ÉÓÃ
+				// å¦‚æœå°äºæ”¯æŒåº¦è®¡æ•°ï¼Œåˆ™æ­¤è¾¹ä¸å¯ç”¨
 				edgeVisibles.set(i, false);
 				continue;
 			}
 
-			// Èç¹û´Ë±ßµÄÄ³¸ö¶ËµÄ¶ËµãÒÑ¾­²»¿ÉÓÃÁË£¬Ôò´Ë±ßÒ²²»¿ÉÓÃ,x,y±íÊ¾idºÅ
+			// å¦‚æœæ­¤è¾¹çš„æŸä¸ªç«¯çš„ç«¯ç‚¹å·²ç»ä¸å¯ç”¨äº†ï¼Œåˆ™æ­¤è¾¹ä¹Ÿä¸å¯ç”¨,x,yè¡¨ç¤ºidå·
 			x = edgeX.get(i);
 			y = edgeY.get(i);
 			if (!nodeVisibles.get(x) || !nodeVisibles.get(y)) {
@@ -123,23 +123,23 @@ public class GraphData {
 	}
 
 	/**
-	 * ¸ù¾İ±êºÅÅÅĞòÖØĞÂ¶ÔÂú×ãÌõ¼şµÄµã±ßÖØĞÂ±àºÅ
+	 * æ ¹æ®æ ‡å·æ’åºé‡æ–°å¯¹æ»¡è¶³æ¡ä»¶çš„ç‚¹è¾¹é‡æ–°ç¼–å·
 	 * 
 	 * @param nodeLabel2Rank
-	 *            µãÅÅÃû
+	 *            ç‚¹æ’å
 	 * @param edgeLabel2Rank
-	 *            ±ßÅÅÃû
+	 *            è¾¹æ’å
 	 */
 	public void reLabelByRank(int[] nodeLabel2Rank, int[] edgeLabel2Rank) {
 		int label = 0;
 		int count = 0;
 		int temp = 0;
-		// ¾ÉµÄid¶ÔĞÂidºÅµÄÓ³Éä
+		// æ—§çš„idå¯¹æ–°idå·çš„æ˜ å°„
 		int[] oldId2New = new int[nodeLabels.size()];
 		for (int i = 0; i < nodeLabels.size(); i++) {
 			label = nodeLabels.get(i);
 
-			// Èç¹ûµ±Ç°µãÊÇ¿ÉÓÃµÄ£¬½«´Ë±êºÅµÄÅÅÃûºÅ×÷Îª´ËµãĞÂµÄ±êºÅ
+			// å¦‚æœå½“å‰ç‚¹æ˜¯å¯ç”¨çš„ï¼Œå°†æ­¤æ ‡å·çš„æ’åå·ä½œä¸ºæ­¤ç‚¹æ–°çš„æ ‡å·
 			if (nodeVisibles.get(i)) {
 				nodeLabels.set(i, nodeLabel2Rank[label]);
 				oldId2New[i] = count;
@@ -150,11 +150,11 @@ public class GraphData {
 		for (int i = 0; i < edgeLabels.size(); i++) {
 			label = edgeLabels.get(i);
 
-			// Èç¹ûµ±Ç°±ßÊÇ¿ÉÓÃµÄ£¬½«´Ë±êºÅµÄÅÅÃûºÅ×÷Îª´ËµãĞÂµÄ±êºÅ
+			// å¦‚æœå½“å‰è¾¹æ˜¯å¯ç”¨çš„ï¼Œå°†æ­¤æ ‡å·çš„æ’åå·ä½œä¸ºæ­¤ç‚¹æ–°çš„æ ‡å·
 			if (edgeVisibles.get(i)) {
 				edgeLabels.set(i, edgeLabel2Rank[label]);
 
-				// ¶Ô´Ëµã×öx,yµÄidºÅÌæ»»
+				// å¯¹æ­¤ç‚¹åšx,yçš„idå·æ›¿æ¢
 				temp = edgeX.get(i);
 				edgeX.set(i, oldId2New[temp]);
 				temp = edgeY.get(i);

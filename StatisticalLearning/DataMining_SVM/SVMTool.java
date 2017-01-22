@@ -13,36 +13,36 @@ import DataMining_SVM.libsvm.svm_parameter;
 import DataMining_SVM.libsvm.svm_problem;
 
 /**
- * SVMÖ§³ÖÏòÁ¿»ú¹¤¾ßÀà
+ * SVMæ”¯æŒå‘é‡æœºå·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class SVMTool {
-	// ÑµÁ·¼¯Êı¾İÎÄ¼şÂ·¾¶
+	// è®­ç»ƒé›†æ•°æ®æ–‡ä»¶è·¯å¾„
 	private String trainDataPath;
-	// svm_problem¶ÔÏó£¬ÓÃÓÚ¹¹Ôìsvm modelÄ£ĞÍ
+	// svm_problemå¯¹è±¡ï¼Œç”¨äºæ„é€ svm modelæ¨¡å‹
 	private svm_problem sProblem;
-	// svm²ÎÊı£¬ÀïÃæÓĞsvmÖ§³ÖÏòÁ¿»úµÄÀàĞÍºÍ²»Í¬ µÄsvmµÄºËº¯ÊıÀàĞÍ
+	// svmå‚æ•°ï¼Œé‡Œé¢æœ‰svmæ”¯æŒå‘é‡æœºçš„ç±»å‹å’Œä¸åŒ çš„svmçš„æ ¸å‡½æ•°ç±»å‹
 	private svm_parameter sParam;
 
 	public SVMTool(String trainDataPath) {
 		this.trainDataPath = trainDataPath;
 
-		// ³õÊ¼»¯svmÏà¹Ø±äÁ¿
+		// åˆå§‹åŒ–svmç›¸å…³å˜é‡
 		sProblem = initSvmProblem();
 		sParam = initSvmParam();
 	}
 	
 	/**
-	 * ³õÊ¼»¯²Ù×÷£¬¸ù¾İÑµÁ·¼¯Êı¾İ¹¹Ôì·ÖÀàÄ£ĞÍ
+	 * åˆå§‹åŒ–æ“ä½œï¼Œæ ¹æ®è®­ç»ƒé›†æ•°æ®æ„é€ åˆ†ç±»æ¨¡å‹
 	 */
 	private void initOperation(){
 		
 	}
 
 	/**
-	 * svm_problem¶ÔÏó£¬ÑµÁ·¼¯Êı¾İµÄÏà¹ØĞÅÏ¢ÅäÖÃ
+	 * svm_problemå¯¹è±¡ï¼Œè®­ç»ƒé›†æ•°æ®çš„ç›¸å…³ä¿¡æ¯é…ç½®
 	 * 
 	 * @return
 	 */
@@ -52,38 +52,38 @@ public class SVMTool {
 		getData(nodeSet, label, trainDataPath);
 
 		int dataRange = nodeSet.get(0).length;
-		svm_node[][] datas = new svm_node[nodeSet.size()][dataRange]; // ÑµÁ·¼¯µÄÏòÁ¿±í
+		svm_node[][] datas = new svm_node[nodeSet.size()][dataRange]; // è®­ç»ƒé›†çš„å‘é‡è¡¨
 		for (int i = 0; i < datas.length; i++) {
 			for (int j = 0; j < dataRange; j++) {
 				datas[i][j] = nodeSet.get(i)[j];
 			}
 		}
-		double[] lables = new double[label.size()]; // a,b ¶ÔÓ¦µÄlable
+		double[] lables = new double[label.size()]; // a,b å¯¹åº”çš„lable
 		for (int i = 0; i < lables.length; i++) {
 			lables[i] = label.get(i);
 		}
 
-		// ¶¨Òåsvm_problem¶ÔÏó
+		// å®šä¹‰svm_problemå¯¹è±¡
 		svm_problem problem = new svm_problem();
-		problem.l = nodeSet.size(); // ÏòÁ¿¸öÊı
-		problem.x = datas; // ÑµÁ·¼¯ÏòÁ¿±í
-		problem.y = lables; // ¶ÔÓ¦µÄlableÊı×é
+		problem.l = nodeSet.size(); // å‘é‡ä¸ªæ•°
+		problem.x = datas; // è®­ç»ƒé›†å‘é‡è¡¨
+		problem.y = lables; // å¯¹åº”çš„lableæ•°ç»„
 
 		return problem;
 	}
 
 	/**
-	 * ³õÊ¼»¯svmÖ§³ÖÏòÁ¿»úµÄ²ÎÊı£¬°üÀ¨svmµÄÀàĞÍºÍºËº¯ÊıµÄÀàĞÍ
+	 * åˆå§‹åŒ–svmæ”¯æŒå‘é‡æœºçš„å‚æ•°ï¼ŒåŒ…æ‹¬svmçš„ç±»å‹å’Œæ ¸å‡½æ•°çš„ç±»å‹
 	 * 
 	 * @return
 	 */
 	private svm_parameter initSvmParam() {
-		// ¶¨Òåsvm_parameter¶ÔÏó
+		// å®šä¹‰svm_parameterå¯¹è±¡
 		svm_parameter param = new svm_parameter();
 		param.svm_type = svm_parameter.EPSILON_SVR;
-		// ÉèÖÃsvmµÄºËº¯ÊıÀàĞÍÎªÏßĞÍ
+		// è®¾ç½®svmçš„æ ¸å‡½æ•°ç±»å‹ä¸ºçº¿å‹
 		param.kernel_type = svm_parameter.LINEAR;
-		// ºóÃæµÄ²ÎÊıÅäÖÃÖ»Õë¶ÔÑµÁ·¼¯µÄÊı¾İ
+		// åé¢çš„å‚æ•°é…ç½®åªé’ˆå¯¹è®­ç»ƒé›†çš„æ•°æ®
 		param.cache_size = 100;
 		param.eps = 0.00001;
 		param.C = 1.9;
@@ -92,57 +92,57 @@ public class SVMTool {
 	}
 
 	/**
-	 * Í¨¹ısvm·½Ê½Ô¤²âÊı¾İµÄÀàĞÍ
+	 * é€šè¿‡svmæ–¹å¼é¢„æµ‹æ•°æ®çš„ç±»å‹
 	 * 
 	 * @param testDataPath
 	 */
 	public void svmPredictData(String testDataPath) {
-		// »ñÈ¡²âÊÔÊı¾İ
+		// è·å–æµ‹è¯•æ•°æ®
 		List<Double> testlabel = new ArrayList<Double>();
 		List<svm_node[]> testnodeSet = new ArrayList<svm_node[]>();
 		getData(testnodeSet, testlabel, testDataPath);
 		int dataRange = testnodeSet.get(0).length;
 
-		svm_node[][] testdatas = new svm_node[testnodeSet.size()][dataRange]; // ÑµÁ·¼¯µÄÏòÁ¿±í
+		svm_node[][] testdatas = new svm_node[testnodeSet.size()][dataRange]; // è®­ç»ƒé›†çš„å‘é‡è¡¨
 		for (int i = 0; i < testdatas.length; i++) {
 			for (int j = 0; j < dataRange; j++) {
 				testdatas[i][j] = testnodeSet.get(i)[j];
 			}
 		}
-		// ²âÊÔÊı¾İµÄÕæÊµÖµ£¬ÔÚºóÃæ½«»áÓësvmµÄÔ¤²âÖµ×ö±È½Ï
-		double[] testlables = new double[testlabel.size()]; // a,b ¶ÔÓ¦µÄlable
+		// æµ‹è¯•æ•°æ®çš„çœŸå®å€¼ï¼Œåœ¨åé¢å°†ä¼šä¸svmçš„é¢„æµ‹å€¼åšæ¯”è¾ƒ
+		double[] testlables = new double[testlabel.size()]; // a,b å¯¹åº”çš„lable
 		for (int i = 0; i < testlables.length; i++) {
 			testlables[i] = testlabel.get(i);
 		}
 
-		// Èç¹û²ÎÊıÃ»ÓĞÎÊÌâ£¬Ôòsvm.svm_check_parameter()º¯Êı·µ»Ønull,·ñÔò·µ»ØerrorÃèÊö¡£
-		// ¶ÔsvmµÄÅäÖÃ²ÎÊı½ĞÑéÖ¤£¬ÒòÎªÓĞĞ©²ÎÊıÖ»Õë¶Ô²¿·ÖµÄÖ§³ÖÏòÁ¿»úµÄÀàĞÍ
+		// å¦‚æœå‚æ•°æ²¡æœ‰é—®é¢˜ï¼Œåˆ™svm.svm_check_parameter()å‡½æ•°è¿”å›null,å¦åˆ™è¿”å›erroræè¿°ã€‚
+		// å¯¹svmçš„é…ç½®å‚æ•°å«éªŒè¯ï¼Œå› ä¸ºæœ‰äº›å‚æ•°åªé’ˆå¯¹éƒ¨åˆ†çš„æ”¯æŒå‘é‡æœºçš„ç±»å‹
 		System.out.println(svm.svm_check_parameter(sProblem, sParam));
-		System.out.println("------------¼ìÑé²ÎÊı-----------");
-		// ÑµÁ·SVM·ÖÀàÄ£ĞÍ
+		System.out.println("------------æ£€éªŒå‚æ•°-----------");
+		// è®­ç»ƒSVMåˆ†ç±»æ¨¡å‹
 		svm_model model = svm.svm_train(sProblem, sParam);
 
-		// Ô¤²â²âÊÔÊı¾İµÄlable
+		// é¢„æµ‹æµ‹è¯•æ•°æ®çš„lable
 		double err = 0.0;
 		for (int i = 0; i < testdatas.length; i++) {
 			double truevalue = testlables[i];
-			// ²âÊÔÊı¾İÕæÊµÖµ
+			// æµ‹è¯•æ•°æ®çœŸå®å€¼
 			System.out.print(truevalue + " ");
 			double predictValue = svm.svm_predict(model, testdatas[i]);
-			// ²âÊÔÊı¾İÔ¤²âÖµ
+			// æµ‹è¯•æ•°æ®é¢„æµ‹å€¼
 			System.out.println(predictValue);
 		}
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ»ñÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è·å–æ•°æ®
 	 * 
 	 * @param nodeSet
-	 *            ÏòÁ¿½Úµã
+	 *            å‘é‡èŠ‚ç‚¹
 	 * @param label
-	 *            ½ÚµãÖµÀàĞÍÖµ
+	 *            èŠ‚ç‚¹å€¼ç±»å‹å€¼
 	 * @param filename
-	 *            Êı¾İÎÄ¼şµØÖ·
+	 *            æ•°æ®æ–‡ä»¶åœ°å€
 	 */
 	private void getData(List<svm_node[]> nodeSet, List<Double> label,
 			String filename) {

@@ -1,14 +1,14 @@
 package DataMining_KMeans;
 
 /**
- * K-means£¨K¾ùÖµ£©Ëã·¨µ÷ÓÃÀà
+ * K-meansï¼ˆKå‡å€¼ï¼‰ç®—æ³•è°ƒç”¨ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		//¾ÛÀàÖĞĞÄÊıÁ¿Éè¶¨
+		//èšç±»ä¸­å¿ƒæ•°é‡è®¾å®š
 		int classNum = 3;
 		
 		KMeansTool tool = new KMeansTool(filePath, classNum);

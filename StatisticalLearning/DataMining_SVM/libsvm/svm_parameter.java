@@ -1,22 +1,22 @@
 package DataMining_SVM.libsvm;
 public class svm_parameter implements Cloneable,java.io.Serializable
 {
-	/* svm_type Ö§³ÖÏòÁ¿»úµÄÀàĞÍ*/
+	/* svm_type æ”¯æŒå‘é‡æœºçš„ç±»å‹*/
 	public static final int C_SVC = 0;
 	public static final int NU_SVC = 1;
-	//Ò»Ààsvm
+	//ä¸€ç±»svm
 	public static final int ONE_CLASS = 2;
 	public static final int EPSILON_SVR = 3;
 	public static final int NU_SVR = 4;
 
-	/* kernel_type ºËº¯ÊıÀàĞÍ*/
-	//ÏßĞÍºËº¯Êı
+	/* kernel_type æ ¸å‡½æ•°ç±»å‹*/
+	//çº¿å‹æ ¸å‡½æ•°
 	public static final int LINEAR = 0;
-	//¶àÏîÊ½ºËº¯Êı
+	//å¤šé¡¹å¼æ ¸å‡½æ•°
 	public static final int POLY = 1;
-	//RBF¾¶Ïò»ùº¯Êı
+	//RBFå¾„å‘åŸºå‡½æ•°
 	public static final int RBF = 2;
-	//¶ş²ãÉñ¾­ÍøÂçºËº¯Êı
+	//äºŒå±‚ç¥ç»ç½‘ç»œæ ¸å‡½æ•°
 	public static final int SIGMOID = 3;
 	public static final int PRECOMPUTED = 4;
 
@@ -26,7 +26,7 @@ public class svm_parameter implements Cloneable,java.io.Serializable
 	public double gamma;	// for poly/rbf/sigmoid
 	public double coef0;	// for poly/sigmoid
 
-	// these are for training only ºóÃæÕâĞ©²ÎÊıÖ»Õë¶ÔÑµÁ·¼¯µÄÊı¾İ
+	// these are for training only åé¢è¿™äº›å‚æ•°åªé’ˆå¯¹è®­ç»ƒé›†çš„æ•°æ®
 	public double cache_size; // in MB
 	public double eps;	// stopping criteria
 	public double C;	// for C_SVC, EPSILON_SVR and NU_SVR

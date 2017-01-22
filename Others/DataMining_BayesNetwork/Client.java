@@ -3,7 +3,7 @@ package DataMining_BayesNetwork;
 import java.text.MessageFormat;
 
 /**
- * ±´Ò¶Ë¹ÍøÂç³¡¾°²âÊÔÀà
+ * è´å¶æ–¯ç½‘ç»œåœºæ™¯æµ‹è¯•ç±»
  * 
  * @author lyq
  * 
@@ -12,21 +12,21 @@ public class Client {
 	public static void main(String[] args) {
 		String dataFilePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
 		String attachFilePath = "C:\\Users\\lyq\\Desktop\\icon\\attach.txt";
-		// ²éÑ¯´®Óï¾ä
+		// æŸ¥è¯¢ä¸²è¯­å¥
 		String queryStr;
-		// ½á¹û¸ÅÂÊ
+		// ç»“æœæ¦‚ç‡
 		double result;
 
-		// ²éÑ¯Óï¾äµÄÃèÊöµÄÊÂ¼şÊÇµØÕğ·¢ÉúÁË£¬µ¼ÖÂÏìÁåÏìÁË£¬µ¼ÖÂ½Óµ½MaryµÄµç»°
+		// æŸ¥è¯¢è¯­å¥çš„æè¿°çš„äº‹ä»¶æ˜¯åœ°éœ‡å‘ç”Ÿäº†ï¼Œå¯¼è‡´å“é“ƒå“äº†ï¼Œå¯¼è‡´æ¥åˆ°Maryçš„ç”µè¯
 		queryStr = "E=y,A=y,M=y";
 		BayesNetWorkTool tool = new BayesNetWorkTool(dataFilePath,
 				attachFilePath);
 		result = tool.calProByNetWork(queryStr);
 
 		if (result == -1) {
-			System.out.println("ËùÃèÊöµÄÊÂ¼ş²»Âú×ã±´Ò¶Ë¹ÍøÂçµÄ½á¹¹£¬ÎŞ·¨ÇóÆä¸ÅÂÊ");
+			System.out.println("æ‰€æè¿°çš„äº‹ä»¶ä¸æ»¡è¶³è´å¶æ–¯ç½‘ç»œçš„ç»“æ„ï¼Œæ— æ³•æ±‚å…¶æ¦‚ç‡");
 		} else {
-			System.out.println(String.format("ÊÂ¼ş%s·¢ÉúµÄ¸ÅÂÊÎª%s", queryStr, result));
+			System.out.println(String.format("äº‹ä»¶%så‘ç”Ÿçš„æ¦‚ç‡ä¸º%s", queryStr, result));
 		}
 	}
 }

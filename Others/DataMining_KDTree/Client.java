@@ -3,7 +3,7 @@ package DataMining_KDTree;
 import java.text.MessageFormat;
 
 /**
- * KDÊ÷Ëã·¨²âÊÔÀà
+ * KDæ ‘ç®—æ³•æµ‹è¯•ç±»
  * 
  * @author lyq
  * 
@@ -15,22 +15,22 @@ public class Client {
 		Point searchedNode;
 		KDTreeTool tool = new KDTreeTool(filePath);
 
-		// ½øĞĞKDÊ÷µÄ¹¹½¨
+		// è¿›è¡ŒKDæ ‘çš„æ„å»º
 		tool.createKDTree();
 
-		// Í¨¹ıKDÊ÷½øĞĞÊı¾İµãµÄ×î½üµã²éÑ¯
+		// é€šè¿‡KDæ ‘è¿›è¡Œæ•°æ®ç‚¹çš„æœ€è¿‘ç‚¹æŸ¥è¯¢
 		queryNode = new Point(2.1, 3.1);
 		searchedNode = tool.searchNearestData(queryNode);
 		System.out.println(MessageFormat.format(
-				"¾àÀë²éÑ¯µã({0}, {1})×î½üµÄ×ø±êµãÎª({2}, {3})", queryNode.x, queryNode.y,
+				"è·ç¦»æŸ¥è¯¢ç‚¹({0}, {1})æœ€è¿‘çš„åæ ‡ç‚¹ä¸º({2}, {3})", queryNode.x, queryNode.y,
 				searchedNode.x, searchedNode.y));
 		
-		//ÖØĞÂ¹¹ÔìKDÊ÷,È¥³ıÖ®Ç°µÄ·ÃÎÊ¼ÇÂ¼
+		//é‡æ–°æ„é€ KDæ ‘,å»é™¤ä¹‹å‰çš„è®¿é—®è®°å½•
 		tool.createKDTree();
 		queryNode = new Point(2, 4.5);
 		searchedNode = tool.searchNearestData(queryNode);
 		System.out.println(MessageFormat.format(
-				"¾àÀë²éÑ¯µã({0}, {1})×î½üµÄ×ø±êµãÎª({2}, {3})", queryNode.x, queryNode.y,
+				"è·ç¦»æŸ¥è¯¢ç‚¹({0}, {1})æœ€è¿‘çš„åæ ‡ç‚¹ä¸º({2}, {3})", queryNode.x, queryNode.y,
 				searchedNode.x, searchedNode.y));
 	}
 }

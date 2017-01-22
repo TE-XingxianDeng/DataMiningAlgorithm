@@ -6,15 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Êı¾İ¼ÇÂ¼£¬°üº¬ÕâÌõ¼ÇÂ¼ËùÓĞÊôĞÔ
+ * æ•°æ®è®°å½•ï¼ŒåŒ…å«è¿™æ¡è®°å½•æ‰€æœ‰å±æ€§
  * 
  * @author lyq
  * 
  */
 public class Record {
-	// ¼ÇÂ¼Ãû³Æ
+	// è®°å½•åç§°
 	private String name;
-	// ¼ÇÂ¼ÊôĞÔ¼üÖµ¶Ô
+	// è®°å½•å±æ€§é”®å€¼å¯¹
 	private HashMap<String, String> attrValues;
 
 	public Record(String name, HashMap<String, String> attrValues) {
@@ -27,10 +27,10 @@ public class Record {
 	}
 
 	/**
-	 * ´ËÊı¾İÊÇ·ñ°üº¬´ËÊôĞÔÖµ
+	 * æ­¤æ•°æ®æ˜¯å¦åŒ…å«æ­¤å±æ€§å€¼
 	 * 
 	 * @param attr
-	 *            ´ıÅĞ¶ÏÊôĞÔÖµ
+	 *            å¾…åˆ¤æ–­å±æ€§å€¼
 	 * @return
 	 */
 	public boolean isContainedAttr(String attr) {
@@ -44,10 +44,10 @@ public class Record {
 	}
 
 	/**
-	 * ÅĞ¶ÏÊı¾İ¼ÇÂ¼ÊÇ·ñÊÇÍ¬Ò»Ìõ¼ÇÂ¼£¬¸ù¾İÊı¾İÃû³ÆÀ´ÅĞ¶Ï
+	 * åˆ¤æ–­æ•°æ®è®°å½•æ˜¯å¦æ˜¯åŒä¸€æ¡è®°å½•ï¼Œæ ¹æ®æ•°æ®åç§°æ¥åˆ¤æ–­
 	 * 
 	 * @param record
-	 *            Ä¿±ê±È½Ï¶ÔÏó
+	 *            ç›®æ ‡æ¯”è¾ƒå¯¹è±¡
 	 * @return
 	 */
 	public boolean isRecordSame(Record record) {
@@ -61,7 +61,7 @@ public class Record {
 	}
 
 	/**
-	 * Êı¾İµÄ¾ö²ßÊôĞÔ·ÖÀà
+	 * æ•°æ®çš„å†³ç­–å±æ€§åˆ†ç±»
 	 * 
 	 * @return
 	 */
@@ -74,10 +74,10 @@ public class Record {
 	}
 
 	/**
-	 * ¸ù¾İÔ¼¼òÊôĞÔÊä³ö¾ö²ß¹æÔò
+	 * æ ¹æ®çº¦ç®€å±æ€§è¾“å‡ºå†³ç­–è§„åˆ™
 	 * 
 	 * @param reductAttr
-	 *            Ô¼¼òÊôĞÔ¼¯ºÏ
+	 *            çº¦ç®€å±æ€§é›†åˆ
 	 */
 	public String getDecisionRule(ArrayList<String> reductAttr) {
 		String ruleStr = "";
@@ -86,7 +86,7 @@ public class Record {
 		String decisionValue;
 
 		decisionValue = attrValues.get(RoughSetsTool.DECISION_ATTR_NAME);
-		ruleStr += "ÊôĞÔ";
+		ruleStr += "å±æ€§";
 		for (Map.Entry entry : this.attrValues.entrySet()) {
 			attrName = (String) entry.getKey();
 			value = (String) entry.getValue();
@@ -98,7 +98,7 @@ public class Record {
 
 			ruleStr += MessageFormat.format("{0}={1},", attrName, value);
 		}
-		ruleStr += "ËûµÄ·ÖÀàÎª" + decisionValue;
+		ruleStr += "ä»–çš„åˆ†ç±»ä¸º" + decisionValue;
 		
 		return ruleStr;
 	}

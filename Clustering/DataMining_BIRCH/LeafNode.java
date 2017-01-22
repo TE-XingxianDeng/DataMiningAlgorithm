@@ -3,15 +3,15 @@ package DataMining_BIRCH;
 import java.util.ArrayList;
 
 /**
- * CFÊ÷Ò¶×Ó½Úµã
+ * CFæ ‘å¶å­èŠ‚ç‚¹
  * 
  * @author lyq
  * 
  */
 public class LeafNode extends ClusteringFeature {
-	// º¢×Ó¼¯Èº
+	// å­©å­é›†ç¾¤
 	private ArrayList<Cluster> clusterChilds;
-	// ¸¸Ç×½Úµã
+	// çˆ¶äº²èŠ‚ç‚¹
 	private NonLeafNode parentNode;
 
 	public ArrayList<Cluster> getClusterChilds() {
@@ -23,20 +23,20 @@ public class LeafNode extends ClusteringFeature {
 	}
 
 	/**
-	 * ½«Ò¶×Ó½Úµã»®·Ö³ö2¸ö
+	 * å°†å¶å­èŠ‚ç‚¹åˆ’åˆ†å‡º2ä¸ª
 	 * 
 	 * @return
 	 */
 	public LeafNode[] divideLeafNode() {
 		LeafNode[] leafNodeArray = new LeafNode[2];
-		// ´Ø¼ä¾àÀë²î¾à×î´óµÄ2¸ö´Ø£¬ºóÃæµÄ´Ø°´ÕÕ¾Í½üÔ­Ôò»®·Ö¼´¿É
+		// ç°‡é—´è·ç¦»å·®è·æœ€å¤§çš„2ä¸ªç°‡ï¼Œåé¢çš„ç°‡æŒ‰ç…§å°±è¿‘åŸåˆ™åˆ’åˆ†å³å¯
 		Cluster cluster1 = null;
 		Cluster cluster2 = null;
 		Cluster tempCluster = null;
 		double maxValue = 0;
 		double temp = 0;
 
-		// ÕÒ³ö´ØĞÄ¾àÀë²î¾à×î´óµÄ2¸ö´Ø
+		// æ‰¾å‡ºç°‡å¿ƒè·ç¦»å·®è·æœ€å¤§çš„2ä¸ªç°‡
 		for (int i = 0; i < clusterChilds.size() - 1; i++) {
 			tempCluster = clusterChilds.get(i);
 			for (int j = i + 1; j < clusterChilds.size(); j++) {
@@ -59,11 +59,11 @@ public class LeafNode extends ClusteringFeature {
 		cluster2.setParentNode(leafNodeArray[1]);
 		clusterChilds.remove(cluster1);
 		clusterChilds.remove(cluster2);
-		// ¾Í½ü·ÖÅä´Ø
+		// å°±è¿‘åˆ†é…ç°‡
 		for (Cluster c : clusterChilds) {
 			if (cluster1.computerClusterDistance(c) < cluster2
 					.computerClusterDistance(c)) {
-				// ´Ø¼ä¾àÀëÈç¹û½Ó½ü×îĞ¡´Ø£¬¾Í¼ÓÈë×îĞ¡´ØËùÊôÒ¶×Ó½Úµã
+				// ç°‡é—´è·ç¦»å¦‚æœæ¥è¿‘æœ€å°ç°‡ï¼Œå°±åŠ å…¥æœ€å°ç°‡æ‰€å±å¶å­èŠ‚ç‚¹
 				leafNodeArray[0].addingCluster(c);
 				c.setParentNode(leafNodeArray[0]);
 			} else {
@@ -85,15 +85,15 @@ public class LeafNode extends ClusteringFeature {
 
 	@Override
 	public void addingCluster(ClusteringFeature clusteringFeature) {
-		//¸üĞÂ¾ÛÀàÌØÕ÷Öµ
+		//æ›´æ–°èšç±»ç‰¹å¾å€¼
 		directAddCluster(clusteringFeature);
 		
-		// Ñ°ÕÒµ½µÄÄ¿±ê¼¯Èº
+		// å¯»æ‰¾åˆ°çš„ç›®æ ‡é›†ç¾¤
 		Cluster findedCluster = null;
 		Cluster cluster = (Cluster) clusteringFeature;
-		// ´ØÄÚ¶ÔÏóÆ½¾ù¾àÀë
+		// ç°‡å†…å¯¹è±¡å¹³å‡è·ç¦»
 		double disance = Integer.MAX_VALUE;
-		// ´Ø¼ä¾àÀë²îÖµ
+		// ç°‡é—´è·ç¦»å·®å€¼
 		double errorDistance = 0;
 		boolean needDivided = false;
 		if (clusterChilds == null) {
@@ -104,7 +104,7 @@ public class LeafNode extends ClusteringFeature {
 			for (Cluster c : clusterChilds) {
 				errorDistance = c.computerClusterDistance(cluster);
 				if (disance > errorDistance) {
-					// Ñ¡³ö´Ø¼ä¾àÀë×î½üµÄ
+					// é€‰å‡ºç°‡é—´è·ç¦»æœ€è¿‘çš„
 					disance = errorDistance;
 					findedCluster = c;
 				}
@@ -114,9 +114,9 @@ public class LeafNode extends ClusteringFeature {
 					.getData().clone();
 			ArrayList<double[]> data2 = cluster.getData();
 			data1.addAll(data2);
-			// Èç¹ûÌí¼ÓºóµÄ¾ÛÀàµÄ´Ø¼ä¾àÀë³¬¹ı¸ø¶¨ãĞÖµ£¬ĞèÒª¶îÍâĞÂ½¨´Ø
+			// å¦‚æœæ·»åŠ åçš„èšç±»çš„ç°‡é—´è·ç¦»è¶…è¿‡ç»™å®šé˜ˆå€¼ï¼Œéœ€è¦é¢å¤–æ–°å»ºç°‡
 			if (findedCluster.computerInClusterDistance(data1) > BIRCHTool.T) {
-				// Ò¶×Ó½ÚµãµÄº¢×ÓÊı²»ÄÜ³¬¹ıÆ½ºâÒò×ÓL
+				// å¶å­èŠ‚ç‚¹çš„å­©å­æ•°ä¸èƒ½è¶…è¿‡å¹³è¡¡å› å­L
 				if (clusterChilds.size() + 1 > BIRCHTool.L) {
 					needDivided = true;
 				}

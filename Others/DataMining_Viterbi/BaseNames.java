@@ -1,22 +1,22 @@
 package DataMining_Viterbi;
 
 /**
- * »ù±¾±äÁ¿¶¨ÒåÀà
+ * åŸºæœ¬å˜é‡å®šä¹‰ç±»
  * @author lyq
  *
  */
 public class BaseNames {
-	//ÈÕÆÚÌìÊıÏÂ±ê
+	//æ—¥æœŸå¤©æ•°ä¸‹æ ‡
 	public static final int DAY1 = 0;
 	public static final int DAY2 = 1;
 	public static final int DAY3 = 2;
 	
-	//ÌìÆøÊôĞÔÀà±ğ
+	//å¤©æ°”å±æ€§ç±»åˆ«
 	public static final int WEATHER_SUNNY = 0;
 	public static final int WEATHER_CLOUDY = 1;
 	public static final int WEATHER_RAINY = 2;
 	
-	//Êª¶ÈÊôĞÔÀà±ğ
+	//æ¹¿åº¦å±æ€§ç±»åˆ«
 	public static final int HUMIDITY_DRY = 0;
 	public static final int HUMIDITY_DRYISH = 1;
 	public static final int HUMIDITY_DAMP = 1;

@@ -15,24 +15,24 @@ import javax.swing.text.DefaultEditorKit.CutAction;
 import javax.swing.text.html.MinimalHTMLWriter;
 
 /**
- * CART·ÖÀà»Ø¹éÊ÷Ëã·¨¹¤¾ßÀà
+ * CARTåˆ†ç±»å›å½’æ ‘ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class CARTTool {
-	// Àà±êºÅµÄÖµÀàĞÍ
+	// ç±»æ ‡å·çš„å€¼ç±»å‹
 	private final String YES = "Yes";
 	private final String NO = "No";
 
-	// ËùÓĞÊôĞÔµÄÀàĞÍ×ÜÊı,ÔÚÕâÀï¾ÍÊÇdataÔ´Êı¾İµÄÁĞÊı
+	// æ‰€æœ‰å±æ€§çš„ç±»å‹æ€»æ•°,åœ¨è¿™é‡Œå°±æ˜¯dataæºæ•°æ®çš„åˆ—æ•°
 	private int attrNum;
 	private String filePath;
-	// ³õÊ¼Ô´Êı¾İ£¬ÓÃÒ»¸ö¶şÎ¬×Ö·ûÊı×é´æ·ÅÄ£·Â±í¸ñÊı¾İ
+	// åˆå§‹æºæ•°æ®ï¼Œç”¨ä¸€ä¸ªäºŒç»´å­—ç¬¦æ•°ç»„å­˜æ”¾æ¨¡ä»¿è¡¨æ ¼æ•°æ®
 	private String[][] data;
-	// Êı¾İµÄÊôĞÔĞĞµÄÃû×Ö
+	// æ•°æ®çš„å±æ€§è¡Œçš„åå­—
 	private String[] attrNames;
-	// Ã¿¸öÊôĞÔµÄÖµËùÓĞÀàĞÍ
+	// æ¯ä¸ªå±æ€§çš„å€¼æ‰€æœ‰ç±»å‹
 	private HashMap<String, ArrayList<String>> attrValue;
 
 	public CARTTool(String filePath) {
@@ -41,7 +41,7 @@ public class CARTTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	public void readDataFile() {
 		File file = new File(filePath);
@@ -74,23 +74,23 @@ public class CARTTool {
 	}
 
 	/**
-	 * Ê×ÏÈ³õÊ¼»¯Ã¿ÖÖÊôĞÔµÄÖµµÄËùÓĞÀàĞÍ£¬ÓÃÓÚºóÃæµÄ×ÓÀàìØµÄ¼ÆËãÊ±ÓÃ
+	 * é¦–å…ˆåˆå§‹åŒ–æ¯ç§å±æ€§çš„å€¼çš„æ‰€æœ‰ç±»å‹ï¼Œç”¨äºåé¢çš„å­ç±»ç†µçš„è®¡ç®—æ—¶ç”¨
 	 */
 	public void initAttrValue() {
 		ArrayList<String> tempValues;
 
-		// °´ÕÕÁĞµÄ·½Ê½£¬´Ó×óÍùÓÒÕÒ
+		// æŒ‰ç…§åˆ—çš„æ–¹å¼ï¼Œä»å·¦å¾€å³æ‰¾
 		for (int j = 1; j < attrNum; j++) {
-			// ´ÓÒ»ÁĞÖĞµÄÉÏÍùÏÂ¿ªÊ¼Ñ°ÕÒÖµ
+			// ä»ä¸€åˆ—ä¸­çš„ä¸Šå¾€ä¸‹å¼€ï¿½ä½³ç½¢æŠ‘ï¿½
 			tempValues = new ArrayList<>();
 			for (int i = 1; i < data.length; i++) {
 				if (!tempValues.contains(data[i][j])) {
-					// Èç¹ûÕâ¸öÊôĞÔµÄÖµÃ»ÓĞÌí¼Ó¹ı£¬ÔòÌí¼Ó
+					// å¦‚æœè¿™ä¸ªå±æ€§çš„å€¼æ²¡æœ‰æ·»åŠ è¿‡ï¼Œåˆ™æ·»åŠ 
 					tempValues.add(data[i][j]);
 				}
 			}
 
-			// Ò»ÁĞÊôĞÔµÄÖµÒÑ¾­±éÀúÍê±Ï£¬¸´ÖÆµ½mapÊôĞÔ±íÖĞ
+			// ä¸€åˆ—å±æ€§çš„å€¼å·²ç»éå†å®Œæ¯•ï¼Œå¤åˆ¶åˆ°mapå±æ€§è¡¨ä¸­
 			attrValue.put(data[0][j], tempValues);
 		}
 
@@ -102,39 +102,39 @@ public class CARTTool {
 	}
 
 	/**
-	 * ¼ÆËã»ú»ùÄáÖ¸Êı
+	 * è®¡ç®—æœºåŸºå°¼æŒ‡æ•°
 	 * 
 	 * @param remainData
-	 *            Ê£ÓàÊı¾İ
+	 *            å‰©ä½™æ•°æ®
 	 * @param attrName
-	 *            ÊôĞÔÃû³Æ
+	 *            å±æ€§åç§°
 	 * @param value
-	 *            ÊôĞÔÖµ
+	 *            å±æ€§å€¼
 	 * @param beLongValue
-	 *            ·ÖÀàÊÇ·ñÊôÓÚ´ËÊôĞÔÖµ
+	 *            åˆ†ç±»æ˜¯å¦å±äºæ­¤å±æ€§å€¼
 	 * @return
 	 */
 	public double computeGini(String[][] remainData, String attrName,
 			String value, boolean beLongValue) {
-		// ÊµÀı×ÜÊı
+		// å®ä¾‹æ€»æ•°
 		int total = 0;
-		// ÕıÊµÀıÊı
+		// æ­£å®ä¾‹æ•°
 		int posNum = 0;
-		// ¸ºÊµÀıÊı
+		// è´Ÿå®ä¾‹æ•°
 		int negNum = 0;
-		// »ùÄáÖ¸Êı
+		// åŸºå°¼æŒ‡æ•°
 		double gini = 0;
 
-		// »¹ÊÇ°´ÁĞ´Ó×óÍùÓÒ±éÀúÊôĞÔ
+		// è¿˜æ˜¯æŒ‰åˆ—ä»å·¦å¾€å³éå†å±æ€§
 		for (int j = 1; j < attrNames.length; j++) {
-			// ÕÒµ½ÁËÖ¸¶¨µÄÊôĞÔ
+			// æ‰¾åˆ°äº†æŒ‡å®šçš„å±æ€§
 			if (attrName.equals(attrNames[j])) {
 				for (int i = 1; i < remainData.length; i++) {
-					// Í³¼ÆÕı¸ºÊµÀı°´ÕÕÊôÓÚºÍ²»ÊôÓÚÖµÀàĞÍ½øĞĞ»®·Ö
+					// ç»Ÿè®¡æ­£è´Ÿå®ä¾‹æŒ‰ç…§å±äºå’Œä¸å±äºå€¼ç±»å‹è¿›è¡Œåˆ’åˆ†
 					if ((beLongValue && remainData[i][j].equals(value))
 							|| (!beLongValue && !remainData[i][j].equals(value))) {
 						if (remainData[i][attrNames.length - 1].equals(YES)) {
-							// ÅĞ¶Ï´ËĞĞÊı¾İÊÇ·ñÎªÕıÊµÀı
+							// åˆ¤æ–­æ­¤è¡Œæ•°æ®æ˜¯å¦ä¸ºæ­£å®ä¾‹
 							posNum++;
 						} else {
 							negNum++;
@@ -149,40 +149,40 @@ public class CARTTool {
 		double negProbobly = (double) negNum / total;
 		gini = 1 - posProbobly * posProbobly - negProbobly * negProbobly;
 
-		// ·µ»Ø¼ÆËã»ùÄáÖ¸Êı
+		// è¿”å›è®¡ç®—åŸºå°¼æŒ‡æ•°
 		return gini;
 	}
 
 	/**
-	 * ¼ÆËãÊôĞÔ»®·ÖµÄ×îĞ¡»ùÄáÖ¸Êı£¬·µ»Ø×îĞ¡µÄÊôĞÔÖµ»®·ÖºÍ×îĞ¡µÄ»ùÄáÖ¸Êı£¬±£´æÔÚÒ»¸öÊı×éÖĞ
+	 * è®¡ç®—å±æ€§åˆ’åˆ†çš„æœ€å°åŸºå°¼æŒ‡æ•°ï¼Œè¿”å›æœ€å°çš„å±æ€§å€¼åˆ’åˆ†å’Œæœ€å°çš„åŸºå°¼æŒ‡æ•°ï¼Œä¿å­˜åœ¨ä¸€ä¸ªæ•°ç»„ä¸­
 	 * 
 	 * @param remainData
-	 *            Ê£ÓàË­
+	 *            å‰©ä½™è°
 	 * @param attrName
-	 *            ÊôĞÔÃû³Æ
+	 *            å±æ€§åç§°
 	 * @return
 	 */
 	public String[] computeAttrGini(String[][] remainData, String attrName) {
 		String[] str = new String[2];
-		// ×îÖÕ¸ÃÊôĞÔµÄ»®·ÖÀàĞÍÖµ
+		// æœ€ç»ˆè¯¥å±æ€§çš„åˆ’åˆ†ç±»å‹å€¼
 		String spiltValue = "";
-		// ÁÙÊ±±äÁ¿
+		// ä¸´æ—¶å˜é‡
 		int tempNum = 0;
-		// ±£´æÊôĞÔµÄÖµ»®·ÖÊ±µÄ×îĞ¡µÄ»ùÄáÖ¸Êı
+		// ä¿å­˜å±æ€§çš„å€¼åˆ’åˆ†æ—¶çš„æœ€å°çš„åŸºå°¼æŒ‡æ•°
 		double minGini = Integer.MAX_VALUE;
 		ArrayList<String> valueTypes = attrValue.get(attrName);
-		// ÊôÓÚ´ËÊôĞÔÖµµÄÊµÀıÊı
+		// å±äºæ­¤å±æ€§å€¼çš„å®ä¾‹æ•°
 		HashMap<String, Integer> belongNum = new HashMap<>();
 
 		for (String string : valueTypes) {
-			// ÖØĞÂ¼ÆÊıµÄÊ±ºò£¬Êı×Ö¹é0
+			// é‡æ–°è®¡æ•°çš„æ—¶å€™ï¼Œæ•°å­—å½’0
 			tempNum = 0;
-			// °´ÁĞ´Ó×óÍùÓÒ±éÀúÊôĞÔ
+			// æŒ‰åˆ—ä»å·¦å¾€å³éå†å±æ€§
 			for (int j = 1; j < attrNames.length; j++) {
-				// ÕÒµ½ÁËÖ¸¶¨µÄÊôĞÔ
+				// æ‰¾åˆ°äº†æŒ‡å®šçš„å±æ€§
 				if (attrName.equals(attrNames[j])) {
 					for (int i = 1; i < remainData.length; i++) {
-						// Í³¼ÆÕı¸ºÊµÀı°´ÕÕÊôÓÚºÍ²»ÊôÓÚÖµÀàĞÍ½øĞĞ»®·Ö
+						// ç»Ÿè®¡æ­£è´Ÿå®ä¾‹æŒ‰ç…§å±äºå’Œä¸å±äºå€¼ç±»å‹è¿›è¡Œåˆ’åˆ†
 						if (remainData[i][j].equals(string)) {
 							tempNum++;
 						}
@@ -222,13 +222,13 @@ public class CARTTool {
 	public void buildDecisionTree(AttrNode node, String parentAttrValue,
 			String[][] remainData, ArrayList<String> remainAttr,
 			boolean beLongParentValue) {
-		// ÊôĞÔ»®·ÖÖµ
+		// å±æ€§åˆ’åˆ†å€¼
 		String valueType = "";
-		// »®·ÖÊôĞÔÃû³Æ
+		// åˆ’åˆ†å±æ€§åç§°
 		String spiltAttrName = "";
 		double minGini = Integer.MAX_VALUE;
 		double tempGini = 0;
-		// »ùÄáÖ¸ÊıÊı×é£¬±£´æÁË»ùÄáÖ¸ÊıºÍ´Ë»ùÄáÖ¸ÊıµÄ»®·ÖÊôĞÔÖµ
+		// åŸºå°¼æŒ‡æ•°æ•°ç»„ï¼Œä¿å­˜äº†åŸºå°¼æŒ‡æ•°å’Œæ­¤åŸºå°¼æŒ‡æ•°çš„åˆ’åˆ†å±æ€§å€¼
 		String[] giniArray;
 
 		if (beLongParentValue) {
@@ -259,27 +259,27 @@ public class CARTTool {
 				valueType = giniArray[0];
 			}
 		}
-		// ÒÆ³ı»®·ÖÊôĞÔ
+		// ç§»é™¤åˆ’åˆ†å±æ€§
 		remainAttr.remove(spiltAttrName);
 		node.setAttrName(spiltAttrName);
 
-		// º¢×Ó½Úµã,·ÖÀà»Ø¹éÊ÷ÖĞ£¬Ã¿´Î¶şÔª»®·Ö£¬·Ö³ö2¸öº¢×Ó½Úµã
+		// å­©å­èŠ‚ç‚¹,åˆ†ç±»å›å½’æ ‘ä¸­ï¼Œæ¯æ¬¡äºŒå…ƒåˆ’åˆ†ï¼Œåˆ†å‡º2ä¸ªå­©å­èŠ‚ç‚¹
 		AttrNode[] childNode = new AttrNode[2];
 		String[][] rData;
 
 		boolean[] bArray = new boolean[] { true, false };
 		for (int i = 0; i < bArray.length; i++) {
-			// ¶şÔª»®·ÖÊôÓÚÊôĞÔÖµµÄ»®·Ö
+			// äºŒå…ƒåˆ’åˆ†å±äºå±æ€§å€¼çš„åˆ’åˆ†
 			rData = removeData(remainData, spiltAttrName, valueType, bArray[i]);
 
 			boolean sameClass = true;
 			ArrayList<String> indexArray = new ArrayList<>();
 			for (int k = 1; k < rData.length; k++) {
 				indexArray.add(rData[k][0]);
-				// ÅĞ¶ÏÊÇ·ñÎªÍ¬Ò»ÀàµÄ
+				// åˆ¤æ–­æ˜¯å¦ä¸ºåŒä¸€ç±»çš„
 				if (!rData[k][attrNames.length - 1]
 						.equals(rData[1][attrNames.length - 1])) {
-					// Ö»ÒªÓĞ1¸ö²»ÏàµÈ£¬¾Í²»ÊÇÍ¬ÀàĞÍµÄ
+					// åªè¦æœ‰1ä¸ªä¸ç›¸ç­‰ï¼Œå°±ä¸æ˜¯åŒç±»å‹çš„
 					sameClass = false;
 					break;
 				}
@@ -287,7 +287,7 @@ public class CARTTool {
 
 			childNode[i] = new AttrNode();
 			if (!sameClass) {
-				// ´´½¨ĞÂµÄ¶ÔÏóÊôĞÔ£¬¶ÔÏóµÄÍ¬¸öÒıÓÃ»á³ö´í
+				// åˆ›å»ºæ–°çš„å¯¹è±¡å±æ€§ï¼Œå¯¹è±¡çš„åŒä¸ªå¼•ç”¨ä¼šå‡ºé”™
 				ArrayList<String> rAttr = new ArrayList<>();
 				for (String str : remainAttr) {
 					rAttr.add(str);
@@ -305,35 +305,35 @@ public class CARTTool {
 	}
 
 	/**
-	 * ÊôĞÔ»®·ÖÍê±Ï£¬½øĞĞÊı¾İµÄÒÆ³ı
+	 * å±æ€§åˆ’åˆ†å®Œæ¯•ï¼Œè¿›è¡Œæ•°æ®çš„ç§»é™¤
 	 * 
 	 * @param srcData
-	 *            Ô´Êı¾İ
+	 *            æºæ•°æ®
 	 * @param attrName
-	 *            »®·ÖµÄÊôĞÔÃû³Æ
+	 *            åˆ’åˆ†çš„å±æ€§åç§°
 	 * @param valueType
-	 *            ÊôĞÔµÄÖµÀàĞÍ
-	 * @parame beLongValue ·ÖÀàÊÇ·ñÊôÓÚ´ËÖµÀàĞÍ
+	 *            å±æ€§çš„å€¼ç±»å‹
+	 * @parame beLongValue åˆ†ç±»æ˜¯å¦å±äºæ­¤å€¼ç±»å‹
 	 */
 	private String[][] removeData(String[][] srcData, String attrName,
 			String valueType, boolean beLongValue) {
 		String[][] desDataArray;
 		ArrayList<String[]> desData = new ArrayList<>();
-		// ´ıÉ¾³ıÊı¾İ
+		// å¾…åˆ é™¤æ•°æ®
 		ArrayList<String[]> selectData = new ArrayList<>();
 		selectData.add(attrNames);
 
-		// Êı×éÊı¾İ×ª»¯µ½ÁĞ±íÖĞ£¬·½±ãÒÆ³ı
+		// æ•°ç»„æ•°æ®è½¬åŒ–åˆ°åˆ—è¡¨ä¸­ï¼Œæ–¹ä¾¿ç§»é™¤
 		for (int i = 0; i < srcData.length; i++) {
 			desData.add(srcData[i]);
 		}
 
-		// »¹ÊÇ´Ó×óÍùÓÒÒ»ÁĞÁĞµÄ²éÕÒ
+		// è¿˜æ˜¯ä»å·¦å¾€å³ä¸€åˆ—åˆ—çš„æŸ¥æ‰¾
 		for (int j = 1; j < attrNames.length; j++) {
 			if (attrNames[j].equals(attrName)) {
 				for (int i = 1; i < desData.size(); i++) {
 					if (desData.get(i)[j].equals(valueType)) {
-						// Èç¹ûÆ¥ÅäÕâ¸öÊı¾İ£¬ÔòÒÆ³ıÆäËûµÄÊı¾İ
+						// å¦‚æœåŒ¹é…è¿™ä¸ªæ•°æ®ï¼Œåˆ™ç§»é™¤å…¶ä»–çš„æ•°æ®
 						selectData.add(desData.get(i));
 					}
 				}
@@ -344,9 +344,9 @@ public class CARTTool {
 			desDataArray = new String[selectData.size()][];
 			selectData.toArray(desDataArray);
 		} else {
-			// ÊôĞÔÃû³ÆĞĞ²»ÒÆ³ı
+			// å±æ€§åç§°è¡Œä¸ç§»é™¤
 			selectData.remove(attrNames);
-			// Èç¹ûÊÇ»®·Ö²»ÊôÓÚ´ËÀàĞÍµÄÊı¾İÊ±£¬½øĞĞÒÆ³ı
+			// å¦‚æœæ˜¯åˆ’åˆ†ä¸å±äºæ­¤ç±»å‹çš„æ•°æ®æ—¶ï¼Œè¿›è¡Œç§»é™¤
 			desData.removeAll(selectData);
 			desDataArray = new String[desData.size()][];
 			desData.toArray(desDataArray);
@@ -360,7 +360,7 @@ public class CARTTool {
 		initAttrValue();
 
 		ArrayList<String> remainAttr = new ArrayList<>();
-		// Ìí¼ÓÊôĞÔ£¬³ıÁË×îºóÒ»¸öÀà±êºÅÊôĞÔ
+		// æ·»åŠ å±æ€§ï¼Œé™¤äº†æœ€åä¸€ä¸ªç±»æ ‡å·å±æ€§
 		for (int i = 1; i < attrNames.length - 1; i++) {
 			remainAttr.add(attrNames[i]);
 		}
@@ -368,20 +368,20 @@ public class CARTTool {
 		AttrNode rootNode = new AttrNode();
 		buildDecisionTree(rootNode, "", data, remainAttr, false);
 		setIndexAndAlpah(rootNode, 0, false);
-		System.out.println("¼ôÖ¦Ç°£º");
+		System.out.println("å‰ªæå‰ï¼š");
 		showDecisionTree(rootNode, 1);
 		setIndexAndAlpah(rootNode, 0, true);
-		System.out.println("\n¼ôÖ¦ºó£º");
+		System.out.println("\nå‰ªæåï¼š");
 		showDecisionTree(rootNode, 1);
 	}
 
 	/**
-	 * ÏÔÊ¾¾ö²ßÊ÷
+	 * æ˜¾ç¤ºå†³ç­–æ ‘
 	 * 
 	 * @param node
-	 *            ´ıÏÔÊ¾µÄ½Úµã
+	 *            å¾…æ˜¾ç¤ºçš„èŠ‚ç‚¹
 	 * @param blankNum
-	 *            ĞĞ¿Õ¸ñ·û£¬ÓÃÓÚÏÔÊ¾Ê÷ĞÍ½á¹¹
+	 *            è¡Œç©ºæ ¼ç¬¦ï¼Œç”¨äºæ˜¾ç¤ºæ ‘å‹ç»“æ„
 	 */
 	private void showDecisionTree(AttrNode node, int blankNum) {
 		System.out.println();
@@ -389,7 +389,7 @@ public class CARTTool {
 			System.out.print("    ");
 		}
 		System.out.print("--");
-		// ÏÔÊ¾·ÖÀàµÄÊôĞÔÖµ
+		// æ˜¾ç¤ºåˆ†ç±»çš„å±æ€§å€¼
 		if (node.getParentAttrValue() != null
 				&& node.getParentAttrValue().length() > 0) {
 			System.out.print(node.getParentAttrValue());
@@ -400,7 +400,7 @@ public class CARTTool {
 
 		if (node.getDataIndex() != null && node.getDataIndex().size() > 0) {
 			String i = node.getDataIndex().get(0);
-			System.out.print("¡¾" + node.getNodeIndex() + "¡¿Àà±ğ:"
+			System.out.print("ã€" + node.getNodeIndex() + "ã€‘ç±»åˆ«:"
 					+ data[Integer.parseInt(i)][attrNames.length - 1]);
 			System.out.print("[");
 			for (String index : node.getDataIndex()) {
@@ -408,32 +408,32 @@ public class CARTTool {
 			}
 			System.out.print("]");
 		} else {
-			// µİ¹éÏÔÊ¾×Ó½Úµã
-			System.out.print("¡¾" + node.getNodeIndex() + ":"
-					+ node.getAttrName() + "¡¿");
+			// é€’å½’æ˜¾ç¤ºå­èŠ‚ç‚¹
+			System.out.print("ã€" + node.getNodeIndex() + ":"
+					+ node.getAttrName() + "ã€‘");
 			if (node.getChildAttrNode() != null) {
 				for (AttrNode childNode : node.getChildAttrNode()) {
 					showDecisionTree(childNode, 2 * blankNum);
 				}
 			} else {
-				System.out.print("¡¾  Child Null¡¿");
+				System.out.print("ã€  Child Nullã€‘");
 			}
 		}
 	}
 
 	/**
-	 * Îª½ÚµãÉèÖÃĞòÁĞºÅ£¬²¢¼ÆËãÃ¿¸ö½ÚµãµÄÎó²îÂÊ£¬ÓÃÓÚºóÃæ¼ôÖ¦
+	 * ä¸ºèŠ‚ç‚¹è®¾ï¿½çœ¯è›„æ³»ç‰›îƒâ’“æ‰‘å¿æ‰›é¼‹è¯˜æ„•å¥ˆèŸ›ç›¥å‰©îƒ®ç³œè¯¤ç«ºå©•ç³ï¿½
 	 * 
 	 * @param node
-	 *            ¿ªÊ¼µÄÊ±ºò´«ÈëµÄÊÇ¸ù½Úµã
+	 *            å¼€å§‹çš„æ—¶å€™ä¼ å…¥çš„æ˜¯æ ¹èŠ‚ç‚¹
 	 * @param index
-	 *            ¿ªÊ¼µÄË÷ÒıºÅ£¬´Ó1¿ªÊ¼
+	 *            å¼€å§‹çš„ç´¢å¼•å·ï¼Œä»1å¼€å§‹
 	 * @param ifCutNode
-	 *            ÊÇ·ñĞèÒª¼ôÖ¦
+	 *            æ˜¯å¦éœ€è¦å‰ªæ
 	 */
 	private void setIndexAndAlpah(AttrNode node, int index, boolean ifCutNode) {
 		AttrNode tempNode;
-		// ×îĞ¡Îó²î´ú¼Û½Úµã£¬¼´½«±»¼ôÖ¦µÄ½Úµã
+		// æœ€å°è¯¯å·®ä»£ä»·èŠ‚ç‚¹ï¼Œå³å°†è¢«å‰ªæçš„èŠ‚ç‚¹
 		AttrNode minAlphaNode = null;
 		double minAlpah = Integer.MAX_VALUE;
 		Queue<AttrNode> nodeQueue = new LinkedList<AttrNode>();
@@ -441,7 +441,7 @@ public class CARTTool {
 		nodeQueue.add(node);
 		while (nodeQueue.size() > 0) {
 			index++;
-			// ´Ó¶ÓÁĞÍ·²¿»ñÈ¡Ê×¸ö½Úµã
+			// ä»é˜Ÿåˆ—å¤´éƒ¨è·å–é¦–ä¸ªèŠ‚ç‚¹
 			tempNode = nodeQueue.poll();
 			tempNode.setNodeIndex(index);
 			if (tempNode.getChildAttrNode() != null) {
@@ -453,7 +453,7 @@ public class CARTTool {
 					minAlphaNode = tempNode;
 					minAlpah = tempNode.getAlpha();
 				} else if (tempNode.getAlpha() == minAlpah) {
-					// Èç¹ûÎó²î´ú¼ÛÖµÒ»Ñù£¬±È½Ï°üº¬µÄÒ¶×Ó½Úµã¸öÊı£¬¼ôÖ¦ÓĞ¶àÒ¶×Ó½ÚµãÊıµÄ½Úµã
+					// å¦‚æœè¯¯å·®ä»£ä»·å€¼ä¸€æ ·ï¼Œæ¯”è¾ƒåŒ…å«çš„å¶å­èŠ‚ç‚¹ä¸ªæ•°ï¼Œå‰ªææœ‰å¤šå¶å­èŠ‚ç‚¹æ•°çš„èŠ‚ç‚¹
 					if (tempNode.getLeafNum() > minAlphaNode.getLeafNum()) {
 						minAlphaNode = tempNode;
 					}
@@ -462,24 +462,24 @@ public class CARTTool {
 		}
 
 		if (ifCutNode) {
-			// ½øĞĞÊ÷µÄ¼ôÖ¦£¬ÈÃÆä×óÓÒº¢×Ó½ÚµãÎªnull
+			// è¿›è¡Œæ ‘çš„å‰ªæï¼Œè®©å…¶å·¦å³å­©å­èŠ‚ç‚¹ä¸ºnull
 			minAlphaNode.setChildAttrNode(null);
 		}
 	}
 
 	/**
-	 * Îª·ÇÒ¶×Ó½Úµã¼ÆËãÎó²î´ú¼Û£¬ÕâÀïµÄºó¼ôÖ¦·¨ÓÃµÄÊÇCCP´ú¼Û¸´ÔÓ¶È¼ôÖ¦
+	 * ä¸ºéå¶å­èŠ‚ç‚¹è®¡ç®—è¯¯å·®ä»£ä»·ï¼Œè¿™é‡Œçš„åå‰ªææ³•ç”¨çš„æ˜¯CCPä»£ä»·å¤æ‚åº¦å‰ªæ
 	 * 
 	 * @param node
-	 *            ´ı¼ÆËãµÄ·ÇÒ¶×Ó½Úµã
+	 *            å¾…è®¡ç®—çš„éå¶å­èŠ‚ç‚¹
 	 */
 	private void computeAlpha(AttrNode node) {
 		double rt = 0;
 		double Rt = 0;
 		double alpha = 0;
-		// µ±Ç°½ÚµãµÄÊı¾İ×ÜÊı
+		// å½“å‰èŠ‚ç‚¹çš„æ•°æ®æ€»æ•°
 		int sumNum = 0;
-		// ×îÉÙµÄÆ«²îÊı
+		// æœ€å°‘çš„åå·®æ•°
 		int minNum = 0;
 
 		ArrayList<String> dataIndex;
@@ -493,14 +493,14 @@ public class CARTTool {
 			int num = 0;
 			sumNum += dataIndex.size();
 			for (String s : dataIndex) {
-				// Í³¼Æ·ÖÀàÊı¾İÖĞµÄÕı¸ºÊµÀıÊı
+				// ç»Ÿè®¡åˆ†ç±»æ•°æ®ä¸­çš„æ­£è´Ÿå®ä¾‹æ•°
 				if (data[Integer.parseInt(s)][attrNames.length - 1].equals(YES)) {
 					num++;
 				}
 			}
 			minNum += num;
 
-			// È¡Ğ¡ÊıÁ¿µÄÖµ²¿·Ö
+			// å–å°æ•°é‡çš„å€¼éƒ¨åˆ†
 			if (1.0 * num / dataIndex.size() > 0.5) {
 				num = dataIndex.size() - num;
 			}
@@ -508,7 +508,7 @@ public class CARTTool {
 			rt += (1.0 * num / (data.length - 1));
 		}
 		
-		//Í¬ÑùÈ¡³öÉÙÆ«²îµÄÄÇ²¿·Ö
+		//åŒæ ·å–å‡ºå°‘åå·®çš„é‚£éƒ¨åˆ†
 		if (1.0 * minNum / sumNum > 0.5) {
 			minNum = sumNum - minNum;
 		}
@@ -519,12 +519,12 @@ public class CARTTool {
 	}
 
 	/**
-	 * É¸Ñ¡³ö½ÚµãËù°üº¬µÄÒ¶×Ó½ÚµãÊı
+	 * ç­›é€‰å‡ºèŠ‚ç‚¹æ‰€åŒ…å«çš„å¶å­èŠ‚ç‚¹æ•°
 	 * 
 	 * @param node
-	 *            ´ıÉ¸Ñ¡½Úµã
+	 *            å¾…ç­›é€‰èŠ‚ç‚¹
 	 * @param leafNode
-	 *            Ò¶×Ó½ÚµãÁĞ±íÈİÆ÷
+	 *            å¶å­èŠ‚ç‚¹åˆ—è¡¨å®¹å™¨
 	 */
 	private void addLeafNode(AttrNode node, ArrayList<AttrNode> leafNode) {
 		ArrayList<String> dataIndex;
@@ -533,10 +533,10 @@ public class CARTTool {
 			for (AttrNode childNode : node.getChildAttrNode()) {
 				dataIndex = childNode.getDataIndex();
 				if (dataIndex != null && dataIndex.size() > 0) {
-					// ËµÃ÷´Ë½ÚµãÎªÒ¶×Ó½Úµã
+					// è¯´æ˜æ­¤èŠ‚ç‚¹ä¸ºå¶å­èŠ‚ç‚¹
 					leafNode.add(childNode);
 				} else {
-					// Èç¹û»¹ÊÇ·ÇÒ¶×Ó½ÚµãÔò¼ÌĞøµİ¹éµ÷ÓÃ
+					// å¦‚æœè¿˜æ˜¯éå¶å­èŠ‚ç‚¹åˆ™ç»§ç»­é€’å½’è°ƒç”¨
 					addLeafNode(childNode, leafNode);
 				}
 			}

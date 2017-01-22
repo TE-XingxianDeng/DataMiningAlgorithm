@@ -1,26 +1,26 @@
 package DataMining_GSpan;
 
 /**
- * ±ß£¬ÓÃÎåÔª×é±íÊ¾
+ * è¾¹ï¼Œç”¨äº”å…ƒç»„è¡¨ç¤º
  * 
  * @author lyq
  * 
  */
 public class Edge {
-	// ÎåÔª×éµÄ´óĞ¡±È½Ï½á¹û
+	// äº”å…ƒç»„çš„å¤§å°æ¯”è¾ƒç»“æœ
 	public static final int EDGE_EQUAL = 0;
 	public static final int EDGE_SMALLER = 1;
 	public static final int EDGE_LARGER = 2;
 
-	// ±ßµÄÒ»¶ËµÄidºÅ±êÊ¶
+	// è¾¹çš„ä¸€ç«¯çš„idå·æ ‡è¯†
 	int ix;
-	// ±ßµÄÁíÒ»¶ËµÄidºÅ±êÊ¶
+	// è¾¹çš„å¦ä¸€ç«¯çš„idå·æ ‡è¯†
 	int iy;
-	// ±ßµÄÒ»¶ËµÄµã±êºÅ
+	// è¾¹çš„ä¸€ç«¯çš„ç‚¹æ ‡å·
 	int x;
-	// ±ßµÄ±êºÅ
+	// è¾¹çš„æ ‡å·
 	int a;
-	// ±ßµÄÁíÒ»¶ËµÄµã±êºÅ
+	// è¾¹çš„å¦ä¸€ç«¯çš„ç‚¹æ ‡å·
 	int y;
 
 	public Edge(int ix, int iy, int x, int a, int y) {
@@ -32,7 +32,7 @@ public class Edge {
 	}
 
 	/**
-	 * µ±Ç°±ßÊÇÓë¸ø¶¨µÄ±ßµÄ´óĞ¡±È½Ï¹ØÏµ
+	 * å½“å‰è¾¹æ˜¯ä¸ç»™å®šçš„è¾¹çš„å¤§å°æ¯”è¾ƒå…³ç³»
 	 * 
 	 * @param e
 	 * @return
@@ -42,7 +42,7 @@ public class Edge {
 		int[] array1 = new int[] { ix, iy, x, y, a };
 		int[] array2 = new int[] { e.ix, e.iy, e.x, e.y, e.a };
 
-		// °´ÕÕix, iy,x,y,aµÄ´ÎĞòÒÀ´Î±È½Ï
+		// æŒ‰ç…§ix, iy,x,y,açš„æ¬¡åºä¾æ¬¡æ¯”è¾ƒ
 		for (int i = 0; i < array1.length; i++) {
 			if (array1[i] < array2[i]) {
 				result = EDGE_SMALLER;
@@ -51,7 +51,7 @@ public class Edge {
 				result = EDGE_LARGER;
 				break;
 			} else {
-				// Èç¹ûÏàµÈ£¬¼ÌĞø±È½ÏÏÂÒ»¸ö
+				// å¦‚æœç›¸ç­‰ï¼Œç»§ç»­æ¯”è¾ƒä¸‹ä¸€ä¸ª
 				continue;
 			}
 		}

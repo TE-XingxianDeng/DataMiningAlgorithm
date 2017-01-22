@@ -13,48 +13,48 @@ import java.util.Map;
 import DataMining_Apriori.FrequentItem;
 
 /**
- * »ùÓÚ¶àÖ§³Ö¶ÈµÄAprioriËã·¨¹¤¾ßÀà
+ * åŸºäºå¤šæ”¯æŒåº¦çš„Aprioriç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class MSAprioriTool {
-	// Ç°¼şÅĞ¶ÏµÄ½á¹ûÖµ£¬ÓÃÓÚ¹ØÁª¹æÔòµÄÍÆµ¼
+	// å‰ä»¶åˆ¤æ–­çš„ç»“æœå€¼ï¼Œç”¨äºå…³è”è§„åˆ™çš„æ¨å¯¼
 	public static final int PREFIX_NOT_SUB = -1;
 	public static final int PREFIX_EQUAL = 1;
 	public static final int PREFIX_IS_SUB = 2;
 
-	// ÊÇ·ñ¶ÁÈ¡µÄÊÇÊÂÎñĞÍÊı¾İ
+	// æ˜¯å¦è¯»å–çš„æ˜¯äº‹åŠ¡å‹æ•°æ®
 	private boolean isTransaction;
-	// ×î´óÆµ·±kÏî¼¯µÄkÖµ
+	// æœ€å¤§é¢‘ç¹ké¡¹é›†çš„kå€¼
 	private int initFItemNum;
-	// ÊÂÎñÊı¾İÎÄ¼şµØÖ·
+	// äº‹åŠ¡æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ×îĞ¡Ö§³Ö¶ÈãĞÖµ
+	// æœ€å°æ”¯æŒåº¦é˜ˆå€¼
 	private double minSup;
-	// ×îĞ¡ÖÃĞÅ¶ÈÂÊ
+	// æœ€å°ç½®ä¿¡åº¦ç‡
 	private double minConf;
-	// ×î´óÖ§³Ö¶È²î±ğãĞÖµ
+	// æœ€å¤§æ”¯æŒåº¦å·®åˆ«é˜ˆå€¼
 	private double delta;
-	// ¶àÏîÄ¿µÄ×îĞ¡Ö§³Ö¶ÈÊı,À¨ºÅÖĞµÄÏÂ±ê´ú±íµÄÊÇÉÌÆ·µÄID
+	// å¤šé¡¹ç›®çš„æœ€å°æ”¯æŒåº¦æ•°,æ‹¬å·ä¸­çš„ä¸‹æ ‡ä»£è¡¨çš„æ˜¯å•†å“çš„ID
 	private double[] mis;
-	// Ã¿¸öÊÂÎñÖĞµÄÉÌÆ·ID
+	// æ¯ä¸ªäº‹åŠ¡ä¸­çš„å•†å“ID
 	private ArrayList<String[]> totalGoodsIDs;
-	// ¹ØÏµ±íÊı¾İËù×ª»¯µÄÊÂÎñÊı¾İ
+	// å…³ç³»è¡¨æ•°æ®æ‰€è½¬åŒ–çš„äº‹åŠ¡æ•°æ®
 	private ArrayList<String[]> transactionDatas;
-	// ¹ı³ÌÖĞ¼ÆËã³öÀ´µÄËùÓĞÆµ·±Ïî¼¯ÁĞ±í
+	// è¿‡ç¨‹ä¸­è®¡ç®—å‡ºæ¥çš„æ‰€æœ‰é¢‘ç¹é¡¹é›†åˆ—è¡¨
 	private ArrayList<FrequentItem> resultItem;
-	// ¹ı³ÌÖĞ¼ÆËã³öÀ´Æµ·±Ïî¼¯µÄID¼¯ºÏ
+	// è¿‡ç¨‹ä¸­è®¡ç®—å‡ºæ¥é¢‘ç¹é¡¹é›†çš„IDé›†åˆ
 	private ArrayList<String[]> resultItemID;
-	// ÊôĞÔµ½Êı×ÖµÄÓ³ÉäÍ¼
+	// å±æ€§åˆ°æ•°å­—çš„æ˜ å°„å›¾
 	private HashMap<String, Integer> attr2Num;
-	// Êı×Öid¶ÔÓ¦ÊôĞÔµÄÓ³ÉäÍ¼
+	// æ•°å­—idå¯¹åº”å±æ€§çš„æ˜ å°„å›¾
 	private HashMap<Integer, String> num2Attr;
-	// Æµ·±Ïî¼¯Ëù¸²¸ÇµÄidÊıÖµ
+	// é¢‘ç¹é¡¹é›†æ‰€è¦†ç›–çš„idæ•°å€¼
 	private Map<String, int[]> fItem2Id;
 
 	/**
-	 * ÊÂÎñĞÍÊı¾İ¹ØÁªÍÚ¾òËã·¨
+	 * äº‹åŠ¡å‹æ•°æ®å…³è”æŒ–æ˜ç®—æ³•
 	 * 
 	 * @param filePath
 	 * @param minConf
@@ -75,7 +75,7 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * ·ÇÊÂÎñĞÍ¹ØÁªÍÚ¾ò
+	 * éäº‹åŠ¡å‹å…³è”æŒ–æ˜
 	 * 
 	 * @param filePath
 	 * @param minConf
@@ -95,7 +95,7 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		String[] temp = null;
@@ -108,16 +108,16 @@ public class MSAprioriTool {
 			temp = new String[array.length - 1];
 			System.arraycopy(array, 1, temp, 0, array.length - 1);
 
-			// ½«ÊÂÎñID¼ÓÈëÁĞ±í°ÉÖĞ
+			// å°†äº‹åŠ¡IDåŠ å…¥åˆ—è¡¨å§ä¸­
 			totalGoodsIDs.add(temp);
 		}
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞÖğĞĞ¶ÁÊı¾İ
+	 * ä»æ–‡ä»¶ä¸­é€è¡Œè¯»æ•°æ®
 	 * 
 	 * @param filePath
-	 *            Êı¾İÎÄ¼şµØÖ·
+	 *            æ•°æ®æ–‡ä»¶åœ°å€
 	 * @return
 	 */
 	private ArrayList<String[]> readLine(String filePath) {
@@ -141,7 +141,7 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * ¼ÆËãÆµ·±Ïî¼¯
+	 * è®¡ç®—é¢‘ç¹é¡¹é›†
 	 */
 	public void calFItems() {
 		FrequentItem fItem;
@@ -151,31 +151,31 @@ public class MSAprioriTool {
 
 		if (isTransaction) {
 			fItem = resultItem.get(resultItem.size() - 1);
-			// È¡³ö×îºóÒ»¸öÆµ·±Ïî¼¯×ö¹ØÁª¹æÔòµÄÍÆµ¼
-			System.out.println("×îºóÒ»¸öÆµ·±Ïî¼¯×ö¹ØÁª¹æÔòµÄÍÆµ¼½á¹û£º");
+			// å–å‡ºæœ€åä¸€ä¸ªé¢‘ç¹é¡¹é›†åšå…³è”è§„åˆ™çš„æ¨å¯¼
+			System.out.println("æœ€åä¸€ä¸ªé¢‘ç¹é¡¹é›†åšå…³è”è§„åˆ™çš„æ¨å¯¼ç»“æœï¼š");
 			printAttachRuls(fItem.getIdArray());
 		}
 	}
 
 	/**
-	 * Êä³öÆµ·±Ïî¼¯
+	 * è¾“å‡ºé¢‘ç¹é¡¹é›†
 	 */
 	private void printFItems() {
 		if (isTransaction) {
-			System.out.println("ÊÂÎñĞÍÊı¾İÆµ·±Ïî¼¯Êä³ö½á¹û:");
+			System.out.println("äº‹åŠ¡å‹æ•°æ®é¢‘ç¹é¡¹é›†è¾“å‡ºç»“æœ:");
 		} else {
-			System.out.println("·ÇÊÂÎñ(¹ØÏµ)ĞÍÊı¾İÆµ·±Ïî¼¯Êä³ö½á¹û:");
+			System.out.println("éäº‹åŠ¡(å…³ç³»)å‹æ•°æ®é¢‘ç¹é¡¹é›†è¾“å‡ºç»“æœ:");
 		}
 
-		// Êä³öÆµ·±Ïî¼¯
+		// è¾“å‡ºé¢‘ç¹é¡¹é›†
 		for (int k = 1; k <= initFItemNum; k++) {
-			System.out.println("Æµ·±" + k + "Ïî¼¯£º");
+			System.out.println("é¢‘ç¹" + k + "é¡¹é›†ï¼š");
 			for (FrequentItem i : resultItem) {
 				if (i.getLength() == k) {
 					System.out.print("{");
 					for (String t : i.getIdArray()) {
 						if (!isTransaction) {
-							// Èç¹ûÔ­±¾ÊÇ·ÇÊÂÎñĞÍÊı¾İ£¬ĞèÒªÖØĞÂ×öÌæ»»
+							// å¦‚æœåŸæœ¬æ˜¯éäº‹åŠ¡å‹æ•°æ®ï¼Œéœ€è¦é‡æ–°åšæ›¿æ¢
 							t = num2Attr.get(Integer.parseInt(t));
 						}
 
@@ -189,22 +189,22 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * Ïî¼¯½øĞĞÁ¬½ÓÔËËã
+	 * é¡¹é›†è¿›è¡Œè¿æ¥è¿ç®—
 	 */
 	private void computeLink() {
-		// Á¬½Ó¼ÆËãµÄÖÕÖ¹Êı£¬kÏî¼¯±ØĞëËãµ½k-1×ÓÏî¼¯ÎªÖ¹
+		// è¿æ¥è®¡ç®—çš„ç»ˆæ­¢æ•°ï¼Œké¡¹é›†å¿…é¡»ç®—åˆ°k-1å­é¡¹é›†ä¸ºæ­¢
 		int endNum = 0;
-		// µ±Ç°ÒÑ¾­½øĞĞÁ¬½ÓÔËËãµ½¼¸Ïî¼¯,¿ªÊ¼Ê±¾ÍÊÇ1Ïî¼¯
+		// å½“å‰å·²ç»è¿›è¡Œè¿æ¥è¿ç®—åˆ°å‡ é¡¹é›†,å¼€å§‹æ—¶å°±æ˜¯1é¡¹é›†
 		int currentNum = 1;
-		// ÉÌÆ·£¬1Æµ·±Ïî¼¯Ó³ÉäÍ¼
+		// å•†å“ï¼Œ1é¢‘ç¹é¡¹é›†æ˜ å°„å›¾
 		HashMap<String, FrequentItem> itemMap = new HashMap<>();
 		FrequentItem tempItem;
-		// ³õÊ¼ÁĞ±í
+		// åˆå§‹åˆ—è¡¨
 		ArrayList<FrequentItem> list = new ArrayList<>();
-		// ¾­¹ıÁ¬½ÓÔËËãºó²úÉúµÄ½á¹ûÏî¼¯
+		// ç»è¿‡è¿æ¥è¿ç®—åäº§ç”Ÿçš„ç»“æœé¡¹é›†
 		resultItem = new ArrayList<>();
 		resultItemID = new ArrayList<>();
-		// ÉÌÆ·IDµÄÖÖÀà
+		// å•†å“IDçš„ç§ç±»
 		ArrayList<String> idType = new ArrayList<>();
 		for (String[] a : totalGoodsIDs) {
 			for (String s : a) {
@@ -213,24 +213,24 @@ public class MSAprioriTool {
 					idType.add(s);
 					resultItemID.add(new String[] { s });
 				} else {
-					// Ö§³Ö¶È¼ÆÊı¼Ó1
+					// æ”¯æŒåº¦è®¡æ•°åŠ 1
 					tempItem = itemMap.get(s);
 					tempItem.setCount(tempItem.getCount() + 1);
 				}
 				itemMap.put(s, tempItem);
 			}
 		}
-		// ½«³õÊ¼Æµ·±Ïî¼¯×ªÈëµ½ÁĞ±íÖĞ£¬ÒÔ±ã¼ÌĞø×öÁ¬½ÓÔËËã
+		// å°†åˆå§‹é¢‘ç¹é¡¹é›†è½¬å…¥åˆ°åˆ—è¡¨ä¸­ï¼Œä»¥ä¾¿ç»§ç»­åšè¿æ¥è¿ç®—
 		for (Map.Entry<String, FrequentItem> entry : itemMap.entrySet()) {
 			tempItem = entry.getValue();
 
-			// ÅĞ¶Ï1Æµ·±Ïî¼¯ÊÇ·ñÂú×ãÖ§³Ö¶ÈãĞÖµµÄÌõ¼ş
+			// åˆ¤æ–­1é¢‘ç¹é¡¹é›†æ˜¯å¦æ»¡è¶³æ”¯æŒåº¦é˜ˆå€¼çš„æ¡ä»¶
 			if (judgeFItem(tempItem.getIdArray())) {
 				list.add(tempItem);
 			}
 		}
 
-		// °´ÕÕÉÌÆ·ID½øĞĞÅÅĞò£¬·ñÔòÁ¬½Ó¼ÆËã½á¹û½«»á²»Ò»ÖÂ£¬½«»á¼õÉÙ
+		// æŒ‰ç…§å•†å“IDè¿›è¡Œæ’åºï¼Œå¦åˆ™è¿æ¥è®¡ç®—ç»“æœå°†ä¼šä¸ä¸€è‡´ï¼Œå°†ä¼šå‡å°‘
 		Collections.sort(list);
 		resultItem.addAll(list);
 
@@ -239,7 +239,7 @@ public class MSAprioriTool {
 		String[] resultArray;
 		ArrayList<String> tempIds;
 		ArrayList<String[]> resultContainer;
-		// ×Ü¹²ÒªËãµ½endNumÏî¼¯
+		// æ€»å…±è¦ç®—åˆ°endNumé¡¹é›†
 		endNum = list.size() - 1;
 		initFItemNum = list.size() - 1;
 
@@ -254,7 +254,7 @@ public class MSAprioriTool {
 					array2 = list.get(j).getIdArray();
 
 					for (int k = 0; k < array1.length; k++) {
-						// Èç¹û¶ÔÓ¦Î»ÖÃÉÏµÄÖµÏàµÈµÄÊ±ºò£¬Ö»È¡ÆäÖĞÒ»¸öÖµ£¬×öÁËÒ»¸öÁ¬½ÓÉ¾³ı²Ù×÷
+						// å¦‚æœå¯¹åº”ä½ç½®ä¸Šçš„å€¼ç›¸ç­‰çš„æ—¶å€™ï¼Œåªå–å…¶ä¸­ä¸€ä¸ªå€¼ï¼Œåšäº†ä¸€ä¸ªè¿æ¥åˆ é™¤æ“ä½œ
 						if (array1[k].equals(array2[k])) {
 							tempIds.add(array1[k]);
 						} else {
@@ -267,7 +267,7 @@ public class MSAprioriTool {
 					tempIds.toArray(resultArray);
 
 					boolean isContain = false;
-					// ¹ıÂË²»·ûºÏÌõ¼şµÄµÄIDÊı×é£¬°üÀ¨ÖØ¸´µÄºÍ³¤¶È²»·ûºÏÒªÇóµÄ
+					// è¿‡æ»¤ä¸ç¬¦åˆæ¡ä»¶çš„çš„IDæ•°ç»„ï¼ŒåŒ…æ‹¬é‡å¤çš„å’Œé•¿åº¦ä¸ç¬¦åˆè¦æ±‚çš„
 					if (resultArray.length == (array1.length + 1)) {
 						isContain = isIDArrayContains(resultContainer,
 								resultArray);
@@ -278,29 +278,29 @@ public class MSAprioriTool {
 				}
 			}
 
-			// ×öÆµ·±Ïî¼¯µÄ¼ôÖ¦´¦Àí£¬±ØĞë±£Ö¤ĞÂµÄÆµ·±Ïî¼¯µÄ×ÓÏî¼¯Ò²±ØĞëÊÇÆµ·±Ïî¼¯
+			// åšé¢‘ç¹é¡¹é›†çš„å‰ªæå¤„ç†ï¼Œå¿…é¡»ä¿è¯æ–°çš„é¢‘ç¹é¡¹é›†çš„å­é¡¹é›†ä¹Ÿå¿…é¡»æ˜¯é¢‘ç¹é¡¹é›†
 			list = cutItem(resultContainer);
 			currentNum++;
 		}
 	}
 
 	/**
-	 * ¶ÔÆµ·±Ïî¼¯×ö¼ôÖ¦²½Öè£¬±ØĞë±£Ö¤ĞÂµÄÆµ·±Ïî¼¯µÄ×ÓÏî¼¯Ò²±ØĞëÊÇÆµ·±Ïî¼¯
+	 * å¯¹é¢‘ç¹é¡¹é›†åšå‰ªææ­¥éª¤ï¼Œå¿…é¡»ä¿è¯æ–°çš„é¢‘ç¹é¡¹é›†çš„å­é¡¹é›†ä¹Ÿå¿…é¡»æ˜¯é¢‘ç¹é¡¹é›†
 	 */
 	private ArrayList<FrequentItem> cutItem(ArrayList<String[]> resultIds) {
 		String[] temp;
-		// ºöÂÔµÄË÷ÒıÎ»ÖÃ£¬ÒÔ´Ë¹¹½¨×Ó¼¯
+		// å¿½ç•¥çš„ç´¢å¼•ä½ç½®ï¼Œä»¥æ­¤æ„å»ºå­é›†
 		int igNoreIndex = 0;
 		FrequentItem tempItem;
-		// ¼ôÖ¦Éú³ÉĞÂµÄÆµ·±Ïî¼¯
+		// å‰ªæç”Ÿæˆæ–°çš„é¢‘ç¹é¡¹é›†
 		ArrayList<FrequentItem> newItem = new ArrayList<>();
-		// ²»·ûºÏÒªÇóµÄid
+		// ä¸ç¬¦åˆè¦æ±‚çš„id
 		ArrayList<String[]> deleteIdArray = new ArrayList<>();
-		// ×ÓÏî¼¯ÊÇ·ñÒ²ÎªÆµ·±×ÓÏî¼¯
+		// å­é¡¹é›†æ˜¯å¦ä¹Ÿä¸ºé¢‘ç¹å­é¡¹é›†
 		boolean isContain = true;
 
 		for (String[] array : resultIds) {
-			// ÁĞ¾Ù³öÆäÖĞµÄÒ»¸ö¸öµÄ×ÓÏî¼¯£¬ÅĞ¶Ï´æÔÚÓÚÆµ·±Ïî¼¯ÁĞ±íÖĞ
+			// åˆ—ä¸¾å‡ºå…¶ä¸­çš„ä¸€ä¸ªä¸ªçš„å­é¡¹é›†ï¼Œåˆ¤æ–­å­˜åœ¨äºé¢‘ç¹é¡¹é›†åˆ—è¡¨ä¸­
 			temp = new String[array.length - 1];
 			for (igNoreIndex = 0; igNoreIndex < array.length; igNoreIndex++) {
 				isContain = true;
@@ -322,16 +322,16 @@ public class MSAprioriTool {
 			}
 		}
 
-		// ÒÆ³ı²»·ûºÏÌõ¼şµÄID×éºÏ
+		// ç§»é™¤ä¸ç¬¦åˆæ¡ä»¶çš„IDç»„åˆ
 		resultIds.removeAll(deleteIdArray);
 
-		// ÒÆ³ıÖ§³Ö¶È¼ÆÊı²»¹»µÄid¼¯ºÏ
+		// ç§»é™¤æ”¯æŒåº¦è®¡æ•°ä¸å¤Ÿçš„idé›†åˆ
 		int tempCount = 0;
 		boolean isSatisfied = false;
 		for (String[] array : resultIds) {
 			isSatisfied = judgeFItem(array);
 
-			// Èç¹û´ËÆµ·±Ïî¼¯Âú×ã¶àÖ§³Ö¶ÈãĞÖµÏŞÖÆÌõ¼şºÍÖ§³Ö¶È²î±ğÏŞÖÆÌõ¼ş£¬ÔòÌí¼ÓÈë½á¹û¼¯ÖĞ
+			// å¦‚æœæ­¤é¢‘ç¹é¡¹é›†æ»¡è¶³å¤šæ”¯æŒåº¦é˜ˆå€¼é™åˆ¶æ¡ä»¶å’Œæ”¯æŒåº¦å·®åˆ«é™åˆ¶æ¡ä»¶ï¼Œåˆ™æ·»åŠ å…¥ç»“æœé›†ä¸­
 			if (isSatisfied) {
 				tempItem = new FrequentItem(array, tempCount);
 				newItem.add(tempItem);
@@ -344,12 +344,12 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * ÅĞ¶ÏÁĞ±í½á¹ûÖĞÊÇ·ñÒÑ¾­°üº¬´ËÊı×é
+	 * åˆ¤æ–­åˆ—è¡¨ç»“æœä¸­æ˜¯å¦å·²ç»åŒ…å«æ­¤æ•°ç»„
 	 * 
 	 * @param container
-	 *            IDÊı×éÈİÆ÷
+	 *            IDæ•°ç»„å®¹å™¨
 	 * @param array
-	 *            ´ı±È½ÏÊı×é
+	 *            å¾…æ¯”è¾ƒæ•°ç»„
 	 * @return
 	 */
 	private boolean isIDArrayContains(ArrayList<String[]> container,
@@ -361,21 +361,21 @@ public class MSAprioriTool {
 		}
 
 		for (String[] s : container) {
-			// ±È½ÏµÄÊÓºõ±ØĞë±£Ö¤³¤¶ÈÒ»Ñù
+			// æ¯”è¾ƒçš„è§†ä¹å¿…é¡»ä¿è¯é•¿åº¦ä¸€æ ·
 			if (s.length != array.length) {
 				continue;
 			}
 
 			isContain = true;
 			for (int i = 0; i < s.length; i++) {
-				// Ö»ÒªÓĞÒ»¸öid²»µÈ£¬¾ÍËã²»ÏàµÈ
+				// åªè¦æœ‰ä¸€ä¸ªidä¸ç­‰ï¼Œå°±ç®—ä¸ç›¸ç­‰
 				if (s[i] != array[i]) {
 					isContain = false;
 					break;
 				}
 			}
 
-			// Èç¹ûÒÑ¾­ÅĞ¶ÏÊÇ°üº¬ÔÚÈİÆ÷ÖĞÊ±£¬Ö±½ÓÍË³ö
+			// å¦‚æœå·²ç»åˆ¤æ–­æ˜¯åŒ…å«åœ¨å®¹å™¨ä¸­æ—¶ï¼Œç›´æ¥é€€å‡º
 			if (isContain) {
 				break;
 			}
@@ -385,10 +385,10 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * ÅĞ¶ÏÒ»¸öÆµ·±Ïî¼¯ÊÇ·ñÂú×ãÌõ¼ş
+	 * åˆ¤æ–­ä¸€ä¸ªé¢‘ç¹é¡¹é›†æ˜¯å¦æ»¡è¶³æ¡ä»¶
 	 * 
 	 * @param frequentItem
-	 *            ´ıÅĞ¶ÏÆµ·±Ïî¼¯
+	 *            å¾…åˆ¤æ–­é¢‘ç¹é¡¹é›†
 	 * @return
 	 */
 	private boolean judgeFItem(String[] frequentItem) {
@@ -396,14 +396,14 @@ public class MSAprioriTool {
 		int id;
 		int count;
 		double tempMinSup;
-		// ×îĞ¡µÄÖ§³Ö¶ÈãĞÖµ
+		// æœ€å°çš„æ”¯æŒåº¦é˜ˆå€¼
 		double minMis = Integer.MAX_VALUE;
-		// ×î´óµÄÖ§³Ö¶ÈãĞÖµ
+		// æœ€å¤§çš„æ”¯æŒåº¦é˜ˆå€¼
 		double maxMis = -Integer.MAX_VALUE;
 
-		// Èç¹ûÊÇÊÂÎñĞÍÊı¾İ£¬ÓÃmisÊı×éÅĞ¶Ï£¬Èç¹û²»ÊÇÍ³Ò»ÓÃÍ¬ÑùµÄ×îĞ¡Ö§³Ö¶ÈãĞÖµÅĞ¶Ï
+		// å¦‚æœæ˜¯äº‹åŠ¡å‹æ•°æ®ï¼Œç”¨misæ•°ç»„åˆ¤æ–­ï¼Œå¦‚æœä¸æ˜¯ç»Ÿä¸€ç”¨åŒæ ·çš„æœ€å°æ”¯æŒåº¦é˜ˆå€¼åˆ¤æ–­
 		if (isTransaction) {
-			// Ñ°ÕÒÆµ·±Ïî¼¯ÖĞµÄ×îĞ¡Ö§³Ö¶ÈãĞÖµ
+			// å¯»æ‰¾é¢‘ç¹é¡¹é›†ä¸­çš„æœ€å°æ”¯æŒåº¦é˜ˆå€¼
 			for (int i = 0; i < frequentItem.length; i++) {
 				id = i + 1;
 
@@ -422,12 +422,12 @@ public class MSAprioriTool {
 
 		count = calSupportCount(frequentItem);
 		tempMinSup = 1.0 * count / totalGoodsIDs.size();
-		// ÅĞ¶ÏÆµ·±Ïî¼¯µÄÖ§³Ö¶ÈãĞÖµÊÇ·ñ³¬¹ı×îĞ¡µÄÖ§³Ö¶ÈãĞÖµ
+		// åˆ¤æ–­é¢‘ç¹é¡¹é›†çš„æ”¯æŒåº¦é˜ˆå€¼æ˜¯å¦è¶…è¿‡æœ€å°çš„æ”¯æŒåº¦é˜ˆå€¼
 		if (tempMinSup < minMis) {
 			isSatisfied = false;
 		}
 
-		// Èç¹ûÎó²î³¬¹ıÁË×î´óÖ§³Ö¶È²î±ğ£¬Ò²Ëã²»Âú×ãÌõ¼ş
+		// å¦‚æœè¯¯å·®è¶…è¿‡äº†æœ€å¤§æ”¯æŒåº¦å·®åˆ«ï¼Œä¹Ÿç®—ä¸æ»¡è¶³æ¡ä»¶
 		if (Math.abs(maxMis - minMis) > delta) {
 			isSatisfied = false;
 		}
@@ -436,10 +436,10 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * Í³¼ÆºòÑ¡Æµ·±Ïî¼¯µÄÖ§³Ö¶ÈÊı£¬ÀûÓÃËûµÄ×Ó¼¯½øĞĞ¼¼Êõ£¬ÎŞĞëÉ¨ÃèÕû¸öÊı¾İ¼¯
+	 * ç»Ÿè®¡å€™é€‰é¢‘ç¹é¡¹é›†çš„æ”¯æŒåº¦æ•°ï¼Œåˆ©ç”¨ä»–çš„å­é›†è¿›è¡ŒæŠ€æœ¯ï¼Œæ— é¡»æ‰«ææ•´ä¸ªæ•°æ®é›†
 	 * 
 	 * @param frequentItem
-	 *            ´ı¼ÆËãÆµ·±Ïî¼¯
+	 *            å¾…è®¡ç®—é¢‘ç¹é¡¹é›†
 	 * @return
 	 */
 	private int calSupportCount(String[] frequentItem) {
@@ -455,10 +455,10 @@ public class MSAprioriTool {
 		}
 
 		newIds = new ArrayList<>();
-		// ÕÒ³öËùÊôµÄÊÂÎñID
+		// æ‰¾å‡ºæ‰€å±çš„äº‹åŠ¡ID
 		ids = fItem2Id.get(key);
 
-		// Èç¹ûÃ»ÓĞÕÒµ½×ÓÏî¼¯µÄÊÂÎñid£¬ÔòÈ«ÅÌÉ¨ÃèÊı¾İ¼¯
+		// å¦‚æœæ²¡æœ‰æ‰¾åˆ°å­é¡¹é›†çš„äº‹åŠ¡idï¼Œåˆ™å…¨ç›˜æ‰«ææ•°æ®é›†
 		if (ids == null || ids.length == 0) {
 			for (int j = 0; j < totalGoodsIDs.size(); j++) {
 				array = totalGoodsIDs.get(j);
@@ -483,22 +483,22 @@ public class MSAprioriTool {
 		}
 
 		key = frequentItem[0] + key;
-		// ½«ËùÇóÖµ´æÈëÍ¼ÖĞ£¬±ãÓÚÏÂ´ÎµÄ¼ÆÊı
+		// å°†æ‰€æ±‚å€¼å­˜å…¥å›¾ä¸­ï¼Œä¾¿äºä¸‹æ¬¡çš„è®¡æ•°
 		fItem2Id.put(key, ids);
 
 		return count;
 	}
 
 	/**
-	 * ¸ù¾İ¸ø¶¨µÄÆµ·±Ïî¼¯Êä³ö¹ØÁª¹æÔò
+	 * æ ¹æ®ç»™å®šçš„é¢‘ç¹é¡¹é›†è¾“å‡ºå…³è”è§„åˆ™
 	 * 
 	 * @param frequentItems
-	 *            Æµ·±Ïî¼¯
+	 *            é¢‘ç¹é¡¹é›†
 	 */
 	public void printAttachRuls(String[] frequentItem) {
-		// ¹ØÁª¹æÔòÇ°¼ş,ºó¼ş¶Ô
+		// å…³è”è§„åˆ™å‰ä»¶,åä»¶å¯¹
 		Map<ArrayList<String>, ArrayList<String>> rules;
-		// Ç°¼şËÑË÷ÀúÊ·
+		// å‰ä»¶æœç´¢å†å²
 		Map<ArrayList<String>, ArrayList<String>> searchHistory;
 		ArrayList<String> prefix;
 		ArrayList<String> suffix;
@@ -516,7 +516,7 @@ public class MSAprioriTool {
 			recusiveFindRules(rules, searchHistory, prefix, suffix);
 		}
 
-		// ÒÀ´ÎÊä³öÕÒµ½µÄ¹ØÁª¹æÔò
+		// ä¾æ¬¡è¾“å‡ºæ‰¾åˆ°çš„å…³è”è§„åˆ™
 		for (Map.Entry<ArrayList<String>, ArrayList<String>> entry : rules
 				.entrySet()) {
 			prefix = entry.getKey();
@@ -527,14 +527,14 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * ¸ù¾İÇ°¼şºó¼ş£¬Êä³ö¹ØÁª¹æÔò
+	 * æ ¹æ®å‰ä»¶åä»¶ï¼Œè¾“å‡ºå…³è”è§„åˆ™
 	 * 
 	 * @param prefix
 	 * @param suffix
 	 */
 	private void printRuleDetail(ArrayList<String> prefix,
 			ArrayList<String> suffix) {
-		// {A}-->{B}µÄÒâË¼ÎªÔÚAµÄÇé¿öÏÂ·¢ÉúBµÄ¸ÅÂÊ
+		// {A}-->{B}çš„æ„æ€ä¸ºåœ¨Açš„æƒ…å†µä¸‹å‘ç”ŸBçš„æ¦‚ç‡
 		System.out.print("{");
 		for (String s : prefix) {
 			System.out.print(s + ", ");
@@ -548,16 +548,16 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * µİ¹éÀ©Õ¹¹ØÁª¹æÔò½â
+	 * é€’å½’æ‰©å±•å…³è”è§„åˆ™è§£
 	 * 
 	 * @param rules
-	 *            ¹ØÁª¹æÔò½á¹û¼¯
+	 *            å…³è”è§„åˆ™ç»“æœé›†
 	 * @param history
-	 *            Ç°¼şËÑË÷ÀúÊ·
+	 *            å‰ä»¶æœç´¢å†å²
 	 * @param prefix
-	 *            ¹ØÁª¹æÔòÇ°¼ş
+	 *            å…³è”è§„åˆ™å‰ä»¶
 	 * @param suffix
-	 *            ¹ØÁª¹æÔòºó¼ş
+	 *            å…³è”è§„åˆ™åä»¶
 	 */
 	private void recusiveFindRules(
 			Map<ArrayList<String>, ArrayList<String>> rules,
@@ -566,14 +566,14 @@ public class MSAprioriTool {
 		int count1;
 		int count2;
 		int compareResult;
-		// ÖÃĞÅ¶È´óĞ¡
+		// ç½®ä¿¡åº¦å¤§å°
 		double conf;
 		String[] temp1;
 		String[] temp2;
 		ArrayList<String> copyPrefix;
 		ArrayList<String> copySuffix;
 
-		// Èç¹ûºó¼şÖ»ÓĞ1¸ö£¬Ôòº¯Êı·µ»Ø
+		// å¦‚æœåä»¶åªæœ‰1ä¸ªï¼Œåˆ™å‡½æ•°è¿”å›
 		if (suffix.size() == 1) {
 			return;
 		}
@@ -586,39 +586,39 @@ public class MSAprioriTool {
 			copyPrefix.add(s);
 
 			copySuffix = (ArrayList<String>) suffix.clone();
-			// ½«¿½±´µÄºó¼şÒÆ³ıÌí¼ÓµÄÒ»Ïî
+			// å°†æ‹·è´çš„åä»¶ç§»é™¤æ·»åŠ çš„ä¸€é¡¹
 			copySuffix.remove(s);
 
 			compareResult = isSubSetInRules(history, copyPrefix);
 			if (compareResult == PREFIX_EQUAL) {
-				// Èç¹ûÔø¾­ÒÑ¾­±»ËÑË÷¹ı£¬ÔòÌø¹ı
+				// å¦‚æœæ›¾ç»å·²ç»è¢«æœç´¢è¿‡ï¼Œåˆ™è·³è¿‡
 				continue;
 			}
 
-			// ÅĞ¶ÏÊÇ·ñÎª×Ó¼¯£¬Èç¹ûÊÇ×Ó¼¯ÔòÎŞĞè¼ÆËã
+			// åˆ¤æ–­æ˜¯å¦ä¸ºå­é›†ï¼Œå¦‚æœæ˜¯å­é›†åˆ™æ— éœ€è®¡ç®—
 			compareResult = isSubSetInRules(rules, copyPrefix);
 			if (compareResult == PREFIX_IS_SUB) {
 				rules.put(copyPrefix, copySuffix);
-				// ¼ÓÈëµ½ËÑË÷ÀúÊ·ÖĞ
+				// åŠ å…¥åˆ°æœç´¢å†å²ä¸­
 				history.put(copyPrefix, copySuffix);
 				recusiveFindRules(rules, history, copyPrefix, copySuffix);
 				continue;
 			}
 
-			// ÔİÊ±ºÏ²¢Îª×ÜµÄ¼¯ºÏ
+			// æš‚æ—¶åˆå¹¶ä¸ºæ€»çš„é›†åˆ
 			copySuffix.addAll(copyPrefix);
 			temp1 = new String[copyPrefix.size()];
 			temp2 = new String[copySuffix.size()];
 			copyPrefix.toArray(temp1);
 			copySuffix.toArray(temp2);
-			// Ö®ºóÔÙ´ÎÒÆ³ıÖ®Ç°Ìì½£µÄÇ°¼ş
+			// ä¹‹åå†æ¬¡ç§»é™¤ä¹‹å‰å¤©å‰‘çš„å‰ä»¶
 			copySuffix.removeAll(copyPrefix);
 
 			for (String[] a : totalGoodsIDs) {
 				if (isStrArrayContain(a, temp1)) {
 					count1++;
 
-					// ÔÚgroup1µÄÌõ¼şÏÂ£¬Í³¼Ægroup2µÄÊÂ¼ş·¢Éú´ÎÊı
+					// åœ¨group1çš„æ¡ä»¶ä¸‹ï¼Œç»Ÿè®¡group2çš„äº‹ä»¶å‘ç”Ÿæ¬¡æ•°
 					if (isStrArrayContain(a, temp2)) {
 						count2++;
 					}
@@ -627,23 +627,23 @@ public class MSAprioriTool {
 
 			conf = 1.0 * count2 / count1;
 			if (conf > minConf) {
-				// ÉèÖÃ´ËÇ°¼şÌõ¼şÏÂ£¬ÄÜµ¼³ö¹ØÁª¹æÔò
+				// è®¾ç½®æ­¤å‰ä»¶æ¡ä»¶ä¸‹ï¼Œèƒ½å¯¼å‡ºå…³è”è§„åˆ™
 				rules.put(copyPrefix, copySuffix);
 			}
 
-			// ¼ÓÈëµ½ËÑË÷ÀúÊ·ÖĞ
+			// åŠ å…¥åˆ°æœç´¢å†å²ä¸­
 			history.put(copyPrefix, copySuffix);
 			recusiveFindRules(rules, history, copyPrefix, copySuffix);
 		}
 	}
 
 	/**
-	 * ÅĞ¶Ïµ±Ç°µÄÇ°¼şÊÇ·ñ»á¹ØÁª¹æÔòµÄ×Ó¼¯
+	 * åˆ¤æ–­å½“å‰çš„å‰ä»¶æ˜¯å¦ä¼šå…³è”è§„åˆ™çš„å­é›†
 	 * 
 	 * @param rules
-	 *            µ±Ç°ÒÑ¾­ÅĞ¶Ï³öµÄ¹ØÁª¹æÔò
+	 *            å½“å‰å·²ç»åˆ¤æ–­å‡ºçš„å…³è”è§„åˆ™
 	 * @param prefix
-	 *            ´ıÅĞ¶ÏµÄÇ°¼ş
+	 *            å¾…åˆ¤æ–­çš„å‰ä»¶
 	 * @return
 	 */
 	private int isSubSetInRules(
@@ -664,7 +664,7 @@ public class MSAprioriTool {
 			tempPrefix.toArray(temp1);
 			prefix.toArray(temp2);
 
-			// ÅĞ¶Ïµ±Ç°¹¹ÔìµÄÇ°¼şÊÇ·ñÒÑ¾­ÊÇ´æÔÚÇ°¼şµÄ×Ó¼¯
+			// åˆ¤æ–­å½“å‰æ„é€ çš„å‰ä»¶æ˜¯å¦å·²ç»æ˜¯å­˜åœ¨å‰ä»¶çš„å­é›†
 			if (isStrArrayContain(temp2, temp1)) {
 				if (temp2.length == temp1.length) {
 					result = PREFIX_EQUAL;
@@ -682,7 +682,7 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * Êı×éarray2ÊÇ·ñ°üº¬ÓÚarray1ÖĞ£¬²»ĞèÒªÍêÈ«Ò»Ñù
+	 * æ•°ç»„array2æ˜¯å¦åŒ…å«äºarray1ä¸­ï¼Œä¸éœ€è¦å®Œå…¨ä¸€æ ·
 	 * 
 	 * @param array1
 	 * @param array2
@@ -693,14 +693,14 @@ public class MSAprioriTool {
 		for (String s2 : array2) {
 			isContain = false;
 			for (String s1 : array1) {
-				// Ö»Òªs2×Ö·û´æÔÚÓÚarray1ÖĞ£¬Õâ¸ö×Ö·û¾ÍËã°üº¬ÔÚarray1ÖĞ
+				// åªè¦s2å­—ç¬¦å­˜åœ¨äºarray1ä¸­ï¼Œè¿™ä¸ªå­—ç¬¦å°±ç®—åŒ…å«åœ¨array1ä¸­
 				if (s2.equals(s1)) {
 					isContain = true;
 					break;
 				}
 			}
 
-			// Ò»µ©·¢ÏÖ²»°üº¬µÄ×Ö·û£¬Ôòarray2Êı×é²»°üº¬ÓÚarray1ÖĞ
+			// ä¸€æ—¦å‘ç°ä¸åŒ…å«çš„å­—ç¬¦ï¼Œåˆ™array2æ•°ç»„ä¸åŒ…å«äºarray1ä¸­
 			if (!isContain) {
 				break;
 			}
@@ -710,13 +710,13 @@ public class MSAprioriTool {
 	}
 
 	/**
-	 * ¶Á¹ØÏµ±íÖĞµÄÊı¾İ£¬²¢×ª»¯ÎªÊÂÎñÊı¾İ
+	 * è¯»å…³ç³»è¡¨ä¸­çš„æ•°æ®ï¼Œå¹¶è½¬åŒ–ä¸ºäº‹åŠ¡æ•°æ®
 	 * 
 	 * @param filePath
 	 */
 	private void readRDBMSData(String filePath) {
 		String str;
-		// ÊôĞÔÃû³ÆĞĞ
+		// å±æ€§åç§°è¡Œ
 		String[] attrNames = null;
 		String[] temp;
 		String[] newRecord;
@@ -724,18 +724,18 @@ public class MSAprioriTool {
 
 		datas = readLine(filePath);
 
-		// »ñÈ¡Ê×ĞĞ
+		// è·å–é¦–è¡Œ
 		attrNames = datas.get(0);
 		this.transactionDatas = new ArrayList<>();
 
-		// È¥³ıÊ×ĞĞÊı¾İ
+		// å»é™¤é¦–è¡Œæ•°æ®
 		for (int i = 1; i < datas.size(); i++) {
 			temp = datas.get(i);
 
-			// ¹ıÂËµôÊ×ÁĞidÁĞ
+			// è¿‡æ»¤æ‰é¦–åˆ—idåˆ—
 			for (int j = 1; j < temp.length; j++) {
 				str = "";
-				// ²ÉÓÃÊôĞÔÃû+ÊôĞÔÖµµÄĞÎÊ½±ÜÃâÊı¾İµÄÖØ¸´
+				// é‡‡ç”¨å±æ€§å+å±æ€§å€¼çš„å½¢å¼é¿å…æ•°æ®çš„é‡å¤
 				str = attrNames[j] + ":" + temp[j];
 				temp[j] = str;
 			}
@@ -746,21 +746,21 @@ public class MSAprioriTool {
 		}
 
 		attributeReplace();
-		// ½«ÊÂÎñÊı×ªµ½totalGoodsIDÖĞ×öÍ³Ò»´¦Àí
+		// å°†äº‹åŠ¡æ•°è½¬åˆ°totalGoodsIDä¸­åšç»Ÿä¸€å¤„ç†
 		this.totalGoodsIDs = transactionDatas;
 	}
 
 	/**
-	 * ÊôĞÔÖµµÄÌæ»»£¬Ìæ»»³ÉÊı×ÖµÄĞÎÊ½£¬ÒÔ±ã½øĞĞÆµ·±ÏîµÄÍÚ¾ò
+	 * å±æ€§å€¼çš„æ›¿æ¢ï¼Œæ›¿æ¢æˆæ•°å­—çš„å½¢å¼ï¼Œä»¥ä¾¿è¿›è¡Œé¢‘ç¹é¡¹çš„æŒ–æ˜
 	 */
 	private void attributeReplace() {
 		int currentValue = 1;
 		String s;
-		// ÊôĞÔÃûµ½Êı×ÖµÄÓ³ÉäÍ¼
+		// å±æ€§ååˆ°æ•°å­—çš„æ˜ å°„å›¾
 		attr2Num = new HashMap<>();
 		num2Attr = new HashMap<>();
 
-		// °´ÕÕ1ÁĞÁĞµÄ·½Ê½À´£¬´Ó×óÍùÓÒ±ßÉ¨Ãè,Ìø¹ıÁĞÃû³ÆĞĞºÍidÁĞ
+		// æŒ‰ç…§1åˆ—åˆ—çš„æ–¹å¼æ¥ï¼Œä»å·¦å¾€ï¿½å†¶å‘±îŸ‹ï¿½,è·³è¿‡åˆ—åç§°è¡Œå’Œidåˆ—
 		for (int j = 0; j < transactionDatas.get(0).length; j++) {
 			for (int i = 0; i < transactionDatas.size(); i++) {
 				s = transactionDatas.get(i)[j];

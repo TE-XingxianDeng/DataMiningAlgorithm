@@ -3,17 +3,17 @@ package DataMining_Chameleon;
 import java.util.ArrayList;
 
 /**
- * ¾Û´ØÀà
+ * èšç°‡ç±»
  * 
  * @author lyq
  * 
  */
 public class Cluster implements Cloneable{
-	//´ØÎ¨Ò»id±êÊ¶ºÅ
+	//ç°‡å”¯ä¸€idæ ‡è¯†å·
 	int id;
-	// ¾Û´ØÄÚµÄ×ø±êµã¼¯ºÏ
+	// èšç°‡å†…çš„åæ ‡ç‚¹é›†åˆ
 	ArrayList<Point> points;
-	// ¾Û´ØÄÚµÄËùÓĞ±ßµÄÈ¨ÖØºÍ
+	// èšç°‡å†…çš„æ‰€æœ‰è¾¹çš„æƒé‡å’Œ
 	double weightSum = 0;
 
 	public Cluster(int id, ArrayList<Point> points) {
@@ -22,7 +22,7 @@ public class Cluster implements Cloneable{
 	}
 
 	/**
-	 * ¼ÆËã¾Û´ØµÄÄÚ²¿µÄ±ßÈ¨ÖØºÍ
+	 * è®¡ç®—èšç°‡çš„å†…éƒ¨çš„è¾¹æƒé‡å’Œ
 	 * 
 	 * @return
 	 */
@@ -36,7 +36,7 @@ public class Cluster implements Cloneable{
 				id1 = p1.id;
 				id2 = p2.id;
 
-				// ÎªÁË±ÜÃâÖØ¸´¼ÆËã£¬È¡id1Ğ¡µÄ¶ÔÓ¦´óµÄ
+				// ä¸ºäº†é¿å…é‡å¤è®¡ç®—ï¼Œå–id1å°çš„å¯¹åº”å¤§çš„
 				if (id1 < id2 && ChameleonTool.edges[id1][id2] == 1) {
 					weightSum += ChameleonTool.weights[id1][id2];
 				}
@@ -47,12 +47,12 @@ public class Cluster implements Cloneable{
 	}
 
 	/**
-	 * ¼ÆËã2¸ö´ØÖ®¼ä×î½üµÄnÌõ±ß
+	 * è®¡ç®—2ä¸ªç°‡ä¹‹é—´æœ€è¿‘çš„næ¡è¾¹
 	 * 
 	 * @param otherCluster
-	 *            ´ı±È½ÏµÄ´Ø
+	 *            å¾…æ¯”è¾ƒçš„ç°‡
 	 * @param n
-	 *            ×î½üµÄ±ßµÄÊıÄ¿
+	 *            æœ€è¿‘çš„è¾¹çš„æ•°ç›®
 	 * @return
 	 */
 	public ArrayList<int[]> calNearestEdge(Cluster otherCluster, int n){
@@ -75,7 +75,7 @@ public class Cluster implements Cloneable{
 		}
 
 		int[] tempEdge;
-		// Ñ­»·¼ÆËã³öÃ¿´ÎµÄ×î½ü¾àÀë
+		// å¾ªç¯è®¡ç®—å‡ºæ¯æ¬¡çš„æœ€è¿‘è·ç¦»
 		while (count < n) {
 			tempEdge = new int[2];
 			minDistance = Integer.MAX_VALUE;
@@ -107,7 +107,7 @@ public class Cluster implements Cloneable{
 	protected Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		
-		//ÒıÓÃĞèÒªÔÙ´Î¸´ÖÆ£¬ÊµÏÖÉî¿½±´
+		//å¼•ç”¨éœ€è¦å†æ¬¡å¤åˆ¶ï¼Œå®ç°æ·±æ‹·è´
 		ArrayList<Point> pointList = (ArrayList<Point>) this.points.clone();
 		Cluster cluster = new Cluster(id, pointList);
 		

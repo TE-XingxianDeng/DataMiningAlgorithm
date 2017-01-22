@@ -1,7 +1,7 @@
 package DataMining_Apriori;
 
 /**
- * apriori¹ØÁª¹æÔòÍÚ¾òËã·¨µ÷ÓÃÀà
+ * aprioriå…³è”è§„åˆ™æŒ–æ˜ç®—æ³•è°ƒç”¨ç±»
  * @author lyq
  *
  */

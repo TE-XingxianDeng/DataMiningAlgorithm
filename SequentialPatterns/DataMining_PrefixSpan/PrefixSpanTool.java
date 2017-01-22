@@ -10,23 +10,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * PrefixSpanToolĞòÁĞÄ£Ê½·ÖÎöËã·¨¹¤¾ßÀà
+ * PrefixSpanToolåºåˆ—æ¨¡å¼åˆ†æç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class PrefixSpanTool {
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ×îĞ¡Ö§³Ö¶ÈãĞÖµ±ÈÀı
+	// æœ€å°æ”¯æŒåº¦é˜ˆå€¼æ¯”ä¾‹
 	private double minSupportRate;
-	// ×îĞ¡Ö§³Ö¶È£¬Í¨¹ıĞòÁĞ×ÜÊı³ËÒÔãĞÖµ±ÈÀı¼ÆËã
+	// æœ€å°æ”¯æŒåº¦ï¼Œé€šè¿‡åºåˆ—æ€»æ•°ä¹˜ä»¥é˜ˆå€¼æ¯”ä¾‹è®¡ç®—
 	private int minSupport;
-	// Ô­Ê¼ĞòÁĞ×é
+	// åŸå§‹åºåˆ—ç»„
 	private ArrayList<Sequence> totalSeqs;
-	// ÍÚ¾ò³öµÄËùÓĞĞòÁĞÆµ·±Ä£Ê½
+	// æŒ–æ˜å‡ºçš„æ‰€æœ‰åºåˆ—é¢‘ç¹æ¨¡å¼
 	private ArrayList<Sequence> totalFrequentSeqs;
-	// ËùÓĞµÄµ¥Ò»Ïî£¬ÓÃÓÚµİ¹éÃ¶¾Ù
+	// æ‰€æœ‰çš„å•ä¸€é¡¹ï¼Œç”¨äºé€’å½’æšä¸¾
 	private ArrayList<String> singleItems;
 
 	public PrefixSpanTool(String filePath, double minSupportRate) {
@@ -36,7 +36,7 @@ public class PrefixSpanTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -69,15 +69,15 @@ public class PrefixSpanTool {
 			totalSeqs.add(tempSeq);
 		}
 
-		System.out.println("Ô­Ê¼ĞòÁĞÊı¾İ£º");
+		System.out.println("åŸå§‹åºåˆ—æ•°æ®ï¼š");
 		outputSeqence(totalSeqs);
 	}
 
 	/**
-	 * Êä³öĞòÁĞÁĞ±íÄÚÈİ
+	 * è¾“å‡ºåºåˆ—åˆ—è¡¨å†…å®¹
 	 * 
 	 * @param seqList
-	 *            ´ıÊä³öĞòÁĞÁĞ±í
+	 *            å¾…è¾“å‡ºåºåˆ—åˆ—è¡¨
 	 */
 	private void outputSeqence(ArrayList<Sequence> seqList) {
 		for (Sequence seq : seqList) {
@@ -100,7 +100,7 @@ public class PrefixSpanTool {
 	}
 
 	/**
-	 * ÒÆ³ı³õÊ¼ĞòÁĞÖĞ²»Âú×ã×îĞ¡Ö§³Ö¶ÈãĞÖµµÄµ¥Ïî
+	 * ç§»é™¤åˆå§‹åºåˆ—ä¸­ä¸æ»¡è¶³æœ€å°æ”¯æŒåº¦é˜ˆå€¼çš„å•é¡¹
 	 */
 	private void removeInitSeqsItem() {
 		int count = 0;
@@ -136,7 +136,7 @@ public class PrefixSpanTool {
 			count = (int) entry.getValue();
 
 			if (count < minSupport) {
-				// Èç¹ûÖ§³Ö¶ÈãĞÖµĞ¡ÓÚËùµÃµÄ×îĞ¡Ö§³Ö¶ÈãĞÖµ£¬ÔòÉ¾³ı¸ÃÏî
+				// å¦‚æœæ”¯æŒåº¦é˜ˆå€¼å°äºæ‰€å¾—çš„æœ€å°æ”¯æŒåº¦é˜ˆå€¼ï¼Œåˆ™åˆ é™¤è¯¥é¡¹
 				for (Sequence seq : totalSeqs) {
 					seq.deleteSingleItem(key);
 				}
@@ -149,12 +149,12 @@ public class PrefixSpanTool {
 	}
 
 	/**
-	 * µİ¹éËÑË÷Âú×ãÌõ¼şµÄĞòÁĞÄ£Ê½
+	 * é€’å½’æœç´¢æ»¡è¶³æ¡ä»¶çš„åºåˆ—æ¨¡å¼
 	 * 
 	 * @param beforeSeq
-	 *            Ç°×ºĞòÁĞ
+	 *            å‰ç¼€åºåˆ—
 	 * @param afterSeqList
-	 *            ºó×ºĞòÁĞÁĞ±í
+	 *            åç¼€åºåˆ—åˆ—è¡¨
 	 */
 	private void recursiveSearchSeqs(Sequence beforeSeq,
 			ArrayList<Sequence> afterSeqList) {
@@ -164,7 +164,7 @@ public class PrefixSpanTool {
 		ArrayList<Sequence> tempSeqList = new ArrayList<>();
 
 		for (String s : singleItems) {
-			// ·Ö³É2ÖÖĞÎÊ½µİ¹é£¬ÒÔ<a>ÎªÆğÊ¼Ïî£¬µÚÒ»ÖÖÖ±½Ó¼ÓÈë¶ÀÁ¢Ïî¼¯±éÀú<a,a>,<a,b> <a,c>..
+			// åˆ†æˆ2ç§å½¢å¼é€’å½’ï¼Œä»¥<a>ä¸ºèµ·å§‹é¡¹ï¼Œç¬¬ä¸€ç§ç›´æ¥åŠ å…¥ç‹¬ç«‹é¡¹é›†éå†<a,a>,<a,b> <a,c>..
 			if (isLargerThanMinSupport(s, afterSeqList)) {
 				tempSeq = beforeSeq.copySeqence();
 				tempItemSet = new ItemSet(s);
@@ -183,8 +183,8 @@ public class PrefixSpanTool {
 				recursiveSearchSeqs(tempSeq, tempSeqList);
 			}
 
-			// µÚ¶şÖÖµİ¹éÎªÒÔÔªËØµÄÉí·İ¼ÓÈë×îºóµÄÏî¼¯ÄÚÒÔaÎªÀı<(aa)>,<(ab)>,<(ac)>...
-			// aÔÚÕâÀï¿ÉÒÔÀí½âÎªÒ»¸öÇ°×ºĞòÁĞ£¬ÀïÃæ¿ÉÄÜÊÇµ¥¸öÔªËØ»òÕßÒÑ¾­ÊÇ¶àÔªËØµÄÏî¼¯
+			// ç¬¬äºŒç§é€’å½’ä¸ºä»¥å…ƒç´ çš„èº«ä»½åŠ å…¥æœ€åçš„é¡¹é›†å†…ä»¥aä¸ºä¾‹<(aa)>,<(ab)>,<(ac)>...
+			// aåœ¨è¿™é‡Œå¯ä»¥ç†è§£ä¸ºä¸€ä¸ªå‰ç¼€åºåˆ—ï¼Œé‡Œé¢å¯èƒ½æ˜¯å•ä¸ªå…ƒç´ æˆ–è€…å·²ç»æ˜¯å¤šå…ƒç´ çš„é¡¹é›†
 			tempSeq = beforeSeq.copySeqence();
 			int size = tempSeq.getItemSetList().size();
 			tempItemSet = tempSeq.getItemSetList().get(size - 1);
@@ -207,12 +207,12 @@ public class PrefixSpanTool {
 	}
 
 	/**
-	 * Ëù´«ÈëµÄÏî×éºÏÔÚËù¸ø¶¨ĞòÁĞÖĞµÄÖ§³Ö¶ÈÊÇ·ñ³¬¹ıãĞÖµ
+	 * æ‰€ä¼ å…¥çš„é¡¹ç»„åˆåœ¨æ‰€ç»™å®šåºåˆ—ä¸­çš„æ”¯æŒåº¦æ˜¯å¦è¶…è¿‡é˜ˆå€¼
 	 * 
 	 * @param s
-	 *            ËùĞèÆ¥ÅäµÄÏî
+	 *            æ‰€éœ€åŒ¹é…çš„é¡¹
 	 * @param seqList
-	 *            ±È½ÏĞòÁĞÊı¾İ
+	 *            æ¯”è¾ƒåºåˆ—æ•°æ®
 	 * @return
 	 */
 	private boolean isLargerThanMinSupport(String s, ArrayList<Sequence> seqList) {
@@ -233,12 +233,12 @@ public class PrefixSpanTool {
 	}
 
 	/**
-	 * Ëù´«ÈëµÄ×éºÏÏî¼¯ÔÚĞòÁĞÖĞµÄÖ§³Ö¶ÈÊÇ·ñ´óÓÚãĞÖµ
+	 * æ‰€ä¼ å…¥çš„ç»„åˆé¡¹é›†åœ¨åºåˆ—ä¸­çš„æ”¯æŒåº¦æ˜¯å¦å¤§äºé˜ˆå€¼
 	 * 
 	 * @param itemSet
-	 *            ×éºÏÔªËØÏî¼¯
+	 *            ç»„åˆå…ƒç´ é¡¹é›†
 	 * @param seqList
-	 *            ±È½ÏµÄĞòÁĞÁĞ±í
+	 *            æ¯”è¾ƒçš„åºåˆ—åˆ—è¡¨
 	 * @return
 	 */
 	private boolean isLargerThanMinSupport(ItemSet itemSet,
@@ -264,7 +264,7 @@ public class PrefixSpanTool {
 	}
 
 	/**
-	 * ĞòÁĞÄ£Ê½·ÖÎö¼ÆËã
+	 * åºåˆ—æ¨¡å¼åˆ†æè®¡ç®—
 	 */
 	public void prefixSpanCalculate() {
 		Sequence seq;
@@ -274,7 +274,7 @@ public class PrefixSpanTool {
 		removeInitSeqsItem();
 
 		for (String s : singleItems) {
-			// ´Ó×î¿ªÊ¼µÄa,b,d¿ªÊ¼µİ¹éÍùÏÂÑ°ÕÒÆµ·±ĞòÁĞÄ£Ê½
+			// ä»æœ€å¼€å§‹çš„a,b,då¼€å§‹é€’å½’å¾€ä¸‹å¯»æ‰¾é¢‘ç¹åºåˆ—æ¨¡å¼
 			seq = new Sequence();
 			itemSet = new ItemSet(s);
 			seq.getItemSetList().add(itemSet);
@@ -282,7 +282,7 @@ public class PrefixSpanTool {
 			if (isLargerThanMinSupport(s, totalSeqs)) {
 				tempSeqList = new ArrayList<>();
 				for (Sequence s2 : totalSeqs) {
-					// ÅĞ¶Ïµ¥Ò»ÏîÊÇ·ñ°üº¬ÓÚÔÚĞòÁĞÖĞ£¬°üº¬²Å½øĞĞÌáÈ¡²Ù×÷
+					// åˆ¤æ–­å•ä¸€é¡¹æ˜¯å¦åŒ…å«äºåœ¨åºåˆ—ä¸­ï¼ŒåŒ…å«æ‰è¿›è¡Œæå–æ“ä½œ
 					if (s2.strIsContained(s)) {
 						tempSeq = s2.extractItem(s);
 						tempSeqList.add(tempSeq);
@@ -298,10 +298,10 @@ public class PrefixSpanTool {
 	}
 
 	/**
-	 * °´Ä£Ê½Àà±ğÊä³öÆµ·±ĞòÁĞÄ£Ê½
+	 * æŒ‰æ¨¡å¼ç±»åˆ«è¾“å‡ºé¢‘ç¹åºåˆ—æ¨¡å¼
 	 */
 	private void printTotalFreSeqs() {
-		System.out.println("ĞòÁĞÄ£Ê½ÍÚ¾ò½á¹û£º");
+		System.out.println("åºåˆ—æ¨¡ï¿½é…µè¯°èšªå³îï¿½");
 		
 		ArrayList<Sequence> seqList;
 		HashMap<String, ArrayList<Sequence>> seqMap = new HashMap<>();
@@ -340,7 +340,7 @@ public class PrefixSpanTool {
 				}
 				System.out.print(">, ");
 
-				// Ã¿5¸öĞòÁĞ»»Ò»ĞĞ
+				// æ¯5ä¸ªåºåˆ—æ¢ä¸€è¡Œ
 				if (count == 5) {
 					count = 0;
 					System.out.println();

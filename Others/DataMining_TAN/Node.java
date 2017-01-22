@@ -3,57 +3,57 @@ package DataMining_TAN;
 import java.util.ArrayList;
 
 /**
- * ±´Ò¶Ë¹ÍøÂç½ÚµãÀà
+ * è´å¶æ–¯ç½‘ç»œèŠ‚ç‚¹ç±»
  * 
  * @author lyq
  * 
  */
 public class Node {
-	//½ÚµãÎ¨Ò»id£¬·½±ãºóÃæ½ÚµãÁ¬½Ó·½ÏòµÄÈ·¶¨
+	//èŠ‚ç‚¹å”¯ä¸€idï¼Œæ–¹ä¾¿åé¢èŠ‚ç‚¹è¿æ¥æ–¹å‘çš„ç¡®å®š
 	int id;
-	// ½ÚµãµÄÊôĞÔÃû³Æ
+	// èŠ‚ç‚¹çš„å±æ€§åç§°
 	String name;
-	// ¸Ã½ÚµãËùÁ¬ĞøµÄ½Úµã
+	// è¯¥èŠ‚ç‚¹æ‰€è¿ç»­çš„èŠ‚ç‚¹
 	ArrayList<Node> connectedNodes;
 
 	public Node(int id, String name) {
 		this.id = id;
 		this.name = name;
 
-		// ³õÊ¼»¯±äÁ¿
+		// åˆå§‹åŒ–å˜é‡
 		this.connectedNodes = new ArrayList<>();
 	}
 
 	/**
-	 * ½«×ÔÉí½ÚµãÁ¬½Óµ½Ä¿±ê¸ø¶¨µÄ½Úµã
+	 * å°†è‡ªèº«èŠ‚ç‚¹è¿æ¥åˆ°ç›®æ ‡ç»™å®šçš„èŠ‚ç‚¹
 	 * 
 	 * @param node
-	 *            ÏÂÓÎ½Úµã
+	 *            ä¸‹æ¸¸èŠ‚ç‚¹
 	 */
 	public void connectNode(Node node) {
-		//±ÜÃâÁ¬½Ó×ÔÉí
+		//é¿å…è¿æ¥è‡ªèº«
 		if(this.id == node.id){
 			return;
 		}
 		
-		// ½«½Úµã¼ÓÈë×ÔÉí½ÚµãµÄ½ÚµãÁĞ±íÖĞ
+		// å°†èŠ‚ç‚¹åŠ å…¥è‡ªèº«èŠ‚ç‚¹çš„èŠ‚ç‚¹åˆ—è¡¨ä¸­
 		this.connectedNodes.add(node);
-		// ½«×ÔÉí½Úµã¼ÓÈëµ½Ä¿±ê½ÚµãµÄÁĞ±íÖĞ
+		// å°†è‡ªèº«èŠ‚ç‚¹åŠ å…¥åˆ°ç›®æ ‡èŠ‚ç‚¹çš„åˆ—è¡¨ä¸­
 		node.connectedNodes.add(this);
 	}
 
 	/**
-	 * ÅĞ¶ÏÓëÄ¿±ê½ÚµãÊÇ·ñÏàÍ¬£¬Ö÷Òª±È½ÏÃû³ÆÊÇ·ñÏàÍ¬¼´¿É
+	 * åˆ¤æ–­ä¸ç›®æ ‡èŠ‚ç‚¹æ˜¯å¦ç›¸åŒï¼Œä¸»è¦æ¯”è¾ƒåç§°æ˜¯å¦ç›¸åŒå³å¯
 	 * 
 	 * @param node
-	 *            Ä¿±ê½áµã
+	 *            ç›®æ ‡ç»“ç‚¹
 	 * @return
 	 */
 	public boolean isEqual(Node node) {
 		boolean isEqual;
 
 		isEqual = false;
-		// ½ÚµãÃû³ÆÏàÍ¬ÔòÊÓÎªÏàµÈ
+		// èŠ‚ç‚¹åç§°ç›¸åŒåˆ™è§†ä¸ºç›¸ç­‰
 		if (this.id == node.id) {
 			isEqual = true;
 		}

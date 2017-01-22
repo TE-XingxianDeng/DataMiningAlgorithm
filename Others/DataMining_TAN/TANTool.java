@@ -9,29 +9,29 @@ import java.util.Collections;
 import java.util.HashMap;
 
 /**
- * TANÊ÷ĞÍÆÓËØ±´Ò¶Ë¹Ëã·¨¹¤¾ßÀà
+ * TANæ ‘å‹æœ´ç´ è´å¶æ–¯ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class TANTool {
-	// ²âÊÔÊı¾İ¼¯µØÖ·
+	// æµ‹è¯•æ•°æ®é›†åœ°å€
 	private String filePath;
-	// Êı¾İ¼¯ÊôĞÔ×ÜÊı,ÆäÖĞÒ»¸ö¸ö·ÖÀàÊôĞÔ
+	// æ•°æ®é›†å±æ€§æ€»æ•°,å…¶ä¸­ä¸€ä¸ªä¸ªåˆ†ç±»å±æ€§
 	private int attrNum;
-	// ·ÖÀàÊôĞÔÃû
+	// åˆ†ç±»å±æ€§å
 	private String classAttrName;
-	// ÊôĞÔÁĞÃû³ÆĞĞ
+	// å±æ€§åˆ—åç§°è¡Œ
 	private String[] attrNames;
-	// ±´Ò¶Ë¹ÍøÂç±ßµÄ·½Ïò£¬Êı×éÄÚµÄÊıÖµÎª½Úµãid,´Ói->j
+	// è´å¶æ–¯ç½‘ç»œè¾¹çš„æ–¹å‘ï¼Œæ•°ç»„å†…çš„æ•°å€¼ä¸ºèŠ‚ç‚¹id,ä»i->j
 	private int[][] edges;
-	// ÊôĞÔÃûµ½ÁĞÏÂ±êµÄÓ³Éä
+	// å±æ€§ååˆ°åˆ—ä¸‹æ ‡çš„æ˜ å°„
 	private HashMap<String, Integer> attr2Column;
-	// ÊôĞÔ£¬ÊôĞÔ¶ÔÈ¡Öµ¼¯ºÏÓ³Éä¶Ô
+	// å±æ€§ï¼Œå±æ€§å¯¹å–å€¼é›†åˆæ˜ å°„å¯¹
 	private HashMap<String, ArrayList<String>> attr2Values;
-	// ±´Ò¶Ë¹ÍøÂç×Ü½ÚµãÁĞ±í
+	// è´å¶æ–¯ç½‘ç»œæ€»èŠ‚ç‚¹åˆ—è¡¨
 	private ArrayList<Node> totalNodes;
-	// ×ÜµÄ²âÊÔÊı¾İ
+	// æ€»çš„æµ‹è¯•æ•°æ®
 	private ArrayList<String[]> totalDatas;
 
 	public TANTool(String filePath) {
@@ -41,7 +41,7 @@ public class TANTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -72,28 +72,28 @@ public class TANTool {
 		this.attr2Column = new HashMap<>();
 		this.attr2Values = new HashMap<>();
 
-		// ·ÖÀàÊôĞÔ½Úµãid×îĞ¡ÉèÎª0
+		// åˆ†ç±»å±æ€§èŠ‚ç‚¹idæœ€å°è®¾ä¸º0
 		node = new Node(0, attrNames[attrNum - 1]);
 		this.totalNodes.add(node);
 		for (int i = 0; i < attrNames.length; i++) {
 			if (i < attrNum - 1) {
-				// ´´½¨±´Ò¶Ë¹ÍøÂç½Úµã£¬Ã¿¸öÊôĞÔÒ»¸ö½Úµã
+				// åˆ›å»ºè´å¶æ–¯ç½‘ç»œèŠ‚ç‚¹ï¼Œæ¯ä¸ªå±æ€§ä¸€ä¸ªèŠ‚ç‚¹
 				node = new Node(i + 1, attrNames[i]);
 				this.totalNodes.add(node);
 			}
 
-			// Ìí¼ÓÊôĞÔµ½ÁĞÏÂ±êµÄÓ³Éä
+			// æ·»åŠ å±æ€§åˆ°åˆ—ä¸‹æ ‡çš„æ˜ å°„
 			this.attr2Column.put(attrNames[i], i);
 		}
 
 		String[] temp;
 		ArrayList<String> values;
-		// ½øĞĞÊôĞÔÃû£¬ÊôĞÔÖµ¶ÔµÄÓ³ÉäÆ¥Åä
+		// è¿›è¡Œå±æ€§åï¼Œå±æ€§å€¼å¯¹çš„æ˜ å°„åŒ¹é…
 		for (int i = 1; i < this.totalDatas.size(); i++) {
 			temp = this.totalDatas.get(i);
 
 			for (int j = 0; j < temp.length; j++) {
-				// ÅĞ¶ÏmapÖĞÊÇ·ñ°üº¬´ËÊôĞÔÃû
+				// åˆ¤æ–­mapä¸­æ˜¯å¦åŒ…å«æ­¤å±æ€§å
 				if (this.attr2Values.containsKey(attrNames[j])) {
 					values = this.attr2Values.get(attrNames[j]);
 				} else {
@@ -101,7 +101,7 @@ public class TANTool {
 				}
 
 				if (!values.contains(temp[j])) {
-					// ¼ÓÈëĞÂµÄÊôĞÔÖµ
+					// åŠ å…¥æ–°çš„å±æ€§å€¼
 					values.add(temp[j]);
 				}
 
@@ -111,7 +111,7 @@ public class TANTool {
 	}
 
 	/**
-	 * ¸ù¾İÌõ¼ş»¥ĞÅÏ¢¶È¶Ô¹¹½¨×î´óÈ¨ÖØ¿ç¶ÈÊ÷,·µ»ØµÚÒ»¸ö½ÚµãÎª¸ù½Úµã
+	 * æ ¹æ®æ¡ä»¶äº’ä¿¡æ¯åº¦å¯¹æ„å»ºæœ€å¤§æƒé‡è·¨åº¦æ ‘,è¿”å›ç¬¬ä¸€ä¸ªèŠ‚ç‚¹ä¸ºæ ¹èŠ‚ç‚¹
 	 * 
 	 * @param iArray
 	 */
@@ -127,9 +127,9 @@ public class TANTool {
 			node1 = i[0];
 			node2 = i[1];
 
-			// ½«2¸ö½Úµã½øĞĞÁ¬½Ó
+			// å°†2ä¸ªèŠ‚ç‚¹è¿›è¡Œè¿æ¥
 			node1.connectNode(node2);
-			// ±ÜÃâ³öÏÖ»·Â·ÏÖÏó
+			// é¿å…å‡ºç°ç¯è·¯ç°è±¡
 			addIfNotExist(node1, existNodes);
 			addIfNotExist(node2, existNodes);
 
@@ -138,16 +138,16 @@ public class TANTool {
 			}
 		}
 
-		// ·µ»ØµÚÒ»¸ö×÷Îª¸ù½Úµã
+		// è¿”å›ç¬¬ä¸€ä¸ªä½œä¸ºæ ¹èŠ‚ç‚¹
 		root = existNodes.get(0);
 		return root;
 	}
 
 	/**
-	 * ÎªÊ÷ĞÍ½á¹¹È·¶¨±ßµÄ·½Ïò£¬·½ÏòÎªÊôĞÔ¸ù½Úµã·½ÏòÖ¸ÏòÆäËûÊôĞÔ½Úµã·½Ïò
+	 * ä¸ºæ ‘å‹ç»“æ„ç¡®å®šè¾¹çš„æ–¹å‘ï¼Œæ–¹å‘ä¸ºå±æ€§æ ¹èŠ‚ç‚¹æ–¹å‘æŒ‡å‘å…¶ä»–å±æ€§èŠ‚ç‚¹æ–¹å‘
 	 * 
 	 * @param root
-	 *            µ±Ç°±éÀúµ½µÄ½Úµã
+	 *            å½“å‰éå†åˆ°çš„èŠ‚ç‚¹
 	 */
 	private void confirmGraphDirection(Node currentNode) {
 		int i;
@@ -160,27 +160,27 @@ public class TANTool {
 		for (Node n : connectedNodes) {
 			j = n.id;
 
-			// ÅĞ¶ÏÁ¬½Ó´Ë2½ÚµãµÄ·½ÏòÊÇ·ñ±»È·¶¨
+			// åˆ¤æ–­è¿æ¥æ­¤2èŠ‚ç‚¹çš„æ–¹å‘æ˜¯å¦è¢«ç¡®å®š
 			if (edges[i][j] == 0 && edges[j][i] == 0) {
-				// Èç¹ûÃ»ÓĞÈ·¶¨£¬ÔòÖÆ¶¨·½ÏòÎªi->j
+				// å¦‚æœæ²¡æœ‰ç¡®å®šï¼Œåˆ™åˆ¶å®šæ–¹å‘ä¸ºi->j
 				edges[i][j] = 1;
 
-				// µİ¹é¼ÌĞøËÑË÷
+				// é€’å½’ç»§ç»­æœç´¢
 				confirmGraphDirection(n);
 			}
 		}
 	}
 
 	/**
-	 * ÎªÊôĞÔ½ÚµãÌí¼Ó·ÖÀàÊôĞÔ½ÚµãÎª¸¸½Úµã
+	 * ä¸ºå±æ€§èŠ‚ç‚¹æ·»åŠ åˆ†ç±»å±æ€§èŠ‚ç‚¹ä¸ºçˆ¶èŠ‚ç‚¹
 	 * 
 	 * @param parentNode
-	 *            ¸¸½Úµã
+	 *            çˆ¶èŠ‚ç‚¹
 	 * @param nodeList
-	 *            ×Ó½ÚµãÁĞ±í
+	 *            å­èŠ‚ç‚¹åˆ—è¡¨
 	 */
 	private void addParentNode() {
-		// ·ÖÀàÊôĞÔ½Úµã
+		// åˆ†ç±»å±æ€§èŠ‚ç‚¹
 		Node parentNode;
 
 		parentNode = null;
@@ -195,19 +195,19 @@ public class TANTool {
 			parentNode.connectNode(child);
 
 			if (child.id != 0) {
-				// È·¶¨Á¬½Ó·½Ïò
+				// ç¡®å®šè¿æ¥æ–¹å‘
 				this.edges[0][child.id] = 1;
 			}
 		}
 	}
 
 	/**
-	 * ÔÚ½Úµã¼¯ºÏÖĞÌí¼Ó½Úµã
+	 * åœ¨èŠ‚ç‚¹é›†åˆä¸­æ·»åŠ èŠ‚ç‚¹
 	 * 
 	 * @param node
-	 *            ´ıÌí¼Ó½Úµã
+	 *            å¾…æ·»åŠ èŠ‚ç‚¹
 	 * @param existNodes
-	 *            ÒÑ´æÔÚµÄ½ÚµãÁĞ±í
+	 *            å·²å­˜åœ¨çš„èŠ‚ç‚¹åˆ—è¡¨
 	 * @return
 	 */
 	public boolean addIfNotExist(Node node, ArrayList<Node> existNodes) {
@@ -215,7 +215,7 @@ public class TANTool {
 
 		canAdd = true;
 		for (Node n : existNodes) {
-			// Èç¹û½ÚµãÁĞ±íÖĞÒÑ¾­º¬ÓĞ½Úµã£¬ÔòËãÌí¼ÓÊ§°Ü
+			// å¦‚æœèŠ‚ç‚¹åˆ—è¡¨ä¸­å·²ç»å«æœ‰èŠ‚ç‚¹ï¼Œåˆ™ç®—æ·»åŠ å¤±è´¥
 			if (n.isEqual(node)) {
 				canAdd = false;
 				break;
@@ -230,12 +230,12 @@ public class TANTool {
 	}
 
 	/**
-	 * ¼ÆËã½ÚµãÌõ¼ş¸ÅÂÊ
+	 * è®¡ç®—èŠ‚ç‚¹æ¡ä»¶æ¦‚ç‡
 	 * 
 	 * @param node
-	 *            ¹ØÓÚnodeµÄºóÑé¸ÅÂÊ
+	 *            å…³äºnodeçš„åéªŒæ¦‚ç‡
 	 * @param queryParam
-	 *            ²éÑ¯µÄÊôĞÔ²ÎÊı
+	 *            æŸ¥è¯¢çš„å±æ€§å‚æ•°
 	 * @return
 	 */
 	private double calConditionPro(Node node, HashMap<String, String> queryParam) {
@@ -255,10 +255,10 @@ public class TANTool {
 		backAttrInfos = new ArrayList<>();
 
 		for (int i = 0; i < this.edges.length; i++) {
-			// Ñ°ÕÒ¸¸½Úµãid
+			// å¯»æ‰¾çˆ¶èŠ‚ç‚¹id
 			if (this.edges[i][id] == 1) {
 				for (Node temp : this.totalNodes) {
-					// Ñ°ÕÒÄ¿±ê½Úµãid
+					// å¯»æ‰¾ç›®æ ‡èŠ‚ç‚¹id
 					if (temp.id == i) {
 						parentNodes.add(temp);
 						break;
@@ -267,14 +267,14 @@ public class TANTool {
 			}
 		}
 
-		// »ñÈ¡ÏÈÑéÊôĞÔµÄÊôĞÔÖµ,Ê×ÏÈÌí¼ÓÏÈÑéÊôĞÔ
+		// è·å–å…ˆéªŒå±æ€§çš„å±æ€§å€¼,é¦–å…ˆæ·»åŠ å…ˆéªŒå±æ€§
 		value = queryParam.get(node.name);
 		attrValue = new String[2];
 		attrValue[0] = node.name;
 		attrValue[1] = value;
 		priorAttrInfos.add(attrValue);
 
-		// ÖğÒ»Ìí¼ÓºóÑéÊôĞÔ
+		// é€ä¸€æ·»åŠ åéªŒå±æ€§
 		for (Node p : parentNodes) {
 			value = queryParam.get(p.name);
 			attrValue = new String[2];
@@ -290,17 +290,17 @@ public class TANTool {
 	}
 
 	/**
-	 * ²éÑ¯Ìõ¼ş¸ÅÂÊ
+	 * æŸ¥è¯¢æ¡ä»¶æ¦‚ç‡
 	 * 
 	 * @param attrValues
-	 *            Ìõ¼şÊôĞÔÖµ
+	 *            æ¡ä»¶å±æ€§å€¼
 	 * @return
 	 */
 	private double queryConditionPro(ArrayList<String[]> priorValues,
 			ArrayList<String[]> backValues) {
-		// ÅĞ¶ÏÊÇ·ñÂú×ãÏÈÑéÊôĞÔÖµÌõ¼ş
+		// åˆ¤æ–­æ˜¯å¦æ»¡è¶³å…ˆéªŒå±æ€§å€¼æ¡ä»¶
 		boolean hasPrior;
-		// ÅĞ¶ÏÊÇ·ñÂú×ãºóÑéÊôĞÔÖµÌõ¼ş
+		// åˆ¤æ–­æ˜¯å¦æ»¡è¶³åéªŒå±æ€§å€¼æ¡ä»¶
 		boolean hasBack;
 		int attrIndex;
 		double backPro;
@@ -312,43 +312,43 @@ public class TANTool {
 		totalPro = 0;
 		backPro = 0;
 
-		// Ìø¹ıµÚÒ»ĞĞµÄÊôĞÔÃû³ÆĞĞ
+		// è·³è¿‡ç¬¬ä¸€è¡Œçš„å±æ€§åç§°è¡Œ
 		for (int i = 1; i < this.totalDatas.size(); i++) {
 			tempData = this.totalDatas.get(i);
 
 			hasPrior = true;
 			hasBack = true;
 
-			// ÅĞ¶ÏÊÇ·ñÂú×ãÏÈÑéÌõ¼ş
+			// åˆ¤æ–­æ˜¯å¦æ»¡è¶³å…ˆéªŒæ¡ä»¶
 			for (String[] array : priorValues) {
 				attrIndex = this.attr2Column.get(array[0]);
 
-				// ÅĞ¶ÏÖµÊÇ·ñÂú×ãÌõ¼ş
+				// åˆ¤æ–­å€¼æ˜¯å¦æ»¡è¶³æ¡ä»¶
 				if (!tempData[attrIndex].equals(array[1])) {
 					hasPrior = false;
 					break;
 				}
 			}
 
-			// ÅĞ¶ÏÊÇ·ñÂú×ãºóÑéÌõ¼ş
+			// åˆ¤æ–­æ˜¯å¦æ»¡è¶³åéªŒæ¡ä»¶
 			for (String[] array : backValues) {
 				attrIndex = this.attr2Column.get(array[0]);
 
-				// ÅĞ¶ÏÖµÊÇ·ñÂú×ãÌõ¼ş
+				// åˆ¤æ–­å€¼æ˜¯å¦æ»¡è¶³æ¡ä»¶
 				if (!tempData[attrIndex].equals(array[1])) {
 					hasBack = false;
 					break;
 				}
 			}
 
-			// ½øĞĞ¼ÆÊıÍ³¼Æ£¬·Ö±ğ¼ÆËãÂú×ãºóÑéÊôĞÔµÄÖµºÍÍ¬Ê±Âú×ãÌõ¼şµÄ¸öÊı
+			// è¿›è¡Œè®¡æ•°ç»Ÿè®¡ï¼Œåˆ†åˆ«è®¡ç®—æ»¡è¶³åéªŒå±æ€§çš„å€¼å’ŒåŒæ—¶æ»¡è¶³æ¡ä»¶çš„ä¸ªæ•°
 			if (hasBack) {
 				backPro++;
 				if (hasPrior) {
 					totalPro++;
 				}
 			} else if (hasPrior && backValues.size() == 0) {
-				// Èç¹ûÖ»ÓĞÏÈÑé¸ÅÂÊÔòÎª´¿¸ÅÂÊµÄ¼ÆËã
+				// å¦‚æœåªæœ‰å…ˆéªŒæ¦‚ç‡åˆ™ä¸ºçº¯æ¦‚ç‡çš„è®¡ç®—
 				totalPro++;
 				backPro = 1.0;
 			}
@@ -357,7 +357,7 @@ public class TANTool {
 		if (backPro == 0) {
 			pro = 0;
 		} else {
-			// ¼ÆËã×ÜµÄ¸ÅÂÊ=¶¼·¢Éú¸ÅÂÊ/Ö»·¢ÉúºóÑéÌõ¼şµÄÊ±¼ä¸ÅÂÊ
+			// è®¡ç®—æ€»çš„æ¦‚ç‡=éƒ½å‘ç”Ÿæ¦‚ç‡/åªå‘ç”ŸåéªŒæ¡ä»¶çš„æ—¶é—´æ¦‚ç‡
 			pro = totalPro / backPro;
 		}
 
@@ -365,16 +365,16 @@ public class TANTool {
 	}
 
 	/**
-	 * ÊäÈë²éÑ¯Ìõ¼ş²ÎÊı£¬¼ÆËã·¢Éú¸ÅÂÊ
+	 * è¾“å…¥æŸ¥è¯¢æ¡ä»¶å‚æ•°ï¼Œè®¡ç®—å‘ç”Ÿæ¦‚ç‡
 	 * 
 	 * @param queryParam
-	 *            Ìõ¼ş²ÎÊı
+	 *            æ¡ä»¶å‚æ•°
 	 * @return
 	 */
 	public double calHappenedPro(String queryParam) {
 		double result;
 		double temp;
-		// ·ÖÀàÊôĞÔÖµ
+		// åˆ†ç±»å±æ€§å€¼
 		String classAttrValue;
 		String[] array;
 		String[] array2;
@@ -383,7 +383,7 @@ public class TANTool {
 		result = 1;
 		params = new HashMap<>();
 
-		// ½øĞĞ²éÑ¯×Ö·ûµÄ²ÎÊı·Ö½â
+		// è¿›è¡ŒæŸ¥è¯¢å­—ç¬¦çš„å‚æ•°åˆ†è§£
 		array = queryParam.split(",");
 		for (String s : array) {
 			array2 = s.split("=");
@@ -391,18 +391,18 @@ public class TANTool {
 		}
 
 		classAttrValue = params.get(classAttrName);
-		// ¹¹½¨±´Ò¶Ë¹ÍøÂç½á¹¹
+		// æ„å»ºè´å¶æ–¯ç½‘ç»œç»“æ„
 		constructBayesNetWork(classAttrValue);
 
 		for (Node n : this.totalNodes) {
 			temp = calConditionPro(n, params);
 
-			// ÎªÁË±ÜÃâ³öÏÖÌõ¼ş¸ÅÂÊÎª0µÄÏÖÏó£¬½øĞĞÇáÎ¢½ÃÕı
+			// ä¸ºäº†é¿å…å‡ºç°æ¡ä»¶æ¦‚ç‡ä¸º0çš„ç°è±¡ï¼Œè¿›è¡Œè½»å¾®çŸ«æ­£
 			if (temp == 0) {
 				temp = 0.001;
 			}
 
-			// °´ÕÕÁªºÏ¸ÅÂÊ¹«Ê½£¬½øĞĞ³Ë»ıÔËËã
+			// æŒ‰ç…§è”åˆæ¦‚ç‡å…¬å¼ï¼Œè¿›è¡Œä¹˜ç§¯è¿ç®—
 			result *= temp;
 		}
 
@@ -410,46 +410,46 @@ public class TANTool {
 	}
 
 	/**
-	 * ¹¹½¨Ê÷ĞÍ±´Ò¶Ë¹ÍøÂç½á¹¹
+	 * æ„å»ºæ ‘å‹è´å¶æ–¯ç½‘ç»œç»“æ„
 	 * 
 	 * @param value
-	 *            Àà±ğÁ¿Öµ
+	 *            ç±»åˆ«é‡å€¼
 	 */
 	private void constructBayesNetWork(String value) {
 		Node rootNode;
 		ArrayList<AttrMutualInfo> mInfoArray;
-		// »¥ĞÅÏ¢¶È¶Ô
+		// äº’ä¿¡æ¯åº¦å¯¹
 		ArrayList<Node[]> iArray;
 
 		iArray = null;
 		rootNode = null;
 
-		// ÔÚÃ¿´ÎÖØĞÂ¹¹½¨±´Ò¶Ë¹ÍøÂç½á¹¹µÄÊ±ºò£¬Çå¿ÕÔ­ÓĞµÄÁ¬½Ó½á¹¹
+		// åœ¨æ¯æ¬¡é‡æ–°æ„å»ºè´å¶æ–¯ç½‘ç»œç»“æ„çš„æ—¶å€™ï¼Œæ¸…ç©ºåŸæœ‰çš„è¿æ¥ç»“æ„
 		for (Node n : this.totalNodes) {
 			n.connectedNodes.clear();
 		}
 		this.edges = new int[attrNum][attrNum];
 
-		// ´Ó»¥ĞÅÏ¢¶ÔÏóÖĞÈ¡³öÊôĞÔÖµ¶Ô
+		// ä»äº’ä¿¡æ¯å¯¹è±¡ä¸­å–å‡ºå±æ€§å€¼å¯¹
 		iArray = new ArrayList<>();
 		mInfoArray = calAttrMutualInfoArray(value);
 		for (AttrMutualInfo v : mInfoArray) {
 			iArray.add(v.nodeArray);
 		}
 
-		// ¹¹½¨×î´óÈ¨ÖØ¿ç¶ÈÊ÷
+		// æ„å»ºæœ€å¤§æƒé‡è·¨åº¦æ ‘
 		rootNode = constructWeightTree(iArray);
-		// ÎªÎŞÏòÍ¼È·¶¨±ßµÄ·½Ïò
+		// ä¸ºæ— å‘å›¾ç¡®å®šè¾¹çš„æ–¹å‘
 		confirmGraphDirection(rootNode);
-		// ÎªÃ¿¸öÊôĞÔ½ÚµãÌí¼Ó·ÖÀàÊôĞÔ¸¸½Úµã
+		// ä¸ºæ¯ä¸ªå±æ€§èŠ‚ç‚¹æ·»åŠ åˆ†ç±»å±æ€§çˆ¶èŠ‚ç‚¹
 		addParentNode();
 	}
 
 	/**
-	 * ¸ø¶¨·ÖÀà±äÁ¿Öµ£¬¼ÆËãÊôĞÔÖ®¼äµÄ»¥ĞÅÏ¢Öµ
+	 * ç»™å®šåˆ†ç±»å˜é‡å€¼ï¼Œè®¡ç®—å±æ€§ä¹‹é—´çš„äº’ä¿¡æ¯å€¼
 	 * 
 	 * @param value
-	 *            ·ÖÀà±äÁ¿Öµ
+	 *            åˆ†ç±»å˜é‡å€¼
 	 * @return
 	 */
 	private ArrayList<AttrMutualInfo> calAttrMutualInfoArray(String value) {
@@ -463,45 +463,45 @@ public class TANTool {
 
 		for (int i = 0; i < this.totalNodes.size() - 1; i++) {
 			node1 = this.totalNodes.get(i);
-			// Ìø¹ı·ÖÀàÊôĞÔ½Úµã
+			// è·³è¿‡åˆ†ç±»å±æ€§èŠ‚ç‚¹
 			if (node1.id == 0) {
 				continue;
 			}
 
 			for (int j = i + 1; j < this.totalNodes.size(); j++) {
 				node2 = this.totalNodes.get(j);
-				// Ìø¹ı·ÖÀàÊôĞÔ½Úµã
+				// è·³è¿‡åˆ†ç±»å±æ€§èŠ‚ç‚¹
 				if (node2.id == 0) {
 					continue;
 				}
 
-				// ¼ÆËã2¸öÊôĞÔ½ÚµãÖ®¼äµÄ»¥ĞÅÏ¢Öµ
+				// è®¡ç®—2ä¸ªå±æ€§èŠ‚ç‚¹ä¹‹é—´çš„äº’ä¿¡æ¯å€¼
 				iValue = calMutualInfoValue(node1, node2, value);
 				mInfo = new AttrMutualInfo(iValue, node1, node2);
 				mInfoArray.add(mInfo);
 			}
 		}
 
-		// ½«½á¹û½øĞĞ½µĞòÅÅÁĞ£¬ÈÃ»¥ĞÅÏ¢Öµ¸ßµÄÓÅÏÈÓÃÓÚ¹¹½¨Ê÷
+		// å°†ç»“æœè¿›è¡Œé™åºæ’åˆ—ï¼Œè®©äº’ä¿¡æ¯å€¼é«˜çš„ä¼˜å…ˆç”¨äºæ„å»ºæ ‘
 		Collections.sort(mInfoArray);
 
 		return mInfoArray;
 	}
 
 	/**
-	 * ¼ÆËã2¸öÊôĞÔ½ÚµãµÄ»¥ĞÅÏ¢Öµ
+	 * è®¡ç®—2ä¸ªå±æ€§èŠ‚ç‚¹çš„äº’ä¿¡æ¯å€¼
 	 * 
 	 * @param node1
-	 *            ½Úµã1
+	 *            èŠ‚ç‚¹1
 	 * @param node2
-	 *            ½Úµã2
+	 *            èŠ‚ç‚¹2
 	 * @param vlaue
-	 *            ·ÖÀà±äÁ¿Öµ
+	 *            åˆ†ç±»å˜é‡å€¼
 	 */
 	private double calMutualInfoValue(Node node1, Node node2, String value) {
 		double iValue;
 		double temp;
-		// ÈıÖÖ²»Í¬Ìõ¼şµÄºóÑé¸ÅÂÊ
+		// ä¸‰ç§ä¸åŒæ¡ä»¶çš„åéªŒæ¦‚ç‡
 		double pXiXj;
 		double pXi;
 		double pXj;
@@ -510,7 +510,7 @@ public class TANTool {
 		ArrayList<String> attrValues1;
 		ArrayList<String> attrValues2;
 		ArrayList<String[]> priorValues;
-		// ºóÑé¸ÅÂÊ£¬ÔÚÕâÀï¾ÍÊÇÀà±äÁ¿Öµ
+		// åéªŒæ¦‚ç‡ï¼Œåœ¨è¿™é‡Œå°±æ˜¯ç±»å˜é‡å€¼
 		ArrayList<String[]> backValues;
 
 		array1 = new String[2];
@@ -521,10 +521,10 @@ public class TANTool {
 		iValue = 0;
 		array1[0] = classAttrName;
 		array1[1] = value;
-		// ºóÑéÊôĞÔ¶¼ÊÇÀàÊôĞÔ
+		// åéªŒå±æ€§éƒ½æ˜¯ç±»å±æ€§
 		backValues.add(array1);
 
-		// »ñÈ¡½ÚµãÊôĞÔµÄÊôĞÔÖµ¼¯ºÏ
+		// è·å–èŠ‚ç‚¹å±æ€§çš„å±æ€§å€¼é›†åˆ
 		attrValues1 = this.attr2Values.get(node1.name);
 		attrValues2 = this.attr2Values.get(node2.name);
 
@@ -542,7 +542,7 @@ public class TANTool {
 				array2[1] = v2;
 				priorValues.add(array2);
 
-				// ¼ÆËã3ÖÖÌõ¼şÏÂµÄ¸ÅÂÊ
+				// è®¡ç®—3ç§æ¡ä»¶ä¸‹çš„æ¦‚ç‡
 				pXiXj = queryConditionPro(priorValues, backValues);
 
 				priorValues.clear();
@@ -553,15 +553,15 @@ public class TANTool {
 				priorValues.add(array2);
 				pXj = queryConditionPro(priorValues, backValues);
 
-				// Èç¹û³öÏÖÆäÖĞÒ»¸ö¼ÆÊı¸ÅÂÊÎª0£¬ÔòÖ±½Ó¸³ÖµÎª0´¦Àí
+				// å¦‚æœå‡ºç°å…¶ä¸­ä¸€ä¸ªè®¡æ•°æ¦‚ç‡ä¸º0ï¼Œåˆ™ç›´æ¥èµ‹å€¼ä¸º0å¤„ç†
 				if (pXiXj == 0 || pXi == 0 || pXj == 0) {
 					temp = 0;
 				} else {
-					// ÀûÓÃ¹«Ê½¼ÆËãÕë¶Ô´ËÊôĞÔÖµ¶Ô×éºÏµÄ¸ÅÂÊ
+					// åˆ©ç”¨å…¬å¼è®¡ç®—é’ˆå¯¹æ­¤å±æ€§å€¼å¯¹ç»„åˆçš„æ¦‚ç‡
 					temp = pXiXj * Math.log(pXiXj / (pXi * pXj)) / Math.log(2);
 				}
 
-				// ½øĞĞºÍÊôĞÔÖµ¶Ô×éºÏµÄÀÛ¼Ó¼´ÎªÕû¸öÊôĞÔµÄ»¥ĞÅÏ¢Öµ
+				// è¿›è¡Œå’Œå±æ€§å€¼å¯¹ç»„åˆçš„ç´¯åŠ å³ä¸ºæ•´ä¸ªå±æ€§çš„äº’ä¿¡æ¯å€¼
 				iValue += temp;
 			}
 		}

@@ -10,32 +10,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * AdaBoostÌáÉıËã·¨¹¤¾ßÀà
+ * AdaBoostæå‡ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class AdaBoostTool {
-	// ·ÖÀàµÄÀà±ğ£¬³ÌĞòÄ¬ÈÏÎªÕıÀà1ºÍ¸ºÀà-1
+	// åˆ†ç±»çš„ç±»åˆ«ï¼Œç¨‹åºé»˜è®¤ä¸ºæ­£ç±»1å’Œè´Ÿç±»-1
 	public static final int CLASS_POSITIVE = 1;
 	public static final int CLASS_NEGTIVE = -1;
 
-	// ÊÂÏÈ¼ÙÉèµÄ3¸ö·ÖÀàÆ÷(ÀíÂÛÉÏÓ¦¸ÃÖØĞÂ¶ÔÊı¾İ¼¯½øĞĞÑµÁ·µÃµ½)
+	// äº‹å…ˆå‡è®¾çš„3ä¸ªåˆ†ç±»å™¨(ç†è®ºä¸Šåº”è¯¥é‡æ–°å¯¹æ•°æ®é›†è¿›è¡Œè®­ç»ƒå¾—åˆ°)
 	public static final String CLASSIFICATION1 = "X=2.5";
 	public static final String CLASSIFICATION2 = "X=7.5";
 	public static final String CLASSIFICATION3 = "Y=5.5";
 
-	// ·ÖÀàÆ÷×é
+	// åˆ†ç±»å™¨ç»„
 	public static final String[] ClASSIFICATION = new String[] {
 			CLASSIFICATION1, CLASSIFICATION2, CLASSIFICATION3 };
-	// ·ÖÀàÈ¨ÖØ×é
+	// åˆ†ç±»æƒé‡ç»„
 	private double[] CLASSIFICATION_WEIGHT;
 
-	// ²âÊÔÊı¾İÎÄ¼şµØÖ·
+	// æµ‹è¯•æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// Îó²îÂÊãĞÖµ
+	// è¯¯å·®ç‡é˜ˆå€¼
 	private double errorValue;
-	// ËùÓĞµÄÊı¾İµã
+	// æ‰€æœ‰çš„æ•°æ®ç‚¹
 	private ArrayList<Point> totalPoint;
 
 	public AdaBoostTool(String filePath, double errorValue) {
@@ -45,7 +45,7 @@ public class AdaBoostTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -74,10 +74,10 @@ public class AdaBoostTool {
 	}
 
 	/**
-	 * ¸ù¾İµ±Ç°µÄÎó²îÖµËã³öËùµÃµÄÈ¨ÖØ
+	 * æ ¹æ®å½“å‰çš„è¯¯å·®å€¼ç®—å‡ºæ‰€å¾—çš„æƒé‡
 	 * 
 	 * @param errorValue
-	 *            µ±Ç°»®·ÖµÄ×ø±êµãÎó²îÂÊ
+	 *            å½“å‰åˆ’åˆ†çš„åæ ‡ç‚¹è¯¯å·®ç‡
 	 * @return
 	 */
 	private double calculateWeight(double errorValue) {
@@ -91,12 +91,12 @@ public class AdaBoostTool {
 	}
 
 	/**
-	 * ¼ÆËãµ±Ç°»®·ÖµÄÎó²îÂÊ
+	 * è®¡ç®—å½“å‰åˆ’åˆ†çš„è¯¯å·®ç‡
 	 * 
 	 * @param pointMap
-	 *            »®·ÖÖ®ºóµÄµã¼¯
+	 *            åˆ’åˆ†ä¹‹åçš„ç‚¹é›†
 	 * @param weight
-	 *            ±¾´Î»®·ÖµÃµ½µÄ·ÖÀàÆ÷È¨ÖØ
+	 *            æœ¬æ¬¡åˆ’åˆ†å¾—åˆ°çš„åˆ†ç±»å™¨æƒé‡
 	 * @return
 	 */
 	private double calculateErrorValue(
@@ -112,7 +112,7 @@ public class AdaBoostTool {
 			pList = (ArrayList<Point>) entry.getValue();
 			for (Point p : pList) {
 				temp = p.getProbably();
-				// Èç¹û»®·ÖÀàĞÍ²»ÏàµÈ£¬´ú±í»®´íÁË
+				// å¦‚æœåˆ’åˆ†ç±»å‹ä¸ç›¸ç­‰ï¼Œä»£è¡¨åˆ’é”™äº†
 				if (tempClassType != p.getClassType()) {
 					resultValue += temp;
 				}
@@ -126,27 +126,27 @@ public class AdaBoostTool {
 			pList = (ArrayList<Point>) entry.getValue();
 			for (Point p : pList) {
 				temp = p.getProbably();
-				// Èç¹û»®·ÖÀàĞÍ²»ÏàµÈ£¬´ú±í»®´íÁË
+				// å¦‚æœåˆ’åˆ†ç±»å‹ä¸ç›¸ç­‰ï¼Œä»£è¡¨åˆ’é”™äº†
 				if (tempClassType != p.getClassType()) {
-					// »®´íµÄµãµÄÈ¨ÖØ±ÈÀı±ä´ó
+					// åˆ’é”™çš„ç‚¹çš„æƒé‡æ¯”ä¾‹å˜å¤§
 					temp *= Math.exp(weight);
 					p.setProbably(temp);
 				} else {
-					// »®¶ÔµÄµãµÄÈ¨ÖØ±È¼õĞ¡
+					// åˆ’å¯¹çš„ç‚¹çš„æƒé‡æ¯”å‡å°
 					temp *= Math.exp(-weight);
 					p.setProbably(temp);
 				}
 			}
 		}
 
-		// Èç¹ûÎó²îÂÊÃ»ÓĞĞ¡ÓÚãĞÖµ£¬¼ÌĞø´¦Àí
+		// å¦‚æœè¯¯å·®ç‡æ²¡æœ‰å°äºé˜ˆå€¼ï¼Œç»§ç»­å¤„ç†
 		dataNormalized();
 
 		return resultValue;
 	}
 
 	/**
-	 * ¸ÅÂÊ×ö¹éÒ»»¯´¦Àí
+	 * æ¦‚ç‡åšå½’ä¸€åŒ–å¤„ç†
 	 */
 	private void dataNormalized() {
 		double sumProbably = 0;
@@ -156,7 +156,7 @@ public class AdaBoostTool {
 			sumProbably += p.getProbably();
 		}
 
-		// ¹éÒ»»¯´¦Àí
+		// å½’ä¸€åŒ–å¤„ç†
 		for (Point p : totalPoint) {
 			temp = p.getProbably();
 			p.setProbably(temp / sumProbably);
@@ -164,7 +164,7 @@ public class AdaBoostTool {
 	}
 
 	/**
-	 * ÓÃAdaBoostËã·¨µÃµ½µÄ×éºÏ·ÖÀàÆ÷¶ÔÊı¾İ½øĞĞ·ÖÀà
+	 * ç”¨AdaBoostç®—æ³•å¾—åˆ°çš„ç»„åˆåˆ†ç±»å™¨å¯¹æ•°æ®è¿›è¡Œåˆ†ç±»
 	 * 
 	 */
 	public void adaBoostClassify() {
@@ -173,7 +173,7 @@ public class AdaBoostTool {
 
 		calculateWeightArray();
 		for (int i = 0; i < ClASSIFICATION.length; i++) {
-			System.out.println(MessageFormat.format("·ÖÀàÆ÷{0}È¨ÖØÎª£º{1}", (i+1), CLASSIFICATION_WEIGHT[i]));
+			System.out.println(MessageFormat.format("åˆ†ç±»å™¨{0}æƒé‡ä¸ºï¼š{1}", (i+1), CLASSIFICATION_WEIGHT[i]));
 		}
 		
 		for (int j = 0; j < totalPoint.size(); j++) {
@@ -185,22 +185,22 @@ public class AdaBoostTool {
 						* CLASSIFICATION_WEIGHT[i];
 			}
 			
-			//½øĞĞ·ûºÅÅĞ¶Ï
+			//è¿›è¡Œç¬¦å·åˆ¤æ–­
 			if (value > 0) {
 				System.out
 						.println(MessageFormat.format(
-								"µã({0}, {1})µÄ×éºÏ·ÖÀà½á¹ûÎª£º1£¬¸ÃµãµÄÊµ¼Ê·ÖÀàÎª{2}", p.getX(), p.getY(),
+								"ç‚¹({0}, {1})çš„ç»„åˆåˆ†ç±»ç»“æœä¸ºï¼š1ï¼Œè¯¥ç‚¹çš„å®é™…åˆ†ç±»ä¸º{2}", p.getX(), p.getY(),
 								p.getClassType()));
 			} else {
 				System.out.println(MessageFormat.format(
-						"µã({0}, {1})µÄ×éºÏ·ÖÀà½á¹ûÎª£º-1£¬¸ÃµãµÄÊµ¼Ê·ÖÀàÎª{2}", p.getX(), p.getY(),
+						"ç‚¹({0}, {1})çš„ç»„åˆåˆ†ç±»ç»“æœä¸ºï¼š-1ï¼Œè¯¥ç‚¹çš„å®é™…åˆ†ç±»ä¸º{2}", p.getX(), p.getY(),
 						p.getClassType()));
 			}
 		}
 	}
 
 	/**
-	 * ¼ÆËã·ÖÀàÆ÷È¨ÖØÊı×é
+	 * è®¡ç®—åˆ†ç±»å™¨æƒé‡æ•°ç»„
 	 */
 	private void calculateWeightArray() {
 		int tempClassType = 0;
@@ -229,35 +229,35 @@ public class AdaBoostTool {
 			mapList.put(CLASS_NEGTIVE, negPointList);
 
 			if (i == 0) {
-				// ×î¿ªÊ¼µÄ¸÷¸öµãµÄÈ¨ÖØÒ»Ñù£¬ËùÒÔ´«Èë0£¬Ê¹µÃeµÄ0´Î·½µÈÓÚ1
+				// æœ€å¼€å§‹çš„å„ä¸ªç‚¹çš„æƒé‡ä¸€æ ·ï¼Œæ‰€ä»¥ä¼ å…¥0ï¼Œä½¿å¾—eçš„0æ¬¡æ–¹ç­‰äº1
 				errorValue = calculateErrorValue(mapList);
 			} else {
-				// Ã¿´Î°ÑÉÏ´Î¼ÆËãËùµÃµÄÈ¨ÖØ´úÈë£¬½øĞĞ¸ÅÂÊµÄÀ©´ó»òËõĞ¡
+				// æ¯æ¬¡æŠŠä¸Šæ¬¡è®¡ç®—æ‰€å¾—çš„æƒé‡ä»£å…¥ï¼Œè¿›è¡Œæ¦‚ç‡çš„æ‰©å¤§æˆ–ç¼©å°
 				errorValue = calculateErrorValue(mapList);
 			}
 
-			// ¼ÆËãµ±Ç°·ÖÀàÆ÷µÄËùµÃÈ¨ÖØ
+			// è®¡ç®—å½“å‰åˆ†ç±»å™¨çš„æ‰€å¾—æƒé‡
 			CLASSIFICATION_WEIGHT[i] = calculateWeight(errorValue);
 		}
 	}
 
 	/**
-	 * ÓÃ¸÷¸ö×Ó·ÖÀàÆ÷½øĞĞ·ÖÀà
+	 * ç”¨å„ä¸ªå­åˆ†ç±»å™¨è¿›è¡Œåˆ†ç±»
 	 * 
 	 * @param classification
-	 *            ·ÖÀàÆ÷Ãû³Æ
+	 *            åˆ†ç±»å™¨åç§°
 	 * @param p
-	 *            ´ı»®·Ö×ø±êµã
+	 *            å¾…åˆ’åˆ†åæ ‡ç‚¹
 	 * @return
 	 */
 	private int classifyData(String classification, Point p) {
-		// ·Ö¸îÏßËùÊô×ø±êÖá
+		// åˆ†å‰²çº¿æ‰€å±åæ ‡è½´
 		String position;
-		// ·Ö¸îÏßµÄÖµ
+		// åˆ†å‰²çº¿çš„å€¼
 		double value = 0;
 		double posProbably = 0;
 		double negProbably = 0;
-		// »®·ÖÊÇ·ñÊÇ´óÓÚÒ»±ßµÄ»®·Ö
+		// åˆ’åˆ†æ˜¯å¦æ˜¯å¤§äºä¸€è¾¹çš„åˆ’åˆ†
 		boolean isLarger = false;
 		String[] array;
 		ArrayList<Point> pList = new ArrayList<>();
@@ -271,7 +271,7 @@ public class AdaBoostTool {
 				isLarger = true;
 			}
 
-			// ½«ÑµÁ·Êı¾İÖĞËùÓĞÊôÓÚÕâ±ßµÄµã¼ÓÈë
+			// å°†è®­ç»ƒæ•°æ®ä¸­æ‰€æœ‰å±äºè¿™è¾¹çš„ç‚¹åŠ å…¥
 			for (Point point : totalPoint) {
 				if (isLarger && point.getX() > value) {
 					pList.add(point);
@@ -284,7 +284,7 @@ public class AdaBoostTool {
 				isLarger = true;
 			}
 
-			// ½«ÑµÁ·Êı¾İÖĞËùÓĞÊôÓÚÕâ±ßµÄµã¼ÓÈë
+			// å°†è®­ç»ƒæ•°æ®ä¸­æ‰€æœ‰å±äºè¿™è¾¹çš„ç‚¹åŠ å…¥
 			for (Point point : totalPoint) {
 				if (isLarger && point.getY() > value) {
 					pList.add(point);
@@ -302,7 +302,7 @@ public class AdaBoostTool {
 			}
 		}
 		
-		//·ÖÀà°´Õı¸ºÀàÊıÁ¿½øĞĞ»®·Ö
+		//åˆ†ç±»æŒ‰æ­£è´Ÿç±»æ•°é‡è¿›è¡Œåˆ’åˆ†
 		if (posProbably > negProbably) {
 			return CLASS_POSITIVE;
 		} else {

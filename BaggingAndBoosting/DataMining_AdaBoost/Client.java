@@ -1,14 +1,14 @@
 package DataMining_AdaBoost;
 
 /**
- * AdaBoostÌáÉıËã·¨µ÷ÓÃÀà
+ * AdaBoostæå‡ç®—æ³•è°ƒç”¨ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] agrs){
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		//Îó²îÂÊãĞÖµ
+		//è¯¯å·®ç‡é˜ˆå€¼
 		double errorValue = 0.2;
 		
 		AdaBoostTool tool = new AdaBoostTool(filePath, errorValue);

@@ -1,18 +1,18 @@
 package DataMining_GSP;
 
 /**
- * GSPĞòÁĞÄ£Ê½·ÖÎöËã·¨
+ * GSPåºåˆ—æ¨¡å¼åˆ†æç®—æ³•
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\testInput.txt";
-		//×îĞ¡Ö§³Ö¶ÈãĞÖµ
+		//æœ€å°æ”¯æŒåº¦é˜ˆå€¼
 		int minSupportCount = 2;
-		//Ê±¼ä×îĞ¡¼ä¸ô
+		//æ—¶é—´æœ€å°é—´éš”
 		int min_gap = 1;
-		//Ê©¼Ó×î´ó¼ä¸ô
+		//æ–½åŠ æœ€å¤§é—´éš”
 		int max_gap = 5;
 		
 		GSPTool tool = new GSPTool(filePath, minSupportCount, min_gap, max_gap);

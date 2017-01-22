@@ -13,35 +13,35 @@ import DataMining_CBA.AprioriTool.AprioriTool;
 import DataMining_CBA.AprioriTool.FrequentItem;
 
 /**
- * CBAËã·¨(¹ØÁª¹æÔò·ÖÀà)¹¤¾ßÀà
+ * CBAç®—æ³•(å…³è”è§„åˆ™åˆ†ç±»)å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class CBATool {
-	// ÄêÁäµÄÀà±ğ»®·Ö
+	// å¹´é¾„çš„ç±»åˆ«åˆ’åˆ†
 	public final String AGE = "Age";
 	public final String AGE_YOUNG = "Young";
 	public final String AGE_MIDDLE_AGED = "Middle_aged";
 	public final String AGE_Senior = "Senior";
 
-	// ²âÊÔÊı¾İµØÖ·
+	// æµ‹è¯•æ•°æ®åœ°å€
 	private String filePath;
-	// ×îĞ¡Ö§³Ö¶ÈãĞÖµÂÊ
+	// æœ€å°æ”¯æŒåº¦é˜ˆå€¼ç‡
 	private double minSupportRate;
-	// ×îĞ¡ÖÃĞÅ¶ÈãĞÖµ£¬ÓÃÀ´ÅĞ¶ÏÊÇ·ñÄÜ¹»³ÉÎª¹ØÁª¹æÔò
+	// æœ€å°ç½®ä¿¡åº¦é˜ˆå€¼ï¼Œç”¨æ¥åˆ¤æ–­æ˜¯å¦èƒ½å¤Ÿæˆä¸ºå…³è”è§„åˆ™
 	private double minConf;
-	// ×îĞ¡Ö§³Ö¶È
+	// æœ€å°æ”¯æŒåº¦
 	private int minSupportCount;
-	// ÊôĞÔÁĞÃû³Æ
+	// å±æ€§åˆ—åç§°
 	private String[] attrNames;
-	// Àà±ğÊôĞÔËù´ú±íµÄÊı×Ö¼¯ºÏ
+	// ç±»åˆ«å±æ€§æ‰€ä»£è¡¨çš„æ•°å­—é›†åˆ
 	private ArrayList<Integer> classTypes;
-	// ÓÃ¶şÎ¬Êı×é±£´æ²âÊÔÊı¾İ
+	// ç”¨äºŒç»´æ•°ç»„ä¿å­˜æµ‹è¯•æ•°æ®
 	private ArrayList<String[]> totalDatas;
-	// AprioriËã·¨¹¤¾ßÀà
+	// Aprioriç®—æ³•å·¥å…·ç±»
 	private AprioriTool aprioriTool;
-	// ÊôĞÔµ½Êı×ÖµÄÓ³ÉäÍ¼
+	// å±æ€§åˆ°æ•°å­—çš„æ˜ å°„å›¾
 	private HashMap<String, Integer> attr2Num;
 	private HashMap<Integer, String> num2Attr;
 
@@ -53,7 +53,7 @@ public class CBATool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -83,22 +83,22 @@ public class CBATool {
 	}
 
 	/**
-	 * ÊôĞÔÖµµÄÌæ»»£¬Ìæ»»³ÉÊı×ÖµÄĞÎÊ½£¬ÒÔ±ã½øĞĞÆµ·±ÏîµÄÍÚ¾ò
+	 * å±æ€§å€¼çš„æ›¿æ¢ï¼Œæ›¿æ¢æˆæ•°å­—çš„å½¢å¼ï¼Œä»¥ä¾¿è¿›è¡Œé¢‘ç¹é¡¹çš„æŒ–æ˜
 	 */
 	private void attributeReplace() {
 		int currentValue = 1;
 		int num = 0;
 		String s;
-		// ÊôĞÔÃûµ½Êı×ÖµÄÓ³ÉäÍ¼
+		// å±æ€§ååˆ°æ•°å­—çš„æ˜ å°„å›¾
 		attr2Num = new HashMap<>();
 		num2Attr = new HashMap<>();
 		classTypes = new ArrayList<>();
 
-		// °´ÕÕ1ÁĞÁĞµÄ·½Ê½À´£¬´Ó×óÍùÓÒ±ßÉ¨Ãè,Ìø¹ıÁĞÃû³ÆĞĞºÍidÁĞ
+		// æŒ‰ç…§1åˆ—åˆ—çš„æ–¹å¼æ¥ï¼Œä»å·¦å¾€å³è¾¹æ‰«æ,è·³è¿‡åˆ—åç§°è¡Œå’Œidåˆ—
 		for (int j = 1; j < attrNames.length; j++) {
 			for (int i = 1; i < totalDatas.size(); i++) {
 				s = totalDatas.get(i)[j];
-				// Èç¹ûÊÇÊı×ÖĞÎÊ½µÄ£¬ÕâÀïÖ»×öÄêÁäÀà±ğ×ª»»£¬ÆäËûµÄÊı×ÖÇé¿öÀàËÆ
+				// å¦‚æœæ˜¯æ•°å­—å½¢å¼çš„ï¼Œè¿™é‡Œåªåšå¹´é¾„ç±»åˆ«è½¬æ¢ï¼Œå…¶ä»–çš„æ•°å­—æƒ…å†µç±»ä¼¼
 				if (attrNames[j].equals(AGE)) {
 					num = Integer.parseInt(s);
 					if (num <= 20 && num > 0) {
@@ -114,7 +114,7 @@ public class CBATool {
 					attr2Num.put(totalDatas.get(i)[j], currentValue);
 					num2Attr.put(currentValue, totalDatas.get(i)[j]);
 					if (j == attrNames.length - 1) {
-						// Èç¹ûÊÇ×éºóÒ»ÁĞ£¬ËµÃ÷ÊÇ·ÖÀàÀà±ğÁĞ£¬¼ÇÂ¼ÏÂÀ´
+						// å¦‚æœæ˜¯ç»„åä¸€åˆ—ï¼Œè¯´æ˜æ˜¯åˆ†ç±»ç±»åˆ«åˆ—ï¼Œè®°å½•ä¸‹æ¥
 						classTypes.add(currentValue);
 					}
 
@@ -123,7 +123,7 @@ public class CBATool {
 			}
 		}
 
-		// ¶ÔÔ­Ê¼µÄÊı¾İ×÷ÊôĞÔÌæ»»£¬Ã¿Ìõ¼ÇÂ¼±äÎªÀàËÆÓÚÊÂÎñÊı¾İµÄĞÎÊ½
+		// å¯¹åŸå§‹çš„æ•°æ®ä½œå±æ€§æ›¿æ¢ï¼Œæ¯æ¡è®°å½•å˜ä¸ºç±»ä¼¼äºäº‹åŠ¡æ•°æ®çš„å½¢å¼
 		for (int i = 1; i < totalDatas.size(); i++) {
 			for (int j = 1; j < attrNames.length; j++) {
 				s = totalDatas.get(i)[j];
@@ -135,16 +135,16 @@ public class CBATool {
 	}
 
 	/**
-	 * Apriori¼ÆËãÈ«²¿Æµ·±Ïî¼¯
+	 * Aprioriè®¡ç®—å…¨éƒ¨é¢‘ç¹é¡¹é›†
 	 * @return
 	 */
 	private ArrayList<FrequentItem> aprioriCalculate() {
 		String[] tempArray;
 		ArrayList<FrequentItem> totalFrequentItems;
 		ArrayList<String[]> copyData = (ArrayList<String[]>) totalDatas.clone();
-		// È¥³ıÊôĞÔÃû³ÆĞĞ
+		// å»é™¤å±æ€§åç§°è¡Œ
 		copyData.remove(0);
-		// È¥³ıÊ×ÁĞID
+		// å»é™¤é¦–åˆ—ID
 		for (int i = 0; i < copyData.size(); i++) {
 			String[] array = copyData.get(i);
 			tempArray = new String[array.length - 1];
@@ -159,23 +159,23 @@ public class CBATool {
 	}
 
 	/**
-	 * »ùÓÚ¹ØÁª¹æÔòµÄ·ÖÀà
+	 * åŸºäºå…³è”è§„åˆ™çš„åˆ†ç±»
 	 * 
 	 * @param attrValues
-	 *            Ô¤ÏÈÖªµÀµÄÒ»Ğ©ÊôĞÔ
+	 *            é¢„å…ˆçŸ¥é“çš„ä¸€äº›å±æ€§
 	 * @return
 	 */
 	public String CBAJudge(String attrValues) {
 		int value = 0;
-		// ×îÖÕ·ÖÀàÀà±ğ
+		// æœ€ç»ˆåˆ†ç±»ç±»åˆ«
 		String classType = null;
 		String[] tempArray;
-		// ÒÑÖªµÄÊôĞÔÖµ
+		// å·²çŸ¥çš„å±æ€§å€¼
 		ArrayList<String> attrValueList = new ArrayList<>();
 		ArrayList<FrequentItem> totalFrequentItems;
 
 		totalFrequentItems = aprioriCalculate();
-		// ½«²éÑ¯Ìõ¼ş½øĞĞÖğÒ»ÊôĞÔµÄ·Ö¸î
+		// å°†æŸ¥è¯¢æ¡ä»¶è¿›è¡Œé€ä¸€å±æ€§çš„åˆ†å‰²
 		String[] array = attrValues.split(",");
 		for (String record : array) {
 			tempArray = record.split("=");
@@ -183,20 +183,20 @@ public class CBATool {
 			attrValueList.add(value + "");
 		}
 
-		// ÔÚÆµ·±Ïî¼¯ÖĞÑ°ÕÒ·ûºÏÌõ¼şµÄÏî
+		// åœ¨é¢‘ç¹é¡¹é›†ä¸­å¯»æ‰¾ç¬¦åˆæ¡ä»¶çš„é¡¹
 		for (FrequentItem item : totalFrequentItems) {
-			// ¹ıÂËµô²»Âú×ã¸öÊıÆµ·±Ïî
+			// è¿‡æ»¤æ‰ä¸æ»¡è¶³ä¸ªæ•°é¢‘ç¹é¡¹
 			if (item.getIdArray().length < (attrValueList.size() + 1)) {
 				continue;
 			}
 
-			// Òª±£Ö¤²éÑ¯µÄÊôĞÔ¶¼°üº¬ÔÚÆµ·±Ïî¼¯ÖĞ
+			// è¦ä¿è¯æŸ¥è¯¢çš„å±æ€§éƒ½åŒ…å«åœ¨é¢‘ç¹é¡¹é›†ä¸­
 			if (itemIsSatisfied(item, attrValueList)) {
 				tempArray = item.getIdArray();
 				classType = classificationBaseRules(tempArray);
 
 				if (classType != null) {
-					// ×÷ÊôĞÔÌæ»»
+					// ä½œå±æ€§æ›¿æ¢
 					classType = num2Attr.get(Integer.parseInt(classType));
 					break;
 				}
@@ -207,10 +207,10 @@ public class CBATool {
 	}
 
 	/**
-	 * »ùÓÚ¹ØÁª¹æÔò½øĞĞ·ÖÀà
+	 * åŸºäºå…³è”è§„åˆ™è¿›è¡Œåˆ†ç±»
 	 * 
 	 * @param items
-	 *            Æµ·±Ïî
+	 *            é¢‘ç¹é¡¹
 	 * @return
 	 */
 	private String classificationBaseRules(String[] items) {
@@ -218,7 +218,7 @@ public class CBATool {
 		String[] arrayTemp;
 		int count1 = 0;
 		int count2 = 0;
-		// ÖÃĞÅ¶È
+		// ç½®ä¿¡åº¦
 		double confidenceRate;
 
 		String[] noClassTypeItems = new String[items.length - 1];
@@ -232,7 +232,7 @@ public class CBATool {
 		}
 
 		for (String[] array : totalDatas) {
-			// È¥³ıIDÊı×ÖºÅ
+			// å»é™¤IDæ•°å­—å·
 			arrayTemp = new String[array.length - 1];
 			System.arraycopy(array, 1, arrayTemp, 0, array.length - 1);
 			if (isStrArrayContain(arrayTemp, noClassTypeItems)) {
@@ -244,23 +244,23 @@ public class CBATool {
 			}
 		}
 
-		// ×öÖÃĞÅ¶ÈµÄ¼ÆËã
+		// åšç½®ä¿¡åº¦çš„è®¡ç®—
 		confidenceRate = count1 * 1.0 / count2;
 		if (confidenceRate >= minConf) {
 			return classType;
 		} else {
-			// Èç¹û²»Âú×ã×îĞ¡ÖÃĞÅ¶ÈÒªÇó£¬Ôò´Ë¹ØÁª¹æÔòÎŞĞ§
+			// å¦‚æœä¸æ»¡è¶³æœ€å°ç½®ä¿¡åº¦è¦æ±‚ï¼Œåˆ™æ­¤å…³è”è§„åˆ™æ— æ•ˆ
 			return null;
 		}
 	}
 
 	/**
-	 * ÅĞ¶Ïµ¥¸ö×Ö·ûÊÇ·ñ°üº¬ÔÚ×Ö·ûÊı×éÖĞ
+	 * åˆ¤æ–­å•ä¸ªå­—ç¬¦æ˜¯å¦åŒ…å«åœ¨å­—ç¬¦æ•°ç»„ä¸­
 	 * 
 	 * @param array
-	 *            ×Ö·ûÊı×é
+	 *            å­—ç¬¦æ•°ç»„
 	 * @param s
-	 *            ÅĞ¶ÏµÄµ¥×Ö·û
+	 *            åˆ¤æ–­çš„å•å­—ç¬¦
 	 * @return
 	 */
 	private boolean strIsContained(String[] array, String s) {
@@ -277,7 +277,7 @@ public class CBATool {
 	}
 
 	/**
-	 * Êı×éarray2ÊÇ·ñ°üº¬ÓÚarray1ÖĞ£¬²»ĞèÒªÍêÈ«Ò»Ñù
+	 * æ•°ç»„array2æ˜¯å¦åŒ…å«äºarray1ä¸­ï¼Œä¸éœ€è¦å®Œå…¨ä¸€æ ·
 	 * 
 	 * @param array1
 	 * @param array2
@@ -288,14 +288,14 @@ public class CBATool {
 		for (String s2 : array2) {
 			isContain = false;
 			for (String s1 : array1) {
-				// Ö»Òªs2×Ö·û´æÔÚÓÚarray1ÖĞ£¬Õâ¸ö×Ö·û¾ÍËã°üº¬ÔÚarray1ÖĞ
+				// åªè¦s2å­—ç¬¦å­˜åœ¨äºarray1ä¸­ï¼Œè¿™ä¸ªå­—ç¬¦å°±ç®—åŒ…å«åœ¨array1ä¸­
 				if (s2.equals(s1)) {
 					isContain = true;
 					break;
 				}
 			}
 
-			// Ò»µ©·¢ÏÖ²»°üº¬µÄ×Ö·û£¬Ôòarray2Êı×é²»°üº¬ÓÚarray1ÖĞ
+			// ä¸€æ—¦å‘ç°ä¸åŒ…å«çš„å­—ç¬¦ï¼Œåˆ™array2æ•°ç»„ä¸åŒ…å«äºarray1ä¸­
 			if (!isContain) {
 				break;
 			}
@@ -305,12 +305,12 @@ public class CBATool {
 	}
 
 	/**
-	 * ÅĞ¶ÏÆµ·±Ïî¼¯ÊÇ·ñÂú×ã²éÑ¯
+	 * åˆ¤æ–­é¢‘ç¹é¡¹é›†æ˜¯å¦æ»¡è¶³æŸ¥è¯¢
 	 * 
 	 * @param item
-	 *            ´ıÅĞ¶ÏµÄÆµ·±Ïî¼¯
+	 *            å¾…åˆ¤æ–­çš„é¢‘ç¹é¡¹é›†
 	 * @param attrValues
-	 *            ²éÑ¯µÄÊôĞÔÖµÁĞ±í
+	 *            æŸ¥è¯¢çš„å±æ€§å€¼åˆ—è¡¨
 	 * @return
 	 */
 	private boolean itemIsSatisfied(FrequentItem item,
@@ -334,7 +334,7 @@ public class CBATool {
 		if (isContained) {
 			isContained = false;
 
-			// »¹ÒªÑéÖ¤ÊÇ·ñÆµ·±Ïî¼¯ÖĞÊÇ·ñ°üº¬·ÖÀàÊôĞÔ
+			// è¿˜è¦éªŒè¯æ˜¯å¦é¢‘ç¹é¡¹é›†ä¸­æ˜¯å¦åŒ…å«åˆ†ç±»å±æ€§
 			for (Integer type : classTypes) {
 				if (strIsContained(array, type + "")) {
 					isContained = true;

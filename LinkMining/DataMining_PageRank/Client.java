@@ -1,7 +1,7 @@
 package DataMining_PageRank;
 
 /**
- * PageRank¼ÆËãÍøÒ³ÖØÒªĞÔ/ÅÅÃûËã·¨
+ * PageRankè®¡ç®—ç½‘é¡µé‡è¦æ€§/æ’åç®—æ³•
  * @author lyq
  *
  */

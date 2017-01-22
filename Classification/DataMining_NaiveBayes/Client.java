@@ -2,16 +2,16 @@ package DataMining_NaiveBayes;
 
 
 /**
- * ÆÓËØ±´Ò¶Ë¹Ëã·¨³¡¾°µ÷ÓÃÀà
+ * æœ´ç´ è´å¶æ–¯ç®—æ³•åœºæ™¯è°ƒç”¨ç±»
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args){
-		//ÑµÁ·¼¯Êı¾İ
+		//è®­ç»ƒé›†æ•°æ®
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
 		String testData = "Youth Medium Yes Fair";
 		NaiveBayesTool tool = new NaiveBayesTool(filePath);
-		System.out.println(testData + " Êı¾İµÄ·ÖÀàÎª:" + tool.naiveBayesClassificate(testData));
+		System.out.println(testData + " æ•°æ®çš„åˆ†ç±»ä¸º:" + tool.naiveBayesClassificate(testData));
 	}
 }

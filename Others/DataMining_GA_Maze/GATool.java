@@ -9,40 +9,40 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * ÒÅ´«Ëã·¨ÔÚ×ßÃÔ¹¬ÓÎÏ·µÄÓ¦ÓÃ-ÒÅ´«Ëã·¨¹¤¾ßÀà
+ * é—ä¼ ç®—æ³•åœ¨èµ°è¿·å®«æ¸¸æˆçš„åº”ç”¨-é—ä¼ ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class GATool {
-	// ÃÔ¹¬³öÈë¿Ú±ê¼Ç
+	// è¿·å®«å‡ºå…¥å£æ ‡è®°
 	public static final int MAZE_ENTRANCE_POS = 1;
 	public static final int MAZE_EXIT_POS = 2;
-	// ·½Ïò¶ÔÓ¦µÄ±àÂëÊı×é
+	// æ–¹å‘å¯¹åº”çš„ç¼–ç æ•°ç»„
 	public static final int[][] MAZE_DIRECTION_CODE = new int[][] { { 0, 0 },
 			{ 0, 1 }, { 1, 0 }, { 1, 1 }, };
-	// ×ø±êµã·½Ïò¸Ä±ä
+	// åæ ‡ç‚¹æ–¹å‘æ”¹å˜
 	public static final int[][] MAZE_DIRECTION_CHANGE = new int[][] {
 			{ -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, };
-	// ·½ÏòµÄÎÄ×ÖÃèÊö
-	public static final String[] MAZE_DIRECTION_LABEL = new String[] { "ÉÏ",
-			"ÏÂ", "×ó", "ÓÒ" };
+	// æ–¹å‘çš„æ–‡å­—æè¿°
+	public static final String[] MAZE_DIRECTION_LABEL = new String[] { "ä¸Š",
+			"ä¸‹", "å·¦", "å³" };
 
-	// µØÍ¼Êı¾İÎÄ¼şµØÖ·
+	// åœ°å›¾æ•°æ®æ–‡ä»¶åœ°å€
 	private String filePath;
-	// ×ßÃÔ¹¬µÄ×î¶Ì²½Êı
+	// èµ°è¿·å®«çš„æœ€çŸ­æ­¥æ•°
 	private int stepNum;
-	// ³õÊ¼¸öÌåµÄÊıÁ¿
+	// åˆå§‹ä¸ªä½“çš„æ•°é‡
 	private int initSetsNum;
-	// ÃÔ¹¬Èë¿ÚÎ»ÖÃ
+	// è¿·å®«å…¥å£ä½ç½®
 	private int[] startPos;
-	// ÃÔ¹¬³ö¿ÚÎ»ÖÃ
+	// è¿·å®«å‡ºå£ä½ç½®
 	private int[] endPos;
-	// ÃÔ¹¬µØÍ¼Êı¾İ
+	// è¿·å®«åœ°å›¾æ•°æ®
 	private int[][] mazeData;
-	// ³õÊ¼¸öÌå¼¯
+	// åˆå§‹ä¸ªä½“é›†
 	private ArrayList<int[]> initSets;
-	// Ëæ»úÊı²úÉúÆ÷
+	// éšæœºæ•°äº§ç”Ÿå™¨
 	private Random random;
 
 	public GATool(String filePath, int initSetsNum) {
@@ -53,7 +53,7 @@ public class GATool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	public void readDataFile() {
 		File file = new File(filePath);
@@ -79,7 +79,7 @@ public class GATool {
 			for (int j = 0; j < data.length; j++) {
 				mazeData[i][j] = Integer.parseInt(data[j]);
 
-				// ¸³ÖµÈë¿ÚºÍ³ö¿ÚÎ»ÖÃ
+				// èµ‹å€¼å…¥å£å’Œå‡ºå£ä½ç½®
 				if (mazeData[i][j] == MAZE_ENTRANCE_POS) {
 					startPos = new int[2];
 					startPos[0] = i;
@@ -92,20 +92,20 @@ public class GATool {
 			}
 		}
 
-		// ¼ÆËã×ß³öÃÔ¹¬µÄ×î¶Ì²½Êı
+		// è®¡ç®—èµ°å‡ºè¿·å®«çš„æœ€çŸ­æ­¥æ•°
 		stepNum = Math.abs(startPos[0] - endPos[0])
 				+ Math.abs(startPos[1] - endPos[1]);
 	}
 
 	/**
-	 * ²úÉú³õÊ¼Êı¾İ¼¯
+	 * äº§ç”Ÿåˆå§‹æ•°æ®é›†
 	 */
 	private void produceInitSet() {
-		// ·½Ïò±àÂë
+		// æ–¹å‘ç¼–ç 
 		int directionCode = 0;
 		random = new Random();
 		initSets = new ArrayList<>();
-		// Ã¿¸ö²½ÖèµÄ²Ù×÷ĞèÒªÓÃ2Î»Êı×Ö±íÊ¾
+		// æ¯ä¸ªæ­¥éª¤çš„æ“ä½œéœ€è¦ç”¨2ä½æ•°å­—è¡¨ç¤º
 		int[] codeNum;
 
 		for (int i = 0; i < initSetsNum; i++) {
@@ -121,10 +121,10 @@ public class GATool {
 	}
 
 	/**
-	 * Ñ¡Ôñ²Ù×÷£¬°ÑÊÊÖµ½Ï¸ßµÄ¸öÌåÓÅÏÈÒÅ´«µ½ÏÂÒ»´ú
+	 * é€‰æ‹©æ“ä½œï¼ŒæŠŠé€‚å€¼è¾ƒé«˜çš„ä¸ªä½“ä¼˜å…ˆé—ä¼ åˆ°ä¸‹ä¸€ä»£
 	 * 
 	 * @param initCodes
-	 *            ³õÊ¼¸öÌå±àÂë
+	 *            åˆå§‹ä¸ªä½“ç¼–ç 
 	 * @return
 	 */
 	private ArrayList<int[]> selectOperate(ArrayList<int[]> initCodes) {
@@ -138,7 +138,7 @@ public class GATool {
 			sumFitness += adaptiveValue[i];
 		}
 
-		// ×ª³É¸ÅÂÊµÄĞÎÊ½£¬×ö¹éÒ»»¯²Ù×÷
+		// è½¬æˆæ¦‚ç‡çš„å½¢å¼ï¼Œåšå½’ä¸€åŒ–æ“ä½œ
 		for (int i = 0; i < initSetsNum; i++) {
 			adaptiveValue[i] = adaptiveValue[i] / sumFitness;
 		}
@@ -146,17 +146,17 @@ public class GATool {
 		for (int i = 0; i < initSetsNum; i++) {
 			randomNum = random.nextInt(100) + 1;
 			randomNum = randomNum / 100;
-			//ÒòÎª1.0ÊÇÎŞ·¨ÅĞ¶Ïµ½µÄ£¬,×ÜºÍ»áÎŞÏŞ½Ó½ü1.0È¡Îª0.99×öÅĞ¶Ï
+			//å› ä¸º1.0æ˜¯æ— æ³•åˆ¤æ–­åˆ°çš„ï¼Œ,æ€»å’Œä¼šæ— é™æ¥è¿‘1.0å–ä¸º0.99åšåˆ¤æ–­
 			if(randomNum == 1){
 				randomNum = randomNum - 0.01;
 			}
 			
 			sumFitness = 0;
-			// È·¶¨Çø¼ä
+			// ç¡®å®šåŒºé—´
 			for (int j = 0; j < initSetsNum; j++) {
 				if (randomNum > sumFitness
 						&& randomNum <= sumFitness + adaptiveValue[j]) {
-					// ²ÉÓÃ¿½±´µÄ·½Ê½±ÜÃâÒıÓÃÖØ¸´
+					// é‡‡ï¿½æ¯å¥–å¹å§†ç»å¥–è‹Šåº–î¼å¼¥é¦—ï¿½
 					resultCodes.add(initCodes.get(j).clone());
 					break;
 				} else {
@@ -169,21 +169,21 @@ public class GATool {
 	}
 
 	/**
-	 * ½»²æÔËËã
+	 * äº¤å‰è¿ç®—
 	 * 
 	 * @param selectedCodes
-	 *            ÉÏ²½ÖèµÄÑ¡ÔñºóµÄ±àÂë
+	 *            ä¸Šæ­¥éª¤çš„é€‰æ‹©åçš„ç¼–ç 
 	 * @return
 	 */
 	private ArrayList<int[]> crossOperate(ArrayList<int[]> selectedCodes) {
 		int randomNum = 0;
-		// ½»²æµã
+		// äº¤å‰ç‚¹
 		int crossPoint = 0;
 		ArrayList<int[]> resultCodes = new ArrayList<>();
-		// Ëæ»ú±àÂë¶ÓÁĞ£¬½øĞĞËæ»ú½»²æÅä¶Ô
+		// éšæœºç¼–ç é˜Ÿåˆ—ï¼Œè¿›è¡Œéšæœºäº¤å‰é…å¯¹
 		ArrayList<int[]> randomCodeSeqs = new ArrayList<>();
 
-		// ½øĞĞËæ»úÅÅĞò
+		// è¿›è¡Œéšæœºæ’åº
 		while (selectedCodes.size() > 0) {
 			randomNum = random.nextInt(selectedCodes.size());
 
@@ -194,14 +194,14 @@ public class GATool {
 		int temp = 0;
 		int[] array1;
 		int[] array2;
-		// ½øĞĞÁ½Á½½»²æÔËËã
+		// è¿›è¡Œä¸¤ä¸¤äº¤å‰è¿ç®—
 		for (int i = 1; i < randomCodeSeqs.size(); i++) {
 			if (i % 2 == 1) {
 				array1 = randomCodeSeqs.get(i - 1);
 				array2 = randomCodeSeqs.get(i);
 				crossPoint = random.nextInt(stepNum - 1) + 1;
 
-				// ½øĞĞ½»²æµãÎ»ÖÃºóµÄ±àÂëµ÷»»
+				// è¿›è¡Œäº¤å‰ç‚¹ä½ç½®åçš„ç¼–ç è°ƒæ¢
 				for (int j = 0; j < 2 * stepNum; j++) {
 					if (j >= 2 * crossPoint) {
 						temp = array1[j];
@@ -210,7 +210,7 @@ public class GATool {
 					}
 				}
 
-				// ¼ÓÈëµ½½»²æÔËËã½á¹ûÖĞ
+				// åŠ å…¥åˆ°äº¤å‰è¿ç®—ç»“æœä¸­
 				resultCodes.add(array1);
 				resultCodes.add(array2);
 			}
@@ -220,14 +220,14 @@ public class GATool {
 	}
 
 	/**
-	 * ±äÒì²Ù×÷
+	 * å˜å¼‚æ“ä½œ
 	 * 
 	 * @param crossCodes
-	 *            ½»²æÔËËãºóµÄ½á¹û
+	 *            äº¤å‰è¿ç®—åçš„ç»“æœ
 	 * @return
 	 */
 	private ArrayList<int[]> variationOperate(ArrayList<int[]> crossCodes) {
-		// ±äÒìµã
+		// å˜å¼‚ç‚¹
 		int variationPoint = 0;
 		ArrayList<int[]> resultCodes = new ArrayList<>();
 
@@ -235,7 +235,7 @@ public class GATool {
 			variationPoint = random.nextInt(stepNum);
 
 			for (int i = 0; i < array.length; i += 2) {
-				// ±äÒìµã½øĞĞ±äÒì
+				// å˜å¼‚ç‚¹è¿›è¡Œå˜å¼‚
 				if (i % 2 == 0 && i / 2 == variationPoint) {
 					array[i] = (array[i] == 0 ? 1 : 0);
 					array[i + 1] = (array[i + 1] == 0 ? 1 : 0);
@@ -250,23 +250,23 @@ public class GATool {
 	}
 
 	/**
-	 * ¸ù¾İ±àÂë¼ÆËãÊÊÖµ
+	 * æ ¹æ®ç¼–ç è®¡ç®—é€‚å€¼
 	 * 
 	 * @param code
-	 *            µ±Ç°µÄ±àÂë
+	 *            å½“å‰çš„ç¼–ç 
 	 * @return
 	 */
 	public double calFitness(int[] code) {
 		double fintness = 0;
-		// ÓÉ±àÂë¼ÆËãËùµÃµÄÖÕµãºá×ø±ê
+		// ç”±ç¼–ç è®¡ç®—æ‰€å¾—çš„ç»ˆç‚¹æ¨ªåæ ‡
 		int endX = 0;
-		// ÓÉ±àÂë¼ÆËãËùµÃµÄÖÕµã×İ×ø±ê
+		// ç”±ç¼–ç è®¡ç®—æ‰€å¾—çš„ç»ˆç‚¹çºµåæ ‡
 		int endY = 0;
-		// »ùÓÚÆ¬¶ÎËù´ú±íµÄĞĞ×ß·½Ïò
+		// åŸºäºç‰‡æ®µæ‰€ä»£è¡¨çš„è¡Œèµ°æ–¹å‘
 		int direction = 0;
-		// ÁÙÊ±×ø±êµãºá×ø±ê
+		// ä¸´æ—¶åæ ‡ç‚¹æ¨ªåæ ‡
 		int tempX = 0;
-		// ÁÙÊ±×ø±êµã×İ×ø±ê
+		// ä¸´æ—¶åæ ‡ç‚¹çºµåæ ‡
 		int tempY = 0;
 
 		endX = startPos[0];
@@ -275,14 +275,14 @@ public class GATool {
 			direction = binaryArrayToNum(new int[] { code[2 * i],
 					code[2 * i + 1] });
 
-			// ¸ù¾İ·½Ïò¸Ä±äÊı×é×ö×ø±êµãµÄ¸Ä±ä
+			// æ ¹æ®æ–¹å‘æ”¹å˜æ•°ç»„åšåæ ‡ç‚¹çš„æ”¹å˜
 			tempX = endX + MAZE_DIRECTION_CHANGE[direction][0];
 			tempY = endY + MAZE_DIRECTION_CHANGE[direction][1];
 
-			// ÅĞ¶Ï×ø±êµãÊÇ·ñÔ½½ç
+			// åˆ¤æ–­åæ ‡ç‚¹æ˜¯å¦è¶Šç•Œ
 			if (tempX >= 0 && tempX < mazeData.length && tempY >= 0
 					&& tempY < mazeData[0].length) {
-				// ÅĞ¶Ï×ø±êµãÊÇ·ñ×ßµ½×è°­¿é
+				// åˆ¤æ–­åæ ‡ç‚¹æ˜¯å¦èµ°åˆ°é˜»ç¢å—
 				if (mazeData[tempX][tempY] != -1) {
 					endX = tempX;
 					endY = tempY;
@@ -290,7 +290,7 @@ public class GATool {
 			}
 		}
 
-		// ¸ù¾İÊÊÖµº¯Êı½øĞĞÊÊÖµµÄ¼ÆËã
+		// æ ¹æ®é€‚å€¼å‡½æ•°è¿›è¡Œé€‚å€¼çš„è®¡ç®—
 		fintness = 1.0 / (Math.abs(endX - endPos[0])
 				+ Math.abs(endY - endPos[1]) + 1);
 
@@ -298,23 +298,23 @@ public class GATool {
 	}
 
 	/**
-	 * ¸ù¾İµ±Ç°±àÂëÅĞ¶ÏÊÇ·ñÒÑ¾­ÕÒµ½³ö¿ÚÎ»ÖÃ
+	 * æ ¹æ®å½“å‰ç¼–ç åˆ¤æ–­æ˜¯å¦å·²ç»æ‰¾åˆ°å‡ºå£ä½ç½®
 	 * 
 	 * @param code
-	 *            ¾­¹ıÈô¸É´ÎÒÅ´«µÄ±àÂë
+	 *            ç»è¿‡è‹¥å¹²æ¬¡é—ä¼ çš„ç¼–ç 
 	 * @return
 	 */
 	private boolean ifArriveEndPos(int[] code) {
 		boolean isArrived = false;
-		// ÓÉ±àÂë¼ÆËãËùµÃµÄÖÕµãºá×ø±ê
+		// ç”±ç¼–ç è®¡ç®—æ‰€å¾—çš„ç»ˆç‚¹æ¨ªåæ ‡
 		int endX = 0;
-		// ÓÉ±àÂë¼ÆËãËùµÃµÄÖÕµã×İ×ø±ê
+		// ç”±ç¼–ç è®¡ç®—æ‰€å¾—çš„ç»ˆç‚¹çºµåæ ‡
 		int endY = 0;
-		// »ùÓÚÆ¬¶ÎËù´ú±íµÄĞĞ×ß·½Ïò
+		// åŸºäºç‰‡æ®µæ‰€ä»£è¡¨çš„è¡Œèµ°æ–¹å‘
 		int direction = 0;
-		// ÁÙÊ±×ø±êµãºá×ø±ê
+		// ä¸´æ—¶åæ ‡ç‚¹æ¨ªåæ ‡
 		int tempX = 0;
-		// ÁÙÊ±×ø±êµã×İ×ø±ê
+		// ä¸´æ—¶åæ ‡ç‚¹çºµåæ ‡
 		int tempY = 0;
 
 		endX = startPos[0];
@@ -323,14 +323,14 @@ public class GATool {
 			direction = binaryArrayToNum(new int[] { code[2 * i],
 					code[2 * i + 1] });
 
-			// ¸ù¾İ·½Ïò¸Ä±äÊı×é×ö×ø±êµãµÄ¸Ä±ä
+			// æ ¹æ®æ–¹å‘æ”¹å˜æ•°ç»„åšåæ ‡ç‚¹çš„æ”¹å˜
 			tempX = endX + MAZE_DIRECTION_CHANGE[direction][0];
 			tempY = endY + MAZE_DIRECTION_CHANGE[direction][1];
 
-			// ÅĞ¶Ï×ø±êµãÊÇ·ñÔ½½ç
+			// åˆ¤æ–­åæ ‡ç‚¹æ˜¯å¦è¶Šç•Œ
 			if (tempX >= 0 && tempX < mazeData.length && tempY >= 0
 					&& tempY < mazeData[0].length) {
-				// ÅĞ¶Ï×ø±êµãÊÇ·ñ×ßµ½×è°­¿é
+				// åˆ¤æ–­åæ ‡ç‚¹æ˜¯å¦èµ°åˆ°é˜»ç¢å—
 				if (mazeData[tempX][tempY] != -1) {
 					endX = tempX;
 					endY = tempY;
@@ -346,10 +346,10 @@ public class GATool {
 	}
 
 	/**
-	 * ¶ş½øÖÆÊı×é×ª»¯ÎªÊı×Ö
+	 * äºŒè¿›åˆ¶æ•°ç»„è½¬åŒ–ä¸ºæ•°å­—
 	 * 
 	 * @param binaryArray
-	 *            ´ı×ª»¯¶ş½øÖÆÊı×é
+	 *            å¾…è½¬åŒ–äºŒè¿›åˆ¶æ•°ç»„
 	 */
 	private int binaryArrayToNum(int[] binaryArray) {
 		int result = 0;
@@ -364,26 +364,26 @@ public class GATool {
 	}
 
 	/**
-	 * ½øĞĞÒÅ´«Ëã·¨×ß³öÃÔ¹¬
+	 * è¿›è¡Œé—ä¼ ç®—æ³•èµ°å‡ºè¿·å®«
 	 */
 	public void goOutMaze() {
-		// µü´úÒÅ´«´ÎÊı
+		// è¿­ä»£é—ä¼ æ¬¡æ•°
 		int loopCount = 0;
 		boolean canExit = false;
-		// ½á¹ûÂ·¾¶
+		// ç»“æœè·¯å¾„
 		int[] resultCode = null;
 		ArrayList<int[]> initCodes;
 		ArrayList<int[]> selectedCodes;
 		ArrayList<int[]> crossedCodes;
 		ArrayList<int[]> variationCodes;
 
-		// ²úÉú³õÊ¼Êı¾İ¼¯
+		// äº§ç”Ÿåˆå§‹æ•°æ®é›†
 		produceInitSet();
 		initCodes = initSets;
 
 		while (true) {
 			for (int[] array : initCodes) {
-				// ÒÅ´«µü´úµÄÖÕÖ¹Ìõ¼şÎªÊÇ·ñÕÒµ½³ö¿ÚÎ»ÖÃ
+				// é—ä¼ è¿­ä»£çš„ç»ˆæ­¢æ¡ä»¶ä¸ºæ˜¯å¦æ‰¾åˆ°å‡ºå£ä½ç½®
 				if (ifArriveEndPos(array)) {
 					resultCode = array;
 					canExit = true;
@@ -402,24 +402,24 @@ public class GATool {
 
 			loopCount++;
 			
-			//Èç¹ûÒÅ´«´ÎÊı³¬¹ı100´Î£¬ÔòÍË³ö
+			//å¦‚æœé—ä¼ æ¬¡æ•°è¶…è¿‡100æ¬¡ï¼Œåˆ™é€€å‡º
 			if(loopCount >= 100){
 				break;
 			}
 		}
 
-		System.out.println("×Ü¹²ÒÅ´«½ø»¯ÁË" + loopCount + "´Î");
+		System.out.println("æ€»å…±é—ä¼ è¿›åŒ–äº†" + loopCount + "æ¬¡");
 		printFindedRoute(resultCode);
 	}
 
 	/**
-	 * Êä³öÕÒµ½µÄÂ·¾¶
+	 * è¾“å‡ºæ‰¾åˆ°çš„è·¯å¾„
 	 * 
 	 * @param code
 	 */
 	private void printFindedRoute(int[] code) {
 		if(code == null){
-			System.out.println("ÔÚÓĞÏŞµÄÒÅ´«½ø»¯´ÎÊıÄÚ£¬Ã»ÓĞÕÒµ½×îÓÅÂ·¾¶");
+			System.out.println("åœ¨æœ‰é™çš„é—ä¼ è¿›åŒ–æ¬¡æ•°å†…ï¼Œæ²¡æœ‰æ‰¾åˆ°æœ€ä¼˜è·¯å¾„");
 			return;
 		}
 		
@@ -428,10 +428,10 @@ public class GATool {
 		int direction = 0;
 
 		System.out.println(MessageFormat.format(
-				"ÆğÊ¼µãÎ»ÖÃ({0},{1}), ³ö¿ÚµãÎ»ÖÃ({2}, {3})", tempX, tempY, endPos[0],
+				"èµ·å§‹ç‚¹ä½ç½®({0},{1}), å‡ºå£ç‚¹ä½ç½®({2}, {3})", tempX, tempY, endPos[0],
 				endPos[1]));
 		
-		System.out.print("ËÑË÷µ½µÄ½á¹û±àÂë£º");
+		System.out.print("æœç´¢åˆ°çš„ç»“æœç¼–ç ï¼š");
 		for(int value: code){
 			System.out.print("" + value);
 		}
@@ -444,7 +444,7 @@ public class GATool {
 			tempY += MAZE_DIRECTION_CHANGE[direction][1];
 
 			System.out.println(MessageFormat.format(
-					"µÚ{0}²½,±àÂëÎª{1}{2},Ïò{3}ÒÆ¶¯£¬ÒÆ¶¯ºóµ½´ï({4},{5})", k, code[i], code[i+1],
+					"ç¬¬{0}æ­¥,ç¼–ç ä¸º{1}{2},å‘{3}ç§»åŠ¨ï¼Œç§»åŠ¨ååˆ°è¾¾({4},{5})", k, code[i], code[i+1],
 					MAZE_DIRECTION_LABEL[direction],  tempX, tempY));
 		}
 	}

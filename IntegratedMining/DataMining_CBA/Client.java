@@ -3,7 +3,7 @@ package DataMining_CBA;
 import java.text.MessageFormat;
 
 /**
- * CBAËã·¨--»ùÓÚ¹ØÁª¹æÔòµÄ·ÖÀàËã·¨
+ * CBAç®—æ³•--åŸºäºå…³è”è§„åˆ™çš„åˆ†ç±»ç®—æ³•
  * @author lyq
  *
  */
@@ -13,13 +13,13 @@ public class Client {
 		String attrDesc = "Age=Senior,CreditRating=Fair";
 		String classification = null;
 		
-		//×îĞ¡Ö§³Ö¶ÈãĞÖµÂÊ
+		//æœ€å°æ”¯æŒåº¦é˜ˆå€¼ç‡
 		double minSupportRate = 0.2;
-		//×îĞ¡ÖÃĞÅ¶ÈãĞÖµ
+		//æœ€å°ç½®ä¿¡åº¦é˜ˆå€¼
 		double minConf = 0.7;
 		
 		CBATool tool = new CBATool(filePath, minSupportRate, minConf);
 		classification = tool.CBAJudge(attrDesc);
-		System.out.println(MessageFormat.format("{0}µÄ¹ØÁª·ÖÀà½á¹ûÎª{1}", attrDesc, classification));
+		System.out.println(MessageFormat.format("{0}çš„å…³è”åˆ†ç±»ç»“æœä¸º{1}", attrDesc, classification));
 	}
 }

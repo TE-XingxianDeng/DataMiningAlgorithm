@@ -1,15 +1,15 @@
 package GA_Maze;
 
 /**
- * ÒÅ´«Ëã·¨ÔÚ×ßÃÔ¹¬ÓÎÏ·µÄÓ¦ÓÃ
+ * é—ä¼ ç®—æ³•åœ¨èµ°è¿·å®«æ¸¸æˆçš„åº”ç”¨
  * @author lyq
  *
  */
 public class Client {
 	public static void main(String[] args) {
-		//ÃÔ¹¬µØÍ¼ÎÄ¼şÊı¾İµØÖ·
+		//è¿·å®«åœ°å›¾æ–‡ä»¶æ•°æ®åœ°å€
 		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\mapData.txt";
-		//³õÊ¼¸öÌåÊıÁ¿
+		//åˆå§‹ä¸ªä½“æ•°é‡
 		int initSetsNum = 4;
 		
 		GATool tool = new GATool(filePath, initSetsNum);

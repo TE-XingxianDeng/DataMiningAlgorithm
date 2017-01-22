@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 /**
- * Í¼±àÂëÉî¶ÈÓÅÏÈËÑË÷Àà£¬ÅĞ¶Ïµ±Ç°±àÂëÔÚ¸ø¶¨Í¼ÖĞÊÇ·ñÎª×îĞ¡±àÂë
+ * å›¾ç¼–ç æ·±åº¦ä¼˜å…ˆæœç´¢ç±»ï¼Œåˆ¤æ–­å½“å‰ç¼–ç åœ¨ç»™å®šå›¾ä¸­æ˜¯å¦ä¸ºæœ€å°ç¼–ç 
  * 
  * @author lyq
  * 
  */
 public class DFSCodeTraveler {
-	// µ±Ç°µÄ±àÂëÊÇ·ñÎª×îÏÂ±àÂë±êÊ¶
+	// å½“å‰çš„ç¼–ç æ˜¯å¦ä¸ºæœ€ä¸‹ç¼–ç æ ‡è¯†
 	boolean isMin;
-	// µ±Ç°ÍÚ¾òµÄÍ¼µÄ±ßÎåÔª×é±àÂë×é
+	// å½“å‰æŒ–æ˜çš„å›¾çš„è¾¹äº”å…ƒç»„ç¼–ç ç»„
 	ArrayList<Edge> edgeSeqs;
-	// µ±Ç°µÄÍ¼½á¹¹
+	// å½“å‰çš„å›¾ç»“æ„
 	Graph graph;
-	// Í¼½Úµãid¶ÔÓ¦µÄ±ßÎåÔª×éÖĞµÄid±êÊ¶
+	// å›¾èŠ‚ç‚¹idå¯¹åº”çš„è¾¹äº”å…ƒç»„ä¸­çš„idæ ‡è¯†
 	int[] g2s;
-	// ´ú±íÍ¼ÖĞµÄ±ßÊÇ·ñ±»ÓÃµ½ÁË
+	// ä»£è¡¨å›¾ä¸­çš„è¾¹æ˜¯å¦è¢«ç”¨åˆ°äº†
 	boolean f[][];
 
 	public DFSCodeTraveler(ArrayList<Edge> edgeSeqs, Graph graph) {
@@ -31,7 +31,7 @@ public class DFSCodeTraveler {
 		int nodeLNums = graph.nodeLabels.size();
 		g2s = new int[nodeLNums];
 		for (int i = 0; i < nodeLNums; i++) {
-			// ÉèÖÃ-1´ú±í´Ëµã»¹Î´±»¼ÆÈë±àÂë
+			// è®¾ç½®-1ä»£è¡¨æ­¤ç‚¹è¿˜æœªè¢«è®¡å…¥ç¼–ç 
 			g2s[i] = -1;
 		}
 
@@ -42,13 +42,13 @@ public class DFSCodeTraveler {
 			}
 		}
 
-		// ´ÓÃ¿¸öµã¿ªÊ¼Ñ°ÕÒ×îĞ¡±àÂëÎåÔª×é
+		// ä»æ¯ä¸ªç‚¹å¼€å§‹å¯»æ‰¾æœ€å°ç¼–ç äº”å…ƒç»„
 		for (int i = 0; i < nodeLNums; i++) {
-			//¶ÔÑ¡ÔñµÄµÚÒ»¸öµãµÄ±êºÅ×öÅĞ¶Ï
+			//å¯¹é€‰æ‹©çš„ç¬¬ä¸€ä¸ªç‚¹çš„æ ‡å·åšåˆ¤æ–­
 			if(graph.getNodeLabels().get(i) > edgeSeqs.get(0).x){
 				continue;
 			}
-			// ÎåÔª×éid´Ó0¿ªÊ¼ÉèÖÃ
+			// äº”å…ƒç»„idä»0å¼€å§‹è®¾ç½®
 			g2s[i] = 0;
 
 			Stack<Integer> s = new Stack<>();
@@ -62,40 +62,40 @@ public class DFSCodeTraveler {
 	}
 
 	/**
-	 * Éî¶ÈÓÅÏÈËÑË÷×îĞ¡±àÂë×é
+	 * æ·±åº¦ä¼˜å…ˆæœç´¢æœ€å°ç¼–ç ç»„
 	 * 
 	 * @param stack
-	 *            ¼ÓÈëµÄ½ÚµãidÕ»
+	 *            åŠ å…¥çš„èŠ‚ç‚¹idæ ˆ
 	 * @param currentPosition
-	 *            µ±Ç°½øĞĞµÄ²ã´Î£¬´ú±íÕÒµ½µÄµÚ¼¸Ìõ±ß
+	 *            å½“å‰è¿›è¡Œçš„å±‚æ¬¡ï¼Œä»£è¡¨æ‰¾åˆ°çš„ç¬¬å‡ æ¡è¾¹
 	 * @param next
-	 *            ÎåÔª×é±ßÏÂÒ»Ìõ±ßµÄµãµÄÁÙÊ±±êÊ¶
+	 *            äº”å…ƒç»„è¾¹ä¸‹ä¸€æ¡è¾¹çš„ç‚¹çš„ä¸´æ—¶æ ‡è¯†
 	 */
 	private void dfsSearch(Stack<Integer> stack, int currentPosition, int next) {
 		if (currentPosition >= edgeSeqs.size()) {
 			stack.pop();
-			// ±È½Ïµ½µ×ÁËÔò·µ»Ø
+			// æ¯”è¾ƒåˆ°åº•äº†åˆ™è¿”å›
 			return;
 		}
 
 		while (!stack.isEmpty()) {
 			int x = stack.pop();
 			for (int i = 0; i < graph.edgeNexts.get(x).size(); i++) {
-				// ´Ó´Ëid½ÚµãËùÁ¬½ÓµÄµãÖĞÑ¡È¡1¸öµã×÷ÎªÏÂÒ»¸öµã
+				// ä»æ­¤idèŠ‚ç‚¹æ‰€è¿æ¥çš„ç‚¹ä¸­é€‰å–1ä¸ªç‚¹ä½œä¸ºä¸‹ä¸€ä¸ªç‚¹
 				int y = graph.edgeNexts.get(x).get(i);
-				// Èç¹ûÕâ2¸öµãËù¹¹³ÉµÄ±ßÒÑ¾­±»ÓÃ¹ı£¬Ôò¼ÌĞø
+				// å¦‚æœè¿™2ä¸ªç‚¹æ‰€æ„æˆçš„è¾¹å·²ç»è¢«ç”¨è¿‡ï¼Œåˆ™ç»§ç»­
 				if (f[x][y] || f[y][x]) {
 					continue;
 				}
 
-				// Èç¹ûyÕâ¸öµãÎ´±»ÓÃ¹ı
+				// å¦‚æœyè¿™ä¸ªç‚¹æœªè¢«ç”¨è¿‡
 				if (g2s[y] < 0) {
-					// ĞÂ½¨ÕâÌõ±ßÎåÔª×é
+					// æ–°å»ºè¿™æ¡è¾¹äº”å…ƒç»„
 					Edge e = new Edge(g2s[x], next, graph.nodeLabels.get(x),
 							graph.edgeLabels.get(x).get(i),
 							graph.nodeLabels.get(y));
 
-					// ÓëÏàÓ¦Î»ÖÃµÄ±ß×ö±È½Ï£¬Èç¹û²»ÊÇ×îĞ¡ÔòÊ§°Ü
+					// ä¸ç›¸åº”ä½ç½®çš„è¾¹åšæ¯”è¾ƒï¼Œå¦‚æœä¸æ˜¯æœ€å°åˆ™å¤±è´¥
 					int compareResult = e.compareWith(edgeSeqs
 							.get(currentPosition));
 					if (compareResult == Edge.EDGE_SMALLER) {
@@ -104,7 +104,7 @@ public class DFSCodeTraveler {
 					} else if (compareResult == Edge.EDGE_LARGER) {
 						continue;
 					}
-					// Èç¹ûÏàµÈÔò¼ÌĞø±È
+					// å¦‚æœç›¸ç­‰åˆ™ç»§ç»­æ¯”
 					g2s[y] = next;
 					f[x][y] = true;
 					f[y][x] = true;
@@ -117,13 +117,13 @@ public class DFSCodeTraveler {
 					f[y][x] = false;
 					g2s[y] = -1;
 				} else {
-					// Õâ¸öµãÒÑ¾­±»ÓÃ¹ıµÄÊ±ºò£¬²»ĞèÒªÔÙÉèÖÃÎåÔª×éid±êÊ¶
-					// ĞÂ½¨ÕâÌõ±ßÎåÔª×é
+					// è¿™ä¸ªç‚¹å·²ç»è¢«ç”¨è¿‡çš„æ—¶å€™ï¼Œä¸éœ€è¦å†è®¾ç½®äº”å…ƒç»„idæ ‡è¯†
+					// æ–°å»ºè¿™æ¡è¾¹äº”å…ƒç»„
 					Edge e = new Edge(g2s[x], g2s[y], graph.nodeLabels.get(x),
 							graph.edgeLabels.get(x).get(i),
 							graph.nodeLabels.get(y));
 
-					// ÓëÏàÓ¦Î»ÖÃµÄ±ß×ö±È½Ï£¬Èç¹û²»ÊÇ×îĞ¡ÔòÊ§°Ü
+					// ä¸ç›¸åº”ä½ç½®çš„è¾¹åšæ¯”è¾ƒï¼Œå¦‚æœä¸æ˜¯æœ€å°åˆ™å¤±è´¥
 					int compareResult = e.compareWith(edgeSeqs
 							.get(currentPosition));
 					if (compareResult == Edge.EDGE_SMALLER) {
@@ -132,7 +132,7 @@ public class DFSCodeTraveler {
 					} else if (compareResult == Edge.EDGE_LARGER) {
 						continue;
 					}
-					// Èç¹ûÏàµÈÔò¼ÌĞø±È
+					// å¦‚æœç›¸ç­‰åˆ™ç»§ç»­æ¯”
 					g2s[y] = next;
 					f[x][y] = true;
 					f[y][x] = true;

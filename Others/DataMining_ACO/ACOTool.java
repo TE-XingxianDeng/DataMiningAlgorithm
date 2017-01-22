@@ -12,41 +12,41 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * ÒÏÈºËã·¨¹¤¾ßÀà
+ * èšç¾¤ç®—æ³•å·¥å…·ç±»
  * 
  * @author lyq
  * 
  */
 public class ACOTool {
-	// ÊäÈëÊı¾İÀàĞÍ
+	// è¾“å…¥æ•°æ®ç±»å‹
 	public static final int INPUT_CITY_NAME = 1;
 	public static final int INPUT_CITY_DIS = 2;
 
-	// ³ÇÊĞ¼ä¾àÀëÁÚ½Ó¾ØÕó
+	// åŸå¸‚é—´è·ç¦»é‚»æ¥çŸ©é˜µ
 	public static double[][] disMatrix;
-	// µ±Ç°Ê±¼ä
+	// å½“å‰æ—¶é—´
 	public static int currentTime;
 
-	// ²âÊÔÊı¾İµØÖ·
+	// æµ‹è¯•æ•°æ®åœ°å€
 	private String filePath;
-	// ÂìÒÏÊıÁ¿
+	// èš‚èšæ•°é‡
 	private int antNum;
-	// ¿ØÖÆ²ÎÊı
+	// æ§åˆ¶å‚æ•°
 	private double alpha;
 	private double beita;
 	private double p;
 	private double Q;
-	// Ëæ»úÊı²úÉúÆ÷
+	// éšæœºæ•°äº§ç”Ÿå™¨
 	private Random random;
-	// ³ÇÊĞÃû³Æ¼¯ºÏ,ÕâÀïÎªÁË·½±ã£¬½«³ÇÊĞÓÃÊı×Ö±íÊ¾
+	// åŸå¸‚åç§°é›†åˆ,è¿™é‡Œä¸ºäº†æ–¹ä¾¿ï¼Œå°†åŸå¸‚ç”¨æ•°å­—è¡¨ç¤º
 	private ArrayList<String> totalCitys;
-	// ËùÓĞµÄÂìÒÏ¼¯ºÏ
+	// æ‰€æœ‰çš„èš‚èšé›†åˆ
 	private ArrayList<Ant> totalAnts;
-	// ³ÇÊĞ¼äµÄĞÅÏ¢ËØÅ¨¶È¾ØÕó£¬Ëæ×ÅÊ±¼äµÄÔö¶à¶ø¼õÉÙ
+	// åŸå¸‚é—´çš„ä¿¡æ¯ç´ æµ“åº¦çŸ©é˜µï¼Œéšç€æ—¶é—´çš„å¢ï¿½å–½î‰è·ï¿½
 	private double[][] pheromoneMatrix;
-	// Ä¿±êµÄ×î¶ÌÂ·¾¶,Ë³ĞòÎª´Ó¼¯ºÏµÄÇ°²¿ÍùºóÅ²¶¯
+	// ç›®æ ‡çš„æœ€çŸ­è·¯å¾„,é¡ºåºä¸ºä»é›†åˆçš„å‰éƒ¨å¾€åæŒªåŠ¨
 	private ArrayList<String> bestPath;
-	// ĞÅÏ¢ËØ¾ØÕó´æ´¢Í¼,key²ÉÓÃµÄ¸ñÊ½(i,j,t)->value
+	// ä¿¡æ¯ç´ çŸ©é˜µå­˜å‚¨å›¾,keyé‡‡ç”¨çš„æ ¼å¼(i,j,t)->value
 	private Map<String, Double> pheromoneTimeMap;
 
 	public ACOTool(String filePath, int antNum, double alpha, double beita,
@@ -63,7 +63,7 @@ public class ACOTool {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
+	 * ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®
 	 */
 	private void readDataFile() {
 		File file = new File(filePath);
@@ -86,7 +86,7 @@ public class ACOTool {
 		int src = 0;
 		int des = 0;
 		int size = 0;
-		// ½øĞĞ³ÇÊĞÃû³ÆÖÖÊıµÄÍ³¼Æ
+		// è¿›è¡ŒåŸå¸‚åç§°ç§æ•°çš„ç»Ÿè®¡
 		this.totalCitys = new ArrayList<>();
 		for (String[] array : dataArray) {
 			if (array[0].equals("#") && totalCitys.size() == 0) {
@@ -95,11 +95,11 @@ public class ACOTool {
 				continue;
 			} else if (array[0].equals("#") && totalCitys.size() > 0) {
 				size = totalCitys.size();
-				// ³õÊ¼»¯¾àÀë¾ØÕó
+				// åˆå§‹åŒ–è·ç¦»çŸ©é˜µ
 				this.disMatrix = new double[size + 1][size + 1];
 				this.pheromoneMatrix = new double[size + 1][size + 1];
 
-				// ³õÊ¼Öµ-1´ú±í´Ë¶ÔÓ¦Î»ÖÃÎŞÖµ
+				// åˆå§‹å€¼-1ä»£è¡¨æ­¤å¯¹åº”ä½ç½®æ— å€¼
 				for (int i = 0; i < size; i++) {
 					for (int j = 0; j < size; j++) {
 						this.disMatrix[i][j] = -1;
@@ -124,14 +124,14 @@ public class ACOTool {
 	}
 
 	/**
-	 * ¼ÆËã´ÓÂìÒÏ³ÇÊĞiµ½jµÄ¸ÅÂÊ
+	 * è®¡ç®—ä»èš‚èšåŸå¸‚iåˆ°jçš„æ¦‚ç‡
 	 * 
 	 * @param cityI
-	 *            ³ÇÊĞI
+	 *            åŸå¸‚I
 	 * @param cityJ
-	 *            ³ÇÊĞJ
+	 *            åŸå¸‚J
 	 * @param currentTime
-	 *            µ±Ç°Ê±¼ä
+	 *            å½“å‰æ—¶é—´
 	 * @return
 	 */
 	private double calIToJProbably(String cityI, String cityJ, int currentTime) {
@@ -157,27 +157,27 @@ public class ACOTool {
 	}
 
 	/**
-	 * ¼ÆËã×ÛºÏ¸ÅÂÊÂìÒÏ´ÓI³ÇÊĞ×ßµ½J³ÇÊĞµÄ¸ÅÂÊ
+	 * è®¡ç®—ç»¼åˆæ¦‚ç‡èš‚èšä»IåŸå¸‚èµ°åˆ°JåŸå¸‚çš„æ¦‚ç‡
 	 * 
 	 * @return
 	 */
 	public String selectAntNextCity(Ant ant, int currentTime) {
 		double randomNum;
 		double tempPro;
-		// ×Ü¸ÅÂÊÖ¸Êı
+		// æ€»æ¦‚ç‡æŒ‡æ•°
 		double proTotal;
 		String nextCity = null;
 		ArrayList<String> allowedCitys;
-		// ¸÷³ÇÊĞ¸ÅÂÊ¼¯
+		// å„åŸå¸‚æ¦‚ç‡é›†
 		double[] proArray;
 
-		// Èç¹ûÊÇ¸Õ¸Õ¿ªÊ¼µÄÊ±ºò£¬Ã»ÓĞÂ·¹ıÈÎºÎ³ÇÊĞ£¬ÔòËæ»ú·µ»ØÒ»¸ö³ÇÊĞ
+		// å¦‚æœæ˜¯åˆšåˆšå¼€å§‹çš„æ—¶å€™ï¼Œæ²¡æœ‰è·¯è¿‡ä»»ä½•åŸå¸‚ï¼Œåˆ™éšæœºè¿”å›ä¸€ä¸ªåŸå¸‚
 		if (ant.currentPath.size() == 0) {
 			nextCity = String.valueOf(random.nextInt(totalCitys.size()) + 1);
 
 			return nextCity;
 		} else if (ant.nonVisitedCitys.isEmpty()) {
-			// Èç¹ûÈ«²¿±éÀúÍê±Ï£¬ÔòÔÙ´Î»Øµ½Æğµã
+			// å¦‚æœå…¨éƒ¨éå†å®Œæ¯•ï¼Œåˆ™å†æ¬¡å›åˆ°èµ·ç‚¹
 			nextCity = ant.currentPath.get(0);
 
 			return nextCity;
@@ -194,23 +194,23 @@ public class ACOTool {
 		}
 
 		for (int i = 0; i < allowedCitys.size(); i++) {
-			// ¹éÒ»»¯´¦Àí
+			// å½’ä¸€åŒ–å¤„ç†
 			proArray[i] /= proTotal;
 		}
 
-		// ÓÃËæ»úÊıÑ¡ÔñÏÂÒ»¸ö³ÇÊĞ
+		// ç”¨éšæœºæ•°é€‰æ‹©ä¸‹ä¸€ä¸ªåŸå¸‚
 		randomNum = random.nextInt(100) + 1;
 		randomNum = randomNum / 100;
-		// ÒòÎª1.0ÊÇÎŞ·¨ÅĞ¶Ïµ½µÄ£¬,×ÜºÍ»áÎŞÏŞ½Ó½ü1.0È¡Îª0.99×öÅĞ¶Ï
+		// å› ä¸º1.0æ˜¯æ— æ³•åˆ¤æ–­åˆ°çš„ï¼Œ,æ€»å’Œä¼šæ— é™æ¥è¿‘1.0å–ä¸º0.99åšåˆ¤æ–­
 		if (randomNum == 1) {
 			randomNum = randomNum - 0.01;
 		}
 
 		tempPro = 0;
-		// È·¶¨Çø¼ä
+		// ç¡®å®šåŒºé—´
 		for (int j = 0; j < allowedCitys.size(); j++) {
 			if (randomNum > tempPro && randomNum <= tempPro + proArray[j]) {
-				// ²ÉÓÃ¿½±´µÄ·½Ê½±ÜÃâÒıÓÃÖØ¸´
+				// é‡‡ç”¨æ‹·è´çš„æ–¹å¼é¿å…å¼•ç”¨é‡å¤
 				nextCity = allowedCitys.get(j);
 				break;
 			} else {
@@ -222,7 +222,7 @@ public class ACOTool {
 	}
 
 	/**
-	 * »ñÈ¡¸ø¶¨Ê±¼äµãÉÏ´Ó³ÇÊĞiµ½³ÇÊĞjµÄĞÅÏ¢ËØÅ¨¶È
+	 * è·å–ç»™å®šæ—¶é—´ç‚¹ä¸Šä»åŸå¸‚iåˆ°åŸå¸‚jçš„ä¿¡æ¯ç´ æµ“åº¦
 	 * 
 	 * @param t
 	 * @param cityI
@@ -233,7 +233,7 @@ public class ACOTool {
 		double pheromone = 0;
 		String key;
 
-		// ÉÏÒ»ÖÜÆÚĞè½«Ê±¼äµ¹»ØÒ»ÖÜÆÚ
+		// ä¸Šä¸€å‘¨æœŸéœ€å°†æ—¶é—´å€’å›ä¸€å‘¨æœŸ
 		key = MessageFormat.format("{0},{1},{2}", cityI, cityJ, t);
 
 		if (pheromoneTimeMap.containsKey(key)) {
@@ -244,22 +244,22 @@ public class ACOTool {
 	}
 
 	/**
-	 * Ã¿ÂÖ½áÊø£¬Ë¢ĞÂĞÅÏ¢ËØÅ¨¶È¾ØÕó
+	 * æ¯è½®ç»“æŸï¼Œåˆ·æ–°ä¿¡æ¯ç´ æµ“åº¦çŸ©é˜µ
 	 * 
 	 * @param t
 	 */
 	private void refreshPheromone(int t) {
 		double pheromone = 0;
-		// ÉÏÒ»ÂÖÖÜÆÚ½áÊøºóµÄĞÅÏ¢ËØÅ¨¶È£¬´ÔĞÅÏ¢ËØÅ¨¶ÈÍ¼ÖĞ²éÕÒ
+		// ä¸Šä¸€è½®å‘¨æœŸç»“æŸåçš„ä¿¡æ¯ç´ æµ“åº¦ï¼Œä¸›ä¿¡æ¯ç´ æµ“åº¦å›¾ä¸­æŸ¥æ‰¾
 		double lastTimeP = 0;
-		// ±¾ÂÖĞÅÏ¢ËØÅ¨¶ÈÔö¼ÓÁ¿
+		// æœ¬è½®ä¿¡æ¯ç´ æµ“åº¦å¢åŠ é‡
 		double addPheromone;
 		String key;
 
 		for (String i : totalCitys) {
 			for (String j : totalCitys) {
 				if (!i.equals(j)) {
-					// ÉÏÒ»ÖÜÆÚĞè½«Ê±¼äµ¹»ØÒ»ÖÜÆÚ
+					// ä¸Šä¸€å‘¨æœŸéœ€å°†æ—¶é—´å€’å›ä¸€å‘¨æœŸ
 					key = MessageFormat.format("{0},{1},{2}", i, j, t - 1);
 
 					if (pheromoneTimeMap.containsKey(key)) {
@@ -271,12 +271,12 @@ public class ACOTool {
 					addPheromone = 0;
 					for (Ant ant : totalAnts) {
 						if(ant.pathContained(i, j)){
-							// Ã¿Ö»ÂìÒÏ´«²¥µÄĞÅÏ¢ËØÎª¿ØÖÆÒò×Ó³ıÒÔ¾àÀë×Ü³É±¾
+							// æ¯åªèš‚èšä¼ æ’­çš„ä¿¡æ¯ç´ ä¸ºæ§åˆ¶å› å­é™¤ä»¥è·ç¦»æ€»æˆæœ¬
 							addPheromone += Q / ant.calSumDistance();
 						}
 					}
 
-					// ½«ÉÏ´ÎµÄ½á¹ûÖµ¼ÓÉÏµİÔöµÄÁ¿£¬²¢´æÈëÍ¼ÖĞ
+					// å°†ä¸Šæ¬¡çš„ç»“æœå€¼åŠ ä¸Šé€’å¢çš„é‡ï¼Œå¹¶å­˜å…¥å›¾ä¸­
 					pheromone = p * lastTimeP + addPheromone;
 					key = MessageFormat.format("{0},{1},{2}", i, j, t);
 					pheromoneTimeMap.put(key, pheromone);
@@ -287,14 +287,14 @@ public class ACOTool {
 	}
 
 	/**
-	 * ÒÏÈºËã·¨µü´ú´ÎÊı
+	 * èšç¾¤ç®—æ³•è¿­ä»£æ¬¡æ•°
 	 * @param loopCount
-	 * ¾ßÌå±éÀú´ÎÊı
+	 * å…·ä½“éå†æ¬¡æ•°
 	 */
 	public void antStartSearching(int loopCount) {
-		// ÒÏÈºÑ°ÕÒµÄ×Ü´ÎÊı
+		// èšç¾¤å¯»æ‰¾çš„æ€»æ¬¡æ•°
 		int count = 0;
-		// Ñ¡ÖĞµÄÏÂÒ»¸ö³ÇÊĞ
+		// é€‰ä¸­çš„ä¸‹ä¸€ä¸ªåŸå¸‚
 		String selectedCity = "";
 
 		pheromoneTimeMap = new HashMap<String, Double>();
@@ -310,22 +310,22 @@ public class ACOTool {
 					ant.goToNextCity(selectedCity);
 				}
 
-				// Èç¹ûÒÑ¾­±éÀúÍêËùÓĞ³ÇÊĞ£¬ÔòÌø³ö´ËÂÖÑ­»·
+				// å¦‚æœå·²ç»éå†å®Œæ‰€æœ‰åŸå¸‚ï¼Œåˆ™è·³å‡ºæ­¤è½®å¾ªç¯
 				if (totalAnts.get(0).isBack()) {
 					break;
 				}
 			}
 
-			// ÖÜÆÚÊ±¼äµş¼Ó
+			// å‘¨æœŸæ—¶é—´å åŠ 
 			currentTime++;
 			refreshPheromone(currentTime);
 			count++;
 		}
 
-		// ¸ù¾İ¾àÀë³É±¾£¬Ñ¡³öËù»¨¾àÀë×î¶ÌµÄÒ»¸öÂ·¾¶
+		// æ ¹æ®è·ç¦»æˆæœ¬ï¼Œé€‰å‡ºæ‰€èŠ±è·ç¦»æœ€çŸ­çš„ä¸€ä¸ªè·¯å¾„
 		Collections.sort(totalAnts);
 		bestPath = totalAnts.get(0).currentPath;
-		System.out.println(MessageFormat.format("¾­¹ı{0}´ÎÑ­»·±éÀú£¬×îÖÕµÃ³öµÄ×î¼ÑÂ·¾¶£º", count));
+		System.out.println(MessageFormat.format("ç»è¿‡{0}æ¬¡å¾ªç¯éå†ï¼Œæœ€ç»ˆå¾—å‡ºçš„æœ€ä½³è·¯å¾„ï¼š", count));
 		System.out.print("entrance");
 		for (String cityName : bestPath) {
 			System.out.print(MessageFormat.format("-->{0}", cityName));
@@ -333,14 +333,14 @@ public class ACOTool {
 	}
 
 	/**
-	 * ³õÊ¼»¯ÒÏÈº²Ù×÷
+	 * åˆå§‹åŒ–èšç¾¤æ“ä½œ
 	 */
 	private void initAnts() {
 		Ant tempAnt;
 		ArrayList<String> nonVisitedCitys;
 		totalAnts.clear();
 
-		// ³õÊ¼»¯ÒÏÈº
+		// åˆå§‹åŒ–èšç¾¤
 		for (int i = 0; i < antNum; i++) {
 			nonVisitedCitys = (ArrayList<String>) totalCitys.clone();
 			tempAnt = new Ant(pheromoneMatrix, nonVisitedCitys);
