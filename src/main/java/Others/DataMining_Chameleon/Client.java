@@ -7,7 +7,7 @@ package Others.DataMining_Chameleon;
  */
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\graphData.txt";
+		String filePath = Client.class.getResource("graphData.txt").getPath();
 		//k-近邻的k设置
 		int k = 1;
 		//度量函数阈值

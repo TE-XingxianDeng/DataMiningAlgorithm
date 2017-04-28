@@ -10,8 +10,8 @@ import java.text.MessageFormat;
  */
 public class Client {
 	public static void main(String[] args) {
-		String dataFilePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
-		String attachFilePath = "C:\\Users\\lyq\\Desktop\\icon\\attach.txt";
+		String dataFilePath = Client.class.getResource("input.txt").getPath();
+		String attachFilePath = Client.class.getResource("attach.txt").getPath();
 		// 查询串语句
 		String queryStr;
 		// 结果概率

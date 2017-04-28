@@ -7,7 +7,7 @@ package LinkMining.DataMining_HITS;
  */
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		
 		HITSTool tool = new HITSTool(filePath);
 		tool.printResultPage();

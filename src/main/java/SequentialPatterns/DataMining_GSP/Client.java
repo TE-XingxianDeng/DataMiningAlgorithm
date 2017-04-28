@@ -7,7 +7,7 @@ package SequentialPatterns.DataMining_GSP;
  */
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\testInput.txt";
+		String filePath = Client.class.getResource("testInput.txt").getPath();
 		//最小支持度阈值
 		int minSupportCount = 2;
 		//时间最小间隔

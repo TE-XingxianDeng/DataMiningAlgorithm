@@ -8,9 +8,9 @@ package StatisticalLearning.DataMining_SVM;
 public class Client {
 	public static void main(String[] args){
 		//训练集数据文件路径
-		String trainDataPath = "C:\\Users\\lyq\\Desktop\\icon\\trainInput.txt";
+		String trainDataPath = Client.class.getResource("trainInput.txt").getPath();
 		//测试数据文件路径
-		String testDataPath = "C:\\Users\\lyq\\Desktop\\icon\\testInput.txt";
+		String testDataPath = Client.class.getResource("testInput.txt").getPath();
 		
 		SVMTool tool = new SVMTool(trainDataPath);
 		//对测试数据进行svm支持向量机分类

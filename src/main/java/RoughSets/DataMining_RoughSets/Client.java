@@ -7,7 +7,7 @@ package RoughSets.DataMining_RoughSets;
  */
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		
 		RoughSetsTool tool = new RoughSetsTool(filePath);
 		tool.findingReduct();

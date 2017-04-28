@@ -7,7 +7,7 @@ package SequentialPatterns.DataMining_PrefixSpan;
  */
 public class Client {
 	public static void main(String[] agrs){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		//最小支持度阈值率
 		double minSupportRate = 0.4;
 		

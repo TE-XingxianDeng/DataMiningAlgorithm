@@ -7,7 +7,7 @@ package Classification.DataMining_ID3;
  */
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		
 		ID3Tool tool = new ID3Tool(filePath);
 		tool.startBuildingTree(true);

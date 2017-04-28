@@ -8,7 +8,7 @@ package Others.DataMining_ACO;
 public class Client {
 	public static void main(String[] args){
 		//测试数据
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		//蚂蚁数量
 		int antNum;
 		//蚁群算法迭代次数

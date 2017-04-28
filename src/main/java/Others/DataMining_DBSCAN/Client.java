@@ -7,7 +7,7 @@ package Others.DataMining_DBSCAN;
  */
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		//簇扫描半径
 		double eps = 3;
 		//最小包含点数阈值

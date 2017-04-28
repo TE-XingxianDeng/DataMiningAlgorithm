@@ -2,7 +2,7 @@ package Classification.DataMining_CART;
 
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		
 		CARTTool tool = new CARTTool(filePath);
 		

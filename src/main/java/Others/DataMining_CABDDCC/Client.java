@@ -7,7 +7,7 @@ package Others.DataMining_CABDDCC;
  */
 public class Client {
 	public static void main(String[] agrs){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\graphData.txt";
+		String filePath = Client.class.getResource("graphData.txt").getPath();
 		//连通距离阈值
 		int length = 3;
 		

@@ -7,7 +7,7 @@ package LinkMining.DataMining_PageRank;
  */
 public class Client {
 	public static void main(String[] args){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		
 		PageRankTool tool = new PageRankTool(filePath);
 		tool.printPageRankValue();

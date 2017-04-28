@@ -7,7 +7,7 @@ package BaggingAndBoosting.DataMining_AdaBoost;
  */
 public class Client {
 	public static void main(String[] agrs){
-		String filePath = "C:\\Users\\lyq\\Desktop\\icon\\input.txt";
+		String filePath = Client.class.getResource("input.txt").getPath();
 		//误差率阈值
 		double errorValue = 0.2;
 		
